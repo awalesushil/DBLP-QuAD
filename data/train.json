@@ -1,0 +1,251 @@
+[{
+    "question": "What is the DOI of the paper \"An analytical methodology for assessment of smart monitoring impact on future electric power distribution system reliability.\"?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title \"An analytical methodology for assessment of smart monitoring impact on future electric power distribution system reliability.\" . ?x dblp:doi ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "FACTOID"
+},{
+    "question": "In which year did the author \"Maoan Han\" publish the most publications?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x dblp:primaryFullCreatorName \"Maoan Han\" . ?y dblp:authoredBy ?x . ?y dblp:yearOfPublication ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "CREATOR",
+    "query_type": "AGGREGATION"
+},{
+    "question": "In \"CHI\" in \"2012\", what are the titles of the papers on entity linking?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER(CONTAINS(LCASE(?answer), entity linking)) . ?x dblp:publishedIn ?v . FILTER(CONTAINS(LCASE(?v), \"CHI\")) . ?x dblp:year ?y . FILTER(?y = \"2012\") }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION"
+},{
+    "question": "What are the title of the papers that \"Alper wrote about entity linking?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER(CONTAINS(LCASE(?y), \"Alper Koz\")) . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER(CONTAINS(LCASE(?answer), entity linking)) }",
+    "entity": "CREATOR",
+    "query_type": "DISAMBIGUATION"
+},{
+    "question": "How many papers did the authors of the paper \"What's on your hard drive?\" publish in the year \"2006\"?",
+    "query": "SELECT DISTINCT (COUNT(?answer) AS ?count) WHERE { ?x dblp:title \"What's on your hard drive?\" . ?x dblp:authoredBy ?y . ?z dblp:authoredBy ?y . ?z dblp:yearOfPublication \"2006\" . ?z dblp:title ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "AGGREGATION"
+},{
+    "question": "Who are the co-authors of the author \"Aaron S. Field\" in the last 2 years and where are they affiliated?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:primaryFullCreatorName \"Aaron S. Field\" . ?y dblp:authoredBy ?x . ?y dblp:yearOfPublication ?z . FILTER(?z > YEAR(NOW())-2) . ?y dblp:authoredBy ?a . ?a dblp:primaryFullCreatorName ?firstanswer FILTER(?firstanswer != \"Aaron S. Field\") . ?a dblp:primaryAffiliation ?secondanswer }",
+    "entity": "CREATOR",
+    "query_type": "DOUBLE_INTENT"
+},{
+    "question": "Where are the majority of the authors of the paper \"AntTracks TrendViz: Configurable Heap Memory Visualization Over Time.\" affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x dblp:title \"AntTracks TrendViz: Configurable Heap Memory Visualization Over Time.\" . ?x dblp:authoredBy ?y . ?y dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "AGGREGATION"
+},{
+    "question": "What are the affiliations of the authors of the paper \"Towards an Improved Vision-Based Web Page Segmentation Algorithm.\"?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title \"Towards an Improved Vision-Based Web Page Segmentation Algorithm.\" . ?x dblp:authoredBy ?y . ?y dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "FACTOID"
+},{
+    "question": "Does the publication \"Dataset Construction via Attention for Aspect Term Extraction with Distant Supervision.\" exist?",
+    "query": "ASK { ?x dblp:title \"Dataset Construction via Attention for Aspect Term Extraction with Distant Supervision.\" }",
+    "entity": "PUBLICATION",
+    "query_type": "ASK"
+},{
+    "question": "Does the publication \"Control your smart home with an autonomously mobile smartphone.\" not exist?",
+    "query": "ASK { ?x dblp:title \"Control your smart home with an autonomously mobile smartphone.\" }",
+    "entity": "PUBLICATION",
+    "query_type": "ASK"
+},{
+    "question": "Who are the authors that published research papers about entity linking in \"Mark. Sci.\" in the year \"2010\"?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER(CONTAINS(LCASE(?t), entity linking)) . ?x dblp:publishedIn ?v . FILTER(CONTAINS(LCASE(?v), \"Mark. Sci.\")) . ?x dblp:year ?y . FILTER(?y = \"2010\") . ?x dblp:authoredBy ?y . ?y dblp:primaryFullCreatorName ?answer . }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION"
+},{
+    "question": "How many papers did the authors of \"A Graph Theoretic Approach for Representation and Classification of Structured Objects.\" publish in \"1982\"?",
+    "query": "SELECT DISTINCT (COUNT(?answer) AS ?count) WHERE { ?x dblp:title \"A Graph Theoretic Approach for Representation and Classification of Structured Objects.\" . ?x dblp:authoredBy ?y . ?z dblp:authoredBy ?y . ?z dblp:yearOfPublication \"1982\" . ?z dblp:title ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "AGGREGATION"
+},{
+    "question": "Who are the authors of \"An ontology-based approach to patient follow-up assessment for continuous and personalized chronic disease management.\" and which other papers did they publish?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:title \"An ontology-based approach to patient follow-up assessment for continuous and personalized chronic disease management.\" . ?x dblp:authoredBy ?y . ?y dblp:primaryFullCreatorName ?firstanswer . ?z dblp:authoredBy ?y . ?z dblp:title ?secondanswer FILTER (?secondanswer != \"An ontology-based approach to patient follow-up assessment for continuous and personalized chronic disease management.\") }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT"
+},{
+    "question": "Did the author \"Monika Ray\" publish in \"BIBE\"?",
+    "query": "ASK { ?x dblp:primaryFullCreatorName \"Monika Ray\" . ?y dblp:authoredBy ?x . ?y dblp:publishedIn \"BIBE\" }",
+    "entity": "CREATOR",
+    "query_type": "ASK"
+},{
+    "question": "Was the paper \"Maritime Fleet Deployment with Speed Optimization and Voyage Separation Requirements.\" published in \"ICCL\"?",
+    "query": "ASK { ?x dblp:title \"Maritime Fleet Deployment with Speed Optimization and Voyage Separation Requirements.\" . ?x dblp:publishedIn \"ICCL\" }",
+    "entity": "PUBLICATION",
+    "query_type": "ASK"
+},{
+    "question": "What is the DOI of the publication \"Toward Privacy-Preserving Task Assignment for Fully Distributed Spatial Crowdsourcing.\"?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title \"Toward Privacy-Preserving Task Assignment for Fully Distributed Spatial Crowdsourcing.\" . ?x dblp:doi ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "FACTOID"
+},{
+    "question": "In what venue was the paper \"Data compression algorithms for energy-constrained devices in delay tolerant networks.\" published and when?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:title \"Data compression algorithms for energy-constrained devices in delay tolerant networks.\" . ?x dblp:publishedIn ?firstanswer . ?x dblp:yearOfPublication ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT"
+},{
+    "question": "Does the paper \"Evolutionary RL for Container Loading.\" not exist?",
+    "query": "ASK { ?x dblp:title \"Evolutionary RL for Container Loading.\" }",
+    "entity": "PUBLICATION",
+    "query_type": "ASK"
+},{
+    "question": "What type of publication is \"The Equivalence of Dissipation from Gibbs' Entropy Production with Phase-Volume Loss in Ergodic Heat-Conducting Oscillators.\"?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title \"The Equivalence of Dissipation from Gibbs' Entropy Production with Phase-Volume Loss in Ergodic Heat-Conducting Oscillators.\" . ?x dblp:bibtexType ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "FACTOID"
+},{
+    "question": "With which author does \"David S. Doermann\" has the most publications with and how many?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x dblp:primaryFullCreatorName \"David S. Doermann\" . ?y dblp:authoredBy ?x . ?y dblp:authoredBy ?z . ?z dblp:primaryFullCreatorName ?answer . FILTER(?answer != \"David S. Doermann\")} GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "CREATOR",
+    "query_type": "AGGREGATION"
+},{
+    "question": "In which year did \"Kaushik Roy\" publish the least papers and how many?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x dblp:primaryFullCreatorName \"Kaushik Roy\" . ?y dblp:authoredBy ?x . ?y dblp:yearOfPublication ?answer } GROUP BY ?answer } ORDER BY ASC(?count) LIMIT 1",
+    "entity": "CREATOR",
+    "query_type": "AGGREGATION"
+},{
+    "question": "Where are the authors of the paper \"Planung des Designs flexibler Fertigungssysteme.\" from?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title \"Planung des Designs flexibler Fertigungssysteme.\" . ?x dblp:authoredBy ?y . ?y dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "FACTOID"
+},{
+    "question": "Who are the authors of \"Preface of Special Issue on 8th Competition on Legal Information of Extraction and Entailment (COLIEE 2021).\" and where are they from?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:title \"Preface of Special Issue on 8th Competition on Legal Information of Extraction and Entailment (COLIEE 2021).\" . ?x dblp:authoredBy ?y . ?y dblp:primaryFullCreatorName ?firstanswer . ?x dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT"
+},{
+    "question": "How many papers did the authors of the publication \"How to consider fractional counting and field normalization in the statistical modeling of bibliometric data: A multilevel Poisson regression approach.\" publish in the year \"2019\"?",
+    "query": "SELECT DISTINCT (COUNT(?answer) AS ?count) WHERE { ?x dblp:title \"How to consider fractional counting and field normalization in the statistical modeling of bibliometric data: A multilevel Poisson regression approach.\" . ?x dblp:authoredBy ?y . ?z dblp:authoredBy ?y . ?z dblp:yearOfPublication \"2019\" . ?z dblp:title ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "AGGREGATION"
+},{
+    "question": "Does the publication \"Estimation of Conditional Mixture Weibull Distribution with Right Censored Data Using Neural Network for Time-to-Event Analysis.\" not exist?",
+    "query": "ASK { ?x dblp:title \"Estimation of Conditional Mixture Weibull Distribution with Right Censored Data Using Neural Network for Time-to-Event Analysis.\" }",
+    "entity": "PUBLICATION",
+    "query_type": "ASK"
+},{
+    "question": "In \"SIGGRAPH Posters\", what papers did the author \"Shigeo Morishima\" publish?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName \"Shigeo Morishima\" . ?y dblp:authoredBy ?x . ?y dblp:publishedIn \"SIGGRAPH Posters\" . ?y dblp:title ?answer }",
+    "entity": "CREATOR",
+    "query_type": "FACTOID"
+},{
+    "question": "Which publications did \"Muhammad Shuaib Qureshi\" write?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName \"Muhammad Shuaib Qureshi\" . ?y dblp:authoredBy ?x . ?y dblp:title ?answer }",
+    "entity": "CREATOR",
+    "query_type": "FACTOID"
+},{
+    "question": "What is the type of the paper \"Joins via Geometric Resolutions: Worst-case and Beyond.\"?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title \"Joins via Geometric Resolutions: Worst-case and Beyond.\" . ?x dblp:bibtexType ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "FACTOID"
+},{
+    "question": "Who wrote \"Logical theories and abstract argumentation: A survey of existing works.\"?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title \"Logical theories and abstract argumentation: A survey of existing works.\" . ?x dblp:authoredBy ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "FACTOID"
+},{
+    "question": "\"M\\u00FCge Erdogmus\" published the most papers in which venue and how many?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x dblp:primaryFullCreatorName \"M\\u00FCge Erdogmus\" . ?y dblp:authoredBy ?x . ?y dblp:publishedIn ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "CREATOR",
+    "query_type": "AGGREGATION"
+},{
+    "question": "Who are the authors of the publication \"SAUV - A Bio-Inspired Soft-Robotic Autonomous Underwater Vehicle.\" and which other papers did they publish?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:title \"SAUV - A Bio-Inspired Soft-Robotic Autonomous Underwater Vehicle.\" . ?x dblp:authoredBy ?y . ?y dblp:primaryFullCreatorName ?firstanswer . ?z dblp:authoredBy ?y . ?z dblp:title ?secondanswer FILTER (?secondanswer != \"SAUV - A Bio-Inspired Soft-Robotic Autonomous Underwater Vehicle.\") }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT"
+},{
+    "question": "Who are the co-authors of the author \"Rui Xie\"?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName \"Rui Xie\" . ?y dblp:authoredBy ?x . ?z dblp:authoredBy ?y . ?z dblp:primaryFullCreatorName ?answer FILTER(?answer != \"Rui Xie\") }",
+    "entity": "CREATOR",
+    "query_type": "FACTOID"
+},{
+    "question": "In \"2013\", how many papers has the author \"Thomas S. Huang\" published?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { ?x dblp:primaryFullCreatorName \"Thomas S. Huang\" . ?y dblp:authoredBy ?x . ?y dblp:publishedIn \"2013\" . ?y dblp:title ?answer }",
+    "entity": "CREATOR",
+    "query_type": "AGGREGATION"
+},{
+    "question": "Who are the authors of the paper \"Equivalent circuit modeling of guard ring structures for evaluation of substrate crosstalk isolation.\" and where are they from?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:title \"Equivalent circuit modeling of guard ring structures for evaluation of substrate crosstalk isolation.\" . ?x dblp:authoredBy ?y . ?y dblp:primaryFullCreatorName ?firstanswer . ?x dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT"
+},{
+    "question": "Who authored the paper \"Guest Editorial.\"?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title \"Guest Editorial.\" . ?x dblp:authoredBy ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "FACTOID"
+},{
+    "question": "Does the paper \"Nonlinear Adaptive Beliefs and the Dynamics of Financial Markets: The Role of the Evolutionary Fitness Measure.\" exist?",
+    "query": "ASK { ?x dblp:title \"Nonlinear Adaptive Beliefs and the Dynamics of Financial Markets: The Role of the Evolutionary Fitness Measure.\" }",
+    "entity": "PUBLICATION",
+    "query_type": "ASK"
+},{
+    "question": "Does \"Clinical Training and Teamwork: Learning and Feedback.\" exist?",
+    "query": "ASK { ?x dblp:title \"Clinical Training and Teamwork: Learning and Feedback.\" }",
+    "entity": "PUBLICATION",
+    "query_type": "ASK"
+},{
+    "question": "How many authors of \"Application of ANN Based Pattern Recognition Technique for the Protection of 3-Phase Power Transformer.\" have  as their primary affiliation?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { ?x dblp:title \"Application of ANN Based Pattern Recognition Technique for the Protection of 3-Phase Power Transformer.\" . ?x dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "AGGREGATION"
+},{
+    "question": "How many papers did the authors \"Fuminori Toyasaki\" and \"Patrizia Daniele\" co-write?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { ?x dblp:primaryFullCreatorName \"Fuminori Toyasaki\" . ?y dblp:primaryFullCreatorName \"Patrizia Daniele\" . ?z dblp:authoredBy ?x . ?z dblp:authoredBy ?y . ?z dblp:title ?answer }",
+    "entity": "CREATOR",
+    "query_type": "AGGREGATION"
+},{
+    "question": "With which other authors has \"Richard B. Davies\" co-authored papers in the last 5 years and where are they affiliated?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:primaryFullCreatorName \"Richard B. Davies\" . ?y dblp:authoredBy ?x . ?y dblp:yearOfPublication ?z . FILTER(?z > YEAR(NOW())-5) . ?y dblp:authoredBy ?a . ?a dblp:primaryFullCreatorName ?firstanswer FILTER(?firstanswer != \"Richard B. Davies\") . ?a dblp:primaryAffiliation ?secondanswer }",
+    "entity": "CREATOR",
+    "query_type": "DOUBLE_INTENT"
+},{
+    "question": "Was the paper \"ERAMO: Effective Remote Attestation through Memory Offloading.\" co-authored by the authors \"Nicola Dragoni\" and \"Edlira Dushku\"?",
+    "query": "ASK { ?x dblp:primaryFullCreatorName \"Nicola Dragoni\" . ?y dblp:primaryFullCreatorName \"Edlira Dushku\" . ?z dblp:authoredBy ?x . ?z dblp:authoredBy ?y . ?z dblp:title \"ERAMO: Effective Remote Attestation through Memory Offloading.\" }",
+    "entity": "CREATOR",
+    "query_type": "ASK"
+},{
+    "question": "Who are the authors of \"On Selected V2X Technology Components and Enablers from the 5GCAR Project.\" and what are the venues of the other papers they published?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:title \"On Selected V2X Technology Components and Enablers from the 5GCAR Project.\" . ?x dblp:authoredBy ?y . ?y dblp:primaryFullCreatorName ?firstanswer . ?z dblp:authoredBy ?y . ?z dblp:publishedIn ?secondanswer FILTER (?secondanswer != \"On Selected V2X Technology Components and Enablers from the 5GCAR Project.\") }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT"
+},{
+    "question": "Who are the authors of the paper \"Psychiatry, Statistics in.\" and what are the venues of the other papers they published?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:title \"Psychiatry, Statistics in.\" . ?x dblp:authoredBy ?y . ?y dblp:primaryFullCreatorName ?firstanswer . ?z dblp:authoredBy ?y . ?z dblp:publishedIn ?secondanswer FILTER (?secondanswer != \"Psychiatry, Statistics in.\") }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT"
+},{
+    "question": "In the year \"2016\" in \"ICCAD\", what are the titles of the research papers on entity linking?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER(CONTAINS(LCASE(?answer), entity linking)) . ?x dblp:publishedIn ?v . FILTER(CONTAINS(LCASE(?v), \"ICCAD\")) . ?x dblp:year ?y . FILTER(?y = \"2016\") }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION"
+},{
+    "question": "What publications did \"Richard L. Ptak\" publish in \"Inf. Syst. Manag.\"?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName \"Richard L. Ptak\" . ?y dblp:authoredBy ?x . ?y dblp:publishedIn \"Inf. Syst. Manag.\" . ?y dblp:title ?answer }",
+    "entity": "CREATOR",
+    "query_type": "FACTOID"
+},{
+    "question": "Which publication on entity linking was published by \"Michael?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER(CONTAINS(LCASE(?y), \"Michael Chlistalla\")) . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER(CONTAINS(LCASE(?answer), entity linking)) }",
+    "entity": "CREATOR",
+    "query_type": "DISAMBIGUATION"
+},{
+    "question": "What is the average number of co-authors for research papers published by the author \"Jos\\u00E9 Fernando Oliveira\"?",
+    "query": "SELECT (AVG(?count) AS ?answer) { SELECT (COUNT(?z) AS ?count) WHERE { ?x dblp:primaryFullCreatorName \"Jos\\u00E9 Fernando Oliveira\" . ?y dblp:authoredBy ?x . ?y dblp:authoredBy ?z . ?z dblp:primaryFullCreatorName ?a . FILTER(?a != \"Jos\\u00E9 Fernando Oliveira\")} GROUP BY ?y }",
+    "entity": "CREATOR",
+    "query_type": "AGGREGATION"
+},{
+    "question": "Did the authors of the publication \"Adaptive Graph Convolutional Network Framework for Multidimensional Time Series Prediction.\" also publish \"Preface: Second Workshop on the Future of Co-Creative Systems.\"?",
+    "query": "ASK { ?x dblp:title \"Adaptive Graph Convolutional Network Framework for Multidimensional Time Series Prediction.\" . ?x dblp:authoredBy ?y . ?z dblp:authoredBy ?y . ?z dblp:title ?a FILTER (?a != \"Adaptive Graph Convolutional Network Framework for Multidimensional Time Series Prediction.\") . ?z dblp:title \"Preface: Second Workshop on the Future of Co-Creative Systems.\" }",
+    "entity": "PUBLICATION",
+    "query_type": "ASK"
+},{
+    "question": "With which author does \"Karthik Srinivasan\" has the most research papers with?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x dblp:primaryFullCreatorName \"Karthik Srinivasan\" . ?y dblp:authoredBy ?x . ?y dblp:authoredBy ?z . ?z dblp:primaryFullCreatorName ?answer . FILTER(?answer != \"Karthik Srinivasan\")} GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "CREATOR",
+    "query_type": "AGGREGATION"
+},{
+    "question": "In the year \"2015\" in \"CoRR\", who are the authors that published research papers about entity linking?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER(CONTAINS(LCASE(?t), entity linking)) . ?x dblp:publishedIn ?v . FILTER(CONTAINS(LCASE(?v), \"CoRR\")) . ?x dblp:year ?y . FILTER(?y = \"2015\") . ?x dblp:authoredBy ?y . ?y dblp:primaryFullCreatorName ?answer . }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION"
+}]
