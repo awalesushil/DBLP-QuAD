@@ -72,6 +72,7 @@ def generate_example():
     creator_name = random.choice(sample.author_names)
     other_creator_name = random.choice(sample.author_names)
     affiliation = random.choice(sample.affiliations)
+    duration = random.choice(range(1, 5))
 
     mapping_dict = {
         "[TITLE]": sample.title,
@@ -82,6 +83,7 @@ def generate_example():
         "[PARTIAL_CREATOR_NAME]": creator_name.split(" ")[0],
         "[AFFILIATION]": affiliation,
         "[YEAR]": sample.year,
+        "[DURATION]": duration,
         "[VENUE]": sample.venue,
         "[OTHER_VENUE]": second_sample.venue,
         "[KEYWORD]": keywords[0]
@@ -102,7 +104,9 @@ def generate_example():
 
 if __name__ == "__main__":
 
+    dataset = []
     with open("train.json", "w", encoding="utf-8") as f:
-        for i in range(10):
+        for i in range(50):
             question, query, entity, query_type = generate_example()
-            f.write(json.dumps({"question": question, "query": query, "entity": entity, "query_type": query_type}))
+            dataset.append({"question": question, "query": query, "entity": entity, "query_type": query_type})
+        json.dump(dataset, f, indent=4)
