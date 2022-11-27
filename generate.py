@@ -160,7 +160,7 @@ class KeywordGenerator:
         
         keywords = [doc[start:end].text for _, start, end in matches]
         keywords = [keyword for keyword in keywords if not nlp.vocab[keyword].is_stop]
-        return keywords
+        return random.choice(keywords)
 
 
 class DataGenerator:
@@ -207,7 +207,7 @@ class DataGenerator:
             query = query.replace(placeholder, str(value))
 
             if re.search(r"\[KEYWORD\]", question):
-                keyword = self.keyword_generator.get()
+                keyword = self.keyword_generator.get(first_sample.title)
                 question = question.replace("[KEYWORD]", keyword)
                 query = query.replace("[KEYWORD]", f'"{keyword}"')
 
