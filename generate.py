@@ -3,12 +3,20 @@
 """
 import json
 import random
+import logging
+
+from tqdm import tqdm
 
 from templates import templates
 from dblp import Graph
 
+logging.basicConfig(level=logging.INFO)
+
 dblp = Graph("DBLP")
+
+logging.info(" Loading DBLP graph...")
 dblp.load_from_pickle("dblp.pkl")
+logging.info(" Loaded.")
 
 class Sample:
     """
@@ -33,14 +41,13 @@ class Sample:
         return self.data.get(self.dblp_prefix("bibtexType"),[""])[0]
 
     def __get_authors(self):
-        for author in self.data.get(self.dblp_prefix("authoredBy"),[]):
-            print(author)
+        authors = self.data.get(self.dblp_prefix("authoredBy"), [])
         return [
             {
                 "uri": next(iter(author)),
                 "name": author.get(self.dblp_prefix("primaryFullCreatorName"), ""),
                 "affiliation": author.get(self.dblp_prefix("primaryAffiliation"), "")
-            } for author in self.data.get(self.dblp_prefix("authoredBy"),[])]
+            } for author in authors] if authors else [""]
 
     def __get_year(self):
         return self.data.get(self.dblp_prefix("yearOfPublication"),[""])[0]
@@ -105,15 +112,15 @@ class DataGenerator:
         mapping_dict = {
             "?p1": first_sample.uri,
             "?p2": second_sample.uri,
-            "?c1": creator.uri,
-            "?c2": other_creator.uri,
+            "?c1": creator["uri"],
+            "?c2": other_creator["uri"],
             "[TITLE]": first_sample.title,
             "[OTHER_TITLE]": second_sample.title,
             "[TYPE]": first_sample.type,
-            "[CREATOR_NAME]": creator.name,
-            "[OTHER_CREATOR_NAME]": other_creator.name,
-            "[PARTIAL_CREATOR_NAME]": creator.split(" ")[0],
-            "[AFFILIATION]": creator.affiliation,
+            "[CREATOR_NAME]": creator["name"],
+            "[OTHER_CREATOR_NAME]": other_creator["name"],
+            "[PARTIAL_CREATOR_NAME]": creator["name"].split(" ")[0],
+            "[AFFILIATION]": creator["affiliation"],
             "[YEAR]": first_sample.year,
             "[DURATION]": duration,
             "[VENUE]": first_sample.venue,
@@ -127,8 +134,8 @@ class DataGenerator:
 
         # Fill in the template with the sample
         for placeholder, value in mapping_dict.items():
-            question = question.replace(placeholder, value)
-            query = query.replace(placeholder, value)
+            question = question.replace(placeholder, str(value))
+            query = query.replace(placeholder, str(value))
 
         return question, query
 
@@ -152,11 +159,12 @@ class DataGenerator:
 
 if __name__ == "__main__":
 
-    dataGenerator = DataGenerator(dblp).generate(500)
+    dataGenerator = DataGenerator(dblp).generate(100)
     
+    logging.info(" Generating data...")
     dataset = []
     with open("train.json", "w", encoding="utf-8") as f:
-        for question, query, entity, query_type in dataGenerator:
+        for question, query, entity, query_type in tqdm(dataGenerator):
             dataset.append({
                 "question": question,
                 "query": query,
