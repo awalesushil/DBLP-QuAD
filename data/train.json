@@ -3,300 +3,3642 @@
         "question": "Does the publication 'An analytical methodology for assessment of smart monitoring impact on future electric power distribution system reliability' not not exist?",
         "query": "ASK { <https://dblp.org/rec/journals/complexity/AhadiGM15> dblp:title 'An analytical methodology for assessment of smart monitoring impact on future electric power distribution system reliability' }",
         "entity": "PUBLICATION",
-        "query_type": "DOUBLE_NEGATION"
+        "query_type": "DOUBLE_NEGATION",
+        "answers": [
+            {
+                "boolean": false
+            }
+        ]
     },
     {
         "question": "What are the affiliations of the authors of the paper 'Compressing Large Polygonal Models'?",
         "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/visualization/HoLK01> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
         "entity": "PUBLICATION",
-        "query_type": "MULTI_FACT"
+        "query_type": "MULTI_FACT",
+        "answers": [
+            {
+                "answer": "University of California, San Diego, USA"
+            }
+        ]
     },
     {
         "question": "What are the primary affiliations of the authors of the paper 'Forensic Analysis and Anonymisation of Printed Documents'?",
         "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/ih/RichterESS18> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
         "entity": "PUBLICATION",
-        "query_type": "MULTI_FACT"
+        "query_type": "MULTI_FACT",
+        "answers": [
+            {
+                "answer": "TU Dresden, Germany"
+            }
+        ]
     },
     {
         "question": "What are the papers that the authors 'Bertram Poettering' and 'Jae S. Lim' published?",
         "query": "SELECT DISTINCT ?answer WHERE { { ?answer dblp:authoredBy <https://dblp.org/pid/48/8243> } UNION { ?answer dblp:authoredBy <https://dblp.org/pid/66/698> } }",
         "entity": "CREATOR",
-        "query_type": "UNION"
-    },
-    {
-        "question": "Who are the authors that published research papers about entity linking in 'Int. J. Inf. Syst. Supply Chain Manag.' in the year '2018'?",
-        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), entity linking) . ?x dblp:publishedIn 'Int. J. Inf. Syst. Supply Chain Manag.' . FILTER CONTAINS(LCASE('Int. J. Inf. Syst. Supply Chain Manag.'), 'Int. J. Inf. Syst. Supply Chain Manag.') . ?x dblp:year ?y . FILTER(?y = '2018') . ?x dblp:authoredBy ?answer }",
-        "entity": "PUBLICATION",
-        "query_type": "DISAMBIGUATION"
-    },
-    {
-        "question": "What is the website of the author 'Tiansheng Wang'?",
-        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/141/1846> dblp:website ?answer }",
-        "entity": "CREATOR",
-        "query_type": "SINGLE_FACT"
+        "query_type": "UNION",
+        "answers": [
+            {
+                "answer": "https://dblp.org/rec/conf/ctrsa/FreirePP13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/uss/AlFardanBPPS13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/fse/DegabrieleFP15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/fse/PatersonPS14"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/pet/ManulisPT10"
+            },
+            {
+                "answer": "https://dblp.org/rec/phd/dnb/Poettering12"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ima/ArmourP19"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wistp/ManulisP11"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ctrsa/AuerbachKPS19"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ctrsa/PoetteringRSS21"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ctrsa/PoetteringS15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/crypto/InoueIMP19"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/crypto/PoetteringR18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ccs/ManulisP11"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ccs/PijnenburgP20"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ccs/PintoPS14"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ccs/FeoPS21"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ccs/FerschKP16"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ccs/FleischhackerGKMP13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/scn/NietoMPRS12"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/esorics/BoydCFPPS13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/esorics/MarsonP13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/esorics/MarsonP14"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/esorics/PijnenburgP20"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/esorics/PoetteringS14"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/pkc/AuerbachP18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/pkc/BellarePS17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/pkc/GiaconHP18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/pkc/GiaconKP18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/africacrypt/Poettering18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/asiacrypt/BellarePS16"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/asiacrypt/HeuerP16"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/asiacrypt/PatersonPS14"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/CramptonFGJP14"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/ijisec/BoydCFPPS17"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/ijisec/CristofaroMP13"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/ijisec/GuntherP17"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/ijisec/ManulisPS14"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/ijisec/PoetteringS17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/tcc/FerschKP17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/acisp/GuntherP15"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/abs-2112-09411"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/Poettering18"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/FeoPS21"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/InoueIMP19"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/MarsonP13"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/PatersonPS13"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/PoetteringS13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/csfw/EugsterMP18"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/CramptonFGJP16"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/acns/BrzuskaBDFFKMOPPS10"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/acns/CramptonFGJP15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/acns/CristofaroMP11"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/acns/ManulisPP10"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/acns/ManulisPT10"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/abs-2009-02667"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tosc/ArmourP19"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tosc/MarsonP17"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tosc/PijnenburgP20"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tosc/PoetteringR20"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/ArmourP19a"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/AuerbachP18"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/FleischhackerGKMP11"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/FreirePP12"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/HeuerP16"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/PijnenburgP20"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/PijnenburgP20a"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/PoetteringR18"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/AuerbachKPS18"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/BellarePS16"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/CristofaroMP11"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/GiaconHP18"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/GuntherP14"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/ManulisPS12"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/MarsonP17a"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/Poettering18a"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/PoetteringR20"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/joc/InoueIMP20"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/ArmourP19"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/ArmourP22"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/BoydCFPPS13"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/DegabrieleFP15"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/FerschKP17"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/GiaconKP17"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/ManulisP10"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/MarsonP14"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/MarsonP17"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/NietoMPRS12"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/PoetteringRSS21"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iacr/PoetteringS15"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/jcs/CramptonFGJP17"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/jcs/NietoMPRS13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/ApostolopoulosPJL94"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/ChanL84"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/KamisliL09"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/MalikLG82"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/MartinezL89"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/RodriguezLS87"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/ZhangL12"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/HayesLO80"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/ReedL98"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/clrimg/FullerL17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/clrimg/FullerL18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/ApostolopoulosM93"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/AyazifarL92"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/GriffinL85"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/KamisliL10"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/NicolasL94"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/YooL95"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/ApostolopoulosL97"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/CurtisOL85"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/DowlaL84"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/DowlaL85"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/Lim86"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/ReeveL83"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/CheungL95"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/GriffinL83"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/HarrisonLS84"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/NawabOL81"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/NicolasL93"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/RichardTL84"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/RozwodTL88"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/CurtisLO84"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/GriffinL86"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/HardwickL88"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/Lim80"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/ApostolopoulosL98"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/Lim79"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/EspyL82"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/HardwickL91"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/HengAL05"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/NawabQL82"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/HardwickYL93"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/Lim78"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/MusicusL79"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/PeliL81"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/CheungL91"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/LimD83"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/NawabQL83"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/dcc/CaiL16"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/dcc/NissenbaumJL19"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/dcc/NissenbaumL16"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/vcip/NarulaL93"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tcsv/BaceL91"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/AlkhairyCL91"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/BrandsteinMHL90"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/EsmersoyL83"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/GriffinDL84"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/LimM81"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/ejasp/HengAL06"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icip/ApostolopoulosL95"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icip/CaiL16"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icip/CaiL15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icip/KamisliL09"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icip/CaiL12"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/MartinezL85"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/OppenheimLKP79"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/vipc/CaiL15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/vipc/FullerL15"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/pieee/ChallapaliLLPSP95"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tsp/AlkhairyCL93"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tsp/CurtisOL85"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tsp/HarrisonLS86"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tsp/IzraelevitzL85"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tsp/GriffinL88"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tsp/ChanL85"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tsp/IzraelevitzL87"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tsp/RozwodTL91"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tsp/YooBL95"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tsp/CheungL92"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tsp/PappasL88"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tip/KamisliL11"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tip/CaiL15"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tip/ReedL02"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/imst/LimS94"
+            }
+        ]
     },
     {
         "question": "What is the average number of co-authors for research papers published by the author 'Robin Cohen'?",
-        "query": "SELECT (AVG(?count) AS ?answer) { SELECT (COUNT(?y) AS ?count) WHERE { ?x dblp:authoredBy <https://dblp.org/pid/24/441> . ?x dblp:numberOfCreators ?y )} GROUP BY ?y }",
+        "query": "SELECT (AVG(?count) AS ?answer) { SELECT (COUNT(?y) AS ?count) WHERE { ?x dblp:authoredBy <https://dblp.org/pid/24/441> . ?x dblp:numberOfCreators ?y } GROUP BY ?y }",
         "entity": "CREATOR",
-        "query_type": "COUNT"
+        "query_type": "COUNT",
+        "answers": [
+            {
+                "answer": "15.545454545454545"
+            }
+        ]
     },
     {
         "question": "Does 'Ray J. Paul' have an ORCID?",
         "query": "ASK { <https://dblp.org/pid/p/RayJPaul> dblp:orcid ?x }",
         "entity": "CREATOR",
-        "query_type": "BOOLEAN"
+        "query_type": "BOOLEAN",
+        "answers": [
+            {
+                "boolean": false
+            }
+        ]
     },
     {
         "question": "Did 'Robert W. Brodersen' publish the paper 'Impact of scattering on the capacity, diversity, and propagation range of multiple-antenna channels' in 'IEEE Trans. Inf. Theory' in the last 8 years?",
         "query": "ASK { <https://dblp.org/rec/journals/tit/PoonTB06> dblp:authoredBy <https://dblp.org/pid/53/3917> . <https://dblp.org/rec/journals/tit/PoonTB06> dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-8) . <https://dblp.org/rec/journals/tit/PoonTB06> dblp:publishedIn 'IEEE Trans. Inf. Theory' }",
         "entity": "CREATOR",
-        "query_type": "BOOLEAN"
+        "query_type": "BOOLEAN",
+        "answers": [
+            {
+                "boolean": true
+            }
+        ]
     },
     {
         "question": "How many authors does the publication 'Why Bundle Discounts Can Be a Profitable Alternative to Competing on Price Promotions' have?",
         "query": "SELECT ?answer WHERE { <https://dblp.org/rec/journals/mktsci/BalachanderGS10> dblp:numberOfCreators ?answer }",
         "entity": "PUBLICATION",
-        "query_type": "SINGLE_FACT"
+        "query_type": "SINGLE_FACT",
+        "answers": [
+            {
+                "answer": "3"
+            }
+        ]
     },
     {
         "question": "Did the author 'Ilker Hacihaliloglu' not publish in 'ISBI' in the last 8 years?",
-        "query": "ASK { ?x dblp:authoredBy <https://dblp.org/pid/81/5273> . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-8) . ?x dblp:publishedIn 'ISBI' FILTER NOT EXISTS { ?x dblp:authoredBy <https://dblp.org/pid/81/5273> . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-8) . ?x dblp:publishedIn 'ISBI' }",
+        "query": "ASK { ?x dblp:authoredBy <https://dblp.org/pid/81/5273> . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-8) . ?x dblp:publishedIn 'ISBI' FILTER NOT EXISTS { ?x dblp:authoredBy <https://dblp.org/pid/81/5273> . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-8) . ?x dblp:publishedIn 'ISBI' } }",
         "entity": "CREATOR",
-        "query_type": "NEGATION"
+        "query_type": "NEGATION",
+        "answers": [
+            {
+                "boolean": false
+            }
+        ]
     },
     {
         "question": "Wasn't 'CATI: An Extensible Platform Supporting Assisted Classification of Large Datasets' published in the year '2020'?",
         "query": "ASK { <https://dblp.org/rec/conf/webist/BosettiE19> dblp:yearOfPublication '2020' FILTER NOT EXISTS { <https://dblp.org/rec/conf/webist/BosettiE19> dblp:yearOfPublication '2020' } }",
         "entity": "PUBLICATION",
-        "query_type": "NEGATION"
+        "query_type": "NEGATION",
+        "answers": [
+            {
+                "boolean": false
+            }
+        ]
     },
     {
         "question": "How many publications has 'Norbert Fuhr' published?",
         "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/f/NFuhr> }",
         "entity": "CREATOR",
-        "query_type": "COUNT"
-    },
-    {
-        "question": "In which venues did 'Ronaldo publish publications about entity linking?",
-        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, 'Ronaldo, 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?t . FILTER REGEX (?t, entity linking, 'i') . ?z dblp:publishedIn ?answer }",
-        "entity": "CREATOR",
-        "query_type": "DISAMBIGUATION"
+        "query_type": "COUNT",
+        "answers": [
+            {
+                "count": "214"
+            }
+        ]
     },
     {
         "question": "What are the papers that 'Jingrou Wu' and 'Junping Zhang' published in 'IEEE Internet Things J.'?",
         "query": "SELECT DISTINCT ?answer WHERE { { ?answer dblp:authoredBy <https://dblp.org/pid/301/2856> . ?answer dblp:publishedIn 'IEEE Internet Things J.' } UNION { ?answer dblp:authoredBy <https://dblp.org/pid/02/5388> . ?answer dblp:publishedIn 'IEEE Internet Things J.' } }",
         "entity": "CREATOR",
-        "query_type": "UNION"
+        "query_type": "UNION",
+        "answers": [
+            {
+                "answer": "https://dblp.org/rec/journals/iotj/LiW0021"
+            }
+        ]
     },
     {
         "question": "Does the paper 'Community networks: Community capital or merely an affordable Internet access tool?' not exist?",
         "query": "ASK { <https://dblp.org/rec/journals/jasis/Kwon05> dblp:title 'Community networks: Community capital or merely an affordable Internet access tool?' FILTER NOT EXISTS { <https://dblp.org/rec/journals/jasis/Kwon05> dblp:title 'Community networks: Community capital or merely an affordable Internet access tool?' } }",
         "entity": "PUBLICATION",
-        "query_type": "NEGATION"
-    },
-    {
-        "question": "Was the paper 'Ontology-Based User Preferences and Social Search for Spoken Dialogue Systems' not published by the person 'Nesrine Ben Mustapha'?",
-        "query": "ASK { <https://dblp.org/rec/conf/smap/VanrompayMA12> dblp:authoredBy <https://dblp.org/pid/59/3607> FILTER NOT EXISTS { <https://dblp.org/rec/conf/smap/VanrompayMA12> dblp:authoredBy <https://dblp.org/pid/59/3607> }",
-        "entity": "CREATOR",
-        "query_type": "NEGATION"
+        "query_type": "NEGATION",
+        "answers": [
+            {
+                "boolean": false
+            }
+        ]
     },
     {
         "question": "In which venues did the author 'Senem Velipasalar' publish papers in the last 3 years and what are the titles of these papers?",
         "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy <https://dblp.org/pid/85/6636> . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-3) . ?x dblp:publishedIn ?firstanswer . ?x dblp:title ?secondanswer }",
         "entity": "CREATOR",
-        "query_type": "DOUBLE_INTENT"
+        "query_type": "DOUBLE_INTENT",
+        "answers": [
+            {
+                "firstanswer": "DASIP",
+                "secondanswer": "A framework for rapid prototyping of embedded vision applications."
+            },
+            {
+                "firstanswer": "WCNC",
+                "secondanswer": "Optimal Resource Allocation for Full-Duplex Wireless Video Transmissions under Delay Constraints."
+            },
+            {
+                "firstanswer": "WCNC",
+                "secondanswer": "Power control and mode selection for VBR video streaming in D2D networks."
+            },
+            {
+                "firstanswer": "WCNC",
+                "secondanswer": "On the throughput of ARQ over multiple-access relay fading channels with queueing constraints."
+            },
+            {
+                "firstanswer": "WCNC",
+                "secondanswer": "A Noncooperative Power Control Game in Multiple-Access Fading Channels with QoS Constraints."
+            },
+            {
+                "firstanswer": "WCNC",
+                "secondanswer": "Adversarial Jamming Attacks on Deep Reinforcement Learning Based Dynamic Multichannel Access."
+            },
+            {
+                "firstanswer": "ICASSP",
+                "secondanswer": "Frame-level temporal calibration of unsynchronized cameras by using Longest Consecutive Common Subsequence."
+            },
+            {
+                "firstanswer": "ICC",
+                "secondanswer": "Throughput and mode selection in two-way MIMO systems under queuing constraints."
+            },
+            {
+                "firstanswer": "ICC",
+                "secondanswer": "On the Achievable Throughput Region of Multiple-Access Fading Channels with QoS Constraints."
+            },
+            {
+                "firstanswer": "ICC",
+                "secondanswer": "Deep Multi-Agent Reinforcement Learning Based Cooperative Edge Caching in Wireless Networks."
+            },
+            {
+                "firstanswer": "GLOBECOM",
+                "secondanswer": "On the throughput of two-way relay systems under queueing constraints."
+            },
+            {
+                "firstanswer": "GLOBECOM",
+                "secondanswer": "Analysis of Energy Efficiency in Fading Channels under QoS Constraints."
+            },
+            {
+                "firstanswer": "GLOBECOM",
+                "secondanswer": "Energy Efficiency of Fixed-Rate Wireless Transmissions under Queueing Constraints and Channel Uncertainty."
+            },
+            {
+                "firstanswer": "GLOBECOM",
+                "secondanswer": "Anomaly Detection via Controlled Sensing and Deep Active Inference."
+            },
+            {
+                "firstanswer": "GLOBECOM",
+                "secondanswer": "Joint Mode Selection and Resource Allocation for D2D Communications via Vertex Coloring."
+            },
+            {
+                "firstanswer": "GLOBECOM",
+                "secondanswer": "Throughput regions for fading interference channels under statistical QoS constraints."
+            },
+            {
+                "firstanswer": "ICPR (3)",
+                "secondanswer": "Bayesian Pot-Assembly from Fragments as Problems in Perceptual-Grouping and Geometric-Learning."
+            },
+            {
+                "firstanswer": "ICIP",
+                "secondanswer": "Recovering field of view lines by using projective invariants."
+            },
+            {
+                "firstanswer": "ICASSP",
+                "secondanswer": "Controlled Sensing and Anomaly Detection Via Soft Actor-Critic Reinforcement Learning."
+            },
+            {
+                "firstanswer": "ICC",
+                "secondanswer": "Device-to-device communication in cellular networks under statistical queueing constraints."
+            },
+            {
+                "firstanswer": "CISS",
+                "secondanswer": "The impact of half-duplex relaying on the effective capacity of two-hop communication systems."
+            },
+            {
+                "firstanswer": "CISS",
+                "secondanswer": "A deep reinforcement learning-based framework for content caching."
+            },
+            {
+                "firstanswer": "GLOBECOM",
+                "secondanswer": "Deep Actor-Critic Reinforcement Learning for Anomaly Detection."
+            },
+            {
+                "firstanswer": "GLOBECOM",
+                "secondanswer": "Throughput of Hybrid-ARQ Chase Combining with ON-OFF Markov Arrivals under QoS Constraints."
+            },
+            {
+                "firstanswer": "GLOBECOM",
+                "secondanswer": "Energy Consumption and Latency Analysis for Wireless Multimedia Sensor Networks."
+            },
+            {
+                "firstanswer": "GLOBECOM",
+                "secondanswer": "Secure Broadcasting over Fading Channels with Statistical QoS Constraints."
+            },
+            {
+                "firstanswer": "GLOBECOM",
+                "secondanswer": "Anomaly Detection and Sampling Cost Control via Hierarchical GANs."
+            },
+            {
+                "firstanswer": "ACSSC",
+                "secondanswer": "Image Completion with Discriminator Guided Context Encoder."
+            },
+            {
+                "firstanswer": "ACSSC",
+                "secondanswer": "Detecting Adversarial Images via Texture Analysis."
+            },
+            {
+                "firstanswer": "ACSSC",
+                "secondanswer": "Obstacle Detection and Classification with Portable Uncalibrated Patterned Projected Light."
+            },
+            {
+                "firstanswer": "ACSSC",
+                "secondanswer": "3D Sensor-Based UAV Localization for Bridge Inspection."
+            },
+            {
+                "firstanswer": "ACSSC",
+                "secondanswer": "Human activity classification from wearable devices with cameras."
+            },
+            {
+                "firstanswer": "ICME",
+                "secondanswer": "A real-time prototype for small-vocabulary audio-visual ASR."
+            },
+            {
+                "firstanswer": "ICME",
+                "secondanswer": "SCCS: A Scalable Clustered Camera System for Multiple Object Tracking Communicating Via Message Passing Interface."
+            },
+            {
+                "firstanswer": "ICME",
+                "secondanswer": "Automatic Counting of Interacting People by using a Single Uncalibrated Camera."
+            },
+            {
+                "firstanswer": "ICME",
+                "secondanswer": "Design and Verification of Communication Protocols for Peer-to-Peer Multimedia Systems."
+            },
+            {
+                "firstanswer": "ICME",
+                "secondanswer": "Multimedia transmission over device-to-device wireless links."
+            },
+            {
+                "firstanswer": "ICME",
+                "secondanswer": "Fall detection and activity classification using a wearable smart camera."
+            },
+            {
+                "firstanswer": "ICME",
+                "secondanswer": "Wide-area multi-object tracking with non-overlapping camera views."
+            },
+            {
+                "firstanswer": "WCNC",
+                "secondanswer": "Analysis of the accuracy-latency-energy tradeoff for wireless embedded camera networks."
+            },
+            {
+                "firstanswer": "WCNC",
+                "secondanswer": "Adversarial Reinforcement Learning in Dynamic Channel Access and Power Control."
+            },
+            {
+                "firstanswer": "WCNC",
+                "secondanswer": "Image and video transmission in cognitive radio systems under sensing uncertainty."
+            },
+            {
+                "firstanswer": "WCNC",
+                "secondanswer": "Learning-Based Robust Anomaly Detection in the Presence of Adversarial Attacks."
+            },
+            {
+                "firstanswer": "ICASSP",
+                "secondanswer": "Light-weight salient foreground detection with adaptive memory requirement."
+            },
+            {
+                "firstanswer": "ICASSP (4)",
+                "secondanswer": "Real-Time Distributed Tracking."
+            },
+            {
+                "firstanswer": "ACSSC",
+                "secondanswer": "3D Capsule Networks for Object Classification from 3D Model Data."
+            },
+            {
+                "firstanswer": "ACSSC",
+                "secondanswer": "Pedestrian Detection from Thermal Images Incorporating Saliency Features."
+            },
+            {
+                "firstanswer": "ACSSC",
+                "secondanswer": "Hierarchical Grow Network for Point Cloud Segmentation."
+            },
+            {
+                "firstanswer": "ACSSC",
+                "secondanswer": "Autonomous tracking and counting of footsteps by mobile phone cameras."
+            },
+            {
+                "firstanswer": "AAAI",
+                "secondanswer": "Preclinical Stage Alzheimer's Disease Detection Using Magnetic Resonance Image Scans."
+            },
+            {
+                "firstanswer": "Personalized Digital Television",
+                "secondanswer": "Media Augmentation and Personalization Through Multimedia Processing and Information Extraction."
+            },
+            {
+                "firstanswer": "IEEE Trans. Circuits Syst. Video Technol.",
+                "secondanswer": "Adaptive Methodologies for Energy-Efficient Object Detection and Tracking With Battery-Powered Embedded Smart Cameras."
+            },
+            {
+                "firstanswer": "PIMRC",
+                "secondanswer": "Energy efficiency in fading relay channels under secrecy and QoS constraints."
+            },
+            {
+                "firstanswer": "ICC",
+                "secondanswer": "Energy Efficiency of Fixed-Rate Wireless Transmissions under QoS Constraints."
+            },
+            {
+                "firstanswer": "ICC",
+                "secondanswer": "Energy efficiency in multiaccess fading channels under QoS constraints."
+            },
+            {
+                "firstanswer": "HCI (25)",
+                "secondanswer": "Insights into User Personality and Learning Styles through Cross Subject fNIRS Classification."
+            },
+            {
+                "firstanswer": "HCI (13)",
+                "secondanswer": "A More Complete Picture of Emotion Using Electrocardiogram and Electrodermal Activity to Complement Cognitive Data."
+            },
+            {
+                "firstanswer": "HCI (25)",
+                "secondanswer": "Our Emotions as Seen through a Webcam."
+            },
+            {
+                "firstanswer": "MCPMD@ICMI",
+                "secondanswer": "Workload-driven modulation of mixed-reality robot-human communication."
+            },
+            {
+                "firstanswer": "ISIT",
+                "secondanswer": "Throughput of HARQ-IR with finite blocklength codes and QoS constraints."
+            },
+            {
+                "firstanswer": "ISIT",
+                "secondanswer": "Throughput of two-hop wireless channels with queueing constraints and finite blocklength codes."
+            },
+            {
+                "firstanswer": "ISIT",
+                "secondanswer": "Secure communication over fading channels with statistical QoS constraints."
+            },
+            {
+                "firstanswer": "ISIT",
+                "secondanswer": "Effective capacity region and optimal power control for fading broadcast channels."
+            },
+            {
+                "firstanswer": "IEEE Embed. Syst. Lett.",
+                "secondanswer": "Wearable Camera- and Accelerometer-Based Fall Detection on Portable Devices."
+            },
+            {
+                "firstanswer": "CVPR Workshops",
+                "secondanswer": "Specifying, Interpreting and Detecting High-level, Spatio-Temporal Composite Events in Single and Multi-Camera Systems."
+            },
+            {
+                "firstanswer": "CVPR",
+                "secondanswer": "Enhancing Cross-Task Black-Box Transferability of Adversarial Examples With Dispersion Reduction."
+            },
+            {
+                "firstanswer": "CVPR Workshops",
+                "secondanswer": "Energy-efficient foreground object detection on embedded smart cameras by hardware-level operations."
+            },
+            {
+                "firstanswer": "INFOCOM Workshops",
+                "secondanswer": "Joint mode selection and resource allocation for D2D communications under queueing constraints."
+            },
+            {
+                "firstanswer": "ICCV",
+                "secondanswer": "PT-CapsNet: A Novel Prediction-Tuning Capsule Network Suitable for Deeper Architectures."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "Autonomous tracking of vehicle taillights from a mobile platform using an embedded smart camera."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "Automatic fall detection by a wearable embedded smart camera."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "Light-weight salient foreground detection for embedded smart cameras."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "An adaptive method for energy-efficiency in battery-powered embedded smart cameras."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "Energy-efficient feedback tracking on embedded smart cameras by hardware-level optimization."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "Design of a Wireless Vision Sensor for object tracking in Wireless Vision Sensor Networks."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "Human detection using mobile embedded smart cameras."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "Autonomous Heat Leakage Detection from Unmanned Aerial Vehicle-Mounted Thermal Cameras."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "A Low-Cost, Tiled Embedded Smart Camera System for Computer Vision Applications."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "A robust edge-based optical flow method for elderly activity classification with wearable smart cameras."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "Robust and reliable step counting by mobile phone cameras."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "Traffic Sign Detection from Lower-quality and Noisy Mobile Videos."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "Detection of composite events spanning multiple camera views with wireless embedded smart cameras."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "Self-Coordinated Target Assignment and Camera Handoff in Distributed Network of Embedded Smart Cameras."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "Person Detection and Re-identification Across Multiple Images and Videos Obtained via Crowdsourcing."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "Detection of moving people with mobile cameras by fast motion segmentation."
+            },
+            {
+                "firstanswer": "ICDSC",
+                "secondanswer": "Energy Efficient Tracking by Dynamic Voltage and Frequency Scaling on Android Smart Phones."
+            },
+            {
+                "firstanswer": "CISDA",
+                "secondanswer": "Autonomous tracking of vehicle rear lights and detection of brakes and turn signals."
+            },
+            {
+                "firstanswer": "GlobalSIP",
+                "secondanswer": "Human Activity Classification Incorporating Egocentric Video and Inertial Measurement Unit Data."
+            },
+            {
+                "firstanswer": "GlobalSIP",
+                "secondanswer": "Deep Learning Based Power Control for Quality-Driven Wireless Video Transmissions."
+            },
+            {
+                "firstanswer": "GlobalSIP",
+                "secondanswer": "Uncoded image transmission in cognitive radio systems."
+            },
+            {
+                "firstanswer": "GlobalSIP",
+                "secondanswer": "Image transmission over cognitive radio systems with channel and sensing uncertainty."
+            },
+            {
+                "firstanswer": "GlobalSIP",
+                "secondanswer": "A codebook of brightness transfer functions for improved target re-identification across non-overlapping camera views."
+            },
+            {
+                "firstanswer": "GlobalSIP",
+                "secondanswer": "Actor-Critic Deep Reinforcement Learning for Dynamic Multichannel Access."
+            },
+            {
+                "firstanswer": "GlobalSIP",
+                "secondanswer": "Selective parts-based tracking through occlusions."
+            },
+            {
+                "firstanswer": "GlobalSIP",
+                "secondanswer": "Object Classification from 3D Volumetric Data with 3D Capsule Networks."
+            },
+            {
+                "firstanswer": "ICIP",
+                "secondanswer": "Autonomous multi-scale object detection with hough forests."
+            },
+            {
+                "firstanswer": "ICIP",
+                "secondanswer": "Fabricate-Vanish: An Effective And Transferable Black-Box Adversarial Attack Incorporating Feature Distortion."
+            },
+            {
+                "firstanswer": "ICIP",
+                "secondanswer": "Efficient Human Activity Classification from Egocentric Videos Incorporating Actor-Critic Reinforcement Learning."
+            },
+            {
+                "firstanswer": "ICIP",
+                "secondanswer": "Part-Based Feature Squeezing To Detect Adversarial Examples in Person Re-Identification Networks."
+            },
+            {
+                "firstanswer": "ICIP",
+                "secondanswer": "Robust footstep counting and traveled distance calculation by mobile phones incorporating camera geometry."
+            },
+            {
+                "firstanswer": "ICIP",
+                "secondanswer": "Weighted Average Precision: Adversarial Example Detection for Visual Perception Of Autonomous Vehicles."
+            },
+            {
+                "firstanswer": "ICIP",
+                "secondanswer": "Agglomerative clustering for feature point grouping."
+            },
+            {
+                "firstanswer": "ICIP (2)",
+                "secondanswer": "Multiple object tracking and occlusion handling by information exchange between uncalibrated cameras."
+            },
+            {
+                "firstanswer": "ICIP",
+                "secondanswer": "Doorway detection for autonomous indoor navigation of unmanned vehicles."
+            },
+            {
+                "firstanswer": "ICIP",
+                "secondanswer": "Autonomous Choice of Deep Neural Network Parameters by a Modified Generative Adversarial Network."
+            },
+            {
+                "firstanswer": "ICIP",
+                "secondanswer": "Scale estimation with difference of ordered residuals."
+            },
+            {
+                "firstanswer": "ICIP",
+                "secondanswer": "Real-time distributed tracking with non-overlapping cameras."
+            },
+            {
+                "firstanswer": "ICC",
+                "secondanswer": "Channel Coding over Multiple Coherence Blocks with Queueing Constraints."
+            },
+            {
+                "firstanswer": "ICC",
+                "secondanswer": "On the Effective Capacity of Two-Hop Communication Systems."
+            },
+            {
+                "firstanswer": "CISS",
+                "secondanswer": "Energy efficiency of hybrid-ARQ systems under QoS constraints."
+            },
+            {
+                "firstanswer": "CISS",
+                "secondanswer": "Defense Strategies Against Adversarial Jamming Attacks via Deep Reinforcement Learning."
+            },
+            {
+                "firstanswer": "INFOCOM Workshops",
+                "secondanswer": "A delay-aware caching algorithm for wireless D2D caching networks."
+            },
+            {
+                "firstanswer": "AVSS",
+                "secondanswer": "A Robust Algorithm for the Detection of Vehicle Turn Signals and Brake Lights."
+            },
+            {
+                "firstanswer": "AVSS",
+                "secondanswer": "Resource-Efficient Salient Foreground Detection for Embedded Smart Cameras br Tracking Feedback."
+            },
+            {
+                "firstanswer": "AVSS",
+                "secondanswer": "Lightweight and Robust Shadow Removal for Foreground Detection."
+            },
+            {
+                "firstanswer": "AVSS",
+                "secondanswer": "Autonomous altitude measurement and landing area detection for indoor UAV applications."
+            },
+            {
+                "firstanswer": "AVSS",
+                "secondanswer": "An improved evolutionary algorithm for fundamental matrix estimation."
+            },
+            {
+                "firstanswer": "AVSS",
+                "secondanswer": "Camera motion detection for mobile smart cameras using segmented edge-based optical flow."
+            },
+            {
+                "firstanswer": "AVSS",
+                "secondanswer": "Frame-level temporal calibration of video sequences from unsynchronized cameras by using projective invariants."
+            },
+            {
+                "firstanswer": "AVSS",
+                "secondanswer": "Cooperative Object Tracking and Event Detection with Wireless Smart Cameras."
+            },
+            {
+                "firstanswer": "AVSS",
+                "secondanswer": "Energy-aware and robust task (re)assignment in embedded smart camera networks."
+            },
+            {
+                "firstanswer": "AVSS",
+                "secondanswer": "Continuous Background Update and Object Detection with Non-static Cameras."
+            },
+            {
+                "firstanswer": "AVSS",
+                "secondanswer": "Energy efficient image transmission using wireless embedded smart cameras."
+            },
+            {
+                "firstanswer": "VTC Fall",
+                "secondanswer": "Intercell Interference-Aware Scheduling for Delay Sensitive Applications in C-RAN."
+            },
+            {
+                "firstanswer": "VTC Fall",
+                "secondanswer": "Scheduling in D2D Underlaid Cellular Networks with Deadline Constraints."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "On the Effective Capacity of Two-Hop Communication Systems"
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Anomaly Detection via Controlled Sensing and Deep Active Inference."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Scalable and Decentralized Algorithms for Anomaly Detection via Learning-Based Controlled Sensing."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Preclinical Stage Alzheimer's Disease Detection Using Magnetic Resonance Image Scans."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "The Impact of QoS Constraints on the Energy Efficiency of Fixed-Rate Wireless Transmissions"
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Joint Mode Selection and Resource Allocation for D2D Communications via Vertex Coloring."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "A Deep Reinforcement Learning-Based Framework for Content Caching."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "RAANet: Range-Aware Attention Network for LiDAR-based 3D Object Detection with Auxiliary Density Level Estimation."
+            },
+            {
+                "firstanswer": "IEEE Trans. Geosci. Remote. Sens.",
+                "secondanswer": "Background-Aware 3-D Point Cloud Segmentation With Dynamic Point Feature Aggregation."
+            },
+            {
+                "firstanswer": "IEEE Trans. Inf. Forensics Secur.",
+                "secondanswer": "Secure Wireless Communication and Optimal Power Control Under Statistical Queueing Constraints."
+            },
+            {
+                "firstanswer": "Multi-Camera Networks",
+                "secondanswer": "Composite Event Detection in Multi-Camera and Multi-Sensor Surveillance Networks."
+            },
+            {
+                "firstanswer": "IEEE Trans. Wirel. Commun.",
+                "secondanswer": "The impact of QoS constraints on the energy efficiency of fixed-rate wireless transmissions."
+            },
+            {
+                "firstanswer": "IEEE Trans. Wirel. Commun.",
+                "secondanswer": "Analysis of Energy Efficiency in Fading Channels under QoS Constraints."
+            },
+            {
+                "firstanswer": "IEEE Trans. Wirel. Commun.",
+                "secondanswer": "On the Throughput of Multi-Source Multi-Destination Relay Networks With Queueing Constraints."
+            },
+            {
+                "firstanswer": "IEEE Trans. Signal Process.",
+                "secondanswer": "Multimedia Transmission Over Cognitive Radio Channels Under Sensing Uncertainty."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Synthetic Distracted Driving (SynDD1) dataset for analyzing distracted behaviors and various gaze zones of a driver."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Power Control for Wireless VBR Video Streaming: From Optimization to Reinforcement Learning."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Energy Efficiency of Hybrid-ARQ under Statistical Queuing Constraints."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Analysis of Energy Efficiency in Fading Channels under QoS Constraints"
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Transmission Strategies in Multiple Access Fading Channels with Statistical QoS Constraints"
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Energy Efficiency of Fixed-Rate Wireless Transmissions under Queueing Constraints and Channel Uncertainty"
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Autonomously and Simultaneously Refining Deep Neural Network Parameters by Generative Adversarial Networks."
+            },
+            {
+                "firstanswer": "Int. J. Hum. Comput. Stud.",
+                "secondanswer": "Building predictive models of emotion with functional near-infrared spectroscopy."
+            },
+            {
+                "firstanswer": "EURASIP J. Image Video Process.",
+                "secondanswer": "A Scalable Clustered Camera System for Multiple Object Tracking."
+            },
+            {
+                "firstanswer": "IEEE J. Emerg. Sel. Topics Circuits Syst.",
+                "secondanswer": "Automatic Fall Detection and Activity Classification by a Wearable Embedded Smart Camera."
+            },
+            {
+                "firstanswer": "Comput. Vis. Image Underst.",
+                "secondanswer": "Light-weight salient foreground detection for embedded smart cameras."
+            },
+            {
+                "firstanswer": "IEEE Trans. Hum. Mach. Syst.",
+                "secondanswer": "Autonomous Fall Detection With Wearable Cameras by Using Relative Entropy Distance Measure."
+            },
+            {
+                "firstanswer": "Elektrotech. Informationstechnik",
+                "secondanswer": "Lessons from a distributed peer-to-peer smart tracker."
+            },
+            {
+                "firstanswer": "IEEE Trans. Intell. Transp. Syst.",
+                "secondanswer": "Mobile Standards-Based Traffic Light Detection in Assistive Devices for Individuals with Color-Vision Deficiency."
+            },
+            {
+                "firstanswer": "IEEE Access",
+                "secondanswer": "An Effective Adversarial Attack on Person Re-Identification in Video Surveillance via Dispersion Reduction."
+            },
+            {
+                "firstanswer": "IEEE Trans. Commun.",
+                "secondanswer": "Energy Efficiency of Hybrid-ARQ Under Statistical Queuing Constraints."
+            },
+            {
+                "firstanswer": "Virtual Reality, Archeology, and Cultural Heritage",
+                "secondanswer": "Assembling virtual pots from 3D measurements of their fragments."
+            },
+            {
+                "firstanswer": "IEEE J. Biomed. Health Informatics",
+                "secondanswer": "Taking a Deeper Look at the Brain: Predicting Visual Perceptual and Working Memory Load From High-Density fNIRS Data."
+            },
+            {
+                "firstanswer": "Phys. Commun.",
+                "secondanswer": "A noncooperative power control game in multi-access fading channels with quality of service (QoS) constraints."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Deep Actor-Critic Reinforcement Learning for Anomaly Detection."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Actor-Critic Deep Reinforcement Learning for Dynamic Multichannel Access."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Background-Aware 3D Point Cloud Segmentationwith Dynamic Point Feature Aggregation."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Anomaly Detection and Sampling Cost Control via Hierarchical GANs."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Secure Wireless Communication and Optimal Power Control under Statistical Queueing Constraints"
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Effective Capacity of Two-Hop Wireless Communication Systems"
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Secure Broadcasting over Fading Channels with Statistical QoS Constraints"
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Adversarial Reinforcement Learning in Dynamic Channel Access and Power Control."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Quality-Driven Resource Allocation for Full-Duplex Delay-Constrained Wireless Video Transmissions."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Weighted Average Precision: Adversarial Example Detection in the Visual Perception of Autonomous Vehicles."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Autonomously and Simultaneously Refining Deep Neural Network Parameters by a Bi-Generative Adversarial Network Aided Genetic Algorithm."
+            },
+            {
+                "firstanswer": "IEEE Trans. Image Process.",
+                "secondanswer": "Cooperative Object Tracking and Composite Event Detection With Wireless Embedded Smart Cameras."
+            },
+            {
+                "firstanswer": "IEEE Trans. Image Process.",
+                "secondanswer": "Autonomous Selective Parts-Based Tracking."
+            },
+            {
+                "firstanswer": "J. Signal Process. Syst.",
+                "secondanswer": "Guest Editorial: Special Issue on Embedded Machine Learning."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Intercell Interference-Aware Scheduling for Delay Sensitive Applications in C-RAN."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Enhancing Cross-task Black-Box Transferability of Adversarial Examples with Dispersion Reduction."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "A Deep Actor-Critic Reinforcement Learning Framework for Dynamic Multichannel Access."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Adversarial jamming attacks and defense strategies via adaptive deep reinforcement learning."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Autonomous Human Activity Classification from Ego-vision Camera and Accelerometer Data."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Accelerometer based Activity Classification with Variational Inference on Sticky HDP-SLDS."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "On the Throughput of Hybrid-ARQ under QoS Constraints."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Learning-Based Delay-Aware Caching in Wireless D2D Caching Networks."
+            },
+            {
+                "firstanswer": "EURASIP J. Wirel. Commun. Netw.",
+                "secondanswer": "Energy efficiency in multiaccess fading channels under QoS constraints."
+            },
+            {
+                "firstanswer": "IEEE Trans. Commun.",
+                "secondanswer": "Energy Efficiency in the Low-SNR Regime under Queueing Constraints and Channel Uncertainty."
+            },
+            {
+                "firstanswer": "IEEE Trans. Commun.",
+                "secondanswer": "Achievable Throughput Regions of Fading Broadcast and Interference Channels under QoS Constraints."
+            },
+            {
+                "firstanswer": "IEEE Trans. Commun.",
+                "secondanswer": "Quality-Driven Resource Allocation for Full-Duplex Delay-Constrained Wireless Video Transmissions."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "On the Achievable Throughput Region of Multiple-Access Fading Channels with QoS Constraints"
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Secure Communication over Fading Channels with Statistical QoS Constraints"
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Deep Learning Based Power Control for Quality-Driven Wireless Video Transmissions."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "On the Throughput of Multi-Source Multi-Destination Relay Networks with Queueing Constraints."
+            },
+            {
+                "firstanswer": "IEEE Trans. Inf. Theory",
+                "secondanswer": "Transmission Strategies in Multiple-Access Fading Channels With Statistical QoS Constraints."
+            },
+            {
+                "firstanswer": "IEEE Trans. Inf. Theory",
+                "secondanswer": "Effective Capacity of Two-Hop Wireless Communication Systems."
+            },
+            {
+                "firstanswer": "J. Real Time Image Process.",
+                "secondanswer": "Special issue on smart cameras for real-time image and video processing."
+            },
+            {
+                "firstanswer": "Multim. Tools Appl.",
+                "secondanswer": "Distributed wide-area multi-object tracking with non-overlapping camera views."
+            },
+            {
+                "firstanswer": "Multim. Tools Appl.",
+                "secondanswer": "Detection of user-defined, semantically high-level, composite events, and retrieval of event queries."
+            },
+            {
+                "firstanswer": "IEEE Trans. Veh. Technol.",
+                "secondanswer": "On the Throughput of Hybrid-ARQ Under Statistical Queuing Constraints."
+            },
+            {
+                "firstanswer": "IEEE Access",
+                "secondanswer": "3D Capsule Networks for Object Classification With Weight Pruning."
+            },
+            {
+                "firstanswer": "IEEE Access",
+                "secondanswer": "Quality-Driven Resource Allocation for Wireless Video Transmissions Under Energy Efficiency and Delay Constraints."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Energy Efficiency in the Low-SNR Regime under Queueing Constraints and Channel Uncertainty"
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Deep Multi-Agent Reinforcement Learning Based Cooperative Edge Caching in Wireless Networks."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "A Delay-Aware Caching Algorithm for Wireless D2D Caching Networks."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Power Control and Mode Selection for VBR Video Streaming in D2D Networks."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Channel Coding over Multiple Coherence Blocks with Queueing Constraints"
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Multimedia Transmission over Cognitive Radio Channels under Sensing Uncertainty."
+            },
+            {
+                "firstanswer": "CoRR",
+                "secondanswer": "Enhancing Cross-task Transferability of Adversarial Examples with Dispersion Reduction."
+            },
+            {
+                "firstanswer": "Mach. Vis. Appl.",
+                "secondanswer": "Frame-level temporal calibration of video sequences from unsynchronized cameras."
+            },
+            {
+                "firstanswer": "IEEE Trans. Cogn. Commun. Netw.",
+                "secondanswer": "Deep Reinforcement Learning-Based Edge Caching in Wireless Networks."
+            },
+            {
+                "firstanswer": "IEEE Trans. Cogn. Commun. Netw.",
+                "secondanswer": "A Deep Actor-Critic Reinforcement Learning Framework for Dynamic Multichannel Access."
+            },
+            {
+                "firstanswer": "IEEE Access",
+                "secondanswer": "Learning-Based Delay-Aware Caching in Wireless D2D Caching Networks."
+            },
+            {
+                "firstanswer": "IEEE Access",
+                "secondanswer": "Resilient Dynamic Channel Access via Robust Deep Reinforcement Learning."
+            },
+            {
+                "firstanswer": "IEEE Access",
+                "secondanswer": "Simultaneous and Spatiotemporal Detection of Different Levels of Activity in Multidimensional Data."
+            },
+            {
+                "firstanswer": "IEEE Trans. Commun.",
+                "secondanswer": "Throughput-Delay Tradeoffs With Finite Blocklength Coding Over Multiple Coherence Blocks."
+            },
+            {
+                "firstanswer": "IEEE Trans. Commun.",
+                "secondanswer": "Power Control for Wireless VBR Video Streaming: From Optimization to Reinforcement Learning."
+            },
+            {
+                "firstanswer": "IEEE Trans. Veh. Technol.",
+                "secondanswer": "Throughput Analysis of Low-Latency IoT Systems With QoS Constraints and Finite Blocklength Codes."
+            }
+        ]
     },
     {
         "question": "Did the authors of 'Preface' not not publish 'Transition Systems of Elementary Net Systems with Localities'?",
         "query": "ASK { <https://dblp.org/rec/journals/jcst/ZhouL10> dblp:authoredBy ?x . <https://dblp.org/rec/conf/concur/KoutnyP06> dblp:authoredBy ?x FILTER (<https://dblp.org/rec/conf/concur/KoutnyP06> != <https://dblp.org/rec/journals/jcst/ZhouL10>) }",
         "entity": "PUBLICATION",
-        "query_type": "DOUBLE_NEGATION"
+        "query_type": "DOUBLE_NEGATION",
+        "answers": [
+            {
+                "boolean": false
+            }
+        ]
     },
     {
         "question": "In which year did the author 'Lunzhi Deng' publish the least publications?",
         "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x dblp:authoredBy <https://dblp.org/pid/131/1122> . ?x dblp:yearOfPublication ?answer } GROUP BY ?answer } ORDER BY ASC(?count) LIMIT 1",
         "entity": "CREATOR",
-        "query_type": "RANK"
+        "query_type": "RANK",
+        "answers": [
+            {
+                "answer": "2013",
+                "count": "1"
+            }
+        ]
     },
     {
         "question": "How many venues has the author 'Paolo Terenziani' published in?",
         "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { ?x dblp:authoredBy <https://dblp.org/pid/26/279> . ?x dblp:publishedIn ?answer }",
         "entity": "CREATOR",
-        "query_type": "COUNT"
-    },
-    {
-        "question": "Where are the majority of the authors of 'Anonymisierte Daten brauchen keinen Datenschutz - wirklich nicht?' affiliated to?",
-        "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/books/sp/22/Kneuper22> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
-        "entity": "PUBLICATION",
-        "query_type": "RANK"
+        "query_type": "COUNT",
+        "answers": [
+            {
+                "count": "61"
+            }
+        ]
     },
     {
         "question": "'Piotr Kulczycki' published the most papers in which venue and how many?",
         "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x dblp:authoredBy <https://dblp.org/pid/74/4974> . ?x dblp:publishedIn ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
         "entity": "CREATOR",
-        "query_type": "RANK"
+        "query_type": "RANK",
+        "answers": [
+            {
+                "answer": "FedCSIS",
+                "count": "6"
+            }
+        ]
     },
     {
         "question": "Who are the co-authors of 'Der-Chyuan Lou' and where are they affiliated?",
         "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy <https://dblp.org/pid/06/1542> . ?x dblp:authoredBy ?firstanswer FILTER(?firstanswer != <https://dblp.org/pid/06/1542>) . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
         "entity": "CREATOR",
-        "query_type": "DOUBLE_INTENT"
+        "query_type": "DOUBLE_INTENT",
+        "answers": [
+            {
+                "firstanswer": "https://dblp.org/pid/l/ChangTsunLi",
+                "secondanswer": "Charles Sturt University, Bathurst, Australia"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/4944-1",
+                "secondanswer": "Fujian Normal University, Fujian Provincial Key Laboratory of Network Security and Cryptology, Fuzhou, China"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/c/ChinChenChang",
+                "secondanswer": "Feng Chia University, Department of Information Engineering and Computer Science, Taichung, Taiwan"
+            }
+        ]
     },
     {
         "question": "What are the papers that 'Christopher J. Carpenter' and 'Tatsuhide Matsuda' published in 'Int. J. Interact. Commun. Syst. Technol.'?",
         "query": "SELECT DISTINCT ?answer WHERE { { ?answer dblp:authoredBy <https://dblp.org/pid/28/1533> . ?answer dblp:publishedIn 'Int. J. Interact. Commun. Syst. Technol.' } UNION { ?answer dblp:authoredBy <https://dblp.org/pid/132/4568> . ?answer dblp:publishedIn 'Int. J. Interact. Commun. Syst. Technol.' } }",
         "entity": "CREATOR",
-        "query_type": "UNION"
+        "query_type": "UNION",
+        "answers": [
+            {
+                "answer": "https://dblp.org/rec/journals/ijicst/Carpenter16"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/ijicst/SpottswoodC20"
+            }
+        ]
     },
     {
         "question": "From where are most of the authors of 'A Balanced Phase Shifter With Common-Mode Suppression' from?",
         "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/tie/ZhangS19> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
         "entity": "PUBLICATION",
-        "query_type": "RANK"
+        "query_type": "RANK",
+        "answers": [
+            {
+                "answer": "Nantong University, School of Electronics and Information, China",
+                "count": "1"
+            }
+        ]
     },
     {
         "question": "Has the paper 'Time-optimal coordination of mobile robots along specified paths' not not been published by 'Florent Altch\\u00E9'?",
         "query": "ASK { <https://dblp.org/rec/conf/iros/AltcheQF16> dblp:authoredBy <https://dblp.org/pid/177/8921> }",
         "entity": "CREATOR",
-        "query_type": "DOUBLE_NEGATION"
-    },
-    {
-        "question": "What are the title of the papers that 'Song wrote about entity linking published in 'IEEE Internet Things J.'?",
-        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, 'Song, 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER REGEX (?answer, entity linking, 'i') . ?z dblp:publishedIn 'IEEE Internet Things J.' }",
-        "entity": "CREATOR",
-        "query_type": "DISAMBIGUATION"
+        "query_type": "DOUBLE_NEGATION",
+        "answers": [
+            {
+                "boolean": true
+            }
+        ]
     },
     {
         "question": "In 'SIGACT News', how many publications has 'Rocky Ross' published?",
         "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/24/6282> . ?answer dblp:publishedIn 'SIGACT News' }",
         "entity": "CREATOR",
-        "query_type": "COUNT"
+        "query_type": "COUNT",
+        "answers": [
+            {
+                "count": "44"
+            }
+        ]
     },
     {
         "question": "Did the authors of 'Controllability of semilinear stochastic integrodifferential systems' also publish 'Feedback-based error control for mobile video transmission'?",
         "query": "ASK { <https://dblp.org/rec/journals/kybernetika/BalachandranKK07> dblp:authoredBy ?x . <https://dblp.org/rec/journals/pieee/GirodF99> dblp:authoredBy ?x FILTER (<https://dblp.org/rec/journals/pieee/GirodF99> != <https://dblp.org/rec/journals/kybernetika/BalachandranKK07>) }",
         "entity": "PUBLICATION",
-        "query_type": "BOOLEAN"
-    },
-    {
-        "question": "Who are the authors that published papers about entity linking in 'ICPR' in '2018'?",
-        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), entity linking) . ?x dblp:publishedIn 'ICPR' . FILTER CONTAINS(LCASE('ICPR'), 'ICPR') . ?x dblp:year ?y . FILTER(?y = '2018') . ?x dblp:authoredBy ?answer }",
-        "entity": "PUBLICATION",
-        "query_type": "DISAMBIGUATION"
+        "query_type": "BOOLEAN",
+        "answers": [
+            {
+                "boolean": false
+            }
+        ]
     },
     {
         "question": "Who are the authors of the paper 'Determining and improving the fault tolerance of multilayer perceptrons in a pattern-recognition application' and where are they from?",
         "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/tnn/EmmersonD93> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
         "entity": "PUBLICATION",
-        "query_type": "DOUBLE_INTENT"
+        "query_type": "DOUBLE_INTENT",
+        "answers": [
+            {
+                "firstanswer": "https://dblp.org/pid/73/5735",
+                "secondanswer": "University of Southampton, UK"
+            }
+        ]
     },
     {
         "question": "Wasn't the paper 'Systems Analysis and Design: An Essential Part of IS Education' published in the year '2006'?",
         "query": "ASK { <https://dblp.org/rec/journals/jisedu/HarrisLOS06> dblp:yearOfPublication '2006' FILTER NOT EXISTS { <https://dblp.org/rec/journals/jisedu/HarrisLOS06> dblp:yearOfPublication '2006' } }",
         "entity": "PUBLICATION",
-        "query_type": "NEGATION"
+        "query_type": "NEGATION",
+        "answers": [
+            {
+                "boolean": false
+            }
+        ]
     },
     {
         "question": "Who are the authors of the publication 'Abnormality detection in crowd videos by tracking sparse components' and what other papers did they publish?",
         "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/mva/BiswasG17> dblp:authoredBy ?firstanswer . ?secondanswer dblp:authoredBy ?firstanswer FILTER (?secondanswer != <https://dblp.org/rec/journals/mva/BiswasG17>) }",
         "entity": "PUBLICATION",
-        "query_type": "DOUBLE_INTENT"
-    },
-    {
-        "question": "What is the ORCID of 'Jenq Kuen Lee'?",
-        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/42/3701> dblp:orcid ?answer }",
-        "entity": "CREATOR",
-        "query_type": "SINGLE_FACT"
+        "query_type": "DOUBLE_INTENT",
+        "answers": [
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/phd/basesearch/Biswas09"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/accv/MandalAB18"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/ncvpripg/Biswas15"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/ncvpripg/BiswasS13"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/ncvpripg/MaliB15"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/ncvpripg/MudunuriVB17"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/bmvc/DuttaB19"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/eccv/DuttaSB20"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icip/MandalB17"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icb/BiswasAF11"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icb/PaoneBAF11"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/mm/ChelliahBD19"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/aipr/BiswasB21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/reference/crypt/BiswasC11"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/sdm/MitraBB15"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icassp/TuragaBC10"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/wifs/BiswasBF11"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/comad/ParekhMBS22"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/isbi/ZhaoLBMMV14"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/wacv/MudunuriB17"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/wacv/AggarwalBFB12"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/wacv/AggarwalBFB12a"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/wacv/BhattacharjeeMB20"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/wacv/DuttaB20"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/wacv/MandalBB20"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/wacv/PambalaDB20"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/btas/BiswasBF10"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/iwcia/ChenB12"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/cvpr/AggarwalBFB11"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/cvpr/AnnadaniB18"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/cvpr/SinghDTBDBCVN21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/cvpr/AggarwalBC05"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/cvpr/DasMB16"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/cvpr/MandalCB17"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/cvpr/BiswasAC07"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/cvpr/BiswasAF11"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/cvpr/MudunuriSB18"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/cvpr/BiswasC10"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icpr/BiswasZLMV14"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/iccv/PaulDB21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/iccv/SanyalMB15"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/iccv/BiswasAC07"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/acpr/ChowdhuryCBBP21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icip/BhattacharjeeMB19"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icip/SanyalMB17"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icip/MudunuriB18"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icip/BhattacharjeeMB19a"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icip/MandalRB20"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icip/BiswasAC06"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icip/MandalB20"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icip/PatelWBPC11"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icip/SomasundaranSB18"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/cvpr/AggarwalBC07"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/cvpr/ParekhSBC21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/ijcai/MitraBB15"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-1905-11139"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-0910-4144"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-1905-04511"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-1812-01391"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/tifs/PatelWBPC12"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/tifs/MudunuriVB19"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/ijprai/BarrBFB12"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/tmm/BiswasAC10"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/tmm/DuttaSB21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/tmm/MandalRB20"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/pr/SanyalMB17"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/asc/BiswasCG13"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-2009-06680"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-1910-05700"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/MitraBB14"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/tip/MandalCB19"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/tip/DasMB17"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/tip/DuttaB19"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/tip/MandalB16"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icvgip/ArfeenDB21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icvgip/BansalB21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icvgip/BharadwajBR16"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icvgip/GoyalB21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icvgip/GuptaB14"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/conf/icvgip/JainSRBBR16"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/prl/DuttaB19a"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/prl/MandalB17"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/prl/MudunuriB16"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/prl/PambalaDB21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-1803-03049"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-2207-10659"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-1905-04523"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/AnnadaniRB16"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-2112-02355"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/vlc/RamanathanCB09"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/pami/BiswasAC09"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/pami/BiswasAFB13"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/pami/BiswasBF12"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/pami/MitraBB17"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/pami/MudunuriB16"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-2108-08356"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-2002-00677"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-2204-10595"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/spic/SomasundaranSB20"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/82/2665",
+                "secondanswer": "https://dblp.org/rec/journals/spic/SoundararajanB19"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/cmg/GawandeKG08"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/cmg/GuptaW07"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/ncvpripg/SamaniGR15"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/acssc/XuWYLGTWC19"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/artcom/GuptaKS09"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/icdf2c/GuptaB15"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/wocn/GuptaMS13"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/wocn/GuptaMS13a"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/ilrn/BahceciPGCO21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/ilrn/Pena-RiosBGCO20"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/eucc/GuptaP16"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/ofc/BianMNCLAMSRYEP21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/ofc/BianRPHMDRVKYEF21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/ofc/ChowdhuryKAPPZA22"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/iecon/KumarPGG20"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/gecco/GuptaAC20"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/retis/GuptaD11"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-1004-3571"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/nca/KumarG21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/jssc/PayneLBRWPEYGWX05"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/cam/GuptaSD21"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/bioinformatics/GuptaMPSA12"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/asc/SaxenaSKG18"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/mia/BustamanteGFCEE18"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/mia/GuptaKHGGNRL12"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-2002-11251"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-1907-10700"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/miccai/BustamanteGCE16"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/miccai/GuptaGKKNL12"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/conf/icvgip/GuptaB14"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/corr/GuptaR17"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/amc/KadalbajooG10"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/cars/KirisliGKRMSGMLRWN12"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/npsc/GuptaK10"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/npsc/KadalbajooG10"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/jkm/ThomasG22"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/cee/KumarPGG22"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/corr/abs-1909-07128"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/mr/ChiuLYG10"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/kybernetes/ChopraG20"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/cma/KadalbajooAG11"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/jeim/GuptaJ17"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/jnma/GuptaK16"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/jvcir/GuptaCS15"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/ijcm/GuptaKD19"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/ijcm/KadalbajooG10"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/kybernetes/ThomasG22"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/jcise/GuptaT17"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/ijkl/SinhaKG15"
+            },
+            {
+                "firstanswer": "https://dblp.org/pid/45/3166",
+                "secondanswer": "https://dblp.org/rec/journals/cad/GuptaT15"
+            }
+        ]
     },
     {
         "question": "Did 'Ignacio Aedo' not not publish in '2016'?",
         "query": "ASK { ?x dblp:authoredBy <https://dblp.org/pid/a/IgnacioAedo> . ?x dblp:yearOfPublication '2016' }",
         "entity": "CREATOR",
-        "query_type": "DOUBLE_NEGATION"
-    },
-    {
-        "question": "Who are the authors of the publication 'Application of ANN Based Pattern Recognition Technique for the Protection of 3-Phase Power Transformer' and where are they from?",
-        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/semcco/BalagaVS11> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
-        "entity": "PUBLICATION",
-        "query_type": "DOUBLE_INTENT"
+        "query_type": "DOUBLE_NEGATION",
+        "answers": [
+            {
+                "boolean": true
+            }
+        ]
     },
     {
         "question": "'Efthimios Bothos' published the most publications in which venue?",
         "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x dblp:authoredBy <https://dblp.org/pid/57/5887> . ?x dblp:publishedIn ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
         "entity": "CREATOR",
-        "query_type": "RANK"
+        "query_type": "RANK",
+        "answers": [
+            {
+                "answer": "CoRR",
+                "count": "4"
+            }
+        ]
     },
     {
         "question": "How many authors of the paper 'An optimal constant level rationing policy under service level constraints' have 'University of Cologne, Department of Supply Chain Management and Management Science, Germany' as their primary affiliation?",
         "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/ors/MolleringT10> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation 'University of Cologne, Department of Supply Chain Management and Management Science, Germany' }",
         "entity": "PUBLICATION",
-        "query_type": "COUNT"
+        "query_type": "COUNT",
+        "answers": [
+            {
+                "count": "1"
+            }
+        ]
     },
     {
         "question": "Who authored 'TDMA-Like Infrared Uplink with Multi-Faces Photodiode Access Points'?",
         "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/icc/BuiB19> dblp:authoredBy ?answer }",
         "entity": "PUBLICATION",
-        "query_type": "SINGLE_FACT"
-    },
-    {
-        "question": "Did 'Himanshu Neema' not publish the paper 'Modeling and Optimization of a Longitudinally-Distributed Global Solar Grid'?",
-        "query": "ASK { <https://dblp.org/rec/journals/corr/abs-2206-05584> dblp:authoredBy <https://dblp.org/pid/50/3859> FILTER NOT EXISTS { <https://dblp.org/rec/journals/corr/abs-2206-05584> dblp:authoredBy <https://dblp.org/pid/50/3859> }",
-        "entity": "CREATOR",
-        "query_type": "NEGATION"
+        "query_type": "SINGLE_FACT",
+        "answers": [
+            {
+                "answer": "https://dblp.org/pid/202/5458"
+            },
+            {
+                "answer": "https://dblp.org/pid/60/4488"
+            }
+        ]
     },
     {
         "question": "In which year did the author 'Siva Sivabalan' publish the most research papers?",
         "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x dblp:authoredBy <https://dblp.org/pid/209/6022> . ?x dblp:yearOfPublication ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
         "entity": "CREATOR",
-        "query_type": "RANK"
+        "query_type": "RANK",
+        "answers": [
+            {
+                "answer": "2020",
+                "count": "4"
+            }
+        ]
     },
     {
         "question": "Did the authors of 'Modeling of dynamic data-driven approach for the distributed steel rolling heating furnace temperature field' not not publish 'The Effects of Physical Design Characteristics on the Area-Performance Tradeoff Curve'?",
         "query": "ASK { <https://dblp.org/rec/journals/nca/BaoZGXZ22> dblp:authoredBy ?x . <https://dblp.org/rec/conf/dac/ParkerGH91> dblp:authoredBy ?x FILTER (<https://dblp.org/rec/conf/dac/ParkerGH91> != <https://dblp.org/rec/journals/nca/BaoZGXZ22>) }",
         "entity": "PUBLICATION",
-        "query_type": "DOUBLE_NEGATION"
+        "query_type": "DOUBLE_NEGATION",
+        "answers": [
+            {
+                "boolean": false
+            }
+        ]
     },
     {
         "question": "Did the author 'J\\u00FCrgen G\\u00F6tze' publish the paper 'Reducing complexity of generalized minimum mean square error detection' in 'EUSIPCO' in the last 8 years?",
         "query": "ASK { <https://dblp.org/rec/conf/eusipco/MorsyG10> dblp:authoredBy <https://dblp.org/pid/43/6299> . <https://dblp.org/rec/conf/eusipco/MorsyG10> dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-8) . <https://dblp.org/rec/conf/eusipco/MorsyG10> dblp:publishedIn 'EUSIPCO' }",
         "entity": "CREATOR",
-        "query_type": "BOOLEAN"
+        "query_type": "BOOLEAN",
+        "answers": [
+            {
+                "boolean": true
+            }
+        ]
     },
     {
         "question": "In which venues did 'Suguru Arimoto' publish papers and what are the titles of these papers?",
         "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy <https://dblp.org/pid/a/SuguruArimoto> . ?x dblp:publishedIn ?firstanswer . ?x dblp:title ?secondanswer }",
         "entity": "CREATOR",
-        "query_type": "DOUBLE_INTENT"
-    },
-    {
-        "question": "In the year '2011' in 'DaWaK', what are the titles of the research papers on entity linking?",
-        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), entity linking) . ?x dblp:publishedIn 'DaWaK' . FILTER CONTAINS(LCASE('DaWaK'), 'DaWaK') . ?x dblp:year ?y . FILTER(?y = '2011') }",
-        "entity": "PUBLICATION",
-        "query_type": "DISAMBIGUATION"
+        "query_type": "DOUBLE_INTENT",
+        "answers": [
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Impedance Matching for Evaluation of Dexterity in Execution of Robot Tasks."
+            },
+            {
+                "firstanswer": "ICRA (1)",
+                "secondanswer": "Model-Based Adaptive Hybrid Control for Geometrically Constrained Robots."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Learning control for robot tasks under geometric endpoint constraints."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Physiologically Inspired Robot Control: A Challenge to Bernstein's Degrees-of-Freedom Problem."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Iterative Learning of Specified Motions in Task-Space for Redundant Multi-Joint Hand-Arm Robots."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "A riemannian-geometry approach for dynamics and control of object manipulation under constraints."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Grasping and Position Control for Multi-Fingered Robot Hands with Uncertain Jacobian Matrices."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Adaptive Control for Holonomicall Constrained Robots: Time-Invariant and Time-Variant Cases."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Learning Control for Robot Tasks under Geometric Constraints."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Learning and adaptive controls for coordination of multiple manipulators without knowing physical parameters of an object."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Video-frame Rate Detection of Position and Orientation of Planar Motion Objects using One-sided Radon Transform."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Blind Grasp and Manipulation of a Rigid Object by a Pair of Robot Fingers with Soft Tips."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Stability on a manifold: simultaneous realization of grasp and orientation control of an object by a pair of robot fingers."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Stable \"Blind Grasping\" of a 3-D Object under Non-holonomic Constraints."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Approximate Jacobian Feedback Control of Robots with Kinematic Uncertainty and its Application to Visual Servoing."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Iterative learning scheme for a redundant manipulator: Skilled hand writing motion on an arbitrary smooth surface."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "A Force Control for a Robot Finger Under Kinematic Uncertainties."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Sensory feedback control for space manipulators."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Bio-mimetic Study on Pinching Motions of a Dual-finger Model with Synergistic Actuation of Antagonist Muscles."
+            },
+            {
+                "firstanswer": "CIRA",
+                "secondanswer": "Computer simulation of grasping and object-manipulation by a pair of multi-degrees of freedom robot fingers."
+            },
+            {
+                "firstanswer": "CIRA",
+                "secondanswer": "Experiments of grasping and object-manipulation by a pair of multi-degrees of freedom robot fingers."
+            },
+            {
+                "firstanswer": "ICASSP",
+                "secondanswer": "A new recursive method for identification of multivariate linear systems from impulse response and output covariance information."
+            },
+            {
+                "firstanswer": "SyRoCo",
+                "secondanswer": "Modeling and Control for 2-D Grasping of an Object with Arbitrary Shape under Rolling Contact."
+            },
+            {
+                "firstanswer": "SyRoCo",
+                "secondanswer": "Task-Space Iterative Learning for Redundant Robots: Simultaneous Acquirements of Desired Motion and Force Trajectories under Constraints."
+            },
+            {
+                "firstanswer": "ICPR",
+                "secondanswer": "A fast algorithm for building the octree for a three-dimensional object from its multiple images."
+            },
+            {
+                "firstanswer": "ISER",
+                "secondanswer": "An Experimental Enviroment for Adaptive Robot Force Control."
+            },
+            {
+                "firstanswer": "ROBIO",
+                "secondanswer": "What are the Fundamentals of Bio-Mimetic Control?"
+            },
+            {
+                "firstanswer": "ROBIO",
+                "secondanswer": "A Natural Resolution of Bernstein's Degrees-of-Freedom Problem in Case of Multi-Joint Reaching."
+            },
+            {
+                "firstanswer": "ROBIO",
+                "secondanswer": "Manipulation of a circular object in a horizontal plane by two finger robots."
+            },
+            {
+                "firstanswer": "ROBIO",
+                "secondanswer": "Stable grasp of a 2D rigid object through rolling with soft fingers."
+            },
+            {
+                "firstanswer": "ROBIO",
+                "secondanswer": "Dexterity Analysis of Human and Robotic Grasping Motions from the Viewpoint of Dynamics."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Performance of Pinching Motions of Two Multi-DOF Robotic Fingers with Soft-tips."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Proposal of the-law-of-inertia (friction/gravity-free) robots."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Cooperative motion control of multiple robot arms or fingers."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Selective learning with a forgetting factor for robotic motion control."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Feedback Control for Robotic Manipulator with Uncertain Kinematics and Dynamics."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Robotic Pinching by Means of a Pair of Soft Fingers with Sensory Feedback."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "External sensory feedback control for end-effector of flexible multi-link manipulators."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Decentralized cooperation control: joint-space approaches for holonomic cooperation."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Coordinated Learning Control for Multiple Manipulators Holding an Object Rigidly."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Discontinuous Model-Based Adaptive Control for Robots Executing Free and Constrained Tasks."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Why does Surplus DOF of Robot Fingers Enhance Dexterity of Object Manipulation: Analysis and Simulation of Overall Fingers-object Dynamics."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Two-Dimensional Stable Blind Grasping under the Gravity Effect."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "A Position/Force Control for a Soft Tip Robot Finger under Kinematic Uncertainties."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "A practical algorithm for planning collision-free coordinated motion of multiple mobile robots."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "A new control methodology toward advanced teleoperation of master-slave robot systems."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "A feasible motion-planning algorithm for a mobile robot based on a quadtree representation."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Multi-fingered Dynamic Blind Grasping with Tactile Feedback in a Horizontal Plane."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "On Control for \"Blind Touching\" by Human-Like Thumb Robots."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Modeling and control of a pair of robot fingers with saddle joint under orderless actuations."
+            },
+            {
+                "firstanswer": "Robotics Auton. Syst.",
+                "secondanswer": "Learning of robot tasks on the basis of passivity and impedance concepts."
+            },
+            {
+                "firstanswer": "Scholarpedia",
+                "secondanswer": "Control of mechanical systems."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Human-like Movements of Robotic Arms with Redundant DOFs: Virtual Spring-damper Hypothesis to Tackle the Bernstein Problem."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "PID Control of Robotic Manipulator with Uncertain Jacobian Matrix."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Is a local linear PD feedback control law effective for trajectory tracking of robot motion?"
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Proposal of tangent graph and extended tangent graph for path planning of mobile robots."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "On iterative learning control for simultaneous force/position trajectory tracking by using a 5 D.O.F. robotic thumb under non-holonomic rolling constraints."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Dynamic object manipulation using a virtual frame by a triple soft-fingered robotic hand."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Behavior of a Mobile Robot Navigated by an Iterated Forecast and Planning Scheme in the Presence of Multiple Moving Obstacles."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Experiments in Adaptive Model-Based Force Control."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Three-dimensional object manipulation by two robot fingers with soft tips and minimum D.O.F."
+            },
+            {
+                "firstanswer": "CVPR",
+                "secondanswer": "Active binocular stereo."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Robustness of learning control for robot manipulators."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "A Unified Control Scheme for a whole Robotic Arm-Fingers System in Grasping and Manipulation."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "A new interference check algorithm using octree."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Adaptive Control for Robot Manipulators with Sliding Mode Error Coordinate System: Free and Constrained Motions."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Skilled-motion plannings of multi-body systems based upon Riemannian distance."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Task-space Feedback Control for A Two-link Arm Driven by Six Muscles with Variable Damping and Elastic Properties."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Passivity-Based Control."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Learning of Robot Tasks via Impedance Matching."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "H\u221e control for robotic systems using the passivity concept."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Variable Structure Robot Control Undergoing Chattering Attenuation: Adaptive and Nonadaptive Cases."
+            },
+            {
+                "firstanswer": "CDC",
+                "secondanswer": "Asymptotic stability of robot control with approximate Jacobian matrix and its application to visual servoing."
+            },
+            {
+                "firstanswer": "IAS",
+                "secondanswer": "Incremental Algorithm of Free Space for a Mobile Robot by a Stereo Volume Intersection Method."
+            },
+            {
+                "firstanswer": "NIPS",
+                "secondanswer": "Self-Organization of Associative Database and Its Applications."
+            },
+            {
+                "firstanswer": "ICASSP",
+                "secondanswer": "The continuous-time limit of the discrete-time stability theory."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Decentralized cooperation control: Non-communication object handling."
+            },
+            {
+                "firstanswer": "ICRA",
+                "secondanswer": "Stable Grasping and Relative Angle Control of an Object by Dual Finger Robots without Object Sensing."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Stability of zero-moment-manifold control for a family of under-actuated robots."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Generation of 3-D motion of under-actuated gymnastics robots having two free joints."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Adaptive binocular vision system for robots."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Learning and adaptive controls for communication of multiple manipulators holding a geometrically constrained object."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Supervisory Control Strategies in a Multi-Fingered Robotic Hand System."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Experimental Study on Reaching Movements of Robot Arms with Redundant DOFs Based upon Virtual Spring-Damper Hypothesis."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Parallel-processable recursive and heuristic method for path planning."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Dynamic force/torque equilibrium for stable grasping by a triple robotic fingers system."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Generation of fingering motions by robotic fingers using morphological characteristics of human thumb."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Manipulation of a Circular Object by a Pair of Multi-DOF Robotic Fingers."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Three-dimensional multi-joint reaching under redundancy of DOFs."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Reaching to Grasp and Preshaping of Multi-DOFs Robotic Hand-Arm Systems Using Approximate Configuration of Objects."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "A sensory feedback method for a handwriting robot with D.O.F. redundancy."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Development of micro actuator using shape memory alloy thin film."
+            },
+            {
+                "firstanswer": "IROS (1)",
+                "secondanswer": "Adaptive distributed cooperation controller for multiple manipulators."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Active detection of binocular disparities."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Learning control for geometrically constrained robot manipulators."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Sensory-motor control of a muscle redundant arm for reaching movements - convergence analysis and gravity compensation."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "What is a Breakthrough toward Human Robotics?"
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Learning for skill refinement."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "An Efficient Algorithm Of Path Planning For An Internal Gas Pipe Inspection Robot."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "On Control Mechanism of Human-Like Reaching Movements with Musculo-Skeletal Redundancy."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Pinching 2D object with arbitrary shape by two robot fingers under rolling constraints."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "A flexible algorithm for planning local shortest path of mobile robots based on reachability graph."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Minimum-time trajectory planning for multiple manipulators handling an object with geometric path constraints."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "A model-based adaptive control scheme for coordinated control of multiple manipulators."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "A Potential Approach for a Point Mobile Robot on an Implicit Potential Field Without the Generation of Local Minima."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Manipulation of a circular object without object information."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "A navigation scheme with learning for a mobile robot among multiple moving obstacles."
+            },
+            {
+                "firstanswer": "IROS (2)",
+                "secondanswer": "Iterated forecast and planning algorithm to steer and drive a mobile robot in the presence of multiple moving objects."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Hierarchical Sphere Model (HSM) and Its Application for Checking an Interference Between Moving Robots."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Iterative learning of impedance control."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "A Feasible Motion-planning Algorithm Using The Quadtree Representation."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Dynamic object grasping by a triple-fingered robotic hand."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Fusion of dead-reckoned positions with a workspace model for a mobile robot by Bayesian inference."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Modeling and Computer simulation of 3D object Grasping and Manipulation by dual fingers under nonholonomic constraints."
+            },
+            {
+                "firstanswer": "IROS",
+                "secondanswer": "Feasibility study of pinching of a rigid object with non-parallel flat surfaces."
+            },
+            {
+                "firstanswer": "Modelling and Planning for Sensor Based Intelligent Robot Systems",
+                "secondanswer": "A Nonlinear Circuit Theory for Physically Understanding Dextrous Robot (Human) Motions."
+            },
+            {
+                "firstanswer": "Intelligent Robots",
+                "secondanswer": "Circuit-Theoretic Module-Based Modeling and Control of Robotic Systems."
+            },
+            {
+                "firstanswer": "IEEE Trans. Inf. Theory",
+                "secondanswer": "On the rate-distortion function for the nonstationary Gaussian autoregressive process (Corresp.)."
+            },
+            {
+                "firstanswer": "IEEE Trans. Inf. Theory",
+                "secondanswer": "A hierarchy of codes for memoryless channels."
+            },
+            {
+                "firstanswer": "Intell. Autom. Soft Comput.",
+                "secondanswer": "Learnability and Adaptability from the Viewpoint of Passivity Analysis."
+            },
+            {
+                "firstanswer": "Intell. Autom. Soft Comput.",
+                "secondanswer": "A Class of Quasi-Natural Potentials for Robot Servo-Loops and its Role in Adaptive and Learning Controls."
+            },
+            {
+                "firstanswer": "Robotics, Mechatronics and Manufacturing Systems",
+                "secondanswer": "Principle of Orthogonalization for Hybrid Control of Robot Manipulators."
+            },
+            {
+                "firstanswer": "Autom.",
+                "secondanswer": "Adaptive and Nonadaptive Hybrid Controllers for Rheonomically Constrained Manipulators."
+            },
+            {
+                "firstanswer": "Autom.",
+                "secondanswer": "Stability of hybrid position and force control for robotic manipulator with kinematics and dynamics uncertainties."
+            },
+            {
+                "firstanswer": "Autom.",
+                "secondanswer": "PD control of robot manipulators with joint flexibility, actuators dynamics and friction."
+            },
+            {
+                "firstanswer": "IEEE Trans. Syst. Man Cybern.",
+                "secondanswer": "Realization of robot motion based on a learning method."
+            },
+            {
+                "firstanswer": "Int. J. Robotics Res.",
+                "secondanswer": "Decentralized Adaptive and Nonadaptive Position/Force Controllers for Redundant Manipulators in Cooperations."
+            },
+            {
+                "firstanswer": "ICARCV",
+                "secondanswer": "A Unified Approach for Multi-Fingered Manipulation with Non-Sliding Contact in a Horizontal Plane."
+            },
+            {
+                "firstanswer": "Commun. Inf. Syst.",
+                "secondanswer": "Reduction of complexity in learning dexterous multi-fingered motions: A theoretical exploration into a future problem C.E. Shannon raised."
+            },
+            {
+                "firstanswer": "Commun. Inf. Syst.",
+                "secondanswer": "Natural Resolution of Ill-Posedness of Inverse Kinematics for Redundant Robots Under Constraints."
+            },
+            {
+                "firstanswer": "Inf. Control.",
+                "secondanswer": "Linear, Stationary, Optimal Feedback Control Systems"
+            },
+            {
+                "firstanswer": "Inf. Control.",
+                "secondanswer": "Information-Theoretical Considerations on Estimation Problems"
+            },
+            {
+                "firstanswer": "IEEE Trans. Autom. Control.",
+                "secondanswer": "Distributively controlling two robots handling an object in the task space without any communication."
+            },
+            {
+                "firstanswer": "The Human Hand as an Inspiration for Robot Hand Development",
+                "secondanswer": "Control for Multi-Finger Hands."
+            },
+            {
+                "firstanswer": "IEEE Trans. Control. Syst. Technol.",
+                "secondanswer": "Model-based adaptive hybrid control for manipulators under multiple geometric constraints."
+            },
+            {
+                "firstanswer": "IEEE Trans. Pattern Anal. Mach. Intell.",
+                "secondanswer": "Construction of the Octree Approximating a Three-Dimensional Object by Using Multiple Views."
+            },
+            {
+                "firstanswer": "IEEE Trans. Inf. Theory",
+                "secondanswer": "Universally optimum block codes and convolutional codes with maximum likelihood decoding."
+            },
+            {
+                "firstanswer": "IEEE Trans. Inf. Theory",
+                "secondanswer": "SECT - A coding technique for black/white graphics."
+            },
+            {
+                "firstanswer": "IEEE Trans. Inf. Theory",
+                "secondanswer": "An algorithm for computing the capacity of arbitrary discrete memoryless channels."
+            },
+            {
+                "firstanswer": "IEEE Trans. Inf. Theory",
+                "secondanswer": "On the converse to the coding theorem for discrete memoryless channels (Corresp.)."
+            },
+            {
+                "firstanswer": "IEEE Trans. Inf. Theory",
+                "secondanswer": "Computation of random coding exponent functions."
+            },
+            {
+                "firstanswer": "IEEE Trans. Inf. Theory",
+                "secondanswer": "Computational moments for sequential decoding of convolutional codes."
+            },
+            {
+                "firstanswer": "J. Field Robotics",
+                "secondanswer": "Generation of natural motions for redundant multi-joint systems: A differential-geometric approach based upon the principle of least actions."
+            },
+            {
+                "firstanswer": "J. Field Robotics",
+                "secondanswer": "Dynamic force/torque balance of 2D polygonal objects by a pair of rolling contacts and sensory-motor coordination."
+            },
+            {
+                "firstanswer": "J. Field Robotics",
+                "secondanswer": "A position/force control for a robot finger with soft tip and uncertain kinematics."
+            },
+            {
+                "firstanswer": "J. Field Robotics",
+                "secondanswer": "A new solid model HSM and its application to interference detection between moving objects."
+            },
+            {
+                "firstanswer": "J. Field Robotics",
+                "secondanswer": "A quadtree-based path-planning algorithm for a mobile robot."
+            },
+            {
+                "firstanswer": "J. Field Robotics",
+                "secondanswer": "A natural redundancy-resolution for 3-D multi-joint reaching under the gravity effect."
+            },
+            {
+                "firstanswer": "J. Field Robotics",
+                "secondanswer": "Visual control of autonomous mobile robot based on self-organizing model for pattern learning."
+            },
+            {
+                "firstanswer": "J. Field Robotics",
+                "secondanswer": "Sensory-motor control mechanism for reaching movements of a redundant musculo-skeletal arm."
+            },
+            {
+                "firstanswer": "IEEE Trans. Robotics Autom.",
+                "secondanswer": "Dynamic sliding PID control for tracking of robot manipulators: theory and experiments."
+            },
+            {
+                "firstanswer": "J. Robotics Mechatronics",
+                "secondanswer": "Natural Resolution of Ill-Posed Inverse Kinematics for Redundant Robots: A Challenge to Bernstein's Degrees-of-Freedom Problem."
+            },
+            {
+                "firstanswer": "J. Robotics Mechatronics",
+                "secondanswer": "Control of a Handwriting Robot with DOF Redundancy Based on Feedback in Task Coordinates."
+            },
+            {
+                "firstanswer": "J. Robotics Mechatronics",
+                "secondanswer": "Planning and Navigation by a Mobile Robot in the Presence of Multiple Moving Obstacles and Their Velocities."
+            },
+            {
+                "firstanswer": "IEICE Trans. Fundam. Electron. Commun. Comput. Sci.",
+                "secondanswer": "A Challenge to Bernstein's Degrees-of-Freedom Problem in Both Cases of Human and Robotic Multi-Joint Movements."
+            },
+            {
+                "firstanswer": "Int. J. Autom. Comput.",
+                "secondanswer": "Dynamics and stability of blind grasping of a 3-dimensional object under non-holonomic constraints."
+            },
+            {
+                "firstanswer": "Annu. Rev. Control.",
+                "secondanswer": "Intelligent control of multi-fingered hands."
+            },
+            {
+                "firstanswer": "Annu. Rev. Control.",
+                "secondanswer": "A differential-geometric approach for 2D and 3D object grasping and manipulation."
+            },
+            {
+                "firstanswer": "Inf. Sci.",
+                "secondanswer": "Embedment of a Fuzzy Logic System into a Boolean Lattice for Satisfying a Complementary Law."
+            },
+            {
+                "firstanswer": "Adv. Robotics",
+                "secondanswer": "Model-based adaptive hybrid control for manipulators with geometric endpoint constraint."
+            },
+            {
+                "firstanswer": "Adv. Robotics",
+                "secondanswer": "Natural resolution of ill-posedness of inverse kinematics for redundant robots: a challenge to Bernstein's degrees-of-freedom problem."
+            },
+            {
+                "firstanswer": "Adv. Robotics",
+                "secondanswer": "A deadlock-free algorithm for planning a collision-free coordinated motion for two mobile robots amidst unknown environments."
+            },
+            {
+                "firstanswer": "Adv. Robotics",
+                "secondanswer": "Dynamics analysis of a robotic manipulator considering driving elements."
+            },
+            {
+                "firstanswer": "Adv. Robotics",
+                "secondanswer": "Closed-loop dynamics analysis by Appel's method."
+            },
+            {
+                "firstanswer": "Adv. Robotics",
+                "secondanswer": "Computer simulation of controlled motion of dual fingers with soft tips grasping and manipulating an object."
+            },
+            {
+                "firstanswer": "Adv. Robotics",
+                "secondanswer": "Fast interference check method using octree representation."
+            },
+            {
+                "firstanswer": "Adv. Robotics",
+                "secondanswer": "Design of robot control systems."
+            },
+            {
+                "firstanswer": "Adv. Robotics",
+                "secondanswer": "A Riemannian-Geometric Approach for Intelligent Control and Fingertip Design of Multi-fingered Hands."
+            },
+            {
+                "firstanswer": "Adv. Robotics",
+                "secondanswer": "Dexterity and versatility in the pinching motion of robot fingers with multi-degrees of freedom."
+            },
+            {
+                "firstanswer": "Adv. Robotics",
+                "secondanswer": "A learning control method for coordination of multiple manipulators holding a geometrically constrained object."
+            },
+            {
+                "firstanswer": "Adv. Robotics",
+                "secondanswer": "Biomimetic Pinching Movements of a Musculo-Skeletal Dual-Finger Model."
+            },
+            {
+                "firstanswer": "Robotica",
+                "secondanswer": "Fundamental problems of robot control: Part I, Innovations in the realm of robot servo-loops."
+            },
+            {
+                "firstanswer": "Robotica",
+                "secondanswer": "Stable pinching by a pair of robot fingers with soft tips under the effect of gravity."
+            },
+            {
+                "firstanswer": "Robotica",
+                "secondanswer": "Learning control for robot motion under geometric end-point constraint."
+            },
+            {
+                "firstanswer": "Robotica",
+                "secondanswer": "Dynamics and control of a set of dual fingers with soft tips."
+            },
+            {
+                "firstanswer": "Robotica",
+                "secondanswer": "Stability of Two-Dimensional Blind Grasping under the Gravity Effect and Rolling Constraints."
+            },
+            {
+                "firstanswer": "Robotica",
+                "secondanswer": "Learning Task Strategies in Robotic Assembly Systems."
+            },
+            {
+                "firstanswer": "Robotica",
+                "secondanswer": "Introduction to the Special Millennium Issue on Grasping and Manipulating."
+            },
+            {
+                "firstanswer": "Robotica",
+                "secondanswer": "Fundamental problems of robot control: Part II A nonlinear circuit theory towards an understanding of dexterous motions."
+            },
+            {
+                "firstanswer": "Robotica",
+                "secondanswer": "A stability theory of a manifold: concurrent realization of grasp and orientation control of an object by a pair of robot fingers."
+            },
+            {
+                "firstanswer": "Robotica",
+                "secondanswer": "Principles of superposition for controlling pinch motions by means of robot fingers with soft tips."
+            },
+            {
+                "firstanswer": "Robotica",
+                "secondanswer": "Important role of force/velocity characteristics in sensory-motor coordination for control design of object manipulation by a multi-fingered robot hand."
+            },
+            {
+                "firstanswer": "Robotica",
+                "secondanswer": "Feedback control for object manipulation by a pair of soft tip fingers."
+            },
+            {
+                "firstanswer": "Robotica",
+                "secondanswer": "Development of digital stroke sensing cylinder and its performance evaluation."
+            },
+            {
+                "firstanswer": "Systems and Computers in Japan",
+                "secondanswer": "Spline approximation of line images by modified dynamic programming."
+            },
+            {
+                "firstanswer": "Systems and Computers in Japan",
+                "secondanswer": "Development of an expert system for recognizing handwritten dollar amounts."
+            },
+            {
+                "firstanswer": "J. Robotics",
+                "secondanswer": "Iterative Learning without Reinforcement or Reward for Multijoint Movements: A Revisit of Bernstein's DOF Problem on Dexterity."
+            },
+            {
+                "firstanswer": "J. Robotics",
+                "secondanswer": "Modeling and Control of 2D Grasping under Rolling Contact Constraints between Arbitrary Shapes: A Riemannian-Geometry Approach."
+            },
+            {
+                "firstanswer": "J. Robotics",
+                "secondanswer": "A Riemannian-Geometry Approach for Modeling and Control of Dynamics of Object Manipulation under Constraints."
+            },
+            {
+                "firstanswer": "J. Intell. Robotic Syst.",
+                "secondanswer": "High Precision Constrained Grasping with Cooperative Adaptive Handcontrol."
+            },
+            {
+                "firstanswer": "Int. J. Robotics Res.",
+                "secondanswer": "Robotics Research toward Explication of Everyday Physics."
+            },
+            {
+                "firstanswer": "Int. J. Robotics Res.",
+                "secondanswer": "A Force Commanded Impedance Control for a Robot Finger with Uncertain Kinematics."
+            },
+            {
+                "firstanswer": "IEEE Trans. Autom. Control.",
+                "secondanswer": "Approximate Jacobian control with task-space damping for robot manipulators."
+            },
+            {
+                "firstanswer": "IEEE Trans. Autom. Control.",
+                "secondanswer": "H\u221e tuning for task-space feedback control of robot with uncertain Jacobian matrix."
+            },
+            {
+                "firstanswer": "IEEE Trans. Ind. Electron.",
+                "secondanswer": "Measuring system for development of stroke-sensing cylinder for automatic excavator."
+            },
+            {
+                "firstanswer": "J. Field Robotics",
+                "secondanswer": "Bettering operation of Robots by learning."
+            },
+            {
+                "firstanswer": "J. Field Robotics",
+                "secondanswer": "Feedback control for robotic manipulator with an uncertain Jacobian matrix."
+            },
+            {
+                "firstanswer": "J. Field Robotics",
+                "secondanswer": "Dexterous manipulation of an object by means of multi-DOF robotic fingers with soft tips."
+            },
+            {
+                "firstanswer": "IEEE Trans. Robotics Autom.",
+                "secondanswer": "Approximate Jacobian control for robots with uncertain kinematics and dynamics."
+            },
+            {
+                "firstanswer": "IEEE Trans. Robotics Autom.",
+                "secondanswer": "Computation of the tangent graph of polygonal obstacles by moving-line processing."
+            },
+            {
+                "firstanswer": "IEEE Trans. Robotics Autom.",
+                "secondanswer": "Finding the shortest path of a disc among polygonal obstacles using a radius-independent graph."
+            },
+            {
+                "firstanswer": "IEEE Trans. Robotics Autom.",
+                "secondanswer": "Learning control for robot tasks under geometric endpoint constraints."
+            },
+            {
+                "firstanswer": "IEEE Trans. Robotics",
+                "secondanswer": "Control of an object with parallel surfaces by a pair of finger robots without object sensing."
+            },
+            {
+                "firstanswer": "IEEE Trans. Robotics Autom.",
+                "secondanswer": "Adaptive model-based hybrid control of geometrically constrained robot arms."
+            },
+            {
+                "firstanswer": "Comput. Vis. Graph. Image Process.",
+                "secondanswer": "Automatic fixing of ship position by simulation-and-matching."
+            }
+        ]
     },
     {
         "question": "Which other papers were published by the authors of the paper 'Hitting Three Birds with One System: A Voice-Based CAPTCHA for the Modern User'?",
         "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/icws/ShahH18> dblp:authoredBy ?x . ?answer dblp:authoredBy ?x FILTER (?answer != <https://dblp.org/rec/conf/icws/ShahH18>) }",
         "entity": "PUBLICATION",
-        "query_type": "MULTI_FACT"
-    },
-    {
-        "question": "What is the primary affiliation of the author named 'Jayabrabu Ramakrishnan'?",
-        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/250/2242> dblp:primaryAffiliation ?answer }",
-        "entity": "CREATOR",
-        "query_type": "SINGLE_FACT"
+        "query_type": "MULTI_FACT",
+        "answers": [
+            {
+                "answer": "https://dblp.org/rec/conf/icassp/OlivierRS21"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mkm/DistlerSS11"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icdim/ShahSAR13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mobiwac/MtibaaH13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mobiwac/NeishabooriSHM14"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ciot/GedawyTMH16"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mmm/ShahHZHHY16"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wcnc/HabakYH12"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wcnc/AhmedMHKM16"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wcnc/AyyatAH14"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wcnc/AyyatAH16"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wcnc/AyyatHA13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wmcsa/HarrasWAB07"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wmcsa/HashemAYH21"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/globecom/GedawyEH20"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/peccs/AyyatAH13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/edge/GedawyHHH18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/edge/HabakZAH17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/hotedge/ElgazarAH19"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icc/LatifMHY13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/globecom/GuirguisISHDY15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/iticse/KaratsolisCHCOAS11"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icccn/IbrahimGHY17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icccn/MtibaaH11"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icccn/MtibaaH11a"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icccn/MtibaaHA14"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mm/HongWTEHHH15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/healthcom/EmamMHM17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mobiquitous/HabakHY14"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wcnc/SaidMEHW17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wcnc/AyyatAH19"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wcnc/EmamAMH19"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/cloudcom/ElgazarAH18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/cloudcom/ElgazarH19"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/cloudcom/MtibaaHA15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/cloudcom/MtibaaHF13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/nsdi/0001ZDZAHV19"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wowmom/HarrasA06"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icdcs/0001HZA17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mlsp/ShahRH17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/atal/KhanAMH16"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mobicom/EmamMH18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mobicom/FahimMH13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mobicom/JarhiAHA11"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mobicom/0001IHY12"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mobicom/AazamHE18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mobicom/ElgazarH19"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mobicom/EssameldinH17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mobicom/SaeedAHZ15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mobicom/SaeedHY14"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icc/SaeedIHY13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/icnp/0001AZH18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/iwcmc/MtibaaETEH17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/iwcmc/SabryMH16"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/iwcmc/SaidMEAH18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/iwcmc/EmamMHM17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/percom/ElgazarHA18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/percom/GedawyHHH18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/percom/HashemYH20"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mobihoc/Abdel-NasserHY15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/IEEEcloud/HabakAHZ15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/IEEEcloud/MtibaaHHAZ15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ntms/HabakYH12"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ntms/RabbouMH12"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/cccg/AbdelkaderSHM15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/infocom/Abdel-NasserHY15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ic2e/HoqueH21"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mobilecloud/ElgazarHAM18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/secon/AbdelnasserHY20"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/secon/AbdelnasserYH16"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/secon/HabakHY12"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/secon/HabakHY12a"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/secon/HashemHY20"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/secon/HolmanHAL06"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/secon/MtibaaH11"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ipsn/0001AKNHM17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/networking/HarrasA06"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/networking/HarrasAB05"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wimob/DeekTJHA08"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wimob/KolarRAMH09"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wimob/MtibaaEH17"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wimob/MtibaaHL15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wimob/SaeedNMH14"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mswim/ElgazarHA20"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mswim/NeishabooriH13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mswim/RazakKAH09"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/infocom/Abdel-NasserYH15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mass/HabakHY15"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mass/MtibaaH13"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mass/NeishabooriSHM14"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/mass/ShahHR20"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wicon/DeekAWH08"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/abs-0903-1002"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/abs-1710-08684"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/percom/HashemHY21"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/fgcs/AazamZH18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/wf-iot/AazamH19"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/ieeesec/EssameldinHH20"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/adhoc-now/MajeedRAH09"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/comsur/ShakeriABMKAHG19"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/SaidMEHW17"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/AbdelnasserYH16"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/abs-1303-3962"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tosn/0001AKNHM19"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tmm/HongEHHH18"
+            },
+            {
+                "answer": "https://dblp.org/rec/conf/sigcomm/MtibaaFHA13"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tii/AazamHZ19"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tii/AazamZH18"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/abs-1810-03060"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/abs-1810-09729"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/Abdel-NasserYH15"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/SaeedNMH14"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/HabakHY14"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/adhoc/MajeedARH12"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/network/SaeedIHY15"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/ahswn/HarrasA10"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tmc/AbdelnasserHY19"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tmc/GedawyHHH21"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/tmc/GuirguisDSIHY19"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/0001AKNHM17"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/HabakHY13"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/IbrahimSYH13"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/Abdel-NasserHY15"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/iotm/GedawyHHH20"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/cn/HabakHY15"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/cn/HabakYH13"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/cn/MtibaaH13"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/wicomm/HarrasA09"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/corr/abs-1201-2760"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/cm/AazamZH18"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/cm/MtibaaHA15"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/sj/KhanHMHH18"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/comcom/AyyatHA15"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/comcom/MtibaaH13"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/comcom/HarrasDHA09"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/comcom/WittieHAB09"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/ccr/MtibaaFHA13"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/access/SaidATAMEHO18"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/access/GedawyEH22"
+            },
+            {
+                "answer": "https://dblp.org/rec/journals/cem/AazamZH20"
+            }
+        ]
     },
     {
         "question": "From where are most of the authors of 'An Approach for Resiliency Quantification of Large Scale Systems' from?",
         "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/sigmetrics/LongoGNRT17> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
         "entity": "PUBLICATION",
-        "query_type": "RANK"
+        "query_type": "RANK",
+        "answers": [
+            {
+                "answer": "Duke University, University of Messina, Italy, IBM Corporation, Center for Advanced Studies, Research Triangle Park, NC, USA, Duke University, Durham, NC, USA",
+                "count": "1"
+            }
+        ]
     },
     {
         "question": "Didn't 'Lawrence J. Fogel' and 'Mei Hong' not co-author a paper?",
         "query": "ASK { ?x dblp:authoredBy <https://dblp.org/pid/78/6587> . ?x dblp:authoredBy <https://dblp.org/pid/90/4422> }",
         "entity": "CREATOR",
-        "query_type": "DOUBLE_NEGATION"
+        "query_type": "DOUBLE_NEGATION",
+        "answers": [
+            {
+                "boolean": false
+            }
+        ]
     }
 ]
