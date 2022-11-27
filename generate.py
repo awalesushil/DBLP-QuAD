@@ -7,17 +7,19 @@ import random
 from templates import templates
 from dblp import Graph
 
+dblp = Graph("DBLP")
+dblp.load_from_pickle("dblp.pkl")
+
 class Sample:
     """
         Wrapper for the sample sub-graph sampled from the graph
     """
     def __init__(self, data):
         self.data = data[next(iter(data))]
+        self.uri = next(iter(data))
         self.title = self.__get_title()
         self.type = self.__get_type()
         self.authors = self.__get_authors()
-        self.author_names = self.__get_author_names()
-        self.affiliations = self.__get_affiliations()
         self.year = self.__get_year()
         self.venue = self.__get_venue()
     
@@ -31,13 +33,14 @@ class Sample:
         return self.data.get(self.dblp_prefix("bibtexType"),[""])[0]
 
     def __get_authors(self):
-        return self.data.get(self.dblp_prefix("authoredBy"),[])
-    
-    def __get_author_names(self):
-        return [author.get(self.dblp_prefix("primaryFullCreatorName"), "") for author in self.authors]
-    
-    def __get_affiliations(self):
-        return [author.get(self.dblp_prefix("primaryAffiliation"), "") for author in self.authors]
+        for author in self.data.get(self.dblp_prefix("authoredBy"),[]):
+            print(author)
+        return [
+            {
+                "uri": next(iter(author)),
+                "name": author.get(self.dblp_prefix("primaryFullCreatorName"), ""),
+                "affiliation": author.get(self.dblp_prefix("primaryAffiliation"), "")
+            } for author in self.data.get(self.dblp_prefix("authoredBy"),[])]
 
     def __get_year(self):
         return self.data.get(self.dblp_prefix("yearOfPublication"),[""])[0]
@@ -46,67 +49,118 @@ class Sample:
         return self.data.get(self.dblp_prefix("publishedIn"),[""])[0]
 
 
-def get_random_template():
+class SampleGenerator:
     """
-        Get a random template from the templates dictionary
+        Get a sample from the graph
     """
-    entity = random.choice(["CREATOR", "PUBLICATION"])
-    query_types = ["FACTOID","DOUBLE_INTENT","ASK","AGGREGATION","DISAMBIGUATION"]
+    def __init__(self, graph):
+        self.graph = graph
     
-    total_templates = sum([len(templates[entity][each]) for each in query_types])
-    weights = [len(templates[entity][each])/total_templates for each in query_types]
+    def get(self, type, count=1):
+        """
+            Get a sample from the graph
+        """
+        return Sample(self.graph.sample_vertex(type, count))
 
-    query_type = random.choices(query_types, weights=weights)[0] # Weighted Sampling for query type
 
-    return random.choice(templates[entity][query_type]), entity, query_type
+class TemplateGenerator:
+    """
+        Template functions
+    """
+    def __init__(self):
+        self.entities = ["CREATOR", "PUBLICATION"]
+        self.query_types = [
+            "SINGLE_FACT","MULTI_FACT","DOUBLE_INTENT",
+            "BOOLEAN","NEGATION","DOUBLE_NEGATION",
+            "UNION","DISAMBIGUATION",
+            "COUNT","RANK"
+        ]
+
+    def get(self):
+        """
+            Get a random template from the templates dictionary
+        """
+        # Randomly select an entity and query type
+        entity = random.choice(self.entities)
+        query_type = random.choices(self.query_types)[0]
+
+        return random.choice(templates[entity][query_type]), entity, query_type
 
 keywords = ["entity linking"]
 
-dblp = Graph("DBLP")
-dblp.load_from_pickle("dblp.pkl")
+class DataGenerator:
+    """
+        Generate question-query pairs
+    """
+    def __init__(self, graph):
+        self.sample_generator = SampleGenerator(graph)
+        self.template_generator = TemplateGenerator()
 
-def generate_example():
+    def fill_slots(self, template, first_sample, second_sample):
+        
+        creator = random.choice(first_sample.authors)
+        other_creator = random.choice(second_sample.authors)
+        duration = random.choice(range(1, 5))
 
-    sample = Sample(dblp.sample_vertex("Publication", count=1))
-    second_sample = Sample(dblp.sample_vertex("Publication", count=1))
-    creator_name = random.choice(sample.author_names)
-    other_creator_name = random.choice(sample.author_names)
-    affiliation = random.choice(sample.affiliations)
-    duration = random.choice(range(1, 5))
+        mapping_dict = {
+            "?p1": first_sample.uri,
+            "?p2": second_sample.uri,
+            "?c1": creator.uri,
+            "?c2": other_creator.uri,
+            "[TITLE]": first_sample.title,
+            "[OTHER_TITLE]": second_sample.title,
+            "[TYPE]": first_sample.type,
+            "[CREATOR_NAME]": creator.name,
+            "[OTHER_CREATOR_NAME]": other_creator.name,
+            "[PARTIAL_CREATOR_NAME]": creator.split(" ")[0],
+            "[AFFILIATION]": creator.affiliation,
+            "[YEAR]": first_sample.year,
+            "[DURATION]": duration,
+            "[VENUE]": first_sample.venue,
+            "[OTHER_VENUE]": second_sample.venue,
+            "[KEYWORD]": str(keywords[0])
+        }
 
-    mapping_dict = {
-        "[TITLE]": sample.title,
-        "[OTHER_TITLE]": second_sample.title,
-        "[TYPE]": sample.type,
-        "[CREATOR_NAME]": creator_name,
-        "[OTHER_CREATOR_NAME]": other_creator_name,
-        "[PARTIAL_CREATOR_NAME]": creator_name.split(" ")[0],
-        "[AFFILIATION]": affiliation,
-        "[YEAR]": sample.year,
-        "[DURATION]": duration,
-        "[VENUE]": sample.venue,
-        "[OTHER_VENUE]": second_sample.venue,
-        "[KEYWORD]": keywords[0]
-    }
+        # Randomly select a question
+        question = random.choice(template["questions"])
+        query = template["query"]
 
-    template, entity, query_type = get_random_template()
-    
-    question = random.choice(template["questions"])
-    query = template["query"]
+        # Fill in the template with the sample
+        for placeholder, value in mapping_dict.items():
+            question = question.replace(placeholder, value)
+            query = query.replace(placeholder, value)
 
-    # Fill in the template with the sample
-    for placeholder, value in mapping_dict.items():
-        question = question.replace(placeholder, value)
-        query = query.replace(placeholder, value)
+        return question, query
 
-    return question, query, entity, query_type
+    def generate(self, n=1):
+        """
+            Generate question-query pairs
+        """
+        for _ in range(n):
 
+            # Get two random samples
+            first_sample = self.sample_generator.get("Publication")
+            second_sample = self.sample_generator.get("Publication")
+
+            # Get a random template
+            template, entity, query_type = self.template_generator.get()
+
+            # Fill in the template with the sample
+            question, query = self.fill_slots(template, first_sample, second_sample)
+
+            yield question, query, entity, query_type
 
 if __name__ == "__main__":
 
+    dataGenerator = DataGenerator(dblp).generate(500)
+    
     dataset = []
     with open("train.json", "w", encoding="utf-8") as f:
-        for i in range(50):
-            question, query, entity, query_type = generate_example()
-            dataset.append({"question": question, "query": query, "entity": entity, "query_type": query_type})
+        for question, query, entity, query_type in dataGenerator:
+            dataset.append({
+                "question": question,
+                "query": query,
+                "entity": entity,
+                "query_type": query_type
+            })
         json.dump(dataset, f, indent=4)
