@@ -39,25 +39,25 @@ class Sample:
         return f"<https://dblp.org/rdf/schema#{predicate}>"
 
     def __get_title(self):
-        return self.data.get(self.dblp_prefix("title"),[""])[0]
+        return self.data.get(self.dblp_prefix("title"),[""])[0].replace('"',"'").replace('.','')
 
     def __get_type(self):
-        return self.data.get(self.dblp_prefix("bibtexType"),[""])[0]
+        return self.data.get(self.dblp_prefix("bibtexType"),[""])[0].replace('"',"'")
 
     def __get_authors(self):
         authors = self.data.get(self.dblp_prefix("authoredBy"), [])
         return [
             {
                 "uri": next(iter(author)),
-                "name": author.get(self.dblp_prefix("primaryFullCreatorName"), ""),
-                "affiliation": author.get(self.dblp_prefix("primaryAffiliation"), "")
-            } for author in authors] if authors else [""]
+                "name": author[next(iter(author))].get(self.dblp_prefix("primaryFullCreatorName"), [""])[0].replace('"',"'"),
+                "affiliation": author[next(iter(author))].get(self.dblp_prefix("primaryAffiliation"), [""])[0].replace('"',"'")
+            } for author in authors] if authors else None
 
     def __get_year(self):
-        return self.data.get(self.dblp_prefix("yearOfPublication"),[""])[0]
+        return self.data.get(self.dblp_prefix("yearOfPublication"),[""])[0].replace('"',"'")
     
     def __get_venue(self):
-        return self.data.get(self.dblp_prefix("publishedIn"),[""])[0]
+        return self.data.get(self.dblp_prefix("publishedIn"),[""])[0].replace('"',"'")
 
 
 class SampleGenerator:
@@ -114,7 +114,7 @@ class DataGenerator:
         
         creator = random.choice(first_sample.authors)
         other_creator = random.choice(second_sample.authors)
-        duration = random.choice(range(1, 5))
+        duration = random.choice(range(1, 10))
 
         mapping_dict = {
             "?p1": first_sample.uri,
@@ -167,11 +167,10 @@ class DataGenerator:
 if __name__ == "__main__":
 
     dataGenerator = DataGenerator(dblp).generate(50)
-    
-    logging.info(" Generating data...")
+
     dataset = []
     with open("train.json", "w", encoding="utf-8") as f:
-        for question, query, entity, query_type in tqdm(dataGenerator):
+        for question, query, entity, query_type in tqdm(dataGenerator, desc="Generating data: "):
             dataset.append({
                 "question": question,
                 "query": query,
