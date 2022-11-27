@@ -125,12 +125,12 @@ class DBLPServer:
         url = f"{self.host}/sparql?query={urllib.parse.quote(query)}&format=application%2Fsparql-results%2B{self.result_format}"
         response = requests.get(url)
         if response.status_code == 200:
-            results = json.loads(response.text)['results']['bindings']
-            if results:
-                try:
-                    return [each['answer']['value'] for each in results]
-                except KeyError:
-                    return [(each['firstanswer']['value'], each['secondanswer']['value']) for each in results]
+            response_data = json.loads(response.text)
+            if 'boolean' in response_data:
+                return [{"boolean": response_data["boolean"]}]
+            variables = response_data["head"]["vars"]
+            results = response_data["results"]["bindings"]
+            return [dict(zip(variables, [result[var]["value"] for var in variables])) for result in results]
         return []
 
 class DataGenerator:
