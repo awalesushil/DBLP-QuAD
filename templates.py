@@ -229,7 +229,7 @@ templates = {
                 "Wasn't the paper [TITLE] published in the year [YEAR]?"
             ]
         },{
-            "query": "ASK { ?p1 dblp:authoredBy ?x . ?y dblp:authoredBy ?x FILTER (?y != ?p1) . ?y dblp:publishedIn [VENUE] FILTER NOT EXISTS { ?p1 dblp:publishedIn [VENUE] }",
+            "query": "ASK { ?p1 dblp:authoredBy ?x . ?y dblp:authoredBy ?x FILTER (?y != ?p1) . ?y dblp:publishedIn [VENUE] FILTER NOT EXISTS { ?p1 dblp:publishedIn [VENUE] } }",
             "questions": [
                 "Did the authors of [TITLE] not publish a paper in [VENUE]?",
                 "Didn't the authors of the paper [TITLE] publish a paper in [VENUE]?",
@@ -239,7 +239,7 @@ templates = {
                 "Haven't the authors of the publication [TITLE] published a publication in [VENUE]?",
             ]
         },{
-            "query": "ASK { ?p1 dblp:authoredBy ?x . ?p2 dblp:authoredBy ?x FILTER (?p2 != ?p1) FILTER NOT EXISTS { ?p1 dblp:authoredBy ?x . ?p2 dblp:authoredBy ?x FILTER (?p2 != ?p1) }",
+            "query": "ASK { ?p1 dblp:authoredBy ?x . ?p2 dblp:authoredBy ?x FILTER (?p2 != ?p1) FILTER NOT EXISTS { ?p1 dblp:authoredBy ?x . ?p2 dblp:authoredBy ?x FILTER (?p2 != ?p1) } }",
             "questions": [
                 "Did the authors of [TITLE] not publish [OTHER_TITLE]?",
                 "Didn't the authors of the paper [TITLE] publish [OTHER_TITLE]?",
@@ -643,7 +643,7 @@ templates = {
                 "Wasn't the paper [TITLE] not published by the person named [CREATOR_NAME]?"
             ]
         },{
-            "query": "ASK { ?x dblp:authoredBy ?c1 . ?x dblp:publishedIn [VENUE] FILTER NOT EXISTS { ?x dblp:authoredBy ?c1 . ?x dblp:publishedIn [VENUE] }",
+            "query": "ASK { ?x dblp:authoredBy ?c1 . ?x dblp:publishedIn [VENUE] FILTER NOT EXISTS { ?x dblp:authoredBy ?c1 . ?x dblp:publishedIn [VENUE] } }",
             "questions": [
                 "Did [CREATOR_NAME] not publish in [VENUE]?",
                 "Did the author [CREATOR_NAME] not publish in [VENUE]?",
@@ -651,7 +651,7 @@ templates = {
                 "Has the author [CREATOR_NAME] not published in [VENUE]?"
             ]
         },{
-            "query": "ASK { ?p1 dblp:authoredBy ?c1 . ?p1 dblp:authoredBy ?c2 FILTER NOT EXISTS { ?p1 dblp:authoredBy ?c1 . ?p1 dblp:authoredBy ?c2 }",
+            "query": "ASK { ?p1 dblp:authoredBy ?c1 . ?p1 dblp:authoredBy ?c2 FILTER NOT EXISTS { ?p1 dblp:authoredBy ?c1 . ?p1 dblp:authoredBy ?c2 } }",
             "questions": [
                 "Did [CREATOR_NAME] and [OTHER_CREATOR_NAME] not co-author the paper [TITLE]?",
                 "Did the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] not co-author the paper [TITLE]?",
@@ -660,7 +660,7 @@ templates = {
                 "Have [CREATOR_NAME] and [OTHER_CREATOR_NAME] not co-authored the paper [TITLE]?"
             ]
         },{
-            "query": "ASK { ?x dblp:authoredBy ?c1 . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-[DURATION]) . ?x dblp:publishedIn [VENUE] FILTER NOT EXISTS { ?x dblp:authoredBy ?c1 . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-[DURATION]) . ?x dblp:publishedIn [VENUE] }",
+            "query": "ASK { ?x dblp:authoredBy ?c1 . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-[DURATION]) . ?x dblp:publishedIn [VENUE] FILTER NOT EXISTS { ?x dblp:authoredBy ?c1 . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-[DURATION]) . ?x dblp:publishedIn [VENUE] } }",
             "questions": [
                 "Did [CREATOR_NAME] not publish in [VENUE] in the last [DURATION] years?",
                 "Did the author [CREATOR_NAME] not publish in [VENUE] in the last [DURATION] years?"
