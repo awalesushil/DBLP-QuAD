@@ -789,7 +789,7 @@ templates = {
                 "What is the average number of research papers published by the author [CREATOR_NAME] per year?"
             ],
         },{
-            "query": "SELECT (AVG(?count) AS ?answer) { SELECT (COUNT(?y) AS ?count) WHERE { ?x dblp:authoredBy ?c1 . ?x dblp:numberOfCreators ?y )} GROUP BY ?y }",
+            "query": "SELECT (AVG(?count) AS ?answer) { SELECT (COUNT(?y) AS ?count) WHERE { ?x dblp:authoredBy ?c1 . ?x dblp:numberOfCreators ?y } GROUP BY ?y }",
             "questions": [
                 "What is the average number of co-authors for papers published by [CREATOR_NAME]?",
                 "What is the average number of co-authors for papers published by the author [CREATOR_NAME]?",
