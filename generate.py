@@ -160,8 +160,7 @@ class KeywordGenerator:
         
         keywords = [doc[start:end].text for _, start, end in matches]
         keywords = [keyword for keyword in keywords if not nlp.vocab[keyword].is_stop]
-        return random.choice(keywords)
-
+        return "'" + random.choice(keywords) + "'"  if keywords else ""
 
 class DataGenerator:
     """
@@ -189,7 +188,7 @@ class DataGenerator:
             "[TYPE]": first_sample.type,
             "[CREATOR_NAME]": creator["name"],
             "[OTHER_CREATOR_NAME]": other_creator["name"],
-            "[PARTIAL_CREATOR_NAME]": f'"{creator["name"].split(" ")[0]}"',
+            "[PARTIAL_CREATOR_NAME]": "'" + creator["name"].split(" ")[0].replace("'", "") + "'",
             "[AFFILIATION]": creator["affiliation"],
             "[YEAR]": first_sample.year,
             "[DURATION]": duration,
@@ -209,7 +208,7 @@ class DataGenerator:
             if re.search(r"\[KEYWORD\]", question):
                 keyword = self.keyword_generator.get(first_sample.title)
                 question = question.replace("[KEYWORD]", keyword)
-                query = query.replace("[KEYWORD]", f'"{keyword}"')
+                query = query.replace("[KEYWORD]", keyword)
 
         return question, query
 
@@ -234,27 +233,28 @@ class DataGenerator:
 
 if __name__ == "__main__":
 
-    dataGenerator = DataGenerator(dblp).generate(50)
+    dataGenerator = DataGenerator(dblp).generate(500)
 
-    dataset = []
+    train, failed = [], []
     with open("data/train.json", "w", encoding="utf-8") as f1:
         with open("data/failed.json", "w", encoding="utf-8") as f2:
             for question, query, entity, query_type, answers in tqdm(dataGenerator, desc="Generating data: "):
                 
                 if answers:
-                    f1.write(json.dumps({
+                    train.append({
                         "question": question,
                         "query": query,
                         "entity": entity,
                         "query_type": query_type,
                         "answers": answers
-                    }, indent=4))
-                    f1.write("\n")
+                    })
                 else:
-                    f2.write(json.dumps({
+                    failed.append({
                         "question": question,
                         "query": query,
                         "entity": entity,
                         "query_type": query_type
-                    }, indent=4))
-                    f2.write("\n")
+                    })
+
+            f1.write(json.dumps(train, indent=4))
+            f2.write(json.dumps(failed, indent=4))
