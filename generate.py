@@ -5,6 +5,9 @@ import json
 import random
 import logging
 
+import requests
+import urllib.parse
+
 from tqdm import tqdm
 
 from templates import templates
@@ -102,6 +105,34 @@ class TemplateGenerator:
 
 keywords = ["entity linking"]
 
+class DBLPServer:
+    """
+        DBLP Server class
+    """
+    def __init__(self, path):
+        with open(path, "r", encoding="utf-8") as f:
+            self.host = json.load(f)["host"]
+        self.prefix = """PREFIX dblp: <https://dblp.org/rdf/schema#>
+            PREFIX purl: <http://purl.org/dc/terms/>
+        """
+        self.result_format = "json"
+    
+    def query(self, query):
+        """
+            Query the DBLP server
+        """
+        query = self.prefix + query
+        url = f"{self.host}/sparql?query={urllib.parse.quote(query)}&format=application%2Fsparql-results%2B{self.result_format}"
+        response = requests.get(url)
+        if response.status_code == 200:
+            results = json.loads(response.text)['results']['bindings']
+            if results:
+                try:
+                    return [each['answer']['value'] for each in results]
+                except KeyError:
+                    return [(each['firstanswer']['value'], each['secondanswer']['value']) for each in results]
+        return []
+
 class DataGenerator:
     """
         Generate question-query pairs
@@ -109,6 +140,7 @@ class DataGenerator:
     def __init__(self, graph):
         self.sample_generator = SampleGenerator(graph)
         self.template_generator = TemplateGenerator()
+        self.server = DBLPServer("config.json")
 
     def fill_slots(self, template, first_sample, second_sample):
         
@@ -126,13 +158,13 @@ class DataGenerator:
             "[TYPE]": first_sample.type,
             "[CREATOR_NAME]": creator["name"],
             "[OTHER_CREATOR_NAME]": other_creator["name"],
-            "[PARTIAL_CREATOR_NAME]": creator["name"].split(" ")[0],
+            "[PARTIAL_CREATOR_NAME]": f'"{creator["name"].split(" ")[0]}"',
             "[AFFILIATION]": creator["affiliation"],
             "[YEAR]": first_sample.year,
             "[DURATION]": duration,
             "[VENUE]": first_sample.venue,
             "[OTHER_VENUE]": second_sample.venue,
-            "[KEYWORD]": str(keywords[0])
+            "[KEYWORD]": f'"{str(keywords[0])}"'
         }
 
         # Randomly select a question
@@ -161,20 +193,25 @@ class DataGenerator:
 
             # Fill in the template with the sample
             question, query = self.fill_slots(template, first_sample, second_sample)
+            answers = self.server.query(query)
 
-            yield question, query, entity, query_type
+            # If the query returns no results, skip
+            if not answers:
+                continue
+            yield question, query, entity, query_type, answers
 
 if __name__ == "__main__":
 
     dataGenerator = DataGenerator(dblp).generate(50)
 
     dataset = []
-    with open("train.json", "w", encoding="utf-8") as f:
-        for question, query, entity, query_type in tqdm(dataGenerator, desc="Generating data: "):
+    with open("data/train.json", "w", encoding="utf-8") as f:
+        for question, query, entity, query_type, answers in tqdm(dataGenerator, desc="Generating data: "):
             dataset.append({
                 "question": question,
                 "query": query,
                 "entity": entity,
-                "query_type": query_type
+                "query_type": query_type,
+                "answers": answers
             })
         json.dump(dataset, f, indent=4)
