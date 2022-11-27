@@ -30,6 +30,10 @@ class Sample:
         self.authors = self.__get_authors()
         self.year = self.__get_year()
         self.venue = self.__get_venue()
+        self.validate = self.__validate()
+    
+    def __validate(self):
+        return self.title and self.type and self.authors and self.year and self.venue
     
     def dblp_prefix(self, predicate):
         return f"<https://dblp.org/rdf/schema#{predicate}>"
@@ -65,9 +69,12 @@ class SampleGenerator:
     
     def get(self, type, count=1):
         """
-            Get a sample from the graph
+            Return a valid sample from the graph
         """
-        return Sample(self.graph.sample_vertex(type, count))
+        sample = Sample(self.graph.sample_vertex(type, count))
+        if sample.validate:
+            return sample
+        return self.get(type, count)
 
 
 class TemplateGenerator:
@@ -159,7 +166,7 @@ class DataGenerator:
 
 if __name__ == "__main__":
 
-    dataGenerator = DataGenerator(dblp).generate(100)
+    dataGenerator = DataGenerator(dblp).generate(50)
     
     logging.info(" Generating data...")
     dataset = []
