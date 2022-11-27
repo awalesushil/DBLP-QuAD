@@ -1,0 +1,72 @@
+{
+    "question": "Who are the authors that published research papers about level demand in 'Int. J. Inf. Syst. Supply Chain Manag.' in the year '2018'?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), \"level demand\") . ?x dblp:publishedIn 'Int. J. Inf. Syst. Supply Chain Manag.' . FILTER CONTAINS(LCASE('Int. J. Inf. Syst. Supply Chain Manag.'), 'Int. J. Inf. Syst. Supply Chain Manag.') . ?x dblp:year ?y . FILTER(?y = '2018') . ?x dblp:authoredBy ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION"
+}
+{
+    "question": "Which research paper on distance graphs was published by \"'Daphne\"?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), \"'Daphne\") . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), \"distance graphs\") }",
+    "entity": "CREATOR",
+    "query_type": "DISAMBIGUATION"
+}
+{
+    "question": "Was the paper 'An Analysis of Undergraduate Information Systems Curricula: Adoption of the IS 2010 Curriculum Guidelines' not published by the person 'Kelly J. Fadel'?",
+    "query": "ASK { <https://dblp.org/rec/journals/cais/BellMF13> dblp:authoredBy <https://dblp.org/pid/48/2984> FILTER NOT EXISTS { <https://dblp.org/rec/journals/cais/BellMF13> dblp:authoredBy <https://dblp.org/pid/48/2984> }",
+    "entity": "CREATOR",
+    "query_type": "NEGATION"
+}
+{
+    "question": "What is the DOI of 'Evolutionary RL for Container Loading'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/esann/SaikiaVASVS18> dblp:doi ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "SINGLE_FACT"
+}
+{
+    "question": "What is the primary affiliation of 'Karsten D. Wolf'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/02/4211> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT"
+}
+{
+    "question": "What are the affiliations of the authors of the paper 'Infrastructure-less Occupancy Detection and Semantic Localization in Smart Environments'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/casa/KhanHR15> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT"
+}
+{
+    "question": "What is the ORCID of 'Abdolah Chalechale'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/44/871> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT"
+}
+{
+    "question": "What is the ORCID of the author 'Andrea Gaunersdorfer'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/77/6339> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT"
+}
+{
+    "question": "How many authors of 'A modified temporal criterion to meta-optimize the extended Kalman filter for land cover classification of remotely sensed time series' have  as their primary affiliation?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/aeog/SalmonKOBW18> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "COUNT"
+}
+{
+    "question": "Did 'Himanshu Neema' not publish the paper 'Modeling and Optimization of a Longitudinally-Distributed Global Solar Grid'?",
+    "query": "ASK { <https://dblp.org/rec/journals/corr/abs-2206-05584> dblp:authoredBy <https://dblp.org/pid/50/3859> FILTER NOT EXISTS { <https://dblp.org/rec/journals/corr/abs-2206-05584> dblp:authoredBy <https://dblp.org/pid/50/3859> }",
+    "entity": "CREATOR",
+    "query_type": "NEGATION"
+}
+{
+    "question": "In the year '2011' in 'DaWaK', what are the titles of the research papers on stream mining?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), \"stream mining\") . ?x dblp:publishedIn 'DaWaK' . FILTER CONTAINS(LCASE('DaWaK'), 'DaWaK') . ?x dblp:year ?y . FILTER(?y = '2011') }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION"
+}
+{
+    "question": "What is the primary affiliation of the author named 'Jayabrabu Ramakrishnan'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/250/2242> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT"
+}
