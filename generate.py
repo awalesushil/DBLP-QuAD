@@ -1,12 +1,19 @@
 """
     Generate question-query pairs
 """
+import re
 import json
 import random
 import logging
 
 import requests
 import urllib.parse
+
+import spacy
+from spacy.matcher import Matcher
+from spacy.tokens import Span
+
+nlp = spacy.load("en_core_web_sm")
 
 from tqdm import tqdm
 
@@ -133,6 +140,29 @@ class DBLPServer:
             return [dict(zip(variables, [result[var]["value"] for var in variables])) for result in results]
         return []
 
+class KeywordGenerator:
+    """
+        Keyword generator from the title
+    """
+    def __init__(self):
+        pass
+    
+    def get(self, title):
+        """
+            Extract main keywords from the title using spacy
+        """
+        doc = nlp(title.lower())
+        matcher = Matcher(nlp.vocab)
+        
+        pattern = [{"POS": "NOUN"}, {"POS": "NOUN", "OP": "*"}, {"POS": "NOUN"}]
+        matcher.add("NOUN_PHRASE", [pattern])
+        matches = matcher(doc)
+        
+        keywords = [doc[start:end].text for _, start, end in matches]
+        keywords = [keyword for keyword in keywords if not nlp.vocab[keyword].is_stop]
+        return keywords
+
+
 class DataGenerator:
     """
         Generate question-query pairs
@@ -141,6 +171,7 @@ class DataGenerator:
         self.sample_generator = SampleGenerator(graph)
         self.template_generator = TemplateGenerator()
         self.server = DBLPServer("config.json")
+        self.keyword_generator = KeywordGenerator()
 
     def fill_slots(self, template, first_sample, second_sample):
         
@@ -163,8 +194,7 @@ class DataGenerator:
             "[YEAR]": first_sample.year,
             "[DURATION]": duration,
             "[VENUE]": first_sample.venue,
-            "[OTHER_VENUE]": second_sample.venue,
-            "[KEYWORD]": f'"{str(keywords[0])}"'
+            "[OTHER_VENUE]": second_sample.venue
         }
 
         # Randomly select a question
@@ -175,6 +205,11 @@ class DataGenerator:
         for placeholder, value in mapping_dict.items():
             question = question.replace(placeholder, str(value))
             query = query.replace(placeholder, str(value))
+
+            if re.search(r"\[KEYWORD\]", question):
+                keyword = self.keyword_generator.get()
+                question = question.replace("[KEYWORD]", keyword)
+                query = query.replace("[KEYWORD]", f'"{keyword}"')
 
         return question, query
 
@@ -195,9 +230,6 @@ class DataGenerator:
             question, query = self.fill_slots(template, first_sample, second_sample)
             answers = self.server.query(query)
 
-            # If the query returns no results, skip
-            if not answers:
-                continue
             yield question, query, entity, query_type, answers
 
 if __name__ == "__main__":
@@ -205,13 +237,24 @@ if __name__ == "__main__":
     dataGenerator = DataGenerator(dblp).generate(50)
 
     dataset = []
-    with open("data/train.json", "w", encoding="utf-8") as f:
-        for question, query, entity, query_type, answers in tqdm(dataGenerator, desc="Generating data: "):
-            dataset.append({
-                "question": question,
-                "query": query,
-                "entity": entity,
-                "query_type": query_type,
-                "answers": answers
-            })
-        json.dump(dataset, f, indent=4)
+    with open("data/train.json", "w", encoding="utf-8") as f1:
+        with open("data/failed.json", "w", encoding="utf-8") as f2:
+            for question, query, entity, query_type, answers in tqdm(dataGenerator, desc="Generating data: "):
+                
+                if answers:
+                    f1.write(json.dumps({
+                        "question": question,
+                        "query": query,
+                        "entity": entity,
+                        "query_type": query_type,
+                        "answers": answers
+                    }, indent=4))
+                    f1.write("\n")
+                else:
+                    f2.write(json.dumps({
+                        "question": question,
+                        "query": query,
+                        "entity": entity,
+                        "query_type": query_type
+                    }, indent=4))
+                    f2.write("\n")
