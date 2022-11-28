@@ -1,72 +1,716 @@
-{
-    "question": "Who are the authors that published research papers about level demand in 'Int. J. Inf. Syst. Supply Chain Manag.' in the year '2018'?",
-    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), \"level demand\") . ?x dblp:publishedIn 'Int. J. Inf. Syst. Supply Chain Manag.' . FILTER CONTAINS(LCASE('Int. J. Inf. Syst. Supply Chain Manag.'), 'Int. J. Inf. Syst. Supply Chain Manag.') . ?x dblp:year ?y . FILTER(?y = '2018') . ?x dblp:authoredBy ?answer }",
-    "entity": "PUBLICATION",
-    "query_type": "DISAMBIGUATION"
-}
-{
-    "question": "Which research paper on distance graphs was published by \"'Daphne\"?",
-    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), \"'Daphne\") . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), \"distance graphs\") }",
-    "entity": "CREATOR",
-    "query_type": "DISAMBIGUATION"
-}
-{
-    "question": "Was the paper 'An Analysis of Undergraduate Information Systems Curricula: Adoption of the IS 2010 Curriculum Guidelines' not published by the person 'Kelly J. Fadel'?",
-    "query": "ASK { <https://dblp.org/rec/journals/cais/BellMF13> dblp:authoredBy <https://dblp.org/pid/48/2984> FILTER NOT EXISTS { <https://dblp.org/rec/journals/cais/BellMF13> dblp:authoredBy <https://dblp.org/pid/48/2984> }",
-    "entity": "CREATOR",
-    "query_type": "NEGATION"
-}
-{
-    "question": "What is the DOI of 'Evolutionary RL for Container Loading'?",
-    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/esann/SaikiaVASVS18> dblp:doi ?answer }",
-    "entity": "PUBLICATION",
-    "query_type": "SINGLE_FACT"
-}
-{
-    "question": "What is the primary affiliation of 'Karsten D. Wolf'?",
-    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/02/4211> dblp:primaryAffiliation ?answer }",
-    "entity": "CREATOR",
-    "query_type": "SINGLE_FACT"
-}
-{
-    "question": "What are the affiliations of the authors of the paper 'Infrastructure-less Occupancy Detection and Semantic Localization in Smart Environments'?",
-    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/casa/KhanHR15> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
-    "entity": "PUBLICATION",
-    "query_type": "MULTI_FACT"
-}
-{
-    "question": "What is the ORCID of 'Abdolah Chalechale'?",
-    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/44/871> dblp:orcid ?answer }",
-    "entity": "CREATOR",
-    "query_type": "SINGLE_FACT"
-}
-{
-    "question": "What is the ORCID of the author 'Andrea Gaunersdorfer'?",
-    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/77/6339> dblp:orcid ?answer }",
-    "entity": "CREATOR",
-    "query_type": "SINGLE_FACT"
-}
-{
-    "question": "How many authors of 'A modified temporal criterion to meta-optimize the extended Kalman filter for land cover classification of remotely sensed time series' have  as their primary affiliation?",
-    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/aeog/SalmonKOBW18> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
-    "entity": "PUBLICATION",
-    "query_type": "COUNT"
-}
-{
-    "question": "Did 'Himanshu Neema' not publish the paper 'Modeling and Optimization of a Longitudinally-Distributed Global Solar Grid'?",
-    "query": "ASK { <https://dblp.org/rec/journals/corr/abs-2206-05584> dblp:authoredBy <https://dblp.org/pid/50/3859> FILTER NOT EXISTS { <https://dblp.org/rec/journals/corr/abs-2206-05584> dblp:authoredBy <https://dblp.org/pid/50/3859> }",
-    "entity": "CREATOR",
-    "query_type": "NEGATION"
-}
-{
-    "question": "In the year '2011' in 'DaWaK', what are the titles of the research papers on stream mining?",
-    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), \"stream mining\") . ?x dblp:publishedIn 'DaWaK' . FILTER CONTAINS(LCASE('DaWaK'), 'DaWaK') . ?x dblp:year ?y . FILTER(?y = '2011') }",
-    "entity": "PUBLICATION",
-    "query_type": "DISAMBIGUATION"
-}
-{
-    "question": "What is the primary affiliation of the author named 'Jayabrabu Ramakrishnan'?",
-    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/250/2242> dblp:primaryAffiliation ?answer }",
-    "entity": "CREATOR",
-    "query_type": "SINGLE_FACT"
-}
+[
+    {
+        "question": "Who are the authors that published research papers about 'level demand' in 'Int. J. Inf. Syst. Supply Chain Manag.' in the year '2018'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), 'level demand') . ?x dblp:publishedIn 'Int. J. Inf. Syst. Supply Chain Manag.' . FILTER CONTAINS(LCASE('Int. J. Inf. Syst. Supply Chain Manag.'), 'Int. J. Inf. Syst. Supply Chain Manag.') . ?x dblp:year ?y . FILTER(?y = '2018') . ?x dblp:authoredBy ?answer }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Which research paper on 'distance graphs' was published by 'Daphne'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), 'Daphne') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), 'distance graphs') }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Was the paper 'An Analysis of Undergraduate Information Systems Curricula: Adoption of the IS 2010 Curriculum Guidelines' not published by the person 'Kelly J. Fadel'?",
+        "query": "ASK { <https://dblp.org/rec/journals/cais/BellMF13> dblp:authoredBy <https://dblp.org/pid/48/2984> FILTER NOT EXISTS { <https://dblp.org/rec/journals/cais/BellMF13> dblp:authoredBy <https://dblp.org/pid/48/2984> }",
+        "entity": "CREATOR",
+        "query_type": "NEGATION"
+    },
+    {
+        "question": "What is the DOI of 'Evolutionary RL for Container Loading'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/esann/SaikiaVASVS18> dblp:doi ?answer }",
+        "entity": "PUBLICATION",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "What is the primary affiliation of 'Karsten D. Wolf'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/02/4211> dblp:primaryAffiliation ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "What are the affiliations of the authors of the paper 'Infrastructure-less Occupancy Detection and Semantic Localization in Smart Environments'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/casa/KhanHR15> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+        "entity": "PUBLICATION",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "What is the ORCID of 'Abdolah Chalechale'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/44/871> dblp:orcid ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "What is the ORCID of the author 'Andrea Gaunersdorfer'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/77/6339> dblp:orcid ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "How many authors of 'A modified temporal criterion to meta-optimize the extended Kalman filter for land cover classification of remotely sensed time series' have  as their primary affiliation?",
+        "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/aeog/SalmonKOBW18> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+        "entity": "PUBLICATION",
+        "query_type": "COUNT"
+    },
+    {
+        "question": "Did 'Himanshu Neema' not publish the paper 'Modeling and Optimization of a Longitudinally-Distributed Global Solar Grid'?",
+        "query": "ASK { <https://dblp.org/rec/journals/corr/abs-2206-05584> dblp:authoredBy <https://dblp.org/pid/50/3859> FILTER NOT EXISTS { <https://dblp.org/rec/journals/corr/abs-2206-05584> dblp:authoredBy <https://dblp.org/pid/50/3859> }",
+        "entity": "CREATOR",
+        "query_type": "NEGATION"
+    },
+    {
+        "question": "In the year '2011' in 'DaWaK', what are the titles of the research papers on 'stream mining'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), 'stream mining') . ?x dblp:publishedIn 'DaWaK' . FILTER CONTAINS(LCASE('DaWaK'), 'DaWaK') . ?x dblp:year ?y . FILTER(?y = '2011') }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What is the primary affiliation of the author named 'Jayabrabu Ramakrishnan'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/250/2242> dblp:primaryAffiliation ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "Where are the authors of the paper 'Lossless Reduction of Datacubes' from?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/dexa/CasaliCLN06> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+        "entity": "PUBLICATION",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "Which research paper on  was published by 'Grant' in 'EC'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, 'Grant', 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER REGEX (?answer, , 'i') . ?z dblp:publishedIn 'EC' }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "How many authors of the paper 'Evolution model and simulation of logistics outsourcing for manufacturing enterprises based on multi-agent modeling' have  as their primary affiliation?",
+        "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/cluster/YangC19> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+        "entity": "PUBLICATION",
+        "query_type": "COUNT"
+    },
+    {
+        "question": "Who are the authors of the publication 'Introduction to the Special Issue - Algorithmic Game Theory - STOC/FOCS/SODA 2011' and what are the venues of the other papers they published?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/geb/ChawlaFHR15> dblp:authoredBy ?firstanswer . ?x dblp:authoredBy ?firstanswer . ?x dblp:publishedIn ?secondanswer FILTER (?y != <https://dblp.org/rec/journals/geb/ChawlaFHR15>) }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "What is the website of the author 'Junliang Du'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/242/3325> dblp:website ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "What are the primary affiliations of the authors of 'Open Ended Computerized Overview of Controlled Languages'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/lrec/Gavieiro-VillatteS00> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+        "entity": "PUBLICATION",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "Which papers did 'Jason Eisner' and 'Taesoo Kwon' publish in collaboration in 'MLSLP'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/37/3263> . ?answer dblp:authoredBy <https://dblp.org/pid/66/265> . ?answer dblp:publishedIn 'MLSLP' }",
+        "entity": "CREATOR",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "What is the website of the author 'Tutaleni I. Asino'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/249/6444> dblp:website ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "With which other authors has 'Thomas A. Badgwell' co-authored papers and where are they affiliated?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy <https://dblp.org/pid/99/7160> . ?x dblp:authoredBy ?firstanswer FILTER(?firstanswer != <https://dblp.org/pid/99/7160>) . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+        "entity": "CREATOR",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "In '2003' in 'CRYPTO', what are the titles of the papers on ?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), ) . ?x dblp:publishedIn 'CRYPTO' . FILTER CONTAINS(LCASE('CRYPTO'), 'CRYPTO') . ?x dblp:year ?y . FILTER(?y = '2003') }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What are the affiliations of the authors of the paper 'A 10 V Fully-Integrated Switched-Mode Step-up Piezo Drive Stage in 013\\u00B5m CMOS Using Nested-Bootstrapped Switch Cells'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/jssc/DoughertyXPBPMB16> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+        "entity": "PUBLICATION",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "From where are most of the authors of the paper 'Middle School Students' Learning of Social Studies in the Video and 360-Degree Videos Contexts' from?",
+        "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/access/DaherS21> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+        "entity": "PUBLICATION",
+        "query_type": "RANK"
+    },
+    {
+        "question": "What are the titles of the papers on 'emotion analysis' that were published in 'IRI' in '2014'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), 'emotion analysis') . ?x dblp:publishedIn 'IRI' . FILTER CONTAINS(LCASE('IRI'), 'IRI') . ?x dblp:year ?y . FILTER(?y = '2014') }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What are the title of the papers that 'Chunyu' wrote about 'word order'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), 'Chunyu') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), 'word order') }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Who are the authors that published research papers about 'communication portfolios' in the year '2009'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER REGEX (LCASE(?t), 'communication portfolios', 'i') . ?x dblp:year ?y . FILTER(?y = '2009') . ?x dblp:authoredBy ?answer . }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What is the website of the author 'Tuvi Etzion'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/58/5154> dblp:website ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "Which publication on  was published by the author 'Tiansi' in 'DMS'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, 'Tiansi', 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER REGEX (?answer, , 'i') . ?z dblp:publishedIn 'DMS' }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "In 'Inf. Syst. Frontiers', what papers did the authors 'Amita Goyal Chin' and 'G\\u00FCnter Schmidt' co-publish?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/34/877> . ?answer dblp:authoredBy <https://dblp.org/pid/05/5165> . ?answer dblp:publishedIn 'Inf. Syst. Frontiers' }",
+        "entity": "CREATOR",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "Which paper on  was published by the author 'Ashley'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), 'Ashley') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), ) }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Who are the authors of the publication 'Application of Boundary Element Method superposition technique for solving natural frequencies in piecewise homogeneous domains' and what other papers did they publish?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/cma/BarbosaL20> dblp:authoredBy ?firstanswer . ?secondanswer dblp:authoredBy ?firstanswer FILTER (?secondanswer != <https://dblp.org/rec/journals/cma/BarbosaL20>) }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "Who are the authors that published papers about 'time traffic' in '2010'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER REGEX (LCASE(?t), 'time traffic', 'i') . ?x dblp:year ?y . FILTER(?y = '2010') . ?x dblp:authoredBy ?answer . }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Who are the authors of the publication 'A Novel Closed-Loop Control Method for Li-Ion Batteries Connected in Series Power Supply Based on the Time Sequences Recalculation Algorithm' and what are the venues of the other papers they published?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/symmetry/TanGLXSY21> dblp:authoredBy ?firstanswer . ?x dblp:authoredBy ?firstanswer . ?x dblp:publishedIn ?secondanswer FILTER (?y != <https://dblp.org/rec/journals/symmetry/TanGLXSY21>) }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "Who are the authors of 'Correlation Immune Boolean Functions with Very High Nonlinearity' and what are the venues of the other papers they published?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/iacr/Maitra00a> dblp:authoredBy ?firstanswer . ?x dblp:authoredBy ?firstanswer . ?x dblp:publishedIn ?secondanswer FILTER (?y != <https://dblp.org/rec/journals/iacr/Maitra00a>) }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "What is the primary affiliation of the author named 'Alexander Demidovskij'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/196/0736> dblp:primaryAffiliation ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "Who are the authors of 'Electrically induced energy transmission used for implantable medical devices deep inside the body: Measurement of received voltage in consideration of biological effect' and what are the venues of the other papers they published?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/embc/Shiba15> dblp:authoredBy ?firstanswer . ?x dblp:authoredBy ?firstanswer . ?x dblp:publishedIn ?secondanswer FILTER (?y != <https://dblp.org/rec/conf/embc/Shiba15>) }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "How many authors of the paper 'Disjoint cycles in graphs with distance degree sum conditions' have  as their primary affiliation?",
+        "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/dm/JiaoWY17> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+        "entity": "PUBLICATION",
+        "query_type": "COUNT"
+    },
+    {
+        "question": "What is the ORCID of the author 'Frank Herman Behrens'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/31/2789> dblp:orcid ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "What is the primary affiliation of the author named 'Ugur Cini'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/159/4107> dblp:primaryAffiliation ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "Who are the co-authors of the author 'G\\u00F6k\\u00E7er Peynirci' and where are they affiliated?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy <https://dblp.org/pid/152/5742> . ?x dblp:authoredBy ?firstanswer FILTER(?firstanswer != <https://dblp.org/pid/152/5742>) . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+        "entity": "CREATOR",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "How many authors of the publication 'Localization of damage using wireless sensor networks for tunnel health monitoring' have  as their primary affiliation?",
+        "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/iwcmc/ZrelliE17> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+        "entity": "PUBLICATION",
+        "query_type": "COUNT"
+    },
+    {
+        "question": "In '2006' in 'EMBC (Supplement)', who are the authors that published papers about ?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), ) . ?x dblp:publishedIn 'EMBC (Supplement)' . FILTER CONTAINS(LCASE('EMBC (Supplement)'), 'EMBC (Supplement)') . ?x dblp:year ?y . FILTER(?y = '2006') . ?x dblp:authoredBy ?answer }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What is the primary affiliation of 'Sebti Foufou'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/05/6928> dblp:primaryAffiliation ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "Where are the majority of the authors of the paper 'Stability Analysis Of Nonlinear Interconnected Systems Via T-S Fuzzy Models' affiliated to?",
+        "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/ijcia/ChiangCH04> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+        "entity": "PUBLICATION",
+        "query_type": "RANK"
+    },
+    {
+        "question": "What is the website of 'Yanhua Liang'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/121/8881> dblp:website ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "What research papers did 'Alexander L. Topchishvili' publish with the author affiliated to ?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/56/6224> . ?answer dblp:authoredBy ?y . ?y dblp:primaryAffiliation  }",
+        "entity": "CREATOR",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "Has the paper 'Exploring Spatial-Temporal Multi-Frequency Analysis for High-Fidelity and Temporal-Consistency Video Prediction' not been published by 'Jingyu Niu'?",
+        "query": "ASK { <https://dblp.org/rec/conf/cvpr/JinHTN0H020> dblp:authoredBy <https://dblp.org/pid/259/2647> FILTER NOT EXISTS { <https://dblp.org/rec/conf/cvpr/JinHTN0H020> dblp:authoredBy <https://dblp.org/pid/259/2647> }",
+        "entity": "CREATOR",
+        "query_type": "NEGATION"
+    },
+    {
+        "question": "What research papers did 'Peter J. Slater' publish with the author affiliated to ?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/17/6610> . ?answer dblp:authoredBy ?y . ?y dblp:primaryAffiliation  }",
+        "entity": "CREATOR",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "Which papers did the authors 'David Dagan Feng' and 'Michael Lewis' publish together in 'J. Electronic Imaging'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/f/DavidDaganFeng> . ?answer dblp:authoredBy <https://dblp.org/pid/87/1183-2> . ?answer dblp:publishedIn 'J. Electronic Imaging' }",
+        "entity": "CREATOR",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "What is the primary affiliation of the author 'Fr\\u00E9d\\u00E9ric Kaplan'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/66/3345> dblp:primaryAffiliation ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "In 'EMBC' in '2019', who are the authors that published papers about 'recurrence plots'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), 'recurrence plots') . ?x dblp:publishedIn 'EMBC' . FILTER CONTAINS(LCASE('EMBC'), 'EMBC') . ?x dblp:year ?y . FILTER(?y = '2019') . ?x dblp:authoredBy ?answer }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Wasn't the paper 'OLAP Query Routing and Physical Design in a Database Cluster' not published by the person named 'Klemens B\\u00F6hm'?",
+        "query": "ASK { <https://dblp.org/rec/conf/edbt/RohmBS00> dblp:authoredBy <https://dblp.org/pid/b/KBohm> FILTER NOT EXISTS { <https://dblp.org/rec/conf/edbt/RohmBS00> dblp:authoredBy <https://dblp.org/pid/b/KBohm> }",
+        "entity": "CREATOR",
+        "query_type": "NEGATION"
+    },
+    {
+        "question": "Who are the authors that published papers about 'lung disease pattern' in '2006'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER REGEX (LCASE(?t), 'lung disease pattern', 'i') . ?x dblp:year ?y . FILTER(?y = '2006') . ?x dblp:authoredBy ?answer . }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What are the papers written by 'Sin-Horng Chen' and 'Pierre Virelizier' together?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/00/3107> . ?answer dblp:authoredBy <https://dblp.org/pid/86/7057> }",
+        "entity": "CREATOR",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "Which papers did the authors 'Rasheed Hussain' and 'Timo Varkoi' publish together in 'WISA'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/68/7630> . ?answer dblp:authoredBy <https://dblp.org/pid/14/4106> . ?answer dblp:publishedIn 'WISA' }",
+        "entity": "CREATOR",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "What are the affiliations of the authors of the paper 'Abdominal fetal ECG measured with differential ECG sensor'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/mipro/RashkovskaA17> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+        "entity": "PUBLICATION",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "In the year '2010', who are the authors that published research papers about ?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER REGEX (LCASE(?t), , 'i') . ?x dblp:year ?y . FILTER(?y = '2010') . ?x dblp:authoredBy ?answer . }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "How many authors of 'A canonical analysis of intentional information security breaches by insiders' have  as their primary affiliation?",
+        "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/imcs/Shropshire09> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+        "entity": "PUBLICATION",
+        "query_type": "COUNT"
+    },
+    {
+        "question": "Which publication on 'type recognition' was published by the author 'Helmut'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), 'Helmut') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), 'type recognition') }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Who are the authors of the paper 'Mehrkanalige Kleinste-Quadrate-Sch\\u00E4tzung autoregressiver Parameter zur Sensorausfallerkennung' and what are the venues of the other papers they published?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/asst/PtacekA87> dblp:authoredBy ?firstanswer . ?x dblp:authoredBy ?firstanswer . ?x dblp:publishedIn ?secondanswer FILTER (?y != <https://dblp.org/rec/conf/asst/PtacekA87>) }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "Who are the authors of the paper 'The Structure of Hierarchical Motion Representation of 2-state Number Conserving Cellular Automata' and what are the venues of the other papers they published?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/jca/KongIN19> dblp:authoredBy ?firstanswer . ?x dblp:authoredBy ?firstanswer . ?x dblp:publishedIn ?secondanswer FILTER (?y != <https://dblp.org/rec/journals/jca/KongIN19>) }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "Who are the authors of 'Improving Bird Identification using Multiresolution Template Matching and Feature Selection during Training' and what are the venues of the other papers they published?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/clef/Lasseck16> dblp:authoredBy ?firstanswer . ?x dblp:authoredBy ?firstanswer . ?x dblp:publishedIn ?secondanswer FILTER (?y != <https://dblp.org/rec/conf/clef/Lasseck16>) }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "What are the affiliations of the authors of the paper 'Reusable DSP Functions in FPGAs'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/fpl/AndrejasT00> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+        "entity": "PUBLICATION",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "In '2002' in 'Comput. Networks', who are the authors that published papers about 'sensor networks'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), 'sensor networks') . ?x dblp:publishedIn 'Comput. Networks' . FILTER CONTAINS(LCASE('Comput. Networks'), 'Comput. Networks') . ?x dblp:year ?y . FILTER(?y = '2002') . ?x dblp:authoredBy ?answer }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Who are the authors of the paper 'Augmenting Decision Making via Interactive What-If Analysis' and what are the venues of the other papers they published?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/corr/abs-2109-06160> dblp:authoredBy ?firstanswer . ?x dblp:authoredBy ?firstanswer . ?x dblp:publishedIn ?secondanswer FILTER (?y != <https://dblp.org/rec/journals/corr/abs-2109-06160>) }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "Where are the majority of the authors of the paper 'Location-Based Mobile Services and Privacy : Controlling Access to Location Information' affiliated to?",
+        "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/enter/TjostheimNV04> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+        "entity": "PUBLICATION",
+        "query_type": "RANK"
+    },
+    {
+        "question": "Who are the authors of the publication 'Design and Experimental Validation of a Hybrid Micro Tele-Manipulation System' and what are the venues of the other papers they published?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/setn/VlachosP14> dblp:authoredBy ?firstanswer . ?x dblp:authoredBy ?firstanswer . ?x dblp:publishedIn ?secondanswer FILTER (?y != <https://dblp.org/rec/conf/setn/VlachosP14>) }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "Who are the authors of 'PATONGO: Patterns and Tools for Non-Profit Organizations - a pattern-based approach for helping volunteers to identify and share good practice' and what are the venues of the other papers they published?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/nrhm/SchummerH10> dblp:authoredBy ?firstanswer . ?x dblp:authoredBy ?firstanswer . ?x dblp:publishedIn ?secondanswer FILTER (?y != <https://dblp.org/rec/journals/nrhm/SchummerH10>) }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "Where are the majority of the authors of 'Semi-blind multiuser receiver for space-time coded CDMA systems' affiliated to?",
+        "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/icassp/Li02> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+        "entity": "PUBLICATION",
+        "query_type": "RANK"
+    },
+    {
+        "question": "Which research paper on 'feature extraction' was published by 'Ali'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), 'Ali') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), 'feature extraction') }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Did 'Krishnan Balachandran' not publish the paper 'Controllability Results for Second Order Neutral Impulsive Integrodifferential Systems'?",
+        "query": "ASK { <https://dblp.org/rec/journals/jota/RadhakrishnanB11> dblp:authoredBy <https://dblp.org/pid/84/4395> FILTER NOT EXISTS { <https://dblp.org/rec/journals/jota/RadhakrishnanB11> dblp:authoredBy <https://dblp.org/pid/84/4395> }",
+        "entity": "CREATOR",
+        "query_type": "NEGATION"
+    },
+    {
+        "question": "Which publication on  was published by 'Kefei'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), 'Kefei') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), ) }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What is the ORCID of 'Yinghua Jin'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/157/4041> dblp:orcid ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "Who are the co-authors of the author 'Marco Bernardo' in the last '2000' years and where are they affiliated?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy <https://dblp.org/pid/84/594> . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-?y) . ?x dblp:authoredBy ?firstanswer FILTER(?firstanswer != <https://dblp.org/pid/84/594>) . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+        "entity": "CREATOR",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "With which other authors has the author 'Vassilios Morellas' co-authored papers in the last '2009' years and where are they affiliated?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy <https://dblp.org/pid/90/1744> . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-?y) . ?x dblp:authoredBy ?firstanswer FILTER(?firstanswer != <https://dblp.org/pid/90/1744>) . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+        "entity": "CREATOR",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "Where are the majority of the authors of the paper 'A digital adaptive beamforming QAM demodulator IC for high bit-rate wireless communications' affiliated to?",
+        "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/jssc/LeeLS98> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+        "entity": "PUBLICATION",
+        "query_type": "RANK"
+    },
+    {
+        "question": "What is the ORCID of the author 'G\\u00E1bor Szed\\u00F6'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/49/5923> dblp:orcid ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "Who are the co-authors of the author 'Ya-Qiu Jin' in the last '2015' years and where are they affiliated?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy <https://dblp.org/pid/76/5628> . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-?y) . ?x dblp:authoredBy ?firstanswer FILTER(?firstanswer != <https://dblp.org/pid/76/5628>) . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+        "entity": "CREATOR",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "Which papers did 'Hang Zhao' and 'William Bialek' publish in collaboration in 'CoRR'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/31/2950> . ?answer dblp:authoredBy <https://dblp.org/pid/75/5386> . ?answer dblp:publishedIn 'CoRR' }",
+        "entity": "CREATOR",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "Which paper on 'vehicle mobility estimator' was published by 'Gilles'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), 'Gilles') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), 'vehicle mobility estimator') }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What is the ORCID of 'Nga Tran'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/80/4976> dblp:orcid ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "How many authors of the paper 'Auto-adaptive Resonance Equalization using Dilated Residual Networks' have  as their primary affiliation?",
+        "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/corr/abs-1807-08636> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+        "entity": "PUBLICATION",
+        "query_type": "COUNT"
+    },
+    {
+        "question": "Do the authors of the publication 'Combining Reinforcement Learning and Configuration Checking for Maximum k-plex Problem' have  as their primary affiliation?",
+        "query": "ASK { <https://dblp.org/rec/journals/corr/abs-1906-02578> dblp:authoredBy ?x . ?x dblp:primaryAffiliation  }",
+        "entity": "PUBLICATION",
+        "query_type": "BOOLEAN"
+    },
+    {
+        "question": "Which publications did 'Daniel Haak' write with the author from ?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/126/0466> . ?answer dblp:authoredBy ?y . ?y dblp:primaryAffiliation  }",
+        "entity": "CREATOR",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "Which research paper on  was published by 'Tobias'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), 'Tobias') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), ) }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What are the titles of the papers on 'energy systems' that were published in 'e-Energy' in '2019'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), 'energy systems') . ?x dblp:publishedIn 'e-Energy' . FILTER CONTAINS(LCASE('e-Energy'), 'e-Energy') . ?x dblp:year ?y . FILTER(?y = '2019') }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "In 'PPSN' in '1991', who are the authors that published papers about ?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), ) . ?x dblp:publishedIn 'PPSN' . FILTER CONTAINS(LCASE('PPSN'), 'PPSN') . ?x dblp:year ?y . FILTER(?y = '1991') . ?x dblp:authoredBy ?answer }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Who are the authors of the paper 'Semantic Interpretation of Heart Vessel Structures Based on Graph Grammars' and what are their affiliations?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/iccvg/Trzupek10> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "Where are the authors of the paper 'Image Fusion Transformer' from?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/corr/abs-2107-09011> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+        "entity": "PUBLICATION",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "What are the titles of the papers on  that were published in 'Math. Log. Q.' in '1978'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), ) . ?x dblp:publishedIn 'Math. Log. Q.' . FILTER CONTAINS(LCASE('Math. Log. Q.'), 'Math. Log. Q.') . ?x dblp:year ?y . FILTER(?y = '1978') }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What are the titles of the research papers on 'citation data' that were published in 'ISSI' in the year '2015'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), 'citation data') . ?x dblp:publishedIn 'ISSI' . FILTER CONTAINS(LCASE('ISSI'), 'ISSI') . ?x dblp:year ?y . FILTER(?y = '2015') }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What are the titles of the papers on 'battery levels' that were published in 'Ad Hoc Sens. Wirel. Networks' in '2007'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), 'battery levels') . ?x dblp:publishedIn 'Ad Hoc Sens. Wirel. Networks' . FILTER CONTAINS(LCASE('Ad Hoc Sens. Wirel. Networks'), 'Ad Hoc Sens. Wirel. Networks') . ?x dblp:year ?y . FILTER(?y = '2007') }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "How many authors of the paper 'Die Optimierung von Mittelzuweisungen f\\u00FCr Forschungs- und Entwicklungsvorhaben' have  as their primary affiliation?",
+        "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/mmor/Dathe69> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+        "entity": "PUBLICATION",
+        "query_type": "COUNT"
+    },
+    {
+        "question": "Wasn't the paper 'Report from the UK e-Science All Hands Meeting, September 10-13, 2007, Nottingham, UK' not published by the author 'Colin Neilson'?",
+        "query": "ASK { <https://dblp.org/rec/journals/ijdc/Neilson07> dblp:authoredBy <https://dblp.org/pid/47/2284> FILTER NOT EXISTS { <https://dblp.org/rec/journals/ijdc/Neilson07> dblp:authoredBy <https://dblp.org/pid/47/2284> }",
+        "entity": "CREATOR",
+        "query_type": "NEGATION"
+    },
+    {
+        "question": "What is the primary affiliation of most of the authors of 'Burning material detection in real time'?",
+        "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/smc/Wang04a> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+        "entity": "PUBLICATION",
+        "query_type": "RANK"
+    },
+    {
+        "question": "How many authors of the paper 'A Two-Level Strategy for Topology Control in Wireless Sensor Networks' have  as their primary affiliation?",
+        "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/icpads/YinSS05> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+        "entity": "PUBLICATION",
+        "query_type": "COUNT"
+    },
+    {
+        "question": "Who are the authors of the publication 'Presence and Perceived Learning in Different Higher Education Blended Learning Environments' and what are their affiliations?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/ijmbl/KhodabandelouJA15> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "'Mingquan' published publications about  in which venues?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, 'Mingquan', 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?t . FILTER REGEX (?t, , 'i') . ?z dblp:publishedIn ?answer }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Which paper on  was published by the author 'Dolph'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), 'Dolph') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), ) }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Which paper on 'performance analysis' was published by the author 'Thierry'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), 'Thierry') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), 'performance analysis') }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "In 'ICDSC' in the year '2017', what are the titles of the research papers on 'video encoder'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), 'video encoder') . ?x dblp:publishedIn 'ICDSC' . FILTER CONTAINS(LCASE('ICDSC'), 'ICDSC') . ?x dblp:year ?y . FILTER(?y = '2017') }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "'Davide' published papers about  in which venues?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, 'Davide', 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?t . FILTER REGEX (?t, , 'i') . ?z dblp:publishedIn ?answer }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Who are the authors of the publication 'Metrics, Do They Really Help?' and what are the venues of the other papers they published?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/lmo/DemeyerD99> dblp:authoredBy ?firstanswer . ?x dblp:authoredBy ?firstanswer . ?x dblp:publishedIn ?secondanswer FILTER (?y != <https://dblp.org/rec/conf/lmo/DemeyerD99>) }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "In which venues did 'Yevgeni' publish research papers about ?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, 'Yevgeni', 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?t . FILTER REGEX (?t, , 'i') . ?z dblp:publishedIn ?answer }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What is the primary affiliation of most of the authors of 'Optimal VSC Design Based On Nash Strategy for Differential 2-Player Games'?",
+        "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/smc/TamaddoniTA09> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+        "entity": "PUBLICATION",
+        "query_type": "RANK"
+    },
+    {
+        "question": "Who are the authors that published papers about 'steel tubes' in '2021'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER REGEX (LCASE(?t), 'steel tubes', 'i') . ?x dblp:year ?y . FILTER(?y = '2021') . ?x dblp:authoredBy ?answer . }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What is the primary affiliation of most of the authors of the paper 'Optimizationof CPG-network for decentralized control of a snake-like robot'?",
+        "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/robio/InoueMJ05> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+        "entity": "PUBLICATION",
+        "query_type": "RANK"
+    },
+    {
+        "question": "Who are the authors of the paper 'Semiflows \\'Monotone with Respect to High-Rank Cones\\' on a Banach Space' and what are their affiliations?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/siamma/FengWW17> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+        "entity": "PUBLICATION",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "Who are the co-authors of the author 'Nina Moebius' in the last '2012' years and where are they affiliated?",
+        "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy <https://dblp.org/pid/85/564> . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-?y) . ?x dblp:authoredBy ?firstanswer FILTER(?firstanswer != <https://dblp.org/pid/85/564>) . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+        "entity": "CREATOR",
+        "query_type": "DOUBLE_INTENT"
+    },
+    {
+        "question": "Who is the most common co-author of 'Richard I. Blue' and how many papers do they have together?",
+        "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x dblp:authoredBy <https://dblp.org/pid/129/3733> . ?x dblp:authoredBy ?answer FILTER(?answer != <https://dblp.org/pid/129/3733>)} GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+        "entity": "CREATOR",
+        "query_type": "RANK"
+    },
+    {
+        "question": "What is the website of 'Peter G. Neumann'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/n/PeterGNeumann> dblp:website ?answer }",
+        "entity": "CREATOR",
+        "query_type": "SINGLE_FACT"
+    },
+    {
+        "question": "What are the titles of the papers on 'system design' that were published in 'Behav. Inf. Technol.' in '1996'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), 'system design') . ?x dblp:publishedIn 'Behav. Inf. Technol.' . FILTER CONTAINS(LCASE('Behav. Inf. Technol.'), 'Behav. Inf. Technol.') . ?x dblp:year ?y . FILTER(?y = '1996') }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Who are the authors that published papers about 'cloud service' in '2016'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER REGEX (LCASE(?t), 'cloud service', 'i') . ?x dblp:year ?y . FILTER(?y = '2016') . ?x dblp:authoredBy ?answer . }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What are the affiliations of the authors of the paper 'Memristive nanowires exhibit small-world connectivity'?",
+        "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/nn/PantoneKN18> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+        "entity": "PUBLICATION",
+        "query_type": "MULTI_FACT"
+    },
+    {
+        "question": "Who are the authors that published research papers about  in the year '2016'?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER REGEX (LCASE(?t), , 'i') . ?x dblp:year ?y . FILTER(?y = '2016') . ?x dblp:authoredBy ?answer . }",
+        "entity": "PUBLICATION",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "What is the primary affiliation of most of the authors of 'Hybrid Attention based Multimodal Network for Spoken Language Classification'?",
+        "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/coling/GuYFCLM18> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+        "entity": "PUBLICATION",
+        "query_type": "RANK"
+    },
+    {
+        "question": "'John' published publications about  in which venues?",
+        "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, 'John', 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?t . FILTER REGEX (?t, , 'i') . ?z dblp:publishedIn ?answer }",
+        "entity": "CREATOR",
+        "query_type": "DISAMBIGUATION"
+    },
+    {
+        "question": "Has the paper 'Efficient and Robust LFG Parsing: SxLFG' not been published by 'Beno\\u00EEt Sagot'?",
+        "query": "ASK { <https://dblp.org/rec/conf/iwpt/BoullierS05> dblp:authoredBy <https://dblp.org/pid/66/1016> FILTER NOT EXISTS { <https://dblp.org/rec/conf/iwpt/BoullierS05> dblp:authoredBy <https://dblp.org/pid/66/1016> }",
+        "entity": "CREATOR",
+        "query_type": "NEGATION"
+    }
+]
