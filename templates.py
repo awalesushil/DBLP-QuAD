@@ -630,7 +630,7 @@ templates = {
             ]
         }],
         "NEGATION": [{
-            "query": "ASK { ?p1 dblp:authoredBy ?c1 FILTER NOT EXISTS { ?p1 dblp:authoredBy ?c1 }",
+            "query": "ASK { ?p1 dblp:authoredBy ?c1 FILTER NOT EXISTS { ?p1 dblp:authoredBy ?c1 } }",
             "questions": [
                 "Did [CREATOR_NAME] not publish the paper [TITLE]?",
                 "Did the author [CREATOR_NAME] not publish the paper [TITLE]?",
