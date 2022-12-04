@@ -8,8 +8,6 @@ import pickle
 from tqdm import tqdm
 import whitelist
 
-random.seed(20221017)
-
 class Graph:
     """
         Graph data model

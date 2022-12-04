@@ -159,7 +159,8 @@ class DataGenerator:
     """
         Generate question-query pairs
     """
-    def __init__(self, graph):
+    def __init__(self, graph, seed):
+        random.seed(seed)
         self.sample_generator = SampleGenerator(graph)
         self.template_generator = TemplateGenerator()
         self.server = DBLPServer("config.json")
@@ -183,7 +184,7 @@ class DataGenerator:
             name[-1] + ", " + name[0][0] + ". " + " ".join(name[1:-1]), # Smith, J. William
         ]
         name = "'" + random.choice(alt_names) + "'"
-        return name.replace(" '", "")
+        return name.replace(" '", "'")
 
     
     def alt_duration(self, duration):
