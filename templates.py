@@ -10,9 +10,8 @@ templates = {
                 "Who wrote the paper [TITLE]?",
                 "Who authored the paper [TITLE]?",
                 "Who is the author of the paper [TITLE]?",
-                "Who is the author of [TITLE]?",
-                "Who wrote [TITLE]?",
-                "Who authored [TITLE]?"
+                "[TITLE] was written by who?",
+                "[TITLE] was authored by which authors?"
             ]
         },{
             "query": "SELECT DISTINCT ?answer WHERE { ?p1 dblp:yearOfPublication ?answer }",
@@ -20,41 +19,35 @@ templates = {
                 "When was [TITLE] published?",
                 "When was the paper [TITLE] published?",
                 "What year was [TITLE] published?",
-                "What year was the paper [TITLE] published?",
                 "In what year was [TITLE] published?",
-                "In what year was the paper [TITLE] published?"
+                "[TITLE] was published in which year?",
+                "The paper [TITLE] was published in which year?"
             ]
         },{
             "query": "SELECT DISTINCT ?answer WHERE { ?p1 dblp:publishedIn ?answer }",
             "questions": [
                 "Where was [TITLE] published?",
                 "Where was the paper [TITLE] published?",
-                "What is the venue of the paper [TITLE]?",
-                "What is the venue of the publication [TITLE]?",
-                "In what venue was [TITLE] published?",
-                "In which venue was the paper [TITLE] published?"
-            ]
-        },{
-            "query": "SELECT DISTINCT ?answer WHERE { ?p1 dblp:doi ?answer }",
-            "questions": [
-                "What is the DOI of the paper [TITLE]?",
-                "What is the DOI of [TITLE]?",
-                "What is the DOI of the publication [TITLE]?"
+                "In which venue was the paper [TITLE] published?",
+                "[TITLE] was published in which venue?",
+                "The paper [TITLE] was published in which venue?"
             ]
         },{
             "query": "SELECT DISTINCT ?answer WHERE { ?p1 dblp:bibtexType ?answer }",
             "questions": [
-                "What is the type of the paper [TITLE]?",
-                "What is the type of [TITLE]?",
-                "What is the type of the publication [TITLE]?",
-                "What type of publication is [TITLE]?"
+                "What is the bibtex type of the paper [TITLE]?",
+                "What is the bibtex type of [TITLE]?",
+                "What is the bibtex type of the publication [TITLE]?",
+                "What bibtex type of publication is [TITLE]?"
             ]
         },{
             "query": "SELECT ?answer WHERE { ?p1 dblp:numberOfCreators ?answer }",
             "questions": [
                 "How many authors does [TITLE] have?",
                 "How many authors wrote the paper [TITLE]?",
-                "How many authors does the publication [TITLE] have?"
+                "How many authors does the publication [TITLE] have?",
+                "[TITLE] has how many authors?",
+                "The paper [TITLE] has how many authors?"
             ]
         }],
         "MULTI_FACT": [{
@@ -63,40 +56,41 @@ templates = {
                 "What are the primary affiliations of the authors of [TITLE]?",
                 "What are the primary affiliations of the authors of the paper [TITLE]?",
                 "Where are the authors of [TITLE] from?",
-                "Where are the authors of the paper [TITLE] from?"
+                "Where are the authors of the paper [TITLE] from?",
+                "[TITLE] was written by authors from which affiliations?",
+                "[TITLE] was authored by authors from which affiliations?"
             ]
         },{
             "query": "SELECT DISTINCT ?answer WHERE { ?p1 dblp:authoredBy ?x . ?answer dblp:authoredBy ?x FILTER (?answer != ?p1) }",
             "questions": [
-                "Which other papers were published by the authors of [TITLE]?",
-                "Which other papers were published by the authors of the paper [TITLE]?",
-                "What other papers were published by the authors of the publication [TITLE]?",
-                "What other papers were published by the authors of the paper [TITLE]?"
+                "Which other publications were published by the authors of [TITLE]?",
+                "Which other publications were published by the authors of the paper [TITLE]?",
+                "Which other papers were written by the authors of [TITLE]?",
+                "Which other papers were written by the authors of the paper [TITLE]?"
             ]
         },{
             "query": "SELECT DISTINCT ?answer WHERE { ?p1 dblp:authoredBy ?x . ?y dblp:authoredBy ?x . ?y dblp:publishedIn ?answer FILTER (?y != ?p1) }",
             "questions": [
                 "What are the venues of the other papers published by the authors of [TITLE]?",
-                "What are the venues of the other papers published by the authors of the paper [TITLE]?",
-                "What are the venues of the other papers published by the authors of the publication [TITLE]?"
+                "What are the venues of the other papers published by the authors of the publication [TITLE]?",
+                "In which venues were the other papers published by the authors of [TITLE]?",
+                "In which venues were the other publications published by the authors of [TITLE]?"
             ]
         },{
             "query": "SELECT DISTINCT ?answer WHERE { ?p1 dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
             "questions": [
-                "What are the affiliations of the authors of [TITLE]?",
-                "What are the affiliations of the authors of the paper [TITLE]?",
-                "What are the affiliations of the authors of the publication [TITLE]?",
-                "What are the affiliations of the authors of the paper [TITLE]?"
+                "What are the primary affiliations of the authors of [TITLE]?",
+                "What are the primary affiliations of the authors of the paper [TITLE]?",
+                "What are the primary affiliations of the authors of the publication [TITLE]?",
+                "What are the primary affiliations of the authors of the paper [TITLE]?"
             ]
         }],
         "DOUBLE_INTENT": [{
             "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?p1 dblp:publishedIn ?firstanswer . ?p1 dblp:yearOfPublication ?secondanswer }",
             "questions": [
                 "Where was [TITLE] published and when?",
-                "Where was the paper [TITLE] published and when?",
                 "Where was the publication [TITLE] published and when?",
                 "Where was the paper [TITLE] published and in what year?",
-                "Where was the publication [TITLE] published and in what year?",
                 "In what venue was [TITLE] published and when?",
                 "In what year was [TITLE] published and in what venue?",
                 "In what venue was the paper [TITLE] published and when?",
@@ -121,7 +115,7 @@ templates = {
                 "Who are the authors of the publication [TITLE] and what other papers did they publish?"
             ]
         },{
-            "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?p1 dblp:authoredBy ?firstanswer . ?x dblp:authoredBy ?firstanswer . ?x dblp:publishedIn ?secondanswer FILTER (?y != ?p1) }",
+            "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?p1 dblp:authoredBy ?firstanswer . ?x dblp:authoredBy ?firstanswer . ?x dblp:publishedIn ?secondanswer FILTER (?x != ?p1) }",
             "questions": [
                 "Who are the authors of [TITLE] and what are the venues of the other papers they published?",
                 "Who are the authors of the paper [TITLE] and what are the venues of the other papers they published?",
@@ -141,14 +135,16 @@ templates = {
             "query": "ASK { ?p1 purl:bibtexType [TYPE] }",
             "questions": [
                 "Is [TITLE] a [TYPE] publication?",
-                "Is the publication [TITLE] a [TYPE] paper?"
+                "Is the publication [TITLE] a [TYPE] paper?",
+                "Is the paper [TITLE] a [TYPE] publication?"
             ]
         },{
             "query": "ASK { ?p1 dblp:authoredBy ?x . ?x dblp:primaryAffiliation [AFFILIATION] }",
             "questions": [
                 "Do the authors of [TITLE] have [AFFILIATION] as their primary affiliation?",
-                "Do the authors of the paper [TITLE] have [AFFILIATION] as their primary affiliation?",
-                "Do the authors of the publication [TITLE] have [AFFILIATION] as their primary affiliation?"
+                "Do the authors of the publication [TITLE] have [AFFILIATION] as their primary affiliation?",
+                "Is [AFFILIATION] the primary affiliation of the authors of [TITLE]?",
+                "Is [AFFILIATION] the primary affiliation of the authors of the paper [TITLE]?"
             ]
         },{
             "query": "ASK { ?p1 dblp:yearOfPublication [YEAR] }",
@@ -203,13 +199,6 @@ templates = {
                 "Did the authors of the paper [TITLE] also publish a publication in [VENUE]?",
                 "Did the authors of the publication [TITLE] also publish a publication in [VENUE]?",
                 "Did the authors of [TITLE] also publish a paper in the venue [VENUE]?"
-            ]
-        },{
-            "query": "ASK { ?p1 dblp:doi ?y }",
-            "questions": [
-                "Does [TITLE] have a DOI?",
-                "Does the paper [TITLE] have a DOI?",
-                "Does the publication [TITLE] have a DOI?"
             ]
         }],
         "NEGATION": [{
@@ -318,13 +307,6 @@ templates = {
                 "Where were the papers [TITLE] and [OTHER_TITLE] published?",
                 "Where were the publications [TITLE] and [OTHER_TITLE] published?"
             ]
-        },{
-            "query": "SELECT DISTINCT ?answer WHERE { { ?p1 dblp:doi ?answer } UNION { ?p2 dblp:doi ?answer } }",
-            "questions": [
-                "What are the DOIs of [TITLE] and [OTHER_TITLE]?",
-                "What are the DOIs of the papers [TITLE] and [OTHER_TITLE]?",
-                "What are the DOIs of the publications [TITLE] and [OTHER_TITLE]?"
-            ]
         }],
         "COUNT": [{
             "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { ?p1 dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation [AFFILIATION] }",
@@ -373,7 +355,7 @@ templates = {
             ]
         }],
         "DISAMBIGUATION": [{
-            "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), [KEYWORD]) . ?x dblp:publishedIn [VENUE] . FILTER CONTAINS(LCASE([VENUE]), [VENUE]) . ?x dblp:year ?y . FILTER(?y = [YEAR]) . ?x dblp:authoredBy ?answer }",
+            "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn [VENUE] . ?x dblp:yearOfPublication [YEAR] . ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), [KEYWORD]) . ?x dblp:authoredBy ?answer }",
             "questions": [
                 "Who are the authors that published papers about [KEYWORD] in [VENUE] in [YEAR]?",
                 "Who are the authors that published research papers about [KEYWORD] in [VENUE] in the year [YEAR]?",
@@ -383,7 +365,7 @@ templates = {
                 "In the year [YEAR] in [VENUE], who are the authors that published research papers about [KEYWORD]?"
             ]
         },{
-            "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), [KEYWORD]) . ?x dblp:publishedIn [VENUE] . FILTER CONTAINS(LCASE([VENUE]), [VENUE]) . ?x dblp:year ?y . FILTER(?y = [YEAR]) }",
+            "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn [VENUE] . ?x dblp:yearOfPublication [YEAR] . ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), [KEYWORD]) }",
             "questions": [
                 "What are the titles of the papers on [KEYWORD] that were published in [VENUE] in [YEAR]?",
                 "What are the titles of the research papers on [KEYWORD] that were published in [VENUE] in the year [YEAR]?",
@@ -393,7 +375,7 @@ templates = {
                 "In the year [YEAR] in [VENUE], what are the titles of the research papers on [KEYWORD]?"
             ]
         },{
-            "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:title ?t . FILTER REGEX (LCASE(?t), [KEYWORD], 'i') . ?x dblp:year ?y . FILTER(?y = [YEAR]) . ?x dblp:authoredBy ?answer . }",
+            "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:yearOfPublication [YEAR] . ?x dblp:title ?t . FILTER REGEX (LCASE(?t), [KEYWORD], 'i') . ?x dblp:authoredBy ?answer }",
             "questions": [
                 "Who are the authors that published papers about [KEYWORD] in [YEAR]?",
                 "Who are the authors that published research papers about [KEYWORD] in the year [YEAR]?",
@@ -434,19 +416,16 @@ templates = {
             "questions": [
                 "What is the primary affiliation of [CREATOR_NAME]?",
                 "What is the primary affiliation of the author [CREATOR_NAME]?",
-                "What is the primary affiliation of the author named [CREATOR_NAME]?"
+                "[CREATOR_NAME] is primarily affiliated to which institution?",
+                "The author [CREATOR_NAME] is primarily affiliated to which institution?"
             ]
         },{
             "query": "SELECT DISTINCT ?answer WHERE { ?c1 dblp:orcid ?answer }",
             "questions": [
                 "What is the ORCID of [CREATOR_NAME]?",
-                "What is the ORCID of the author [CREATOR_NAME]?"
-            ]
-        },{
-            "query": "SELECT DISTINCT ?answer WHERE { ?c1 dblp:website ?answer }",
-            "questions": [
-                "What is the website of [CREATOR_NAME]?",
-                "What is the website of the author [CREATOR_NAME]?"
+                "What is the ORCID of the author [CREATOR_NAME]?",
+                "What is the ORCID of the person [CREATOR_NAME]?",
+                "What is the ORCID of the researcher [CREATOR_NAME]?"
             ]
         }],
         "MULTI_FACT": [{
@@ -536,12 +515,12 @@ templates = {
                 "With which other authors has the author [CREATOR_NAME] co-authored papers and where are they affiliated?"
             ]
         },{
-            "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy ?c1 . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-?y) . ?x dblp:authoredBy ?firstanswer FILTER(?firstanswer != ?c1) . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+            "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy ?c1 . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-[DURATION]) . ?x dblp:authoredBy ?firstanswer FILTER(?firstanswer != ?c1) . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
             "questions": [
-                "Who are the co-authors of [CREATOR_NAME] in the last [YEAR] years and where are they affiliated?",
-                "Who are the co-authors of the author [CREATOR_NAME] in the last [YEAR] years and where are they affiliated?",
-                "With which other authors has [CREATOR_NAME] co-authored papers in the last [YEAR] years and where are they affiliated?",
-                "With which other authors has the author [CREATOR_NAME] co-authored papers in the last [YEAR] years and where are they affiliated?"
+                "Who are the co-authors of [CREATOR_NAME] in the last [DURATION] years and where are they affiliated?",
+                "Who are the co-authors of the author [CREATOR_NAME] in the last [DURATION] years and where are they affiliated?",
+                "With which other authors has [CREATOR_NAME] co-authored papers in the last [DURATION] years and where are they affiliated?",
+                "With which other authors has the author [CREATOR_NAME] co-authored papers in the last [DURATION] years and where are they affiliated?"
             ]
         },{
             "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy ?c1 . ?x dblp:publishedIn ?firstanswer . ?x dblp:title ?secondanswer }",
@@ -608,25 +587,33 @@ templates = {
             "query": "ASK { ?x dblp:authoredBy ?c1 . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-[DURATION]) . ?x dblp:publishedIn [VENUE] }",
             "questions": [
                 "Did [CREATOR_NAME] publish in [VENUE] in the last [DURATION] years?",
-                "Did the author [CREATOR_NAME] publish in [VENUE] in the last [DURATION] years?"
+                "Did the author [CREATOR_NAME] publish in [VENUE] in the last [DURATION] years?",
+                "Has [CREATOR_NAME] published in [VENUE] in the last [DURATION] years?",
+                "Has the author [CREATOR_NAME] published in [VENUE] in the last [DURATION] years?"
             ]
         },{
             "query": "ASK { ?p1 dblp:authoredBy ?c1 . ?p1 dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-[DURATION]) . ?p1 dblp:publishedIn [VENUE] }",
             "questions": [
                 "Did [CREATOR_NAME] publish the paper [TITLE] in [VENUE] in the last [DURATION] years?",
-                "Did the author [CREATOR_NAME] publish the paper [TITLE] in [VENUE] in the last [DURATION] years?"
+                "Did the author [CREATOR_NAME] publish the paper [TITLE] in [VENUE] in the last [DURATION] years?",
+                "Was the paper [TITLE] published by [CREATOR_NAME] in [VENUE] in the last [DURATION] years?",
+                "Has [CREATOR_NAME] published the paper [TITLE] in [VENUE] in the last [DURATION] years?"
             ]
         },{
             "query": "ASK { ?c1 dblp:orcid ?x }",
             "questions": [
                 "Does [CREATOR_NAME] have an ORCID?",
-                "Does the author [CREATOR_NAME] have an ORCID?"
+                "Does the author [CREATOR_NAME] have an ORCID?",
+                "Does the person [CREATOR_NAME] have an ORCID?",
+                "Does the person named [CREATOR_NAME] have an ORCID?"
             ]
         },{
             "query": "ASK { ?c1 dblp:website ?x }",
             "questions": [
                 "Does [CREATOR_NAME] have a website?",
-                "Does the author [CREATOR_NAME] have a website?"
+                "Does the author [CREATOR_NAME] have a website?",
+                "Does the person [CREATOR_NAME] have a website?",
+                "Does the person named [CREATOR_NAME] have a website?"
             ]
         }],
         "NEGATION": [{
@@ -663,7 +650,9 @@ templates = {
             "query": "ASK { ?x dblp:authoredBy ?c1 . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-[DURATION]) . ?x dblp:publishedIn [VENUE] FILTER NOT EXISTS { ?x dblp:authoredBy ?c1 . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-[DURATION]) . ?x dblp:publishedIn [VENUE] } }",
             "questions": [
                 "Did [CREATOR_NAME] not publish in [VENUE] in the last [DURATION] years?",
-                "Did the author [CREATOR_NAME] not publish in [VENUE] in the last [DURATION] years?"
+                "Did the author [CREATOR_NAME] not publish in [VENUE] in the last [DURATION] years?",
+                "Has [CREATOR_NAME] not published in [VENUE] in the last [DURATION] years?",
+                "Has the author [CREATOR_NAME] not published in [VENUE] in the last [DURATION] years?"
             ]
         }],
         "DOUBLE_NEGATION": [{
@@ -892,6 +881,15 @@ templates = {
                 "[PARTIAL_CREATOR_NAME] published papers about [KEYWORD] in which venues?",
                 "[PARTIAL_CREATOR_NAME] published publications about [KEYWORD] in which venues?",
                 "[PARTIAL_CREATOR_NAME] published research papers about [KEYWORD] in which venues?"
+            ]
+        },{
+            "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, [PARTIAL_CREATOR_NAME], 'i') . ?z dblp:authoredBy ?x . ?answer dblp:publishedIn [VENUE] }",
+            "questions": [
+                "Which papers did [PARTIAL_CREATOR_NAME] publish in [VENUE]?",
+                "Which publications did [PARTIAL_CREATOR_NAME] publish in [VENUE]?",
+                "Which research papers did [PARTIAL_CREATOR_NAME] publish in [VENUE]?",
+                "In [VENUE], which papers did [PARTIAL_CREATOR_NAME] publish?",
+                "In [VENUE], which publications did [PARTIAL_CREATOR_NAME] publish?"
             ]
         }]       
     },
