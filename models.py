@@ -196,7 +196,7 @@ class DataGenerator:
             "1": "one", "2": "two", "3": "three", "4": "four", "5": "five",
             "6": "six", "7": "seven", "8": "eight", "9": "nine", "10": "ten"
         }
-        return num2words[str(duration)]
+        return num2words[duration]
 
     def fill_slots(self, template, first_sample, second_sample):
         
@@ -208,7 +208,7 @@ class DataGenerator:
         else:
             creator, other_creator = {}, {}
 
-        duration = random.choice(range(1, 10))
+        duration = str(random.choice(range(1, 10)))
 
         def get_creator_name(name):
             return random.choice([name, self.alt_name(name)])
@@ -219,6 +219,11 @@ class DataGenerator:
         def get_venue(venue):
             return random.choice([venue, CORE.get(venue, venue)])
 
+        def get_partial_name(name):
+            name = name.lower().replace("'", "")
+            name = name.split(" ")
+            return "'" + random.choice(name) + "'"
+            
         slots = {
             "?p1": first_sample.uri,
             "?p2": second_sample.uri,
@@ -227,7 +232,7 @@ class DataGenerator:
             "[TITLE]": first_sample.title,
             "[OTHER_TITLE]": second_sample.title,
             "[TYPE]": first_sample.type,
-            "[PARTIAL_CREATOR_NAME]": self.alt_name(creator.get("name", "''")),
+            "[PARTIAL_CREATOR_NAME]": get_partial_name(creator.get("name", "''")),
             "[AFFILIATION]": creator.get("affiliation", "''"),
             "[YEAR]": first_sample.year
         }
@@ -261,7 +266,7 @@ class DataGenerator:
         paraphrase = paraphrase.replace("[OTHER_VENUE]", get_venue(second_sample.venue))
         query = query.replace("[OTHER_VENUE]", second_sample.venue)
         
-        keyword = self.keyword_generator.get(first_sample.title)
+        keyword = self.keyword_generator.get(first_sample.title.lower())
         question = question.replace("[KEYWORD]", keyword)
         paraphrase = paraphrase.replace("[KEYWORD]", keyword)
         query = query.replace("[KEYWORD]", keyword)
