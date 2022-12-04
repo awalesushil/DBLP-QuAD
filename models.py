@@ -1,6 +1,7 @@
 """
     Generate question-query pairs
 """
+import re
 import json
 import random
 import logging
@@ -181,8 +182,8 @@ class DataGenerator:
             name[0] + " " + name[1][0] + ". " + " ".join(name[2:]), # John W. Smith
             name[-1] + ", " + name[0][0] + ". " + " ".join(name[1:-1]), # Smith, J. William
         ]
-        
-        return "'" + random.choice(alt_names) + "'"
+        name = "'" + random.choice(alt_names) + "'"
+        return name.replace(" '", "")
 
     
     def alt_duration(self, duration):
@@ -214,7 +215,8 @@ class DataGenerator:
             return random.choice([duration, self.alt_duration(duration)])
 
         def get_venue(venue):
-            return random.choice([venue, CORE.get(venue.upper(), venue)])
+            venue_key = re.sub(r"\(.*\)", "", venue).upper().strip()
+            return random.choice([venue, CORE.get(venue_key, venue)])
 
         def get_partial_name(name):
             name = name.lower().replace("'", "")
