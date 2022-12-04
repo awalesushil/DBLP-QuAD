@@ -882,16 +882,7 @@ templates = {
                 "[PARTIAL_CREATOR_NAME] published publications about [KEYWORD] in which venues?",
                 "[PARTIAL_CREATOR_NAME] published research papers about [KEYWORD] in which venues?"
             ]
-        },{
-            "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, [PARTIAL_CREATOR_NAME], 'i') . ?z dblp:authoredBy ?x . ?answer dblp:publishedIn [VENUE] }",
-            "questions": [
-                "Which papers did [PARTIAL_CREATOR_NAME] publish in [VENUE]?",
-                "Which publications did [PARTIAL_CREATOR_NAME] publish in [VENUE]?",
-                "Which research papers did [PARTIAL_CREATOR_NAME] publish in [VENUE]?",
-                "In [VENUE], which papers did [PARTIAL_CREATOR_NAME] publish?",
-                "In [VENUE], which publications did [PARTIAL_CREATOR_NAME] publish?"
-            ]
-        }]       
+        }]
     },
     "GENERAL": {
         "AGGREGATION": [{
