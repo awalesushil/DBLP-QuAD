@@ -178,11 +178,8 @@ class DataGenerator:
         alt_names = [
             name[-1] + ", " + name[0] + " " + " ".join(name[1:-1]), # Smith, John William
             name[0][0] + ". " + " ".join(name[1:]), # J. William Smith
-            " ".join(name[0:-1]) + " " + name[-1][0] + ".", # John William S.
-            name[-1][0] + "., " + " ".join(name[0:-1]), # S., John William
+            name[0] + " " + name[1][0] + ". " + " ".join(name[2:]), # John W. Smith
             name[-1] + ", " + name[0][0] + ". " + " ".join(name[1:-1]), # Smith, J. William
-            name[0], # John
-            name[-1], # Smith
         ]
         
         return "'" + random.choice(alt_names) + "'"
@@ -217,7 +214,7 @@ class DataGenerator:
             return random.choice([duration, self.alt_duration(duration)])
 
         def get_venue(venue):
-            return random.choice([venue, CORE.get(venue, venue)])
+            return random.choice([venue, CORE.get(venue.upper(), venue)])
 
         def get_partial_name(name):
             name = name.lower().replace("'", "")
