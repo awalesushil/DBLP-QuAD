@@ -169,6 +169,10 @@ class DataGenerator:
         """
             Generate alternative name for the creator
         """
+
+        if not name:
+            return "''"
+
         name = name.replace("'", "")
         name = name.split(" ")
 
@@ -207,22 +211,31 @@ class DataGenerator:
 
         duration = random.choice(range(1, 10))
 
-        mapping_dict = {
+        def get_creator_name(name):
+            return random.choice([name, self.alt_name(name)])
+        
+        def get_duration(duration):
+            return random.choice([duration, self.alt_duration(duration)])
+
+        def get_venue(venue):
+            return random.choice([venue, CORE.get(venue, venue)])
+
+        slots = {
             "?p1": first_sample.uri,
             "?p2": second_sample.uri,
-            "?c1": creator["uri"],
-            "?c2": other_creator["uri"],
+            "?c1": creator.get("uri", "''"),
+            "?c2": other_creator.get("uri", "''"),
             "[TITLE]": first_sample.title,
             "[OTHER_TITLE]": second_sample.title,
             "[TYPE]": first_sample.type,
-            "[CREATOR_NAME]": random.choice([creator["name"], self.alt_name(creator["name"])]),
-            "[OTHER_CREATOR_NAME]": random.choice([other_creator["name"], self.alt_name(other_creator["name"])]),
-            "[PARTIAL_CREATOR_NAME]": self.alt_name(creator["name"]),
-            "[AFFILIATION]": creator["affiliation"],
+            "[CREATOR_NAME]": get_creator_name(creator.get("name", "''")),
+            "[OTHER_CREATOR_NAME]": get_creator_name(other_creator.get("name", "''")),
+            "[PARTIAL_CREATOR_NAME]": self.alt_name(creator.get(["name"], "''")),
+            "[AFFILIATION]": creator.get(["affiliation"], "''"),
             "[YEAR]": first_sample.year,
-            "[DURATION]": random.choice([duration, self.alt_duration(duration)]),
-            "[VENUE]": random.choice([first_sample.venue, CORE.get(first_sample.venue.upper(), first_sample.venue)]),
-            "[OTHER_VENUE]": random.choice([second_sample.venue, CORE.get(second_sample.venue.upper(), second_sample.venue)])
+            "[DURATION]": get_duration(duration),
+            "[VENUE]": get_venue(first_sample.venue),
+            "[OTHER_VENUE]": get_venue(second_sample.venue),
         }
 
         # Randomly select a question
@@ -230,7 +243,7 @@ class DataGenerator:
         query = template["query"]
 
         # Fill in the template with the sample
-        for placeholder, value in mapping_dict.items():
+        for placeholder, value in slots.items():
             question = question.replace(placeholder, str(value))
             paraphrase = paraphrase.replace(placeholder, str(value))
             query = query.replace(placeholder, str(value))
@@ -264,4 +277,4 @@ class DataGenerator:
             if answers:
                 valid_query_count += 1
 
-            yield question, paraphrase, query, answers, entity, query_type
+            yield question, paraphrase, query, entity, query_type, answers
