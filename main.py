@@ -31,8 +31,9 @@ if __name__ == "__main__":
     
     if args.generate:
         graph = load_graph()
-        dataGenerator = DataGenerator(graph, args.size)
-        save_to_json(args.data_file, args.failed_queries_file, dataGenerator)
+        dataGenerator = DataGenerator(graph)
+        generator = dataGenerator.generate(args.size)
+        save_to_json(args.data_file, args.failed_queries_file, generator)
     
     if args.stats:
         plot_template_distribution()

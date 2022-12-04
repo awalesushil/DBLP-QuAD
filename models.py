@@ -243,11 +243,12 @@ class DataGenerator:
 
         return question, paraphrase, query
 
-    def generate(self, n=1):
+    def generate(self, num_samples):
         """
             Generate question-query pairs
         """
-        for _ in range(n):
+        valid_query_count = 0
+        while valid_query_count < num_samples:
 
             # Get two random samples
             first_sample = self.sample_generator.get("Publication")
@@ -260,4 +261,7 @@ class DataGenerator:
             question, paraphrase, query = self.fill_slots(template, first_sample, second_sample)
             answers = self.server.query(query)
 
-            yield question, paraphrase, query, entity, query_type, answers
+            if answers:
+                valid_query_count += 1
+
+            yield question, paraphrase, query, answers, entity, query_type
