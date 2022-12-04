@@ -11,22 +11,15 @@ import urllib.parse
 
 import spacy
 from spacy.matcher import Matcher
-from spacy.tokens import Span
 
 nlp = spacy.load("en_core_web_sm")
 
-from tqdm import tqdm
-
 from templates import templates
-from dblp import Graph
 
 logging.basicConfig(level=logging.INFO)
 
-dblp = Graph("DBLP")
-
-logging.info(" Loading DBLP graph...")
-dblp.load_from_pickle("dblp.pkl")
-logging.info(" Loaded.")
+with open("data/CORE.json", "r") as f:
+    CORE = json.load(f)
 
 class Sample:
     """
@@ -110,7 +103,6 @@ class TemplateGenerator:
 
         return random.choice(templates[entity][query_type]), entity, query_type
 
-keywords = ["entity linking"]
 
 class DBLPServer:
     """
@@ -160,7 +152,8 @@ class KeywordGenerator:
         
         keywords = [doc[start:end].text for _, start, end in matches]
         keywords = [keyword for keyword in keywords if not nlp.vocab[keyword].is_stop]
-        return "'" + random.choice(keywords) + "'"  if keywords else ""
+        return "'" + random.choice(keywords) + "'"  if keywords else "''"
+
 
 class DataGenerator:
     """
@@ -172,10 +165,46 @@ class DataGenerator:
         self.server = DBLPServer("config.json")
         self.keyword_generator = KeywordGenerator()
 
+    def alt_name(self, name):
+        """
+            Generate alternative name for the creator
+        """
+        name = name.replace("'", "")
+        name = name.split(" ")
+
+        alt_names = [
+            name[-1] + ", " + name[0] + " " + " ".join(name[1:-1]), # Smith, John William
+            name[0][0] + ". " + " ".join(name[1:]), # J. William Smith
+            " ".join(name[0:-1]) + " " + name[-1][0] + ".", # John William S.
+            name[-1][0] + "., " + " ".join(name[0:-1]), # S., John William
+            name[-1] + ", " + name[0][0] + ". " + " ".join(name[1:-1]), # Smith, J. William
+            name[0], # John
+            name[-1], # Smith
+        ]
+        
+        return "'" + random.choice(alt_names) + "'"
+
+    
+    def alt_duration(self, duration):
+        """
+            Generate alternative duration
+        """
+        num2words = {
+            "1": "one", "2": "two", "3": "three", "4": "four", "5": "five",
+            "6": "six", "7": "seven", "8": "eight", "9": "nine", "10": "ten"
+        }
+        return num2words[duration]
+
     def fill_slots(self, template, first_sample, second_sample):
         
-        creator = random.choice(first_sample.authors)
-        other_creator = random.choice(second_sample.authors)
+        if first_sample.authors:
+            if len(first_sample.authors) > 1:
+                creator, other_creator = random.sample(first_sample.authors, 2)
+            else:
+                creator, other_creator = first_sample.authors[0], "''"
+        else:
+            creator, other_creator = "''", "''"
+
         duration = random.choice(range(1, 10))
 
         mapping_dict = {
@@ -186,31 +215,33 @@ class DataGenerator:
             "[TITLE]": first_sample.title,
             "[OTHER_TITLE]": second_sample.title,
             "[TYPE]": first_sample.type,
-            "[CREATOR_NAME]": creator["name"],
-            "[OTHER_CREATOR_NAME]": other_creator["name"],
-            "[PARTIAL_CREATOR_NAME]": "'" + creator["name"].split(" ")[0].replace("'", "") + "'",
+            "[CREATOR_NAME]": random.choice(creator["name"], self.alt_name(creator["name"])),
+            "[OTHER_CREATOR_NAME]": random.choice(other_creator["name"], self.alt_name(other_creator["name"])),
+            "[PARTIAL_CREATOR_NAME]": self.alt_name(creator["name"]),
             "[AFFILIATION]": creator["affiliation"],
             "[YEAR]": first_sample.year,
-            "[DURATION]": duration,
-            "[VENUE]": first_sample.venue,
-            "[OTHER_VENUE]": second_sample.venue
+            "[DURATION]": random.choice(duration, self.alt_duration(duration)),
+            "[VENUE]": random.choice(first_sample.venue, CORE.get(first_sample.venue.upper(), first_sample.venue)),
+            "[OTHER_VENUE]": random.choice(second_sample.venue, CORE.get(second_sample.venue.upper(), ""))
         }
 
         # Randomly select a question
-        question = random.choice(template["questions"])
+        question, paraphrase = random.sample(template["questions"], 2)
         query = template["query"]
 
         # Fill in the template with the sample
         for placeholder, value in mapping_dict.items():
             question = question.replace(placeholder, str(value))
+            paraphrase = paraphrase.replace(placeholder, str(value))
             query = query.replace(placeholder, str(value))
 
             if re.search(r"\[KEYWORD\]", question):
                 keyword = self.keyword_generator.get(first_sample.title)
                 question = question.replace("[KEYWORD]", keyword)
+                paraphrase = paraphrase.replace("[KEYWORD]", keyword)
                 query = query.replace("[KEYWORD]", keyword)
 
-        return question, query
+        return question, paraphrase, query
 
     def generate(self, n=1):
         """
@@ -226,35 +257,7 @@ class DataGenerator:
             template, entity, query_type = self.template_generator.get()
 
             # Fill in the template with the sample
-            question, query = self.fill_slots(template, first_sample, second_sample)
+            question, paraphrase, query = self.fill_slots(template, first_sample, second_sample)
             answers = self.server.query(query)
 
-            yield question, query, entity, query_type, answers
-
-if __name__ == "__main__":
-
-    dataGenerator = DataGenerator(dblp).generate(500)
-
-    train, failed = [], []
-    with open("data/train.json", "w", encoding="utf-8") as f1:
-        with open("data/failed.json", "w", encoding="utf-8") as f2:
-            for question, query, entity, query_type, answers in tqdm(dataGenerator, desc="Generating data: "):
-                
-                if answers:
-                    train.append({
-                        "question": question,
-                        "query": query,
-                        "entity": entity,
-                        "query_type": query_type,
-                        "answers": answers
-                    })
-                else:
-                    failed.append({
-                        "question": question,
-                        "query": query,
-                        "entity": entity,
-                        "query_type": query_type
-                    })
-
-            f1.write(json.dumps(train, indent=4))
-            f2.write(json.dumps(failed, indent=4))
+            yield question, paraphrase, query, entity, query_type, answers
