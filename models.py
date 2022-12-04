@@ -1,7 +1,6 @@
 """
     Generate question-query pairs
 """
-import re
 import json
 import random
 import logging
@@ -170,7 +169,7 @@ class DataGenerator:
             Generate alternative name for the creator
         """
 
-        if not name:
+        if name == "''":
             return "''"
 
         name = name.replace("'", "")
@@ -197,7 +196,7 @@ class DataGenerator:
             "1": "one", "2": "two", "3": "three", "4": "four", "5": "five",
             "6": "six", "7": "seven", "8": "eight", "9": "nine", "10": "ten"
         }
-        return num2words[duration]
+        return num2words[str(duration)]
 
     def fill_slots(self, template, first_sample, second_sample):
         
@@ -205,9 +204,9 @@ class DataGenerator:
             if len(first_sample.authors) > 1:
                 creator, other_creator = random.sample(first_sample.authors, 2)
             else:
-                creator, other_creator = first_sample.authors[0], "''"
+                creator, other_creator = first_sample.authors[0], {}
         else:
-            creator, other_creator = "''", "''"
+            creator, other_creator = {}, {}
 
         duration = random.choice(range(1, 10))
 
@@ -228,14 +227,9 @@ class DataGenerator:
             "[TITLE]": first_sample.title,
             "[OTHER_TITLE]": second_sample.title,
             "[TYPE]": first_sample.type,
-            "[CREATOR_NAME]": get_creator_name(creator.get("name", "''")),
-            "[OTHER_CREATOR_NAME]": get_creator_name(other_creator.get("name", "''")),
-            "[PARTIAL_CREATOR_NAME]": self.alt_name(creator.get(["name"], "''")),
-            "[AFFILIATION]": creator.get(["affiliation"], "''"),
-            "[YEAR]": first_sample.year,
-            "[DURATION]": get_duration(duration),
-            "[VENUE]": get_venue(first_sample.venue),
-            "[OTHER_VENUE]": get_venue(second_sample.venue),
+            "[PARTIAL_CREATOR_NAME]": self.alt_name(creator.get("name", "''")),
+            "[AFFILIATION]": creator.get("affiliation", "''"),
+            "[YEAR]": first_sample.year
         }
 
         # Randomly select a question
@@ -244,15 +238,33 @@ class DataGenerator:
 
         # Fill in the template with the sample
         for placeholder, value in slots.items():
+            
             question = question.replace(placeholder, str(value))
             paraphrase = paraphrase.replace(placeholder, str(value))
             query = query.replace(placeholder, str(value))
 
-            if re.search(r"\[KEYWORD\]", question):
-                keyword = self.keyword_generator.get(first_sample.title)
-                question = question.replace("[KEYWORD]", keyword)
-                paraphrase = paraphrase.replace("[KEYWORD]", keyword)
-                query = query.replace("[KEYWORD]", keyword)
+        question = question.replace("[CREATOR_NAME]", get_creator_name(creator.get("name", "''")))
+        paraphrase = paraphrase.replace("[CREATOR_NAME]", get_creator_name(creator.get("name", "''")))
+        
+        question = question.replace("[OTHER_CREATOR_NAME]", get_creator_name(other_creator.get("name", "''")))
+        paraphrase = paraphrase.replace("[OTHER_CREATOR_NAME]", get_creator_name(other_creator.get("name", "''")))
+
+        question = question.replace("[DURATION]", get_duration(duration))
+        paraphrase = paraphrase.replace("[DURATION]", get_duration(duration))
+        query = query.replace("[DURATION]", duration)
+
+        question = question.replace("[VENUE]", get_venue(first_sample.venue))
+        paraphrase = paraphrase.replace("[VENUE]", get_venue(first_sample.venue))
+        query = query.replace("[VENUE]", first_sample.venue)
+
+        question = question.replace("[OTHER_VENUE]", get_venue(second_sample.venue))
+        paraphrase = paraphrase.replace("[OTHER_VENUE]", get_venue(second_sample.venue))
+        query = query.replace("[OTHER_VENUE]", second_sample.venue)
+        
+        keyword = self.keyword_generator.get(first_sample.title)
+        question = question.replace("[KEYWORD]", keyword)
+        paraphrase = paraphrase.replace("[KEYWORD]", keyword)
+        query = query.replace("[KEYWORD]", keyword)
 
         return question, paraphrase, query
 
