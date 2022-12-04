@@ -215,14 +215,14 @@ class DataGenerator:
             "[TITLE]": first_sample.title,
             "[OTHER_TITLE]": second_sample.title,
             "[TYPE]": first_sample.type,
-            "[CREATOR_NAME]": random.choice(creator["name"], self.alt_name(creator["name"])),
-            "[OTHER_CREATOR_NAME]": random.choice(other_creator["name"], self.alt_name(other_creator["name"])),
+            "[CREATOR_NAME]": random.choice([creator["name"], self.alt_name(creator["name"])]),
+            "[OTHER_CREATOR_NAME]": random.choice([other_creator["name"], self.alt_name(other_creator["name"])]),
             "[PARTIAL_CREATOR_NAME]": self.alt_name(creator["name"]),
             "[AFFILIATION]": creator["affiliation"],
             "[YEAR]": first_sample.year,
-            "[DURATION]": random.choice(duration, self.alt_duration(duration)),
-            "[VENUE]": random.choice(first_sample.venue, CORE.get(first_sample.venue.upper(), first_sample.venue)),
-            "[OTHER_VENUE]": random.choice(second_sample.venue, CORE.get(second_sample.venue.upper(), ""))
+            "[DURATION]": random.choice([duration, self.alt_duration(duration)]),
+            "[VENUE]": random.choice([first_sample.venue, CORE.get(first_sample.venue.upper(), first_sample.venue)]),
+            "[OTHER_VENUE]": random.choice([second_sample.venue, CORE.get(second_sample.venue.upper(), second_sample.venue)])
         }
 
         # Randomly select a question
