@@ -174,11 +174,10 @@ class DataGenerator:
         if name == "''":
             return "''"
 
-        name = name.replace("'", "")
         name = name.split(" ")
 
         if len(name) == 1:
-            return "'" + name[0] + "'"
+            return name[0]
 
         alt_names = [
             name[-1] + ", " + name[0] + " " + " ".join(name[1:-1]), # Smith, John William
@@ -186,8 +185,7 @@ class DataGenerator:
             name[0] + " " + name[1][0].replace(".","") + ". " + " ".join(name[2:]), # John W. Smith
             name[-1] + ", " + name[0][0].replace(".","") + ". " + " ".join(name[1:-1]), # Smith, J. William
         ]
-        name = "'" + random.choice(alt_names) + "'"
-        return name.replace(" '", "'")
+        return random.choice(alt_names)
 
     
     def alt_duration(self, duration):
@@ -206,13 +204,14 @@ class DataGenerator:
             if len(first_sample.authors) > 1:
                 creator, other_creator = random.sample(first_sample.authors, 2)
             else:
-                creator, other_creator = first_sample.authors[0], {}
+                creator, other_creator = first_sample.authors[0], second_sample.authors[0]
         else:
             creator, other_creator = {}, {}
 
         duration = str(random.choice(range(1, 10)))
 
         def get_creator_name(name):
+            name = name.replace("'", "")
             return random.choice([name, self.alt_name(name)])
         
         def get_duration(duration):
@@ -226,7 +225,7 @@ class DataGenerator:
         def get_partial_name(name):
             name = name.lower().replace("'", "")
             name = name.split(" ")
-            return "'" + random.choice(name) + "'"
+            return random.choice(name)
             
         slots = {
             "?p1": first_sample.uri,
@@ -271,6 +270,9 @@ class DataGenerator:
         query = query.replace("[OTHER_VENUE]", second_sample.venue)
         
         keyword = self.keyword_generator.get(first_sample.title.lower())
+        if keyword == "''": # if no keyword is found, return blank
+            return "", "", ""
+
         question = question.replace("[KEYWORD]", keyword)
         paraphrase = paraphrase.replace("[KEYWORD]", keyword)
         query = query.replace("[KEYWORD]", keyword)
