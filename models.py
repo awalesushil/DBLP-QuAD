@@ -177,11 +177,14 @@ class DataGenerator:
         name = name.replace("'", "")
         name = name.split(" ")
 
+        if len(name) == 1:
+            return "'" + name[0] + "'"
+
         alt_names = [
             name[-1] + ", " + name[0] + " " + " ".join(name[1:-1]), # Smith, John William
-            name[0][0] + ". " + " ".join(name[1:]), # J. William Smith
-            name[0] + " " + name[1][0] + ". " + " ".join(name[2:]), # John W. Smith
-            name[-1] + ", " + name[0][0] + ". " + " ".join(name[1:-1]), # Smith, J. William
+            name[0][0].replace(".","") + ". " + " ".join(name[1:]), # J. William Smith
+            name[0] + " " + name[1][0].replace(".","") + ". " + " ".join(name[2:]), # John W. Smith
+            name[-1] + ", " + name[0][0].replace(".","") + ". " + " ".join(name[1:-1]), # Smith, J. William
         ]
         name = "'" + random.choice(alt_names) + "'"
         return name.replace(" '", "'")
@@ -216,8 +219,9 @@ class DataGenerator:
             return random.choice([duration, self.alt_duration(duration)])
 
         def get_venue(venue):
+            venue = venue.replace("'","")
             venue_key = re.sub(r"\(.*\)", "", venue).upper().strip()
-            return random.choice([venue, CORE.get(venue_key, venue)])
+            return random.choice(["'"+venue_key+"'", "'"+CORE.get(venue_key, venue_key)+"'"])
 
         def get_partial_name(name):
             name = name.lower().replace("'", "")
@@ -278,6 +282,7 @@ class DataGenerator:
             Generate question-query pairs
         """
         valid_query_count = 0
+        invalid_query_count = 0
         while valid_query_count < num_samples:
 
             # Get two random samples
@@ -293,5 +298,15 @@ class DataGenerator:
 
             if answers:
                 valid_query_count += 1
+                id = str(valid_query_count).zfill(4)
+            else:
+                invalid_query_count += 1
+                id = str(invalid_query_count).zfill(4)
 
-            yield question, paraphrase, query, entity, query_type, answers
+            yield id, {
+                "question": question,
+                "paraphrase": paraphrase,
+                "query": query,
+                "entity": entity,
+                "query_type": query_type,
+            }, answers
