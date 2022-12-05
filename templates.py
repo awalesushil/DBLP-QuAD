@@ -444,7 +444,7 @@ templates = {
                 "What are the papers written by [CREATOR_NAME] and [OTHER_CREATOR_NAME] together?",
                 "What are the publications written by the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] in collaboration?",
                 "Which papers did [CREATOR_NAME] and [OTHER_CREATOR_NAME] write together?",
-                "What publications did [CREATOR_NAME] and [OTHER_CREATOR_NAME] author together?"
+                "What publications did [CREATOR_NAME] and [OTHER_CREATOR_NAME] author together?",
                 "Which papers did the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] co-write?"
             ]
         },{
@@ -672,7 +672,7 @@ templates = {
                 "Did [CREATOR_NAME] not not publish in [YEAR]?",
                 "Did the author [CREATOR_NAME] not not publish in [YEAR]?",
                 "Has [CREATOR_NAME] not not published in [YEAR]?",
-                "Has the author [CREATOR_NAME] not not published in [YEAR]?"
+                "Has the author [CREATOR_NAME] not not published in [YEAR]?",
                 "Didn't [CREATOR_NAME] not publish in [YEAR]?",
                 "Hasn't [CREATOR_NAME] not published in [YEAR]?"
             ]
@@ -689,7 +689,7 @@ templates = {
             "query": "SELECT DISTINCT ?answer WHERE { { ?answer dblp:authoredBy ?c1 } UNION { ?answer dblp:authoredBy ?c2 } }",
             "questions": [
                 "What are the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published?",
-                "What are the papers that the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] published?"
+                "What are the papers that the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] published?",
                 "What are all the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published?",
                 "What are the papers that the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] published?",
                 "What are all the papers that the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] published?"
@@ -698,7 +698,7 @@ templates = {
             "query": "SELECT DISTINCT ?answer WHERE { { ?answer dblp:authoredBy ?c1 . ?answer dblp:publishedIn [VENUE] } UNION { ?answer dblp:authoredBy ?c2 . ?answer dblp:publishedIn [VENUE] } }",
             "questions": [
                 "What are the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE]?",
-                "What are the papers that the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE]?"
+                "What are the papers that the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE]?",
                 "What are all the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE]?",
                 "What are the papers that the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE]?",
                 "What are all the papers that the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE]?"
