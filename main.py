@@ -20,6 +20,7 @@ if __name__ == "__main__":
     parser.add_argument("--generate", action="store_true", help="Generate data")
     parser.add_argument("--data_file", type=str, default="data.json", help="Data file name")
     parser.add_argument("--failed_queries_file", type=str, default="failed_queries.json", help="Failed queries file name")
+    parser.add_argument("--answers_file", type=str, default="answers.json", help="Answers file name")
     parser.add_argument("--size", type=int, default=5000, help="Number of questions to generate")
     parser.add_argument("--seed", type=int, default=2358, help="Random seed")
 
@@ -34,7 +35,7 @@ if __name__ == "__main__":
         graph = load_graph()
         dataGenerator = DataGenerator(graph, args.seed)
         generator = dataGenerator.generate(args.size)
-        save_to_json(args.data_file, args.failed_queries_file, generator)
+        save_to_json(args.data_file, args.answers_file, args.failed_queries_file, generator)
     
     if args.stats:
         plot_template_distribution()

@@ -31,44 +31,34 @@ def load_graph():
     logging.info(" DBLP graph loaded")
     return graph
 
-def add_to_json(file, doc):
+def add_to_json(file, id, doc):
     """
         Add a document to a json file
     """
-    json.dump(doc, file, indent=4)
+    _doc = {"id": id, **doc}
+    json.dump(_doc, file, indent=4, ensure_ascii=False)
     file.write(",\n")
 
 
-def save_to_json(data_file, failed_queries_file, dataGenerator):
+def save_to_json(data_file, answers_file, failed_queries_file, dataGenerator):
     """
         Save data to a json file
     """
-    with open(os.path.join("data", data_file), "w", encoding="utf-8") as f1:
-        with open(os.path.join("data", failed_queries_file), "w", encoding="utf-8") as f2:
-            json.dump("[", f1)
-            json.dump("[", f2)
-            for question, paraphrase, query, entity, query_type, answers in tqdm(dataGenerator, desc="Generating data: "):
-                
-                if answers:
-                    add_to_json(f1, {
-                        "question": question,
-                        "paraphrase": paraphrase,
-                        "query": query,
-                        "entity": entity,
-                        "query_type": query_type,
-                        "answers": answers
-                    })
-                else:
-                    add_to_json(f2, {
-                        "question": question,
-                        "paraphrase": paraphrase,
-                        "query": query,
-                        "entity": entity,
-                        "query_type": query_type,
-                        "answers": answers
-                    })
-            json.dump("]", f1)
-            json.dump("]", f2)
+    with open(os.path.join("data", data_file), "w", encoding="utf-8") as data_file:
+        with open(os.path.join("data", failed_queries_file), "w", encoding="utf-8") as failed_queries_file:
+            with open(os.path.join("data", answers_file), "w", encoding="utf-8") as answers_file:
+                data_file.write("[")
+                answers_file.write("[")
+                failed_queries_file.write("[")
+                for id, data, answer in tqdm(dataGenerator, desc="Generating data: "):
+                    if answer:
+                        add_to_json(data_file, id, data)
+                        add_to_json(answers_file, id, answer)
+                    else:
+                        add_to_json(failed_queries_file, id, data)
+                data_file.write("]")
+                answers_file.write("]")
+                failed_queries_file.write("]")
 
 
 def plot_template_distribution():
@@ -108,7 +98,7 @@ def plot_question_distributions():
     """
         Plot the distribution of questions generated and queries failed
     """
-    data_file = ["train.json", "failed.json"]
+    data_file = ["data.json", "failed_queries.json"]
 
     for file in data_file:
         
