@@ -1,0 +1,1264 @@
+"["{
+    "question": "How many authors of the publication 'Discovering Functional Transcription Factor Binding from Superimposed Gene Networks' have  as their primary affiliation?",
+    "paraphrase": "How many authors of 'Discovering Functional Transcription Factor Binding from Superimposed Gene Networks' have  as their primary affiliation?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/csb/WeirauchS05> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "COUNT",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of most of the authors of 'Inference in hidden Markov models'?",
+    "paraphrase": "Where are the majority of the authors of 'Inference in hidden Markov models' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/books/daglib/0018553> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Who are the authors of the publication 'Coopting Cops with Maps: The Rhetorical Power of Cartography in Modern Policing' and which other papers did they publish?",
+    "paraphrase": "Who are the authors of the publication 'Coopting Cops with Maps: The Rhetorical Power of Cartography in Modern Policing' and what other papers did they publish?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/cartographica/Heiden18> dblp:authoredBy ?firstanswer . ?secondanswer dblp:authoredBy ?firstanswer FILTER (?secondanswer != <https://dblp.org/rec/journals/cartographica/Heiden18>) }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "Who are the authors of the paper 'Energy Analysis of Public-Key Cryptography for Wireless Sensor Networks' and where are they from?",
+    "paraphrase": "Who are the authors of 'Energy Analysis of Public-Key Cryptography for Wireless Sensor Networks' and where are they from?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/percom/WanderGEGS05> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of the paper 'Memoriam Leon Lerman founder of AVIOS' affiliated to?",
+    "paraphrase": "Where are the majority of the authors of 'Memoriam Leon Lerman founder of AVIOS' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/ijst/Viglione97> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "How many authors of 'Pushdown model checking for malware detection' have  as their primary affiliation?",
+    "paraphrase": "How many authors of the paper 'Pushdown model checking for malware detection' have  as their primary affiliation?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/sttt/SongT14> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "COUNT",
+    "answers": []
+},
+{
+    "question": "What are the primary affiliations of the authors of the paper 'Network Load Adaptation for Collective Perception in V2X Communications'?",
+    "paraphrase": "What are the primary affiliations of the authors of the paper 'Network Load Adaptation for Collective Perception in V2X Communications'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/iccve/DeloozF19> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of most of the authors of 'Very Short-Term Surface Solar Irradiance Forecasting Based On FengYun-4 Geostationary Satellite'?",
+    "paraphrase": "Where are the majority of the authors of the paper 'Very Short-Term Surface Solar Irradiance Forecasting Based On FengYun-4 Geostationary Satellite' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/sensors/YangGHWLJ20> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of the paper 'Observe the User Interactive Behavior with a Large Multi-touch Display in Public Space' affiliated to?",
+    "paraphrase": "From where are most of the authors of 'Observe the User Interactive Behavior with a Large Multi-touch Display in Public Space' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/hci/ChenHLCW11> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Who are the authors of the paper 'A readout circuit for tunnel magnetoresistive sensors employing an ultra-low-noise current source' and where are they from?",
+    "paraphrase": "Who are the authors of the publication 'A readout circuit for tunnel magnetoresistive sensors employing an ultra-low-noise current source' and where are they from?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/esscirc/MohamedHA21> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "'daniel' published research papers about '' in which venues?",
+    "paraphrase": "In which venues did 'daniel' publish research papers about ''?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, 'daniel', 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?t . FILTER REGEX (?t, '', 'i') . ?z dblp:publishedIn ?answer }",
+    "entity": "CREATOR",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "What are the primary affiliations of the authors of 'Finding Feasible Parameter Sets for Shape from Silhouettes with Unknown Position of the Viewpoints'?",
+    "paraphrase": "What are the primary affiliations of the authors of the paper 'Finding Feasible Parameter Sets for Shape from Silhouettes with Unknown Position of the Viewpoints'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/wscg/BottinoJL03> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "What research papers did the author 'Rajasree, M. S.' publish with the author affiliated to ?",
+    "paraphrase": "Which papers did the author 'M. S. Rajasree' write with the author from ?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/10/4841> . ?answer dblp:authoredBy ?y . ?y dblp:primaryAffiliation  }",
+    "entity": "CREATOR",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of the author 'Alan L. Rector'?",
+    "paraphrase": "What is the ORCID of the person 'Rector, A. L.'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/91/4955> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of most of the authors of the paper 'A Fault-Tolerant Structure for the Hypercube'?",
+    "paraphrase": "What is the primary affiliation of most of the authors of 'A Fault-Tolerant Structure for the Hypercube'?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/pdpcs/Wang95> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Who are the authors of the publication 'An Algorithm of Level of Detail Terrain' and where are they from?",
+    "paraphrase": "Who are the authors of 'An Algorithm of Level of Detail Terrain' and where are they from?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/snpd/Xiang-binFLSX08> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of most of the authors of the paper 'Cleaning Random d-Regular Graphs with Brooms'?",
+    "paraphrase": "From where are most of the authors of the paper 'Cleaning Random d-Regular Graphs with Brooms' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/gc/Pralat11> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Who are the authors that published research papers about '' in 'Acta Informatica Pragensia' in the year '2014'?",
+    "paraphrase": "In 'Acta Informatica Pragensia' in '2014', who are the authors that published papers about ''?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn 'Acta Informatica Pragensia' . ?x dblp:yearOfPublication '2014' . ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), '') . ?x dblp:authoredBy ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "'Shijie Sun' is primarily affiliated to which institution?",
+    "paraphrase": "What is the primary affiliation of 'S. Sun'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/42/4605> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "How many authors of the paper 'Experiences of Advanced High School Students in Synchronous Online Recitations' have  as their primary affiliation?",
+    "paraphrase": "How many authors of the publication 'Experiences of Advanced High School Students in Synchronous Online Recitations' have  as their primary affiliation?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/ets/MayerLU17> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "COUNT",
+    "answers": []
+},
+{
+    "question": "What are the primary affiliations of the authors of the paper 'Answering Range Queries Under Local Differential Privacy'?",
+    "paraphrase": "Where are the authors of 'Answering Range Queries Under Local Differential Privacy' from?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/sigmod/Kulkarni19> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of 'Endsley, Michael'?",
+    "paraphrase": "The author 'Michael Endsley' is primarily affiliated to which institution?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/175/3359> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "Who are the authors of the paper 'Counterfactual Autoencoder for Unsupervised Semantic Learning' and what are their affiliations?",
+    "paraphrase": "Who are the authors of the publication 'Counterfactual Autoencoder for Unsupervised Semantic Learning' and where are they from?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/ijmdem/SadiqSF18> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of the author 'Taeyoung Lee'?",
+    "paraphrase": "What is the ORCID of 'T. Lee'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/28/7138> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of the paper 'Design of portable power consumption measuring system for green computing needs' affiliated to?",
+    "paraphrase": "Where are the majority of the authors of 'Design of portable power consumption measuring system for green computing needs' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/corr/RzepkaSAP15> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of the researcher 'Maunder, Andrew J.'?",
+    "paraphrase": "What is the ORCID of the person 'Andrew J. Maunder'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/60/853> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "In which venues did 'vaishak' publish papers about ''?",
+    "paraphrase": "'vaishak' published research papers about '' in which venues?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, 'vaishak', 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?t . FILTER REGEX (?t, '', 'i') . ?z dblp:publishedIn ?answer }",
+    "entity": "CREATOR",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of 'Baccouche, Moez'?",
+    "paraphrase": "What is the ORCID of the author 'Baccouche, M.'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/92/8338> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of 'Filippo Cavallo'?",
+    "paraphrase": "What is the primary affiliation of the author 'Filippo Cavallo'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/98/201> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "Who are the authors of the publication 'A Comprehensive Approach to Argumentation' and where are they from?",
+    "paraphrase": "Who are the authors of the publication 'A Comprehensive Approach to Argumentation' and what are their affiliations?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/jcisd/JudsonV03> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "Who are the authors of the publication 'Model Endgame Analysis' and where are they from?",
+    "paraphrase": "Who are the authors of the paper 'Model Endgame Analysis' and what are their affiliations?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/acg/HaworthA03> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "Which research paper on '' was published by 'step\\u00e1n'?",
+    "paraphrase": "Which research paper on '' was published by the author 'step\\u00e1n'?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), 'step\\u00e1n') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), '') }",
+    "entity": "CREATOR",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of the paper 'Handling State Space Explosion in Component-Based Software Verification: A Review' affiliated to?",
+    "paraphrase": "Where are the majority of the authors of 'Handling State Space Explosion in Component-Based Software Verification: A Review' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/access/NejatiGNJ21> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Who are the authors of 'Exploring Production Function and Cost Efficiency Decomposition with VRS Assumption in China's Iron and Steel Industry' and where are they from?",
+    "paraphrase": "Who are the authors of the paper 'Exploring Production Function and Cost Efficiency Decomposition with VRS Assumption in China's Iron and Steel Industry' and where are they from?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/ijoris/ZhangB17> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "Who are the co-authors of the author 'Robert Keber' in the last six years and where are they affiliated?",
+    "paraphrase": "With which other authors has the author 'Robert Keber' co-authored papers in the last 6 years and where are they affiliated?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy <https://dblp.org/pid/153/5476> . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-6) . ?x dblp:authoredBy ?firstanswer FILTER(?firstanswer != <https://dblp.org/pid/153/5476>) . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "CREATOR",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of 'Charvi Dhoot'?",
+    "paraphrase": "What is the primary affiliation of the author 'Charvi Dhoot'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/76/9979> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "Which research paper on '' was published by the author 'smerk'?",
+    "paraphrase": "Which research paper on '' was published by 'smerk'?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), 'smerk') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), '') }",
+    "entity": "CREATOR",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "'feng' published publications about '' in which venues?",
+    "paraphrase": "'feng' published papers about '' in which venues?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, 'feng', 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?t . FILTER REGEX (?t, '', 'i') . ?z dblp:publishedIn ?answer }",
+    "entity": "CREATOR",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "From where are most of the authors of the paper 'Evaluation of a Web-Based Programming Environment' from?",
+    "paraphrase": "Where are the majority of the authors of 'Evaluation of a Web-Based Programming Environment' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/nbis/Yanagisawa12> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "In '1996' in 'Empir. Softw. Eng.', who are the authors that published papers about ''?",
+    "paraphrase": "In the year '1996' in 'Empir. Softw. Eng.', who are the authors that published research papers about ''?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn 'Empir. Softw. Eng.' . ?x dblp:yearOfPublication '1996' . ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), '') . ?x dblp:authoredBy ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "With which other authors has 'Maurizio Kliban Boyarsky' co-authored papers and where are they affiliated?",
+    "paraphrase": "Who are the co-authors of 'Maurizio Kliban Boyarsky' and where are they affiliated?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy <https://dblp.org/pid/74/5746> . ?x dblp:authoredBy ?firstanswer FILTER(?firstanswer != <https://dblp.org/pid/74/5746>) . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "CREATOR",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "From where are most of the authors of 'A secure smart card authentication and authorization framework using in multimedia cloud' from?",
+    "paraphrase": "Where are the majority of the authors of the paper 'A secure smart card authentication and authorization framework using in multimedia cloud' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/mta/YangLLW17> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of 'User-oriented key management scheme for content protection in OPMD environment' affiliated to?",
+    "paraphrase": "What is the primary affiliation of most of the authors of 'User-oriented key management scheme for content protection in OPMD environment'?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/tce/LeeEO12> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Do the authors of the publication 'Constructing a visualization dashboard to improve educational standards in Arizona legislative districts' have  as their primary affiliation?",
+    "paraphrase": "Is  the primary affiliation of the authors of 'Constructing a visualization dashboard to improve educational standards in Arizona legislative districts'?",
+    "query": "ASK { <https://dblp.org/rec/conf/istas/BarrettMMT21> dblp:authoredBy ?x . ?x dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "BOOLEAN",
+    "answers": []
+},
+{
+    "question": "What research papers did the author 'Rathore, Heena' publish with the author affiliated to ?",
+    "paraphrase": "Which papers did 'Rathore, Heena' publish with the author affiliated to ?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/118/7641> . ?answer dblp:authoredBy ?y . ?y dblp:primaryAffiliation  }",
+    "entity": "CREATOR",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "From where are most of the authors of the paper 'Comparative genomics using web-based GeneOrder to determine synteny and to function as an annotation tool' from?",
+    "paraphrase": "What is the primary affiliation of most of the authors of 'Comparative genomics using web-based GeneOrder to determine synteny and to function as an annotation tool'?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/biocomp/MahadevanS06> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "What are the primary affiliations of the authors of the paper 'UZH at CoNLL-SIGMORPHON 2018 Shared Task on Universal Morphological Reinflection'?",
+    "paraphrase": "What are the primary affiliations of the authors of the paper 'UZH at CoNLL-SIGMORPHON 2018 Shared Task on Universal Morphological Reinflection'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/conll/MakarovC18> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of the researcher 'Nikolaos Kiourtis'?",
+    "paraphrase": "What is the ORCID of the person 'Nikolaos Kiourtis'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/181/3696> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "From where are most of the authors of the paper 'Aggregating incoherent agents who disagree' from?",
+    "paraphrase": "From where are most of the authors of 'Aggregating incoherent agents who disagree' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/synthese/Pettigrew19> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of most of the authors of 'Signal Sorting Based on SVC & K-Means Clustering in ESM Systems'?",
+    "paraphrase": "What is the primary affiliation of most of the authors of the paper 'Signal Sorting Based on SVC & K-Means Clustering in ESM Systems'?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/iconip/GuoCZLG06> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "From where are most of the authors of 'Stellungnahme der DGRI zum Referentenentwurf eines Gesetzes zur verbesserten Durchsetzung des Anspruchs der Urheber und der aus\\u00FCbenden K\\u00FCnstler auf angemessene Verg\\u00FCtung' from?",
+    "paraphrase": "What is the primary affiliation of most of the authors of 'Stellungnahme der DGRI zum Referentenentwurf eines Gesetzes zur verbesserten Durchsetzung des Anspruchs der Urheber und der aus\\u00FCbenden K\\u00FCnstler auf angemessene Verg\\u00FCtung'?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/cr/GrutzmacherLSS16> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Is  the primary affiliation of the authors of 'Relative velocity based vehicle-to-vehicle routing protocol over ad-hoc networks'?",
+    "paraphrase": "Do the authors of the publication 'Relative velocity based vehicle-to-vehicle routing protocol over ad-hoc networks' have  as their primary affiliation?",
+    "query": "ASK { <https://dblp.org/rec/journals/ijahuc/LeePLL13> dblp:authoredBy ?x . ?x dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "BOOLEAN",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of the person 'Mason S.'?",
+    "paraphrase": "What is the ORCID of the author 'Shero, Mason'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/291/7464> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of the author 'Aykut Kocaoglu'?",
+    "paraphrase": "The author 'A. Kocaoglu' is primarily affiliated to which institution?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/70/11377> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of most of the authors of the paper 'Contextualizing internet use practices of the cyber-queer: Empowering information realities in everyday life'?",
+    "paraphrase": "From where are most of the authors of 'Contextualizing internet use practices of the cyber-queer: Empowering information realities in everyday life' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/asist/BraquetM06> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "What are the primary affiliations of the authors of the paper 'Intelligent game-based learning: an effective learning model approach'?",
+    "paraphrase": "'Intelligent game-based learning: an effective learning model approach' was written by authors from which affiliations?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/ijcat/Saba20a> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "'hiroshi' published research papers about '' in which venues?",
+    "paraphrase": "In which venues did 'hiroshi' publish publications about ''?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, 'hiroshi', 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?t . FILTER REGEX (?t, '', 'i') . ?z dblp:publishedIn ?answer }",
+    "entity": "CREATOR",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of 'Zheng Li'?",
+    "paraphrase": "'Zheng Li' is primarily affiliated to which institution?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/10/1143> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of 'J. Wu'?",
+    "paraphrase": "What is the ORCID of the author 'Jianqing Wu'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/52/7944> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "How many authors of the paper 'Exploring Unstructured Environment with Frontier Trees' have  as their primary affiliation?",
+    "paraphrase": "How many authors of 'Exploring Unstructured Environment with Frontier Trees' have  as their primary affiliation?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/jirs/KorbS18> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "COUNT",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of 'Applicability Statement for the Routing Protocol for Low-Power and Lossy Networks (RPL) in Advanced Metering Infrastructure (AMI) Networks' affiliated to?",
+    "paraphrase": "From where are most of the authors of 'Applicability Statement for the Routing Protocol for Low-Power and Lossy Networks (RPL) in Advanced Metering Infrastructure (AMI) Networks' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/rfc/rfc8036> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Where are the authors of the paper 'Prolonging Lifetime of Non-volatile Last Level Caches with Cluster Mapping' from?",
+    "paraphrase": "'Prolonging Lifetime of Non-volatile Last Level Caches with Cluster Mapping' was written by authors from which affiliations?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/glvlsi/SoltaniEN16> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "In '2016' in 'CoRR', who are the authors that published papers about ''?",
+    "paraphrase": "In 'CoRR' in '2016', who are the authors that published papers about ''?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn 'CoRR' . ?x dblp:yearOfPublication '2016' . ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), '') . ?x dblp:authoredBy ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of the paper 'Linear-quadratic regulator with output feedback and optimal observer' affiliated to?",
+    "paraphrase": "What is the primary affiliation of most of the authors of 'Linear-quadratic regulator with output feedback and optimal observer'?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/amcc/Gessing01> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "In the year '2008' in 'WCNC', what are the titles of the research papers on ''?",
+    "paraphrase": "In '2008' in 'WCNC', what are the titles of the papers on ''?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn 'WCNC' . ?x dblp:yearOfPublication '2008' . ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), '') }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "From where are most of the authors of 'Using agent-based modeling to understand stakeholder interactions in the rollout of nextgen by the federal aviation administration' from?",
+    "paraphrase": "What is the primary affiliation of most of the authors of the paper 'Using agent-based modeling to understand stakeholder interactions in the rollout of nextgen by the federal aviation administration'?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/syscon/MoscaH17> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Which publication on '' was published by 'zihl'?",
+    "paraphrase": "Which research paper on '' was published by the author 'zihl'?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), 'zihl') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), '') }",
+    "entity": "CREATOR",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "How many authors of the publication 'Corporate Culture: A New Challenge to E-Supply Chain Management Systems' have  as their primary affiliation?",
+    "paraphrase": "How many authors of 'Corporate Culture: A New Challenge to E-Supply Chain Management Systems' have  as their primary affiliation?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/iceis/Al-MutawahLC07> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "COUNT",
+    "answers": []
+},
+{
+    "question": "How many authors of the paper 'Observers and Dynamic Controllers for Linear Differential-Algebraic Systems' have  as their primary affiliation?",
+    "paraphrase": "How many authors of the publication 'Observers and Dynamic Controllers for Linear Differential-Algebraic Systems' have  as their primary affiliation?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/siamco/BergerR17> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "COUNT",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of the author 'Qi, F.'?",
+    "paraphrase": "What is the primary affiliation of 'F. Qi'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/96/818> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of the paper 'VLSI implementation of a LMS based adaptive noise canceller' affiliated to?",
+    "paraphrase": "What is the primary affiliation of most of the authors of 'VLSI implementation of a LMS based adaptive noise canceller'?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/maveba/GittelSSH03> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "From where are most of the authors of the paper '\\u57FA\\u4E8E\\u8D85\\u50CF\\u7D20\\u5339\\u914D\\u7684\\u56FE\\u50CF\\u534F\\u540C\\u663E\\u8457\\u6027\\u68C0\\u6D4B (Co-saliency Detection via Superpixel Matching)' from?",
+    "paraphrase": "From where are most of the authors of '\\u57FA\\u4E8E\\u8D85\\u50CF\\u7D20\\u5339\\u914D\\u7684\\u56FE\\u50CF\\u534F\\u540C\\u663E\\u8457\\u6027\\u68C0\\u6D4B (Co-saliency Detection via Superpixel Matching)' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/jsjkx/ZhangWJDH18> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of the paper 'A Predictive Model for Risk and Trust Assessment in Cloud Computing: Taxonomy and Analysis for Attack Pattern Detection' affiliated to?",
+    "paraphrase": "Where are the majority of the authors of 'A Predictive Model for Risk and Trust Assessment in Cloud Computing: Taxonomy and Analysis for Attack Pattern Detection' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/series/ccn/ChrysikosM18> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of the paper 'A Review of Indirect Tool Condition Monitoring Systems and Decision-Making Methods in Turning: Critical Analysis and Trends' affiliated to?",
+    "paraphrase": "From where are most of the authors of 'A Review of Indirect Tool Condition Monitoring Systems and Decision-Making Methods in Turning: Critical Analysis and Trends' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/sensors/KuntogluAPUSGMG21> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "'Ridha B.' is primarily affiliated to which institution?",
+    "paraphrase": "What is the primary affiliation of 'Ridha Bouall\\u00E8gue'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/43/5509> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of most of the authors of 'Performance Evaluation of Biometric Template Update'?",
+    "paraphrase": "Where are the majority of the authors of 'Performance Evaluation of Biometric Template Update' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/corr/abs-1203-1502> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "How many authors of the paper 'Cognitive RBAC in mobile heterogeneous networks' have  as their primary affiliation?",
+    "paraphrase": "How many authors of the publication 'Cognitive RBAC in mobile heterogeneous networks' have  as their primary affiliation?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/comsis/ChenVWK13> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "COUNT",
+    "answers": []
+},
+{
+    "question": "What are the primary affiliations of the authors of the publication 'Efficient Pilot Allocation for URLLC Traffic in 5G Industrial IoT Networks'?",
+    "paraphrase": "What are the primary affiliations of the authors of the paper 'Efficient Pilot Allocation for URLLC Traffic in 5G Industrial IoT Networks'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/corr/abs-1909-11482> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of the paper 'Smart Contract-Based Role Management on the Blockchain' affiliated to?",
+    "paraphrase": "From where are most of the authors of 'Smart Contract-Based Role Management on the Blockchain' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/bis/IhleS18> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "What are the primary affiliations of the authors of 'Efficient SVC Multicast Streaming for Video Conferencing With SDN Control'?",
+    "paraphrase": "What are the primary affiliations of the authors of the paper 'Efficient SVC Multicast Streaming for Video Conferencing With SDN Control'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/tnsm/Shen19> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of 'Pupils' Data - Implementing a Management Information System to Optimise Planning in Berlin Schools' affiliated to?",
+    "paraphrase": "From where are most of the authors of the paper 'Pupils' Data - Implementing a Management Information System to Optimise Planning in Berlin Schools' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/ifip3-7/GregorWK12> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "What are the primary affiliations of the authors of the paper 'A Miniaturized In-Phase Power Divider with a DC Block Function'?",
+    "paraphrase": "What are the primary affiliations of the authors of the publication 'A Miniaturized In-Phase Power Divider with a DC Block Function'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/ieicet/HayashiNUT07a> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "Is  the primary affiliation of the authors of the paper 'Why don't developers draw diagrams?'?",
+    "paraphrase": "Is  the primary affiliation of the authors of 'Why don't developers draw diagrams?'?",
+    "query": "ASK { <https://dblp.org/rec/conf/softvis/Booch10> dblp:authoredBy ?x . ?x dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "BOOLEAN",
+    "answers": []
+},
+{
+    "question": "From where are most of the authors of 'Clitic Analyses of Korean Little Words' from?",
+    "paraphrase": "Where are the majority of the authors of the paper 'Clitic Analyses of Korean Little Words' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/paclic/Chae95> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Who are the authors of 'Subjectivity and Online News Sharing' and where are they from?",
+    "paraphrase": "Who are the authors of the publication 'Subjectivity and Online News Sharing' and where are they from?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/amcis/NuaimYK17> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "Has the author 'Jo, Sung-O.' not published in 'International Conference on Evolutionary Computation' in the last three years?",
+    "paraphrase": "Has 'Sung-O. Jo' not published in 'International Conference on Evolutionary Computation' in the last 3 years?",
+    "query": "ASK { ?x dblp:authoredBy <https://dblp.org/pid/205/7491> . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-3) . ?x dblp:publishedIn 'International Conference on Evolutionary Computation' FILTER NOT EXISTS { ?x dblp:authoredBy <https://dblp.org/pid/205/7491> . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-3) . ?x dblp:publishedIn 'International Conference on Evolutionary Computation' } }",
+    "entity": "CREATOR",
+    "query_type": "NEGATION",
+    "answers": []
+},
+{
+    "question": "Which papers did 'Yu, R.' publish with the author affiliated to ?",
+    "paraphrase": "What research papers did the author 'Rongshan Yu' publish with the author affiliated to ?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/69/6265> . ?answer dblp:authoredBy ?y . ?y dblp:primaryAffiliation  }",
+    "entity": "CREATOR",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "In 'Secur. Commun. Networks' in '2011', who are the authors that published papers about ''?",
+    "paraphrase": "In 'Secur. Commun. Networks' in the year '2011', who are the authors that published research papers about ''?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn 'Secur. Commun. Networks' . ?x dblp:yearOfPublication '2011' . ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), '') . ?x dblp:authoredBy ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of 'Young Taeg Kim'?",
+    "paraphrase": "What is the ORCID of the researcher 'Young Taeg Kim'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/253/3101> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of the author 'Luigi Bellomarini'?",
+    "paraphrase": "What is the ORCID of the researcher 'Luigi B.'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/86/6775> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "From where are most of the authors of 'Static and Dynamic Evaluation of a Winding Deformation FBG Sensor for Power Transformer Applications' from?",
+    "paraphrase": "What is the primary affiliation of most of the authors of the paper 'Static and Dynamic Evaluation of a Winding Deformation FBG Sensor for Power Transformer Applications'?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/sensors/MeloBLPFSR19> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Is  the primary affiliation of the authors of the paper 'Universal lossless data embedding without explicit compression'?",
+    "paraphrase": "Do the authors of 'Universal lossless data embedding without explicit compression' have  as their primary affiliation?",
+    "query": "ASK { <https://dblp.org/rec/conf/itw/Yokoo05> dblp:authoredBy ?x . ?x dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "BOOLEAN",
+    "answers": []
+},
+{
+    "question": "Who are the authors that published papers about '' in 'Inf. Syst. E Bus. Manag.' in '2006'?",
+    "paraphrase": "In '2006' in 'Inf. Syst. E Bus. Manag.', who are the authors that published papers about ''?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn 'Inf. Syst. E Bus. Manag.' . ?x dblp:yearOfPublication '2006' . ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), '') . ?x dblp:authoredBy ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "From where are most of the authors of 'Introduction of the German Landscape Change Detection Service' from?",
+    "paraphrase": "From where are most of the authors of the paper 'Introduction of the German Landscape Change Detection Service' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/igarss/KnofelH18> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Who are the authors of the paper 'Performance analysis of Robust WDM fast circuit-switched networks with token passing in control channel' and where are they from?",
+    "paraphrase": "Who are the authors of the publication 'Performance analysis of Robust WDM fast circuit-switched networks with token passing in control channel' and where are they from?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/ijcomsys/Abd-ElmalakVJ02> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of 'Ana P. Ambrosio'?",
+    "paraphrase": "The author 'Ambrosio, Ana Paula' is primarily affiliated to which institution?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/26/7438> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "What are the primary affiliations of the authors of the paper 'A triangle area based nearest neighbors approach to intrusion detection'?",
+    "paraphrase": "What are the primary affiliations of the authors of the publication 'A triangle area based nearest neighbors approach to intrusion detection'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/pr/TsaiL10> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of most of the authors of 'Analysis and design of motion control systems with positive force/torque feedback using robust control methods'?",
+    "paraphrase": "From where are most of the authors of 'Analysis and design of motion control systems with positive force/torque feedback using robust control methods' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/tcst/LinMH05> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of most of the authors of the paper 'The Relationship Between Drowsiness Level and Takeover Performance in Automated Driving'?",
+    "paraphrase": "Where are the majority of the authors of 'The Relationship Between Drowsiness Level and Takeover Performance in Automated Driving' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/hci/WuKTSAK20> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Who are the authors of the publication 'Online Assessment with Large Classes: Issues, Methodologies and Case Studies' and where are they from?",
+    "paraphrase": "Who are the authors of the paper 'Online Assessment with Large Classes: Issues, Methodologies and Case Studies' and where are they from?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/webnet/DaviesHSS99> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "With which other authors has 'B. M. Subraya' co-authored papers and where are they affiliated?",
+    "paraphrase": "Who are the co-authors of the author 'B. M. Subraya' and where are they affiliated?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy <https://dblp.org/pid/21/5451> . ?x dblp:authoredBy ?firstanswer FILTER(?firstanswer != <https://dblp.org/pid/21/5451>) . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "CREATOR",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "The author 'Hui-Yun S.' is primarily affiliated to which institution?",
+    "paraphrase": "What is the primary affiliation of 'Sung, Hui-Yun'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/09/9168> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "In '2014' in 'Int. J. Approx. Reason.', what are the titles of the papers on ''?",
+    "paraphrase": "What are the titles of the research papers on '' that were published in 'Int. J. Approx. Reason.' in the year '2014'?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn 'Int. J. Approx. Reason.' . ?x dblp:yearOfPublication '2014' . ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), '') }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "Who are the co-authors of the author 'Birzan, L.' in the last 8 years and where are they affiliated?",
+    "paraphrase": "With which other authors has 'Liviu Birzan' co-authored papers in the last eight years and where are they affiliated?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy <https://dblp.org/pid/292/6474> . ?x dblp:yearOfPublication ?y . FILTER(?y > YEAR(NOW())-8) . ?x dblp:authoredBy ?firstanswer FILTER(?firstanswer != <https://dblp.org/pid/292/6474>) . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "CREATOR",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of 'Bass, L. J.'?",
+    "paraphrase": "What is the ORCID of the author 'Bass, L. J.'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/b/LeonardJBass> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of the author '\\u00D8rnulf Risnes'?",
+    "paraphrase": "What is the ORCID of '\\u00D8rnulf Risnes'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/146/4804> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of the author 'Paulo Dias'?",
+    "paraphrase": "What is the ORCID of the person 'Dias, Paulo'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/30/3799> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "'Yunsong G.' is primarily affiliated to which institution?",
+    "paraphrase": "What is the primary affiliation of the author 'Yunsong Guo'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/64/2670> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "Who are the authors of the publication 'Particle Swarm Optimized Deep Convolutional Neural Sugeno-Takagi Fuzzy PID Controller in Permanent Magnet Synchronous Motor' and what are their affiliations?",
+    "paraphrase": "Who are the authors of the paper 'Particle Swarm Optimized Deep Convolutional Neural Sugeno-Takagi Fuzzy PID Controller in Permanent Magnet Synchronous Motor' and what are their affiliations?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/ijfs/RajK22> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "In 'J. Multivar. Anal.' in the year '2022', who are the authors that published research papers about ''?",
+    "paraphrase": "In 'J. Multivar. Anal.' in '2022', who are the authors that published papers about ''?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn 'J. Multivar. Anal.' . ?x dblp:yearOfPublication '2022' . ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), '') . ?x dblp:authoredBy ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "Where are the authors of the paper 'Stability number and chromatic number of tolerance graphs' from?",
+    "paraphrase": "'Stability number and chromatic number of tolerance graphs' was written by authors from which affiliations?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/dam/NarasimhanM92> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of the person 'Li, Mengyao'?",
+    "paraphrase": "What is the ORCID of the researcher 'Mengyao Li'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/225/1083> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "What are the titles of the papers on '' that were published in 'International Encyclopedia of Statistical Science' in '2011'?",
+    "paraphrase": "What are the titles of the research papers on '' that were published in 'International Encyclopedia of Statistical Science' in the year '2011'?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn 'International Encyclopedia of Statistical Science' . ?x dblp:yearOfPublication '2011' . ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), '') }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "Is  the primary affiliation of the authors of 'Modeling, Stability Analysis, and Testing of a Hybrid Docking Simulator'?",
+    "paraphrase": "Do the authors of 'Modeling, Stability Analysis, and Testing of a Hybrid Docking Simulator' have  as their primary affiliation?",
+    "query": "ASK { <https://dblp.org/rec/journals/corr/ZebenayaBC14> dblp:authoredBy ?x . ?x dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "BOOLEAN",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of most of the authors of 'Non-Strict Execution in Parallel and Distributed Computing'?",
+    "paraphrase": "From where are most of the authors of the paper 'Non-Strict Execution in Parallel and Distributed Computing' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/ijpp/Cristobal-SalasTGL03> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "How many authors of the paper 'Management process for supporting the component development' have  as their primary affiliation?",
+    "paraphrase": "How many authors of the publication 'Management process for supporting the component development' have  as their primary affiliation?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/informaticaSI/KimL01> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "COUNT",
+    "answers": []
+},
+{
+    "question": "Is  the primary affiliation of the authors of the paper 'Estimating Flood Loss of Rural Settlements'?",
+    "paraphrase": "Do the authors of 'Estimating Flood Loss of Rural Settlements' have  as their primary affiliation?",
+    "query": "ASK { <https://dblp.org/rec/journals/agis/XuC96> dblp:authoredBy ?x . ?x dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "BOOLEAN",
+    "answers": []
+},
+{
+    "question": "In 'Mech. Transl. Comput. Linguistics' in the year '1956', what are the titles of the research papers on ''?",
+    "paraphrase": "What are the titles of the papers on '' that were published in 'Mech. Transl. Comput. Linguistics' in '1956'?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn 'Mech. Transl. Comput. Linguistics' . ?x dblp:yearOfPublication '1956' . ?x dblp:title ?answer . FILTER CONTAINS (LCASE(?answer), '') }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "Which papers did 'David Trachtenherz' and '' publish in collaboration in 'Arch. Formal Proofs'?",
+    "paraphrase": "In 'Arch. Formal Proofs', what papers did the authors 'David Trachtenherz' and '' co-publish?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?answer dblp:authoredBy <https://dblp.org/pid/81/1805> . ?answer dblp:authoredBy '' . ?answer dblp:publishedIn 'Arch. Formal Proofs' }",
+    "entity": "CREATOR",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of the author 'Paolino, L.'?",
+    "paraphrase": "What is the ORCID of the researcher 'L. Paolino'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/69/3628> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "'C. R. M\\u00FCller' is primarily affiliated to which institution?",
+    "paraphrase": "The author 'Christin R. M\\u00FCller' is primarily affiliated to which institution?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/151/6975> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "In which venues did 'xue' publish publications about ''?",
+    "paraphrase": "'xue' published papers about '' in which venues?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, 'xue', 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?t . FILTER REGEX (?t, '', 'i') . ?z dblp:publishedIn ?answer }",
+    "entity": "CREATOR",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "How many authors of 'An Exact Method for Solving the Multi-Processor Flow-Shop' have  as their primary affiliation?",
+    "paraphrase": "How many authors of the publication 'An Exact Method for Solving the Multi-Processor Flow-Shop' have  as their primary affiliation?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/rairo/CarlierN00> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "COUNT",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of the researcher 'Ketut Fundana'?",
+    "paraphrase": "What is the ORCID of 'Ketut Fundana'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/18/40> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "Who are the co-authors of 'Hahmady, S.' and where are they affiliated?",
+    "paraphrase": "With which other authors has 'Sara Hahmady' co-authored papers and where are they affiliated?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x dblp:authoredBy <https://dblp.org/pid/275/4177> . ?x dblp:authoredBy ?firstanswer FILTER(?firstanswer != <https://dblp.org/pid/275/4177>) . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "CREATOR",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "In 'IEEE Trans. Signal Process.' in the year '1997', who are the authors that published research papers about ''?",
+    "paraphrase": "Who are the authors that published papers about '' in 'IEEE Trans. Signal Process.' in '1997'?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn 'IEEE Trans. Signal Process.' . ?x dblp:yearOfPublication '1997' . ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), '') . ?x dblp:authoredBy ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of most of the authors of the paper 'Crit \\u00E9rios para avalia\\u00E7\\u00E3o de sistemas gerenciadores de conte\\u00FAdo com enfoque no desenvolvimento de websites acess\\u00EDveis: um estudo experimental'?",
+    "paraphrase": "From where are most of the authors of 'Crit \\u00E9rios para avalia\\u00E7\\u00E3o de sistemas gerenciadores de conte\\u00FAdo com enfoque no desenvolvimento de websites acess\\u00EDveis: um estudo experimental' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/ihc/NetoBSSJ14> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Who are the authors of 'Approximating an optimal feedback control law by a generalized Sugeno controller' and where are they from?",
+    "paraphrase": "Who are the authors of the paper 'Approximating an optimal feedback control law by a generalized Sugeno controller' and what are their affiliations?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/journals/fss/HomaifarBC01> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of 'Fei, S.'?",
+    "paraphrase": "What is the ORCID of the author 'Shumin F.'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/73/6398> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "How many authors of the publication 'Comparative Study for Inference of Hidden Classes in Stochastic Block Models' have  as their primary affiliation?",
+    "paraphrase": "How many authors of 'Comparative Study for Inference of Hidden Classes in Stochastic Block Models' have  as their primary affiliation?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/corr/abs-1207-2328> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "COUNT",
+    "answers": []
+},
+{
+    "question": "From where are most of the authors of the paper 'Frequency Response Based Curve Fitting Approximation of Fractional-Order PID Controllers' from?",
+    "paraphrase": "What is the primary affiliation of most of the authors of the paper 'Frequency Response Based Curve Fitting Approximation of Fractional-Order PID Controllers'?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/amcs/BingiIKHH19> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of most of the authors of 'A Recommender System for Personalized Exploration of Majors, Minors, and Concentrations'?",
+    "paraphrase": "From where are most of the authors of 'A Recommender System for Personalized Exploration of Majors, Minors, and Concentrations' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/recsys/Park17> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "From where are most of the authors of the paper 'Multistage risk assessment of direct delivery business from local oil refineries in Sinopec Group based on normal cloud model' from?",
+    "paraphrase": "Where are the majority of the authors of 'Multistage risk assessment of direct delivery business from local oil refineries in Sinopec Group based on normal cloud model' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/ijpr/SongZWC20> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of the paper 'How to measure the accuracy of the subexponential approximation for the stationary single server queue' affiliated to?",
+    "paraphrase": "Where are the majority of the authors of 'How to measure the accuracy of the subexponential approximation for the stationary single server queue' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/questa/Korshunov11> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "What are the primary affiliations of the authors of the paper '\\'Transformers\\': giant frickin' robots'?",
+    "paraphrase": "What are the primary affiliations of the authors of '\\'Transformers\\': giant frickin' robots'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/siggraph/PerkinsRFEBWB07> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of the paper 'GraphScale: Adding Expressive Reasoning to Semantic Data Stores' affiliated to?",
+    "paraphrase": "From where are most of the authors of the paper 'GraphScale: Adding Expressive Reasoning to Semantic Data Stores' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/semweb/LiebigVOM15> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "What is the primary affiliation of most of the authors of the paper 'When Should Environmental Awareness Be a Policy Goal?'?",
+    "paraphrase": "What is the primary affiliation of most of the authors of 'When Should Environmental Awareness Be a Policy Goal?'?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/books/sp/17/Akerlof17> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "What are the primary affiliations of the authors of the paper 'Principal Gradient Direction and Confidence Reservoir Sampling for Continual Learning'?",
+    "paraphrase": "What are the primary affiliations of the authors of the publication 'Principal Gradient Direction and Confidence Reservoir Sampling for Continual Learning'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/corr/abs-2108-09592> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "Who are the authors of the paper 'Theoretical analysis of quantized Hopfield network for integer programming' and where are they from?",
+    "paraphrase": "Who are the authors of the publication 'Theoretical analysis of quantized Hopfield network for integer programming' and what are their affiliations?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/ijcnn/Matsuda99a> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "Is  the primary affiliation of the authors of 'Realization and optimization of DSP based H264 encoder'?",
+    "paraphrase": "Do the authors of 'Realization and optimization of DSP based H264 encoder' have  as their primary affiliation?",
+    "query": "ASK { <https://dblp.org/rec/conf/iscas/WeiC06> dblp:authoredBy ?x . ?x dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "BOOLEAN",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of the researcher 'Krzyzag\\u00F3rski, Piotr'?",
+    "paraphrase": "What is the ORCID of 'Piotr Krzyzag\\u00F3rski'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/51/1574> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of 'The cost of time - implications of hyperspectral data volume and feature selection routines for conservation science' affiliated to?",
+    "paraphrase": "From where are most of the authors of the paper 'The cost of time - implications of hyperspectral data volume and feature selection routines for conservation science' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/whispers/KalacskaA09> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Do the authors of the publication 'Person\\u00E6: A Character-Visualisation Tool for Dramatic Texts' have  as their primary affiliation?",
+    "paraphrase": "Do the authors of 'Person\\u00E6: A Character-Visualisation Tool for Dramatic Texts' have  as their primary affiliation?",
+    "query": "ASK { <https://dblp.org/rec/conf/dihu/TonraKR17> dblp:authoredBy ?x . ?x dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "BOOLEAN",
+    "answers": []
+},
+{
+    "question": "From where are most of the authors of the paper 'Contour Detection Using Multi-Scale Active Shape Models' from?",
+    "paraphrase": "Where are the majority of the authors of 'Contour Detection Using Multi-Scale Active Shape Models' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/icip/MahmoodiSC97> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of 'Secure Coverage Control in Wireless Sensor Networks with Malicious Nodes Using Multi-agents' affiliated to?",
+    "paraphrase": "From where are most of the authors of 'Secure Coverage Control in Wireless Sensor Networks with Malicious Nodes Using Multi-agents' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/euc/PhuphaninU11> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "In which venues did 'gambin' publish papers about ''?",
+    "paraphrase": "'gambin' published papers about '' in which venues?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, 'gambin', 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?t . FILTER REGEX (?t, '', 'i') . ?z dblp:publishedIn ?answer }",
+    "entity": "CREATOR",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "The author 'Dean A.' is primarily affiliated to which institution?",
+    "paraphrase": "What is the primary affiliation of the author 'D. Allemang'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/03/2240> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "'Lingli W.' is primarily affiliated to which institution?",
+    "paraphrase": "The author 'Lingli Wang' is primarily affiliated to which institution?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/18/6336> dblp:primaryAffiliation ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of the person 'Ali Reza Tavakoli'?",
+    "paraphrase": "What is the ORCID of 'Tavakoli, A. Reza'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/190/4738> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "How many authors of the paper 'Interpretability Analysis for Named Entity Recognition to Understand System Predictions and How They Can Improve' have  as their primary affiliation?",
+    "paraphrase": "How many authors of 'Interpretability Analysis for Named Entity Recognition to Understand System Predictions and How They Can Improve' have  as their primary affiliation?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/journals/corr/abs-2004-04564> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "COUNT",
+    "answers": []
+},
+{
+    "question": "What is the ORCID of the person 'Feige, U.'?",
+    "paraphrase": "What is the ORCID of the author 'Uriel Feige'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/pid/f/UrielFeige> dblp:orcid ?answer }",
+    "entity": "CREATOR",
+    "query_type": "SINGLE_FACT",
+    "answers": []
+},
+{
+    "question": "From where are most of the authors of 'Trust management for cheating detection in distributed massively multiplayer online games' from?",
+    "paraphrase": "Where are the majority of the authors of the paper 'Trust management for cheating detection in distributed massively multiplayer online games' affiliated to?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/netgames/PratherNJ17> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
+{
+    "question": "What are the primary affiliations of the authors of 'Influencing Factors for the Adoption of m-Commerce Applications - A Multiple Case Study'?",
+    "paraphrase": "What are the primary affiliations of the authors of the paper 'Influencing Factors for the Adoption of m-Commerce Applications - A Multiple Case Study'?",
+    "query": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/iceis/ZeeshanCS09> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "MULTI_FACT",
+    "answers": []
+},
+{
+    "question": "Who are the authors of the paper 'Power Grid Capacity Extension with Conditional Loads Instead of Physical Expansions' and where are they from?",
+    "paraphrase": "Who are the authors of the paper 'Power Grid Capacity Extension with Conditional Loads Instead of Physical Expansions' and what are their affiliations?",
+    "query": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { <https://dblp.org/rec/conf/smartgreens/ChristenLWW19a> dblp:authoredBy ?firstanswer . ?firstanswer dblp:primaryAffiliation ?secondanswer }",
+    "entity": "PUBLICATION",
+    "query_type": "DOUBLE_INTENT",
+    "answers": []
+},
+{
+    "question": "Which publication on '' was published by 'kazuhiro'?",
+    "paraphrase": "Which publication on '' was published by the author 'kazuhiro'?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER CONTAINS(LCASE(?y), 'kazuhiro') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER CONTAINS(LCASE(?answer), '') }",
+    "entity": "CREATOR",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "How many authors of the paper 'DDoS Detection Algorithm Based on Fuzzy Logic' have  as their primary affiliation?",
+    "paraphrase": "How many authors of the publication 'DDoS Detection Algorithm Based on Fuzzy Logic' have  as their primary affiliation?",
+    "query": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/siu/AtesOA20> dblp:authoredBy ?answer . ?answer dblp:primaryAffiliation  }",
+    "entity": "PUBLICATION",
+    "query_type": "COUNT",
+    "answers": []
+},
+{
+    "question": "In 'MobiQuitous' in '2018', who are the authors that published papers about ''?",
+    "paraphrase": "In '2018' in 'MobiQuitous', who are the authors that published papers about ''?",
+    "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn 'MobiQuitous' . ?x dblp:yearOfPublication '2018' . ?x dblp:title ?t . FILTER CONTAINS (LCASE(?t), '') . ?x dblp:authoredBy ?answer }",
+    "entity": "PUBLICATION",
+    "query_type": "DISAMBIGUATION",
+    "answers": []
+},
+{
+    "question": "Where are the majority of the authors of 'Mobile applications in the care of children and teenagers in oncological treatment' affiliated to?",
+    "paraphrase": "From where are most of the authors of the paper 'Mobile applications in the care of children and teenagers in oncological treatment' from?",
+    "query": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { <https://dblp.org/rec/conf/webmedia/KnobLBSB19> dblp:authoredBy ?x . ?x dblp:primaryAffiliation ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1",
+    "entity": "PUBLICATION",
+    "query_type": "RANK",
+    "answers": []
+},
