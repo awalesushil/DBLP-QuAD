@@ -40,12 +40,15 @@ class Sample:
     
     def dblp_prefix(self, predicate):
         return f"<https://dblp.org/rdf/schema#{predicate}>"
+    
+    def purl_prefix(self, predicate):
+        return f"<http://purl.net/nknouf/ns/bibtex#{predicate}>"
 
     def __get_title(self):
         return self.data.get(self.dblp_prefix("title"),[""])[0].replace('"',"'").replace('.','')
 
     def __get_type(self):
-        return self.data.get(self.dblp_prefix("bibtexType"),[""])[0].replace('"',"'")
+        return self.data.get(self.purl_prefix("bibtexType"),[""])[0].replace('"',"'")
 
     def __get_authors(self):
         authors = self.data.get(self.dblp_prefix("authoredBy"), [])
@@ -152,7 +155,7 @@ class KeywordGenerator:
         
         keywords = [doc[start:end].text for _, start, end in matches]
         keywords = [keyword for keyword in keywords if not nlp.vocab[keyword].is_stop]
-        return "'" + random.choice(keywords) + "'"  if keywords else "''"
+        return "'" + random.choice(keywords) + "'"  if keywords else "NONE"
 
 
 class DataGenerator:
@@ -174,6 +177,7 @@ class DataGenerator:
         if name == "''":
             return "''"
 
+        name = name.replace("'", "")
         name = name.split(" ")
 
         if len(name) == 1:
@@ -212,7 +216,6 @@ class DataGenerator:
         duration = str(random.choice(range(1, 10)))
 
         def get_creator_name(name):
-            name = name.replace("'","")
             return random.choice([name, self.alt_name(name)])
         
         def get_duration(duration):
@@ -221,12 +224,15 @@ class DataGenerator:
         def get_venue(venue):
             venue = venue.replace("'","")
             venue_key = re.sub(r"\(.*\)", "", venue).upper().strip()
-            return random.choice(["'"+venue_key+"'", "'"+CORE.get(venue_key, venue_key)+"'"])
+            return random.choice([
+                    "'" + venue_key + "'",
+                    "'" + CORE.get(venue_key.replace(".",""), venue_key) + "'"
+                ])
 
         def get_partial_name(name):
             name = name.lower().replace("'", "")
             name = name.split(" ")
-            return random.choice(name)
+            return "'" + random.choice(name) + "'"
             
         slots = {
             "?p1": first_sample.uri,
@@ -237,8 +243,7 @@ class DataGenerator:
             "[OTHER_TITLE]": second_sample.title,
             "[TYPE]": first_sample.type,
             "[PARTIAL_CREATOR_NAME]": get_partial_name(creator.get("name", "''")),
-            "[AFFILIATION]": creator.get("affiliation", "''"),
-            "[YEAR]": first_sample.year
+            "[AFFILIATION]": creator.get("affiliation", "''")
         }
 
         # Randomly select a question
@@ -269,11 +274,12 @@ class DataGenerator:
         question = question.replace("[OTHER_VENUE]", get_venue(second_sample.venue))
         paraphrase = paraphrase.replace("[OTHER_VENUE]", get_venue(second_sample.venue))
         query = query.replace("[OTHER_VENUE]", second_sample.venue)
+
+        question = question.replace("[YEAR]", first_sample.year.replace("'", ""))
+        paraphrase = paraphrase.replace("[YEAR]", first_sample.year.replace("'", ""))
+        query = query.replace("[YEAR]", first_sample.year)
         
         keyword = self.keyword_generator.get(first_sample.title.lower())
-        if keyword == "''": # if no keyword is found, return blank
-            return "", "", ""
-
         question = question.replace("[KEYWORD]", keyword)
         paraphrase = paraphrase.replace("[KEYWORD]", keyword)
         query = query.replace("[KEYWORD]", keyword)
