@@ -45,6 +45,8 @@ class Graph:
                 return self.data[_type][vertex]
             except KeyError:
                 return self.data[other_type][vertex]
+            except TypeError:
+                return None
         except KeyError:
             return None
 

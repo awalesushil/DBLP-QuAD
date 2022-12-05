@@ -309,4 +309,4 @@ class DataGenerator:
                 "query": query,
                 "entity": entity,
                 "query_type": query_type,
-            }, answers
+            }, {"answer": answers}
