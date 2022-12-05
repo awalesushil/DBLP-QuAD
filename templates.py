@@ -790,22 +790,20 @@ templates = {
         },{
             "query": "SELECT DISTINCT MIN(xsd:integer(?answer)) AS ?answer WHERE { ?x dblp:authoredBy ?c1 . ?x dblp:yearOfPublication ?answer }",
             "questions": [
-                "When was [CREATOR_NAME]'s first paper published?",
-                "When was the author [CREATOR_NAME]'s first paper published?",
-                "When was [CREATOR_NAME]'s first publication published?",
-                "When was the author [CREATOR_NAME]'s first publication published?",
-                "In which year was [CREATOR_NAME]'s first paper published?",
-                "In which year was the author [CREATOR_NAME]'s first paper published?"
+                "When was the first paper by [CREATOR_NAME] published?",
+                "When was the first publication by [CREATOR_NAME] published?",
+                "When was the first research paper by [CREATOR_NAME] published?",
+                "In which year was the first paper by [CREATOR_NAME] published?",
+                "In which year did [CREATOR_NAME] publish their first paper?"
             ]
         },{
             "query": "SELECT DISTINCT MAX(xsd:integer(?answer)) AS ?answer WHERE { ?x dblp:authoredBy ?c1 . ?x dblp:yearOfPublication ?answer }",
             "questions": [
-                "When was [CREATOR_NAME]'s last paper published?",
-                "When was the author [CREATOR_NAME]'s last paper published?",
-                "When was [CREATOR_NAME]'s last publication published?",
-                "When was the author [CREATOR_NAME]'s last publication published?",
-                "In which year was [CREATOR_NAME]'s last paper published?",
-                "In which year was the author [CREATOR_NAME]'s last paper published?"
+                "When was the last paper by [CREATOR_NAME] published?",
+                "When was the last publication by [CREATOR_NAME] published?",
+                "When was the last research paper by [CREATOR_NAME] published?",
+                "In which year was the last paper by [CREATOR_NAME] published?",
+                "In which year did [CREATOR_NAME] publish their last paper?"
             ]
         }],
         "RANK": [{

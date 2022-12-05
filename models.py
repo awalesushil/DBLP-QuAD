@@ -185,7 +185,8 @@ class DataGenerator:
             name[0] + " " + name[1][0].replace(".","") + ". " + " ".join(name[2:]), # John W. Smith
             name[-1] + ", " + name[0][0].replace(".","") + ". " + " ".join(name[1:-1]), # Smith, J. William
         ]
-        return random.choice(alt_names)
+        name = "'" + random.choice(alt_names) + "'"
+        return name.replace(" '", "'")
 
     
     def alt_duration(self, duration):
@@ -211,7 +212,7 @@ class DataGenerator:
         duration = str(random.choice(range(1, 10)))
 
         def get_creator_name(name):
-            name = name.replace("'", "")
+            name = name.replace("'","")
             return random.choice([name, self.alt_name(name)])
         
         def get_duration(duration):
