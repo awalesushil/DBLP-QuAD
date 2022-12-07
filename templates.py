@@ -859,7 +859,7 @@ templates = {
                 "Which research paper on [KEYWORD] was published by the author [PARTIAL_CREATOR_NAME]?"
             ]
         },{
-            "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:primaryFullCreatorName ?y . FILTER REGEX (?y, [PARTIAL_CREATOR_NAME], 'i') . ?z dblp:authoredBy ?x . ?z dblp:title ?answer . FILTER REGEX (?answer, [KEYWORD], 'i') . ?z dblp:publishedIn [VENUE] }",
+            "query": "SELECT DISTINCT ?answer WHERE { ?x dblp:publishedIn [VENUE] . ?x dblp:authoredBy ?y . ?y dblp:primaryFullCreatorName ?z . FILTER REGEX (?z, [PARTIAL_CREATOR_NAME], 'i') .  ?x dblp:title ?answer . FILTER REGEX (?answer, [KEYWORD], 'i') }",
             "questions": [
                 "What are the title of the papers that [PARTIAL_CREATOR_NAME] wrote about [KEYWORD] published in [VENUE]?",
                 "What are the titles of the publications that [PARTIAL_CREATOR_NAME] published about [KEYWORD] published in [VENUE]?",

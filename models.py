@@ -220,10 +220,10 @@ class DataGenerator:
 
         def get_venue(venue):
             venue = venue.replace("'","")
-            venue_key = re.sub(r"\(.*\)", "", venue).upper().strip()
+            venue_key = re.sub(r"\(.*\)", "", venue).strip()
             return random.choice([
                     "'" + venue_key + "'",
-                    "'" + CORE.get(venue_key.replace(".",""), venue_key) + "'"
+                    "'" + CORE.get(venue_key.upper().replace(".",""), venue_key) + "'"
                 ])
 
         def get_partial_name(name):
