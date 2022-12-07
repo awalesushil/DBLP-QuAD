@@ -29,26 +29,23 @@ class Sample:
         self.data = data[next(iter(data))]
         self.uri = next(iter(data))
         self.title = self.__get_title()
-        self.type = self.__get_type()
+        self.bibtextype = self.__get_bibtextype()
         self.authors = self.__get_authors()
         self.year = self.__get_year()
         self.venue = self.__get_venue()
         self.validate = self.__validate()
     
     def __validate(self):
-        return self.title and self.type and self.authors and self.year and self.venue
+        return self.title and self.bibtextype and self.authors and self.year and self.venue
     
     def dblp_prefix(self, predicate):
         return f"<https://dblp.org/rdf/schema#{predicate}>"
-    
-    def purl_prefix(self, predicate):
-        return f"<http://purl.net/nknouf/ns/bibtex#{predicate}>"
 
     def __get_title(self):
         return self.data.get(self.dblp_prefix("title"),[""])[0].replace('"',"'").replace('.','')
 
-    def __get_type(self):
-        return self.data.get(self.purl_prefix("bibtexType"),[""])[0].replace('"',"'")
+    def __get_bibtextype(self):
+        return self.data.get(self.dblp_prefix("bibtexType"),[""])[0].replace('"',"'")
 
     def __get_authors(self):
         authors = self.data.get(self.dblp_prefix("authoredBy"), [])
@@ -233,15 +230,19 @@ class DataGenerator:
             name = name.lower().replace("'", "")
             name = name.split(" ")
             return "'" + random.choice(name) + "'"
-            
+        
+        def get_bibtextype(bibtextype):
+            return "'" + bibtextype.split("#")[1].replace(">", "") + "'"
+
         slots = {
             "?p1": first_sample.uri,
             "?p2": second_sample.uri,
             "?c1": creator.get("uri", "''"),
             "?c2": other_creator.get("uri", "''"),
+            "?b": first_sample.bibtextype,
             "[TITLE]": first_sample.title,
             "[OTHER_TITLE]": second_sample.title,
-            "[TYPE]": first_sample.type,
+            "[TYPE]": get_bibtextype(first_sample.bibtextype),
             "[PARTIAL_CREATOR_NAME]": get_partial_name(creator.get("name", "''")),
             "[AFFILIATION]": creator.get("affiliation", "''")
         }

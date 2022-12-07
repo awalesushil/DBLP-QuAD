@@ -132,7 +132,7 @@ templates = {
                 "Does the publication [TITLE] exist?"
             ]
         },{
-            "query": "ASK { ?p1 purl:bibtexType [TYPE] }",
+            "query": "ASK { ?p1 purl:bibtexType ?b }",
             "questions": [
                 "Is [TITLE] a [TYPE] publication?",
                 "Is the publication [TITLE] a [TYPE] paper?",
