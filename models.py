@@ -215,19 +215,22 @@ class DataGenerator:
         }
 
         # Randomly select two questions
-        questions = random.sample(template["question"]["strings"], 2)
+        question, paraphrase = random.sample(template["question"]["strings"], 2)
         query = template["query"]["sparql"]
 
         # Fill in the template with the sample
         for placeholder, value in slots.items():
             question, paraphrase = [
                     each.replace(placeholder, str(random.choice(value)))
-                        for each in questions
+                        for each in [question, paraphrase]
                 ]
-            query = query.replace(
-                    placeholder, str(value)
-                    if placeholder not in ["[DURATION]","[VENUE]","[OTHER_VENUE]"] else value[0]
-                )
+            
+            if placeholder in ["[DURATION]","[VENUE]","[OTHER_VENUE]"]:
+                query = query.replace(placeholder, "'" + str(value[0] + "'"))
+            elif placeholder in ["[YEAR]","[AFFILIATION]"]:
+                query = query.replace(placeholder, '"' + str(value) + '"')
+            else:
+                query = query.replace(placeholder, str(value))
         
         entities = []
         
@@ -283,6 +286,7 @@ class DataGenerator:
                         id = "Q"+str(invalid_query_index).zfill(4)
 
                     yield id, {
+                            "query_type": query_type,
                             "question": {
                                 "string": question
                             },
