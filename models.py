@@ -154,7 +154,7 @@ class DataGenerator:
             name[-1] + ", " + name[0][0].replace(".","") + ". " + " ".join(name[1:-1]) # Smith, J. William
         ]
         alt_name = random.choice(alt_names) + "$"
-        return alt_name.replace(" $","")
+        return alt_name.replace(" $","").replace("$","")
 
     def alt_duration(self, duration):
         """
@@ -215,24 +215,24 @@ class DataGenerator:
         }
 
         # Randomly select two questions
-        question, paraphrase = random.sample(template["question"]["strings"], 2)
+        questions = random.sample(template["question"]["strings"], 2)
         query = template["query"]["sparql"]
 
         # Fill in the template with the sample
         for placeholder, value in slots.items():
             question, paraphrase = [
                     each.replace(placeholder, str(random.choice(value)))
-                        for each in [question, paraphrase]
+                        for each in questions
                 ]
             query = query.replace(
-                    placeholder, str(random.choice(value))
+                    placeholder, str(value)
                     if placeholder not in ["[DURATION]","[VENUE]","[OTHER_VENUE]"] else value[0]
                 )
         
         entities = []
         
         # Save the entities
-        for entity in template["query"]["entities"]:
+        for entity in template["question"]["entities"]:
             entities.append(slots[entity])
 
         return question, paraphrase, query, entities
@@ -270,7 +270,7 @@ class DataGenerator:
                     template = random.choice(templates[entity_type][query_type])
 
                     # Fill in the template with the sample
-                    question, paraphrased_question, query, entities = self.fill_slots(template, first_sample, second_sample)
+                    question, paraphrase, query, entities = self.fill_slots(template, first_sample, second_sample)
                     answers = self.server.query(query)
 
                     if answers:
@@ -283,19 +283,18 @@ class DataGenerator:
                         id = "Q"+str(invalid_query_index).zfill(4)
 
                     yield id, {
-                        "entities": entities,
-                        "relations": template["relations"],
-                        "query_type": query_type,
-                        "template_id": template["id"],
-                        "question": [{
-                            "language": "en",
-                            "string": question
-                        }],
-                        "paraphrased_question": [{
-                            "language": "en",
-                            "string": paraphrased_question
-                        }],
-                        "query": [{
-                            "sparql": query,
-                        }]
-                    }, {"answer": answers}
+                            "question": {
+                                "string": question
+                            },
+                            "paraphrased_question": {
+                                "string": paraphrase
+                            },
+                            "query": {
+                                "sparql": query,
+                            },
+                            "template_id": template["id"],
+                            "entities": entities,
+                            "relations": template["question"]["relations"]
+                        }, {
+                            "answer": answers
+                        }

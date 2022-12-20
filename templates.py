@@ -58,7 +58,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Who wrote the paper [TITLE]?",
                     "Who authored the paper [TITLE]?",
@@ -75,7 +74,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#yearOfPublication> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "When was [TITLE] published?",
                     "When was the paper [TITLE] published?",
@@ -93,7 +91,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#publishedIn> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Where was [TITLE] published?",
                     "Where was the paper [TITLE] published?",
@@ -110,7 +107,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#bibtexType> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What is the bibtex type of the paper [TITLE]?",
                     "What is the bibtex type of [TITLE]?",
@@ -126,7 +122,6 @@ templates = {
                 "sparql": "SELECT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#numberOfCreators> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "How many authors does [TITLE] have?",
                     "How many authors wrote the paper [TITLE]?",
@@ -144,7 +139,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?x <https://dblp.org/rdf/schema#primaryAffiliation> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What are the primary affiliations of the authors of [TITLE]?",
                     "What are the primary affiliations of the authors of the paper [TITLE]?",
@@ -160,7 +154,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?answer <https://dblp.org/rdf/schema#authoredBy> ?x FILTER (?answer != ?p1) }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Which other publications were published by the authors of [TITLE]?",
                     "Which other publications were published by the authors of the paper [TITLE]?",
@@ -176,7 +169,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?y <https://dblp.org/rdf/schema#authoredBy> ?x . ?y <https://dblp.org/rdf/schema#publishedIn> ?answer FILTER (?y != ?p1) }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What are the venues of the other papers published by the authors of [TITLE]?",
                     "What are the venues of the other papers published by the authors of the publication [TITLE]?",
@@ -192,7 +184,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?x <https://dblp.org/rdf/schema#affiliation> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "To which institutions have the authors of [TITLE] been affiliated?",
                     "To which institutions have the authors of the paper [TITLE] been affiliated?",
@@ -208,7 +199,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?x <https://dblp.org/rdf/schema#orcid> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What are the ORCIDs of the authors of [TITLE]?",
                     "What are the ORCIDs of the authors of the paper [TITLE]?",
@@ -224,7 +214,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?p1 <https://dblp.org/rdf/schema#yearOfPublication> ?y . ?z <https://dblp.org/rdf/schema#authoredBy> ?x . ?z <https://dblp.org/rdf/schema#yearOfPublication> ?answer FILTER (?answer != ?y) }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "In which other years were the authors of [TITLE] publishing?",
                     "In which other years have the authors of [TITLE] published?",
@@ -241,7 +230,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?p1 <https://dblp.org/rdf/schema#publishedIn> ?firstanswer . ?p1 <https://dblp.org/rdf/schema#yearOfPublication> ?secondanswer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Where was [TITLE] published and when?",
                     "Where was the publication [TITLE] published and when?",
@@ -258,7 +246,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?firstanswer . ?firstanswer <https://dblp.org/rdf/schema#primaryAffiliation> ?secondanswer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Who are the authors of [TITLE] and where are they from?",
                     "Who are the authors of the paper [TITLE] and where are they from?",
@@ -275,7 +262,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?firstanswer . ?secondanswer <https://dblp.org/rdf/schema#authoredBy> ?firstanswer FILTER (?secondanswer != ?p1) }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Who are the authors of [TITLE] and which other papers did they publish?",
                     "Who are the authors of the paper [TITLE] and which other papers did they publish?",
@@ -292,7 +278,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?firstanswer . ?x <https://dblp.org/rdf/schema#authoredBy> ?firstanswer . ?x <https://dblp.org/rdf/schema#publishedIn> ?secondanswer FILTER (?x != ?p1) }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Who are the authors of [TITLE] and what are the venues of the other papers they published?",
                     "Who are the authors of the paper [TITLE] and what are the venues of the other papers they published?",
@@ -310,7 +295,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#title> [TITLE] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Does [TITLE] exist?",
                     "Does the paper [TITLE] exist?",
@@ -325,7 +309,6 @@ templates = {
                 "sparql": "ASK { ?p1 <http://purl.org/dc/terms/bibtexType> ?b }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Is [TITLE] a [TYPE] publication?",
                     "Is the publication [TITLE] a [TYPE] paper?",
@@ -340,7 +323,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?x <https://dblp.org/rdf/schema#primaryAffiliation> [AFFILIATION] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Do the authors of [TITLE] have [AFFILIATION] as their primary affiliation?",
                     "Do the authors of the publication [TITLE] have [AFFILIATION] as their primary affiliation?",
@@ -356,7 +338,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#yearOfPublication> [YEAR] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Was [TITLE] published in [YEAR]?",
                     "Was the paper [TITLE] published in [YEAR]?",
@@ -374,7 +355,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?p2 <https://dblp.org/rdf/schema#authoredBy> ?x FILTER (?p2 != ?p1) }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did the authors of [TITLE] also publish [OTHER_TITLE]?",
                     "Did the authors of the paper [TITLE] also publish [OTHER_TITLE]?",
@@ -395,7 +375,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?y <https://dblp.org/rdf/schema#authoredBy> ?x FILTER (?y != ?p1) . ?y <https://dblp.org/rdf/schema#publishedIn> [OTHER_VENUE] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did the authors of [TITLE] also publish a paper in [OTHER_VENUE]?",
                     "Did the authors of the paper [TITLE] publish other papers in [OTHER_VENUE]?",
@@ -415,7 +394,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#title> [TITLE] FILTER NOT EXISTS { ?p1 <https://dblp.org/rdf/schema#title> [TITLE] } }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Does [TITLE] not exist?",
                     "Does the paper [TITLE] not exist?",
@@ -430,7 +408,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#yearOfPublication> [YEAR] FILTER NOT EXISTS { ?p1 <https://dblp.org/rdf/schema#yearOfPublication> [YEAR] } }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Was [TITLE] not published in [YEAR]?",
                     "Was the paper [TITLE] not published in [YEAR]?",
@@ -447,7 +424,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?y <https://dblp.org/rdf/schema#authoredBy> ?x FILTER (?y != ?p1) . ?y <https://dblp.org/rdf/schema#publishedIn> [VENUE] FILTER NOT EXISTS { ?p1 <https://dblp.org/rdf/schema#publishedIn> [VENUE] } }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did the authors of [TITLE] not publish a paper in [VENUE]?",
                     "Didn't the authors of the paper [TITLE] publish a paper in [VENUE]?",
@@ -465,7 +441,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?p2 <https://dblp.org/rdf/schema#authoredBy> ?x FILTER (?p2 != ?p1) FILTER NOT EXISTS { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?p2 <https://dblp.org/rdf/schema#authoredBy> ?x FILTER (?p2 != ?p1) } }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did the authors of [TITLE] not publish [OTHER_TITLE]?",
                     "Didn't the authors of the paper [TITLE] publish [OTHER_TITLE]?",
@@ -484,7 +459,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#title> [TITLE] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Does [TITLE] not not exist?",
                     "Doesn't the paper [TITLE] not exist?",
@@ -500,7 +474,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#yearOfPublication> [YEAR] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Was [TITLE] not not published in [YEAR]?",
                     "Wasn't the paper [TITLE] not published in [YEAR]?",
@@ -517,7 +490,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?y <https://dblp.org/rdf/schema#authoredBy> ?x FILTER (?y != ?p1) . ?y <https://dblp.org/rdf/schema#publishedIn> [VENUE] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did the authors of [TITLE] not not publish a paper in [VENUE]?",
                     "Didn't the authors of the paper [TITLE]  not publish a paper in [VENUE]?",
@@ -535,7 +507,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?p2 <https://dblp.org/rdf/schema#authoredBy> ?x FILTER (?p2 != ?p1) }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did the authors of [TITLE] not not publish [OTHER_TITLE]?",
                     "Didn't the authors of the paper [TITLE] not not publish [OTHER_TITLE]?",
@@ -554,7 +525,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer } UNION { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer } }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Who are the authors of [TITLE] and [OTHER_TITLE]?",
                     "Who are the authors of the paper [TITLE] and [OTHER_TITLE]?",
@@ -573,7 +543,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { { ?p1 <https://dblp.org/rdf/schema#yearOfPublication> ?answer } UNION { ?p2 <https://dblp.org/rdf/schema#yearOfPublication> ?answer } }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "When were [TITLE] and [OTHER_TITLE] published?",
                     "When were the papers [TITLE] and [OTHER_TITLE] published?",
@@ -591,7 +560,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { { ?p1 <https://dblp.org/rdf/schema#publishedIn> ?answer } UNION { ?p2 <https://dblp.org/rdf/schema#publishedIn> ?answer } }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Where were [TITLE] and [OTHER_TITLE] published?",
                     "Where were the papers [TITLE] and [OTHER_TITLE] published?",
@@ -610,7 +578,6 @@ templates = {
                 "sparql": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer . ?answer <https://dblp.org/rdf/schema#primaryAffiliation> [AFFILIATION] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "How many authors of [TITLE] have [AFFILIATION] as their primary affiliation?",
                     "How many authors of the paper [TITLE] have [AFFILIATION] as their primary affiliation?",
@@ -625,7 +592,6 @@ templates = {
                 "sparql": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?answer <https://dblp.org/rdf/schema#authoredBy> ?x }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "How many papers did the authors of [TITLE] publish?",
                     "How many papers did the authors of the paper [TITLE] publish?",
@@ -643,7 +609,6 @@ templates = {
                 "sparql": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?x <https://dblp.org/rdf/schema#primaryAffiliation> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "How many different affiliations do the authors of [TITLE] have?",
                     "How many different affiliations do the authors of the paper [TITLE] have?",
@@ -658,7 +623,6 @@ templates = {
                 "sparql": "SELECT DISTINCT (COUNT(?answer) AS ?count) WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?answer <https://dblp.org/rdf/schema#authoredBy> ?x . ?answer <https://dblp.org/rdf/schema#yearOfPublication> [YEAR] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "How many papers did the authors of [TITLE] publish in [YEAR]?",
                     "How many papers did the authors of the paper [TITLE] publish in [YEAR]?",
@@ -676,7 +640,6 @@ templates = {
                 "sparql": "SELECT DISTINCT (COUNT(?answer) AS ?count) WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?answer <https://dblp.org/rdf/schema#authoredBy> ?x . ?answer <https://dblp.org/rdf/schema#publishedIn> [VENUE] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "How many papers did the authors of [TITLE] publish in [VENUE]?",
                     "In [VENUE], how many papers did the authors of [TITLE] publish?",
@@ -693,7 +656,6 @@ templates = {
                 "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?x <https://dblp.org/rdf/schema#primaryAffiliation> ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Where are most of the authors of [TITLE] from?",
                     "Where are most of the authors of the paper [TITLE] from?",
@@ -711,7 +673,6 @@ templates = {
                 "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?x) AS ?count) WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer . ?x <https://dblp.org/rdf/schema#authoredBy> ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Who has published the most papers among the authors of [TITLE]?",
                     "Who has published the most papers among the authors of the paper [TITLE]?",
@@ -727,7 +688,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer (MIN(xsd:integer(?y) AS ?y) WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer . ?x <https://dblp.org/rdf/schema#authoredBy> ?answer . ?x <https://dblp.org/rdf/schema#yearOfPublication> ?y }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "When were the first papers of the authors of [TITLE] published?",
                     "When were the first papers of the authors of the paper [TITLE] published?",
@@ -743,7 +703,6 @@ templates = {
                 "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Who published the first paper among the authors of [TITLE]?",
                     "Who published the first paper among the authors of the paper [TITLE]?",
@@ -759,7 +718,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#yearOfPublication> ?x . ?p2 <https://dblp.org/rdf/schema#yearOfPublication> ?y . BIND(IF(?x < ?y, ?p1, ?p2) AS ?answer) }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Between [TITLE] and [OTHER_TITLE], which paper was published earlier?",
                     "Between [TITLE] and [OTHER_TITLE], which one was published first?",
@@ -775,7 +733,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#numberOfCreators> ?x . ?p2 <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, ?p1, ?p1) AS ?answer) }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Between [TITLE] and [OTHER_TITLE], which paper has more authors?",
                     "Between [TITLE] and [OTHER_TITLE], which one has more number of authors?",
@@ -793,7 +750,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer . ?p1 <https://dblp.org/rdf/schema#publishedIn> [VENUE] . ?p1 <https://dblp.org/rdf/schema#yearOfPublication> [YEAR] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Who are the authors that published papers about [KEYWORD] in [VENUE] in [YEAR]?",
                     "Who are the authors that published research papers about [KEYWORD] in [VENUE] in the year [YEAR]?",
@@ -811,7 +767,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#publishedIn> [VENUE] . ?p1 <https://dblp.org/rdf/schema#yearOfPublication> [YEAR] . ?p1 <https://dblp.org/rdf/schema#title> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What are the titles of the papers on [KEYWORD] that were published in [VENUE] in [YEAR]?",
                     "What are the titles of the research papers on [KEYWORD] that were published in [VENUE] in the year [YEAR]?",
@@ -829,7 +784,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?x <https://dblp.org/rdf/schema#primaryAffiliation> [AFFILIATION] . ?p1 <https://dblp.org/rdf/schema#yearOfPublication> ?answer }",
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "When was the paper [KEYWORD] by [AFFILIATION] published?",
                     "In what year was the paper [KEYWORD] by [AFFILIATION] published?",
@@ -848,7 +802,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c1 }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What are the papers written by [CREATOR_NAME]?",
                     "What are the publications written by the author [CREATOR_NAME]?",
@@ -868,7 +821,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?c1 <https://dblp.org/rdf/schema#primaryAffiliation> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What is the primary affiliation of [CREATOR_NAME]?",
                     "What is the primary affiliation of the author [CREATOR_NAME]?",
@@ -884,7 +836,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?c1 <https://dblp.org/rdf/schema#orcid> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What is the ORCID of [CREATOR_NAME]?",
                     "What is the ORCID of the author [CREATOR_NAME]?",
@@ -900,7 +851,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?c1 <https://dblp.org/rdf/schema#affiliation> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Which institutions has [CREATOR_NAME] been affiliated to?",
                     "Which institutions has the author [CREATOR_NAME] been affiliated to?",
@@ -917,7 +867,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?c1 <https://dblp.org/rdf/schema#homepage> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What is the homepage of [CREATOR_NAME]?",
                     "What is the homepage of the author [CREATOR_NAME]?",
@@ -934,7 +883,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#publishedIn> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What are the venues in which [CREATOR_NAME] published?",
                     "What are the venues in which the author [CREATOR_NAME] published?",
@@ -952,7 +900,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?answer <https://dblp.org/rdf/schema#authoredBy> ?c2 }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What are the papers written by [CREATOR_NAME] and [OTHER_CREATOR_NAME] together?",
                     "What are the publications written by the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] in collaboration?",
@@ -969,7 +916,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?answer <https://dblp.org/rdf/schema#publishedIn> [VENUE] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Which papers did [CREATOR_NAME] publish in [VENUE]?",
                     "Which papers did the author [CREATOR_NAME] publish in [VENUE]?",
@@ -986,7 +932,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#authoredBy> ?answer FILTER(?answer != ?c1) }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Who are the co-authors of [CREATOR_NAME]?",
                     "Who are the co-authors of the author [CREATOR_NAME]?",
@@ -1002,7 +947,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?answer <https://dblp.org/rdf/schema#yearOfPublication> ?y FILTER(?y > YEAR(NOW())-[DURATION]) }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Which papers did [CREATOR_NAME] publish in the last [DURATION] years?",
                     "Which papers did the author [CREATOR_NAME] publish in the last [DURATION] years?",
@@ -1018,7 +962,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?answer <https://dblp.org/rdf/schema#authoredBy> ?y . ?y <https://dblp.org/rdf/schema#primaryAffiliation> [AFFILIATION] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What research papers did [CREATOR_NAME] publish with the author affiliated to [AFFILIATION]?",
                     "What research papers did the author [CREATOR_NAME] publish with the author affiliated to [AFFILIATION]?",
@@ -1036,7 +979,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?firstanswer <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?firstanswer <https://dblp.org/rdf/schema#yearOfPublication> ?secondanswer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Which papers did author [CREATOR_NAME] publish and in which year?",
                     "What are the papers published by [CREATOR_NAME] and in which year?",
@@ -1051,7 +993,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#authoredBy> ?firstanswer FILTER(?firstanswer != ?c1) . ?firstanswer <https://dblp.org/rdf/schema#primaryAffiliation> ?secondanswer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Who are the co-authors of [CREATOR_NAME] and where are they affiliated?",
                     "Who are the co-authors of the author [CREATOR_NAME] and where are they affiliated?",
@@ -1067,7 +1008,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#yearOfPublication> ?y . FILTER(?y > YEAR(NOW())-[DURATION]) . ?x <https://dblp.org/rdf/schema#authoredBy> ?firstanswer FILTER(?firstanswer != ?c1) . ?firstanswer <https://dblp.org/rdf/schema#primaryAffiliation> ?secondanswer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Who are the co-authors of [CREATOR_NAME] in the last [DURATION] years and where are they affiliated?",
                     "Who are the co-authors of the author [CREATOR_NAME] in the last [DURATION] years and where are they affiliated?",
@@ -1083,7 +1023,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#publishedIn> ?firstanswer . ?x <https://dblp.org/rdf/schema#title> ?secondanswer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "In which venues did [CREATOR_NAME] publish papers and what are the titles of these papers?",
                     "In which venues did the author [CREATOR_NAME] publish papers and what are the titles of these papers?",
@@ -1099,7 +1038,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?firstanswer ?secondanswer WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#yearOfPublication> ?y . FILTER(?y > YEAR(NOW())-[DURATION]) . ?x <https://dblp.org/rdf/schema#publishedIn> ?firstanswer . ?x <https://dblp.org/rdf/schema#title> ?secondanswer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "In which venues did [CREATOR_NAME] publish papers in the last [DURATION] years and what are the titles of these papers?",
                     "In which venues did the author [CREATOR_NAME] publish papers in the last [DURATION] years and what are the titles of these papers?",
@@ -1116,7 +1054,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?c1 }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did [CREATOR_NAME] publish the paper [TITLE]?",
                     "Did the author [CREATOR_NAME] publish the paper [TITLE]?",
@@ -1135,7 +1072,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?p1 <https://dblp.org/rdf/schema#authoredBy> ?c2 }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did [CREATOR_NAME] and [OTHER_CREATOR_NAME] co-author the paper [TITLE]?",
                     "Did the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] co-author the paper [TITLE]?",
@@ -1152,7 +1088,6 @@ templates = {
                 "sparql": "ASK { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#publishedIn> [VENUE] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did [CREATOR_NAME] publish the paper [TITLE] in [VENUE]?",
                     "Did the author [CREATOR_NAME] publish the paper [TITLE] in [VENUE]?",
@@ -1168,7 +1103,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?p1 <https://dblp.org/rdf/schema#yearOfPublication> ?y . FILTER(?y > YEAR(NOW())-[DURATION]) }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did [CREATOR_NAME] publish the paper [TITLE] in the last [DURATION] years?",
                     "Did the author [CREATOR_NAME] publish the paper [TITLE] in the last [DURATION] years?",
@@ -1184,7 +1118,6 @@ templates = {
                 "sparql": "ASK { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#yearOfPublication> ?y . FILTER(?y > YEAR(NOW())-[DURATION]) . ?x <https://dblp.org/rdf/schema#publishedIn> [VENUE] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did [CREATOR_NAME] publish in [VENUE] in the last [DURATION] years?",
                     "Did the author [CREATOR_NAME] publish in [VENUE] in the last [DURATION] years?",
@@ -1200,7 +1133,6 @@ templates = {
                 "sparql": "ASK { ?c1 <https://dblp.org/rdf/schema#orcid> ?x }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Does [CREATOR_NAME] have an ORCID?",
                     "Does the author [CREATOR_NAME] have an ORCID?",
@@ -1217,7 +1149,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?c1 FILTER NOT EXISTS { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?c1 } }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did [CREATOR_NAME] not publish the paper [TITLE]?",
                     "Did the author [CREATOR_NAME] not publish the paper [TITLE]?",
@@ -1238,7 +1169,6 @@ templates = {
                 "sparql": "ASK { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#publishedIn> [VENUE] FILTER NOT EXISTS { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#publishedIn> [VENUE] } }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did [CREATOR_NAME] not publish in [VENUE]?",
                     "Did the author [CREATOR_NAME] not publish in [VENUE]?",
@@ -1254,7 +1184,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?p1 <https://dblp.org/rdf/schema#authoredBy> ?c2 FILTER NOT EXISTS { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?p1 <https://dblp.org/rdf/schema#authoredBy> ?c2 } }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did [CREATOR_NAME] and [OTHER_CREATOR_NAME] not co-author the paper [TITLE]?",
                     "Did the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] not co-author the paper [TITLE]?",
@@ -1271,7 +1200,6 @@ templates = {
                 "sparql": "ASK { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#yearOfPublication> ?y . FILTER(?y > YEAR(NOW())-[DURATION]) . ?x <https://dblp.org/rdf/schema#publishedIn> [VENUE] FILTER NOT EXISTS { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#yearOfPublication> ?y . FILTER(?y > YEAR(NOW())-[DURATION]) . ?x <https://dblp.org/rdf/schema#publishedIn> [VENUE] } }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did [CREATOR_NAME] not publish in [VENUE] in the last [DURATION] years?",
                     "Did the author [CREATOR_NAME] not publish in [VENUE] in the last [DURATION] years?",
@@ -1288,7 +1216,6 @@ templates = {
                 "sparql": "ASK { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?c1 }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Didn't [CREATOR_NAME] not publish the paper [TITLE]?",
                     "Has the paper [TITLE] not not been published by [CREATOR_NAME]?",
@@ -1307,7 +1234,6 @@ templates = {
                 "sparql": "ASK { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#yearOfPublication> [YEAR] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Did [CREATOR_NAME] not not publish in [YEAR]?",
                     "Did the author [CREATOR_NAME] not not publish in [YEAR]?",
@@ -1325,7 +1251,6 @@ templates = {
                 "sparql": "ASK { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#authoredBy> ?c2 }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Didn't [CREATOR_NAME] and [OTHER_CREATOR_NAME] not co-author a paper?",
                     "Did the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] not not co-author a paper?",
@@ -1341,7 +1266,6 @@ templates = {
                 "sparql": "ASK { ?c1 <https://dblp.org/rdf/schema#primaryAffiliation> [AFFILIATION] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Isn't [CREATOR_NAME] not affiliated with [AFFILIATION]?",
                     "Is [CREATOR_NAME] not not affiliated with [AFFILIATION]?",
@@ -1358,7 +1282,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c1 } UNION { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c2 } }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What are the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published?",
                     "What are the papers that the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] published?",
@@ -1375,7 +1298,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?answer <https://dblp.org/rdf/schema#publishedIn> [VENUE] } UNION { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c2 . ?answer <https://dblp.org/rdf/schema#publishedIn> [VENUE] } }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What are the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE]?",
                     "What are the papers that the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE]?",
@@ -1392,7 +1314,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c1 { ?answer <https://dblp.org/rdf/schema#publishedIn> [VENUE] } UNION { ?answer <https://dblp.org/rdf/schema#publishedIn> [OTHER_VENUE] } }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What papers did [CREATOR_NAME] publish in [VENUE] and [OTHER_VENUE]?",
                     "What papers did the author [CREATOR_NAME] publish in [VENUE] and [OTHER_VENUE]?",
@@ -1409,7 +1330,6 @@ templates = {
                 "sparql": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c1 }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "How many papers has [CREATOR_NAME] published?",
                     "How many papers has the author [CREATOR_NAME] published?",
@@ -1427,7 +1347,6 @@ templates = {
                 "sparql": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?answer <https://dblp.org/rdf/schema#publishedIn> [VENUE] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "How many papers has [CREATOR_NAME] published in [VENUE]?",
                     "How many papers has the author [CREATOR_NAME] published in [VENUE]?",
@@ -1445,7 +1364,6 @@ templates = {
                 "sparql": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#authoredBy> ?answer FILTER(?answer != ?c1) }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "How many co-authors does [CREATOR_NAME] have?",
                     "How many co-authors does the author [CREATOR_NAME] have?",
@@ -1461,7 +1379,6 @@ templates = {
                 "sparql": "SELECT (COUNT(DISTINCT ?answer) AS ?count) WHERE { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?answer <https://dblp.org/rdf/schema#authoredBy> ?c2 }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "How many papers did [CREATOR_NAME] and [OTHER_CREATOR_NAME] write together?",
                     "How many publications did [CREATOR_NAME] and [OTHER_CREATOR_NAME] author together?",
@@ -1478,7 +1395,6 @@ templates = {
                 "sparql": "SELECT (AVG(?count) AS ?answer) { SELECT (COUNT(?y) AS ?count) WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#yearOfPublication> ?y } GROUP BY ?y }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What is the average number of papers published by [CREATOR_NAME] per year?",
                     "What is the average number of papers published by the author [CREATOR_NAME] per year?",
@@ -1496,7 +1412,6 @@ templates = {
                 "sparql": "SELECT (AVG(?count) AS ?answer) { SELECT (COUNT(?y) AS ?count) WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#numberOfCreators> ?y } GROUP BY ?y }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "What is the average number of co-authors for papers published by [CREATOR_NAME]?",
                     "What is the average number of co-authors for papers published by the author [CREATOR_NAME]?",
@@ -1515,7 +1430,6 @@ templates = {
                 "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#yearOfPublication> ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "In which year did [CREATOR_NAME] publish the most papers?",
                     "In which year did the author [CREATOR_NAME] publish the most papers?",
@@ -1533,7 +1447,6 @@ templates = {
                 "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#yearOfPublication> ?answer } GROUP BY ?answer } ORDER BY ASC(?count) LIMIT 1"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "In which year did [CREATOR_NAME] publish the least papers and how many?",
                     "In which year did the author [CREATOR_NAME] publish the least papers and how many?",
@@ -1551,7 +1464,6 @@ templates = {
                 "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#publishedIn> ?answer } GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "In which venue did [CREATOR_NAME] publish the most papers and how many?",
                     "In which venue did the author [CREATOR_NAME] publish the most papers?",
@@ -1568,7 +1480,6 @@ templates = {
                 "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?count WHERE { SELECT DISTINCT ?answer (COUNT(?answer) AS ?count) WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#authoredBy> ?answer FILTER(?answer != ?c1)} GROUP BY ?answer } ORDER BY DESC(?count) LIMIT 1"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "With which author does [CREATOR_NAME] has the most papers and how many?",
                     "With which author does [CREATOR_NAME] has the most publications and how many?",
@@ -1585,7 +1496,6 @@ templates = {
                 "sparql": "SELECT DISTINCT MIN(xsd:integer(?answer)) AS ?answer WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#yearOfPublication> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "When was the first paper by [CREATOR_NAME] published?",
                     "When was the first publication by [CREATOR_NAME] published?",
@@ -1602,7 +1512,6 @@ templates = {
                 "sparql": "SELECT DISTINCT MAX(xsd:integer(?answer)) AS ?answer WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#yearOfPublication> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "When was the last paper by [CREATOR_NAME] published?",
                     "When was the last publication by [CREATOR_NAME] published?",
@@ -1620,7 +1529,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Which author named [PARTIAL_CREATOR_NAME] published the paper on [KEYWORD]?",
                     "Who is the author named [PARTIAL_CREATOR_NAME] who published the paper about [KEYWORD]?",
@@ -1636,7 +1544,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?answer <https://dblp.org/rdf/schema#publishedIn> [VENUE] }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "Which paper on [KEYWORD] was published by [PARTIAL_CREATOR_NAME] in [VENUE]?",
                     "Which paper on [KEYWORD] was published by the author [PARTIAL_CREATOR_NAME] in [VENUE]?",
@@ -1654,7 +1561,6 @@ templates = {
                 "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?p1 <https://dblp.org/rdf/schema#publishedIn> ?answer }"
             },
             "question": {
-                "language": "en",
                 "strings": [
                     "In which venue did [PARTIAL_CREATOR_NAME] publish the paper about [KEYWORD]?",
                     "In which venue did [PARTIAL_CREATOR_NAME] author the publication on [KEYWORD]?",
