@@ -52,8 +52,8 @@ class Sample:
         return [
             {
                 "uri": next(iter(author)),
-                "name": author[next(iter(author))].get(self.dblp_prefix("primaryFullCreatorName"), "NONE")[0].replace('"',""),
-                "affiliation": author[next(iter(author))].get(self.dblp_prefix("primaryAffiliation"), "NONE")[0].replace('"',"")
+                "name": author[next(iter(author))].get(self.dblp_prefix("primaryFullCreatorName"), ["NONE"])[0].replace('"',""),
+                "affiliation": author[next(iter(author))].get(self.dblp_prefix("primaryAffiliation"), ["NONE"])[0].replace('"',"")
             } for author in authors] if authors else None
 
     def __get_year(self):
@@ -238,7 +238,7 @@ class DataGenerator:
         
         # Save the entities
         for entity in template["question"]["entities"]:
-            entities.append(slots[entity])
+            entities.append(slots[entity][0])
 
         return question, paraphrase, query, entities
 

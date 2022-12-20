@@ -788,7 +788,7 @@ templates = {
                     "When was the paper on [KEYWORD] by [AFFILIATION] published?",
                     "In what year was the paper on [KEYWORD] by [AFFILIATION] published?",
                     "When was the research paper on [KEYWORD] by [AFFILIATION] published?",
-                    "Mention the year in which the paper pn [KEYWORD] by [AFFILIATION] was published?"
+                    "In which year was the paper on [KEYWORD] by [AFFILIATION] published?"
                 ],
                 "entities": ["?p1","[AFFILIATION]"],
                 "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#primaryAffiliation>", "<https://dblp.org/rdf/schema#yearOfPublication>"]
