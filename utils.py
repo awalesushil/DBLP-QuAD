@@ -47,18 +47,18 @@ def save_to_json(data_file, answers_file, failed_queries_file, dataGenerator):
     with open(os.path.join("data", data_file), "w", encoding="utf-8") as data_file:
         with open(os.path.join("data", failed_queries_file), "w", encoding="utf-8") as failed_queries_file:
             with open(os.path.join("data", answers_file), "w", encoding="utf-8") as answers_file:
-                data_file.write("[")
-                answers_file.write("[")
-                failed_queries_file.write("[")
+                data_file.write('{"questions": [')
+                answers_file.write('{"answers": [')
+                failed_queries_file.write('{"failed_queries": [')
                 for id, data, answer in tqdm(dataGenerator, desc="Generating data: "):
                     if answer["answer"]:
                         add_to_json(data_file, id, data)
                         add_to_json(answers_file, id, answer)
                     else:
                         add_to_json(failed_queries_file, id, data)
-                data_file.write("]")
-                answers_file.write("]")
-                failed_queries_file.write("]")
+                data_file.write("\n]}")
+                answers_file.write("\n]}")
+                failed_queries_file.write("\n]}")
 
 
 def plot_template_distribution():
@@ -73,9 +73,6 @@ def plot_template_distribution():
         weights = [len(templates[entity][each])/sum(total_templates) for each in query_types]
 
         print("Total number of templates:", sum(total_templates))
-        print("Number of templates per query type:")
-        for i, query_type in enumerate(query_types):
-            print(f"{query_type}: {len(templates[entity][query_type])} ({weights[i]*100:.2f}%)")
         
         X_axis = np.arange(len(query_types))
         width = 0.4

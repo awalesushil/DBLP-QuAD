@@ -42,25 +42,25 @@ class Sample:
         return f"<https://dblp.org/rdf/schema#{predicate}>"
 
     def __get_title(self):
-        return self.data.get(self.dblp_prefix("title"),[""])[0].replace('"',"'").replace('.','')
+        return self.data.get(self.dblp_prefix("title"),[""])[0].replace('"',"").replace('.','')
 
     def __get_bibtextype(self):
-        return self.data.get(self.dblp_prefix("bibtexType"),[""])[0].replace('"',"'")
+        return self.data.get(self.dblp_prefix("bibtexType"),[""])[0].replace('"',"")
 
     def __get_authors(self):
         authors = self.data.get(self.dblp_prefix("authoredBy"), [])
         return [
             {
                 "uri": next(iter(author)),
-                "name": author[next(iter(author))].get(self.dblp_prefix("primaryFullCreatorName"), [""])[0].replace('"',"'"),
-                "affiliation": author[next(iter(author))].get(self.dblp_prefix("primaryAffiliation"), [""])[0].replace('"',"'")
+                "name": author[next(iter(author))].get(self.dblp_prefix("primaryFullCreatorName"), [""])[0].replace('"',""),
+                "affiliation": author[next(iter(author))].get(self.dblp_prefix("primaryAffiliation"), [""])[0].replace('"',"")
             } for author in authors] if authors else None
 
     def __get_year(self):
-        return self.data.get(self.dblp_prefix("yearOfPublication"),[""])[0].replace('"',"'")
+        return self.data.get(self.dblp_prefix("yearOfPublication"),[""])[0].replace('"',"")
     
     def __get_venue(self):
-        return self.data.get(self.dblp_prefix("publishedIn"),[""])[0].replace('"',"'")
+        return self.data.get(self.dblp_prefix("publishedIn"),[""])[0].replace('"',"")
 
 
 class SampleGenerator:
@@ -80,30 +80,6 @@ class SampleGenerator:
         return self.get(type, count)
 
 
-class TemplateGenerator:
-    """
-        Template functions
-    """
-    def __init__(self):
-        self.entities = ["CREATOR", "PUBLICATION"]
-        self.query_types = [
-            "SINGLE_FACT","MULTI_FACT","DOUBLE_INTENT",
-            "BOOLEAN","NEGATION","DOUBLE_NEGATION",
-            "UNION","DISAMBIGUATION",
-            "COUNT","RANK"
-        ]
-
-    def get(self):
-        """
-            Get a random template from the templates dictionary
-        """
-        # Randomly select an entity and query type
-        entity = random.choice(self.entities)
-        query_type = random.choices(self.query_types)[0]
-
-        return random.choice(templates[entity][query_type]), entity, query_type
-
-
 class DBLPServer:
     """
         DBLP Server class
@@ -111,25 +87,16 @@ class DBLPServer:
     def __init__(self, path):
         with open(path, "r", encoding="utf-8") as f:
             self.host = json.load(f)["host"]
-        self.prefix = """PREFIX dblp: <https://dblp.org/rdf/schema#>
-            PREFIX purl: <http://purl.org/dc/terms/>
-        """
         self.result_format = "json"
     
     def query(self, query):
         """
             Query the DBLP server
         """
-        query = self.prefix + query
         url = f"{self.host}/sparql?query={urllib.parse.quote(query)}&format=application%2Fsparql-results%2B{self.result_format}"
         response = requests.get(url)
         if response.status_code == 200:
-            response_data = json.loads(response.text)
-            if 'boolean' in response_data:
-                return [{"boolean": response_data["boolean"]}]
-            variables = response_data["head"]["vars"]
-            results = response_data["results"]["bindings"]
-            return [dict(zip(variables, [result[var]["value"] for var in variables])) for result in results]
+            return json.loads(response.text)
         return []
 
 class KeywordGenerator:
@@ -152,8 +119,7 @@ class KeywordGenerator:
         
         keywords = [doc[start:end].text for _, start, end in matches]
         keywords = [keyword for keyword in keywords if not nlp.vocab[keyword].is_stop]
-        return "'" + random.choice(keywords) + "'"  if keywords else "NONE"
-
+        return random.choice(keywords).capitalize() if keywords else "NONE"
 
 class DataGenerator:
     """
@@ -161,8 +127,14 @@ class DataGenerator:
     """
     def __init__(self, graph, seed):
         random.seed(seed)
+        self.entities = ["CREATOR", "PUBLICATION"]
+        self.query_types = [
+            "SINGLE_FACT","MULTI_FACT","DOUBLE_INTENT",
+            "BOOLEAN","NEGATION","DOUBLE_NEGATION",
+            "UNION","DISAMBIGUATION",
+            "COUNT","RANK"
+        ]
         self.sample_generator = SampleGenerator(graph)
-        self.template_generator = TemplateGenerator()
         self.server = DBLPServer("config.json")
         self.keyword_generator = KeywordGenerator()
 
@@ -170,15 +142,10 @@ class DataGenerator:
         """
             Generate alternative name for the creator
         """
+        if name == "": return "NONE"
 
-        if name == "''":
-            return "''"
-
-        name = name.replace("'", "")
         name = name.split(" ")
-
-        if len(name) == 1:
-            return name[0]
+        if len(name) == 1: return name[0]
 
         alt_names = [
             name[-1] + ", " + name[0] + " " + " ".join(name[1:-1]), # Smith, John William
@@ -186,10 +153,8 @@ class DataGenerator:
             name[0] + " " + name[1][0].replace(".","") + ". " + " ".join(name[2:]), # John W. Smith
             name[-1] + ", " + name[0][0].replace(".","") + ". " + " ".join(name[1:-1]), # Smith, J. William
         ]
-        name = "'" + random.choice(alt_names) + "'"
-        return name.replace(" '", "'")
+        return " ".join(random.choice(alt_names).split(" "))
 
-    
     def alt_duration(self, duration):
         """
             Generate alternative duration
@@ -200,8 +165,20 @@ class DataGenerator:
         }
         return num2words[duration]
 
+    def alt_venue(self, venue):
+        """
+            Generate alternative venue
+        """
+        venue = re.sub(r"\(.*\)", "", venue).strip()
+        return CORE.get(venue.upper().replace(".",""), venue)
+
     def fill_slots(self, template, first_sample, second_sample):
-        
+        """
+            Fill the slots in the template with the values from the samples
+        """
+        def get_bibtextype(bibtextype):
+            return bibtextype.split("#")[1].replace(">", "")
+
         if first_sample.authors:
             if len(first_sample.authors) > 1:
                 creator, other_creator = random.sample(first_sample.authors, 2)
@@ -210,80 +187,46 @@ class DataGenerator:
         else:
             creator, other_creator = {}, {}
 
+        name = creator.get("name", "NONE")
+        other_name = other_creator.get("name", "NONE")        
         duration = str(random.choice(range(1, 10)))
-
-        def get_creator_name(name):
-            return random.choice([name, self.alt_name(name)])
-        
-        def get_duration(duration):
-            return random.choice([duration, self.alt_duration(duration)])
-
-        def get_venue(venue):
-            venue = venue.replace("'","")
-            venue_key = re.sub(r"\(.*\)", "", venue).strip()
-            return random.choice([
-                    "'" + venue_key + "'",
-                    "'" + CORE.get(venue_key.upper().replace(".",""), venue_key) + "'"
-                ])
-
-        def get_partial_name(name):
-            name = name.lower().replace("'", "")
-            name = name.split(" ")
-            return "'" + random.choice(name) + "'"
-        
-        def get_bibtextype(bibtextype):
-            return "'" + bibtextype.split("#")[1].replace(">", "") + "'"
+        venue = first_sample.venue
+        other_venue = second_sample.venue
 
         slots = {
             "?p1": first_sample.uri,
             "?p2": second_sample.uri,
-            "?c1": creator.get("uri", "''"),
-            "?c2": other_creator.get("uri", "''"),
+            "?c1": creator.get("uri", "NONE"),
+            "?c2": other_creator.get("uri", "NONE"),
             "?b": first_sample.bibtextype,
             "[TITLE]": first_sample.title,
             "[OTHER_TITLE]": second_sample.title,
+            "[CREATOR_NAME]": [name, self.alt_name(name)],
+            "[OTHER_CREATOR_NAME]": [other_name, self.alt_name(other_name)],
             "[TYPE]": get_bibtextype(first_sample.bibtextype),
-            "[PARTIAL_CREATOR_NAME]": get_partial_name(creator.get("name", "''")),
-            "[AFFILIATION]": creator.get("affiliation", "''")
+            "[PARTIAL_CREATOR_NAME]": name.split(" "),
+            "[AFFILIATION]": creator.get("affiliation", "NONE"),
+            "[YEAR]": first_sample.year,
+            "[DURATION]": [duration, self.alt_duration(duration)],
+            "[VENUE]": [venue, self.alt_venue(venue)],
+            "[OTHER_VENUE]": [other_venue, self.alt_venue(other_venue)],
+            "[KEYWORD]": self.keyword_generator.get(first_sample.title)
         }
 
-        # Randomly select a question
-        question, paraphrase = random.sample(template["questions"], 2)
-        query = template["query"]
+        # Randomly select two questions
+        question, paraphrase = random.sample(template["questions"]["strings"], 2)
+        query = template["query"]["sparql"]
 
         # Fill in the template with the sample
         for placeholder, value in slots.items():
-            
-            question = question.replace(placeholder, str(value))
-            paraphrase = paraphrase.replace(placeholder, str(value))
-            query = query.replace(placeholder, str(value))
-
-        question = question.replace("[CREATOR_NAME]", get_creator_name(creator.get("name", "''")))
-        paraphrase = paraphrase.replace("[CREATOR_NAME]", get_creator_name(creator.get("name", "''")))
-        
-        question = question.replace("[OTHER_CREATOR_NAME]", get_creator_name(other_creator.get("name", "''")))
-        paraphrase = paraphrase.replace("[OTHER_CREATOR_NAME]", get_creator_name(other_creator.get("name", "''")))
-
-        question = question.replace("[DURATION]", get_duration(duration))
-        paraphrase = paraphrase.replace("[DURATION]", get_duration(duration))
-        query = query.replace("[DURATION]", duration)
-
-        question = question.replace("[VENUE]", get_venue(first_sample.venue))
-        paraphrase = paraphrase.replace("[VENUE]", get_venue(first_sample.venue))
-        query = query.replace("[VENUE]", first_sample.venue)
-
-        question = question.replace("[OTHER_VENUE]", get_venue(second_sample.venue))
-        paraphrase = paraphrase.replace("[OTHER_VENUE]", get_venue(second_sample.venue))
-        query = query.replace("[OTHER_VENUE]", second_sample.venue)
-
-        question = question.replace("[YEAR]", first_sample.year.replace("'", ""))
-        paraphrase = paraphrase.replace("[YEAR]", first_sample.year.replace("'", ""))
-        query = query.replace("[YEAR]", first_sample.year)
-        
-        keyword = self.keyword_generator.get(first_sample.title.lower())
-        question = question.replace("[KEYWORD]", keyword)
-        paraphrase = paraphrase.replace("[KEYWORD]", keyword)
-        query = query.replace("[KEYWORD]", keyword)
+            question, paraphrase = [
+                    each.replace(placeholder, str(random.choice(value)))
+                        for each in [question, paraphrase]
+                ]
+            query = query.replace(
+                    placeholder, str(random.choice(value))
+                    if placeholder not in ["[DURATION]","[VENUE]","[OTHER_VENUE]"] else value[0]
+                )
 
         return question, paraphrase, query
 
@@ -291,32 +234,60 @@ class DataGenerator:
         """
             Generate question-query pairs
         """
-        valid_query_count = 0
-        invalid_query_count = 0
-        while valid_query_count < num_samples:
 
-            # Get two random samples
-            first_sample = self.sample_generator.get("Publication")
-            second_sample = self.sample_generator.get("Publication")
+        valid_query_count_dict = {
+            "Publication": {{query_type: 0} for query_type in self.query_types},
+            "Creator": {{query_type: 0} for query_type in self.query_types}
+        }
 
-            # Get a random template
-            template, entity, query_type = self.template_generator.get()
+        invalid_query_count_dict = {
+            "Publication": {{query_type: 0} for query_type in self.query_types},
+            "Creator": {{query_type: 0} for query_type in self.query_types}
+        }
+        
+        required_samle_size = (num_samples / len(self.entities)) / len(self.query_types)
 
-            # Fill in the template with the sample
-            question, paraphrase, query = self.fill_slots(template, first_sample, second_sample)
-            answers = self.server.query(query)
+        valid_query_index = 0
+        invalid_query_index = 0
 
-            if answers:
-                valid_query_count += 1
-                id = str(valid_query_count).zfill(4)
-            else:
-                invalid_query_count += 1
-                id = str(invalid_query_count).zfill(4)
+        for entity in self.entities:
+            for query_type in self.query_types:
+                
+                while valid_query_count_dict[entity][query_type] < required_samle_size:
+                    
+                    # Get two random samples
+                    first_sample = self.sample_generator.get("Publication")
+                    second_sample = self.sample_generator.get("Publication")
 
-            yield id, {
-                "question": question,
-                "paraphrase": paraphrase,
-                "query": query,
-                "entity": entity,
-                "query_type": query_type,
-            }, {"answer": answers}
+                    # Get a random template for entity and query type
+                    template = random.choice(templates[entity][query_type])
+
+                    # Fill in the template with the sample
+                    question, paraphrased_question, query = self.fill_slots(template, first_sample, second_sample)
+                    answers = self.server.query(query)
+
+                    if answers:
+                        valid_query_index += 1
+                        valid_query_count_dict[entity][query_type] += 1
+                        id = "Q"+str(valid_query_index).zfill(4) # Q0001, Q0002, ...
+                    else:
+                        invalid_query_index += 1
+                        invalid_query_count_dict[entity][query_type] += 1
+                        id = "Q"+str(invalid_query_index).zfill(4)
+
+                    yield id, {
+                        "entity": entity,
+                        "query_type": query_type,
+                        "template_id": template["id"],
+                        "question": [{
+                            "language": "en",
+                            "string": question
+                        }],
+                        "paraphrased_question": [{
+                            "language": "en",
+                            "string": paraphrased_question
+                        }],
+                        "query": [{
+                            "sparql": query,
+                        }]
+                    }, {"answer": answers}
