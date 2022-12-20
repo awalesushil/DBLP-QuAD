@@ -9,11 +9,13 @@ import logging
 import requests
 import urllib.parse
 
-from keybert import KeyBERT
+import spacy
+from spacy.matcher import Matcher
+
+nlp = spacy.load("en_core_web_sm")
 
 from templates import templates
 
-keybert = KeyBERT("distilbert-base-nli-mean-tokens")
 logging.basicConfig(level=logging.INFO)
 
 with open("data/CORE.json", "r") as f:
@@ -112,9 +114,17 @@ class KeywordGenerator:
     
     def get(self, title):
         """
-            Extract main keywords from the title using KeyBERT
+            Extract main keywords from the title using spacy
         """
-        keywords = keybert.extract_keywords(title, keyphrase_ngram_range=(1, 3), stop_words="english")[0][0]
+        doc = nlp(title.lower())
+        matcher = Matcher(nlp.vocab)
+        
+        pattern = [{"POS": "NOUN"}, {"POS": "NOUN", "OP": "*"}, {"POS": "NOUN"}]
+        matcher.add("NOUN_PHRASE", [pattern])
+        matches = matcher(doc)
+        
+        keywords = [doc[start:end].text for _, start, end in matches]
+        keywords = [keyword for keyword in keywords if not nlp.vocab[keyword].is_stop]
         return random.choice(keywords).capitalize() if keywords else "NONE"
 
 class DataGenerator:
