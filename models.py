@@ -52,8 +52,8 @@ class Sample:
         return [
             {
                 "uri": next(iter(author)),
-                "name": author[next(iter(author))].get(self.dblp_prefix("primaryFullCreatorName"), [""])[0].replace('"',""),
-                "affiliation": author[next(iter(author))].get(self.dblp_prefix("primaryAffiliation"), [""])[0].replace('"',"")
+                "name": author[next(iter(author))].get(self.dblp_prefix("primaryFullCreatorName"), "NONE")[0].replace('"',""),
+                "affiliation": author[next(iter(author))].get(self.dblp_prefix("primaryAffiliation"), "NONE")[0].replace('"',"")
             } for author in authors] if authors else None
 
     def __get_year(self):
@@ -151,9 +151,10 @@ class DataGenerator:
             name[-1] + ", " + name[0] + " " + " ".join(name[1:-1]), # Smith, John William
             name[0][0].replace(".","") + ". " + " ".join(name[1:]), # J. William Smith
             name[0] + " " + name[1][0].replace(".","") + ". " + " ".join(name[2:]), # John W. Smith
-            name[-1] + ", " + name[0][0].replace(".","") + ". " + " ".join(name[1:-1]), # Smith, J. William
+            name[-1] + ", " + name[0][0].replace(".","") + ". " + " ".join(name[1:-1]) # Smith, J. William
         ]
-        return " ".join(random.choice(alt_names).split(" "))
+        alt_name = random.choice(alt_names) + "$"
+        return alt_name.replace(" $","")
 
     def alt_duration(self, duration):
         """
@@ -187,8 +188,8 @@ class DataGenerator:
         else:
             creator, other_creator = {}, {}
 
-        name = creator.get("name", "NONE")
-        other_name = other_creator.get("name", "NONE")        
+        name = creator.get("name")
+        other_name = other_creator.get("name")
         duration = str(random.choice(range(1, 10)))
         venue = first_sample.venue
         other_venue = second_sample.venue
@@ -196,8 +197,8 @@ class DataGenerator:
         slots = {
             "?p1": first_sample.uri,
             "?p2": second_sample.uri,
-            "?c1": creator.get("uri", "NONE"),
-            "?c2": other_creator.get("uri", "NONE"),
+            "?c1": creator.get("uri"),
+            "?c2": other_creator.get("uri"),
             "?b": first_sample.bibtextype,
             "[TITLE]": first_sample.title,
             "[OTHER_TITLE]": second_sample.title,
@@ -205,7 +206,7 @@ class DataGenerator:
             "[OTHER_CREATOR_NAME]": [other_name, self.alt_name(other_name)],
             "[TYPE]": get_bibtextype(first_sample.bibtextype),
             "[PARTIAL_CREATOR_NAME]": name.split(" "),
-            "[AFFILIATION]": creator.get("affiliation", "NONE"),
+            "[AFFILIATION]": creator.get("affiliation"),
             "[YEAR]": first_sample.year,
             "[DURATION]": [duration, self.alt_duration(duration)],
             "[VENUE]": [venue, self.alt_venue(venue)],
