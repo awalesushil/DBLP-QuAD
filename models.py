@@ -214,7 +214,7 @@ class DataGenerator:
         }
 
         # Randomly select two questions
-        question, paraphrase = random.sample(template["questions"]["strings"], 2)
+        question, paraphrase = random.sample(template["question"]["strings"], 2)
         query = template["query"]["sparql"]
 
         # Fill in the template with the sample
@@ -242,16 +242,16 @@ class DataGenerator:
         """
 
         valid_query_count_dict = {
-            "Publication": {query_type: 0 for query_type in self.query_types},
-            "Creator": {query_type: 0 for query_type in self.query_types}
+            "PUBLICATION": {query_type: 0 for query_type in self.query_types},
+            "CREATOR": {query_type: 0 for query_type in self.query_types}
         }
 
         invalid_query_count_dict = {
-            "Publication": {query_type: 0 for query_type in self.query_types},
-            "Creator": {query_type: 0 for query_type in self.query_types}
+            "PUBLICATION": {query_type: 0 for query_type in self.query_types},
+            "CREATOR": {query_type: 0 for query_type in self.query_types}
         }
         
-        required_samle_size = (num_samples / len(self.entities)) / len(self.query_types)
+        required_sample_size = (num_samples / len(self.entity_types)) / len(self.query_types)
 
         valid_query_index = 0
         invalid_query_index = 0
@@ -259,7 +259,7 @@ class DataGenerator:
         for entity_type in self.entity_types:
             for query_type in self.query_types:
                 
-                while valid_query_count_dict[entity_type][query_type] < required_samle_size:
+                while valid_query_count_dict[entity_type][query_type] < required_sample_size:
                     
                     # Get two random samples
                     first_sample = self.sample_generator.get("Publication")
