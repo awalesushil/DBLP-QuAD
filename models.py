@@ -96,7 +96,13 @@ class DBLPServer:
         url = f"{self.host}/sparql?query={urllib.parse.quote(query)}&format=application%2Fsparql-results%2B{self.result_format}"
         response = requests.get(url)
         if response.status_code == 200:
-            return json.loads(response.text)
+            result = json.loads(response.text)
+
+            if "boolean" in result.keys():
+                return result
+            elif "results" in result.keys():
+                if result["results"]["bindings"]:
+                    return result
         return []
 
 class KeywordGenerator:
@@ -190,7 +196,8 @@ class DataGenerator:
 
         name = creator.get("name")
         other_name = other_creator.get("name")
-        duration = str(random.choice(range(1, 10)))
+        affiliation = creator.get("affiliation")
+        duration = str(random.choice(range(2, 10)))
         venue = first_sample.venue
         other_venue = second_sample.venue
 
@@ -206,7 +213,7 @@ class DataGenerator:
             "[OTHER_CREATOR_NAME]": [other_name, self.alt_name(other_name)],
             "[TYPE]": [get_bibtextype(first_sample.bibtextype)],
             "[PARTIAL_CREATOR_NAME]": name.split(" "),
-            "[AFFILIATION]": [creator.get("affiliation")],
+            "[AFFILIATION]": [affiliation],
             "[YEAR]": [first_sample.year],
             "[DURATION]": [duration, self.alt_duration(duration)],
             "[VENUE]": [venue, self.alt_venue(venue)],
@@ -224,8 +231,8 @@ class DataGenerator:
                     each.replace(placeholder, str(random.choice(value)))
                         for each in [question, paraphrase]
                 ]
-            query = query.replace(placeholder, 
-                "'" + str(value[0]) + "'" if placeholder != "[DUARTION]" else int(value[0]))
+            query = query.replace(placeholder, value[0]
+                if placeholder.startswith("?") or placeholder == "[DURATION]" else "'" + str(value[0]) + "'")
         
         entities = []
         
@@ -271,7 +278,7 @@ class DataGenerator:
                     question, paraphrase, query, entities = self.fill_slots(template, first_sample, second_sample)
                     answers = self.server.query(query)
 
-                    if answers:
+                    if answers and not re.search("NONE", question) and not re.search("NONE", paraphrase):
                         valid_query_index += 1
                         valid_query_count_dict[entity_type][query_type] += 1
                         id = "Q"+str(valid_query_index).zfill(4) # Q0001, Q0002, ...
