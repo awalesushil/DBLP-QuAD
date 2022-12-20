@@ -3,7 +3,7 @@
     Each template is a dictionary with the following keys:
         - query: the SPARQL query
         - questions: a list of questions that can be generated from the query
-    The templates are grouped by publication type:
+    The templates are grouped by entity type:
         - PUBLICATION: a query that returns a fact about a publication
         - CREATOR: a query that returns a fact about a creator
     The templates are grouped by query type:
@@ -14,7 +14,7 @@
         - NEGATION: a query that returns a negation
         - DOUBLE_NEGATION: a query that returns a double negation
         - COUNT: a query that returns a count
-        - RANK: a query that answers a superlative question
+        - SUPERLATIVE: a query that answers a superlative question
         - COMPARISON: a query that answers a comparison question
         - DISAMBIGUATION: a query that answers a disambiguation question
 
@@ -65,7 +65,9 @@ templates = {
                     "Who is the author of the paper [TITLE]?",
                     "[TITLE] was written by who?",
                     "[TITLE] was authored by which authors?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TP02",
@@ -81,7 +83,9 @@ templates = {
                     "In what year was [TITLE] published?",
                     "[TITLE] was published in which year?",
                     "The paper [TITLE] was published in which year?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TP03",
@@ -96,7 +100,9 @@ templates = {
                     "In which venue was the paper [TITLE] published?",
                     "[TITLE] was published in which venue?",
                     "The paper [TITLE] was published in which venue?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         },{
             "id": "TP04",
@@ -110,7 +116,9 @@ templates = {
                     "What is the bibtex type of [TITLE]?",
                     "What is the bibtex type of the publication [TITLE]?",
                     "What bibtex type of publication is [TITLE]?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#bibtexType>"]
             }]
         },{
             "id": "TP05",
@@ -125,7 +133,9 @@ templates = {
                     "How many authors does the publication [TITLE] have?",
                     "[TITLE] has how many authors?",
                     "The paper [TITLE] has how many authors?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#numberOfCreators>"]
             }]
         }],
         "MULTI_FACT": [{
@@ -140,7 +150,9 @@ templates = {
                     "What are the primary affiliations of the authors of the paper [TITLE]?",
                     "Where are the authors of [TITLE] from?",
                     "Where are the authors of the paper [TITLE] from?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#primaryAffiliation>"]
             }]
         },{
             "id": "TP12",
@@ -154,7 +166,9 @@ templates = {
                     "Which other publications were published by the authors of the paper [TITLE]?",
                     "Which other papers were written by the authors of [TITLE]?",
                     "Which other papers were written by the authors of the paper [TITLE]?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TP13",
@@ -168,7 +182,9 @@ templates = {
                     "What are the venues of the other papers published by the authors of the publication [TITLE]?",
                     "In which venues were the other papers published by the authors of [TITLE]?",
                     "In which venues were the other publications published by the authors of [TITLE]?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         },{
             "id": "TP14",
@@ -182,7 +198,9 @@ templates = {
                     "To which institutions have the authors of the paper [TITLE] been affiliated?",
                     "Which institutions have the authors of [TITLE] been affiliated to?",
                     "Which institutions have the authors of the paper [TITLE] been affiliated to?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#affiliation>"]
             }]
         },{
             "id": "TP15",
@@ -196,7 +214,9 @@ templates = {
                     "What are the ORCIDs of the authors of the paper [TITLE]?",
                     "What ORCIDs do the authors of [TITLE] have?",
                     "What ORCIDs do the authors of the paper [TITLE] have?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#orcid>"]
             }]
         },{
             "id": "TP16",
@@ -210,7 +230,9 @@ templates = {
                     "In which other years have the authors of [TITLE] published?",
                     "The authors of [TITLE] published in which other years?",
                     "The authors of [TITLE] published research papers in which other years?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         }],
         "DOUBLE_INTENT": [{
@@ -226,7 +248,9 @@ templates = {
                     "Where was the paper [TITLE] published and in which year?",
                     "In which venue was [TITLE] published and when?",
                     "In which venue was the paper [TITLE] published and when?",
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#publishedIn>", "<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TP22",
@@ -241,7 +265,9 @@ templates = {
                     "Who are the authors of the publication [TITLE] and where are they from?",
                     "Who are the authors of the paper [TITLE] and what are their affiliations?",
                     "Who are the authors of the publication [TITLE] and what are their affiliations?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#primaryAffiliation>"]
             }]
         },{
             "id": "TP23",
@@ -256,7 +282,9 @@ templates = {
                     "Who are the authors of the publication [TITLE] and which other papers did they publish?",
                     "Who are the authors of the paper [TITLE] and what other papers did they publish?",
                     "Who are the authors of the publication [TITLE] and what other papers did they publish?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TP24",
@@ -271,7 +299,9 @@ templates = {
                     "Who are the authors of the publication [TITLE] and what are the venues of the other papers they published?",
                     "Who are the authors of the paper [TITLE] and where did they publish other papers?",
                     "Who are the authors of the publication [TITLE] and where did they publish other papers?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         }],
         "BOOLEAN": [{
@@ -285,7 +315,9 @@ templates = {
                     "Does [TITLE] exist?",
                     "Does the paper [TITLE] exist?",
                     "Does the publication [TITLE] exist?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#title>"]
             }]
         },{
             "id": "TP32",
@@ -298,7 +330,9 @@ templates = {
                     "Is [TITLE] a [TYPE] publication?",
                     "Is the publication [TITLE] a [TYPE] paper?",
                     "Is the paper [TITLE] a [TYPE] publication?"
-                ]
+                ],
+                "entities": ["?p1", "?b"],
+                "relations": ["<http://purl.org/dc/terms/bibtexType>"]
             }]
         },{
             "id": "TP33",
@@ -312,7 +346,9 @@ templates = {
                     "Do the authors of the publication [TITLE] have [AFFILIATION] as their primary affiliation?",
                     "Is [AFFILIATION] the primary affiliation of the authors of [TITLE]?",
                     "Is [AFFILIATION] the primary affiliation of the authors of the paper [TITLE]?"
-                ]
+                ],
+                "entities": ["?p1","[AFFILIATION]"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#primaryAffiliation>"]
             }]
         },{
             "id": "TP34",
@@ -328,7 +364,9 @@ templates = {
                     "Was [TITLE] published in the year [YEAR]?",
                     "Was the paper [TITLE] published in the year [YEAR]?",
                     "Was the publication [TITLE] published in the year [YEAR]?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TP35",
@@ -347,7 +385,9 @@ templates = {
                     "Did the authors of [TITLE] also publish the publication [OTHER_TITLE]?",
                     "Did the authors of the paper [TITLE] also publish the publication [OTHER_TITLE]?",
                     "Did the authors of the publication [TITLE] also publish the publication [OTHER_TITLE]?"
-                ]
+                ],
+                "entities": ["?p1", "?p2"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TP36",
@@ -364,7 +404,9 @@ templates = {
                     "Did the authors of the paper [TITLE] also publish a publication in [OTHER_VENUE]?",
                     "Did the authors of the publication [TITLE] also publish a publication in [OTHER_VENUE]?",
                     "Did the authors of [TITLE] also publish a paper in the venue [OTHER_VENUE]?"
-                ]
+                ],
+                "entities": ["?p1", "[OTHER_VENUE]"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         }],
         "NEGATION": [{
@@ -378,7 +420,9 @@ templates = {
                     "Does [TITLE] not exist?",
                     "Does the paper [TITLE] not exist?",
                     "Doesn't the publication [TITLE] exist?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#title>"]
             }]
         },{
             "id": "TP42",
@@ -393,7 +437,9 @@ templates = {
                     "Wasn't the publication [TITLE] published in [YEAR]?",
                     "Wasn't [TITLE] published in the year [YEAR]?",
                     "Wasn't the paper [TITLE] published in the year [YEAR]?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TP43",
@@ -409,7 +455,9 @@ templates = {
                     "Didn't the authors of [TITLE] publish a publication in [VENUE]?",
                     "Have the authors of the paper [TITLE] not published a publication in [VENUE]?",
                     "Haven't the authors of the publication [TITLE] published a publication in [VENUE]?",
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         },{
             "id": "TP44",
@@ -425,7 +473,9 @@ templates = {
                     "Didn't the authors of [TITLE] publish the paper [OTHER_TITLE]?",
                     "Have the authors of the paper [TITLE] not published the paper [OTHER_TITLE]?",
                     "Haven't the authors of the publication [TITLE] published the paper [OTHER_TITLE]?"
-                ]
+                ],
+                "entities": ["?p1", "?p2"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         }],
         "DOUBLE_NEGATION": [{
@@ -440,7 +490,9 @@ templates = {
                     "Doesn't the paper [TITLE] not exist?",
                     "Does the publication [TITLE] not not exist?",
                     "Doesn't the publication [TITLE] not exist?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#title>"]
             }]
         },{
             "id": "TP52",
@@ -455,7 +507,9 @@ templates = {
                     "Was the publication [TITLE] not not published in [YEAR]?",
                     "Wasn't [TITLE] not published in the year [YEAR]?",
                     "Was the paper [TITLE] not not published in the year [YEAR]?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TP53",
@@ -471,7 +525,9 @@ templates = {
                     "Didn't the authors of [TITLE] not not publish a publication in [VENUE]?",
                     "Have the authors of the paper [TITLE] not not published a publication in [VENUE]?",
                     "Haven't the authors of the publication [TITLE] not published a publication in [VENUE]?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         },{
             "id": "TP54",
@@ -487,7 +543,9 @@ templates = {
                     "Didn't the authors of [TITLE] not not publish the paper [OTHER_TITLE]?",
                     "Have the authors of the paper [TITLE] not not published the paper [OTHER_TITLE]?",
                     "Haven't the authors of the publication [TITLE] not published the paper [OTHER_TITLE]?"
-                ]
+                ],
+                "entities": ["?p1", "?p2"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         }],
         "UNION": [{
@@ -505,7 +563,9 @@ templates = {
                     "Who are the authors of the paper [TITLE] and the publication [OTHER_TITLE]?",
                     "Who are the authors of the publication [TITLE] and the paper [OTHER_TITLE]?",
                     "Who are the authors of the publication [TITLE] and the publication [OTHER_TITLE]?"
-                ]
+                ],
+                "entities": ["?p1", "?p2"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TP62",
@@ -521,7 +581,9 @@ templates = {
                     "When were the papers [TITLE] and [OTHER_TITLE] published?",
                     "When were the papers [TITLE] and [OTHER_TITLE] published?",
                     "When were the publications [TITLE] and [OTHER_TITLE] published?"
-                ]
+                ],
+                "entities": ["?p1", "?p2"],
+                "relations": ["<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TP63",
@@ -537,7 +599,9 @@ templates = {
                     "Where were the papers [TITLE] and [OTHER_TITLE] published?",
                     "Where were the papers [TITLE] and [OTHER_TITLE] published?",
                     "Where were the publications [TITLE] and [OTHER_TITLE] published?"
-                ]
+                ],
+                "entities": ["?p1", "?p2"],
+                "relations": ["<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         }],
         "COUNT": [{
@@ -551,7 +615,9 @@ templates = {
                     "How many authors of [TITLE] have [AFFILIATION] as their primary affiliation?",
                     "How many authors of the paper [TITLE] have [AFFILIATION] as their primary affiliation?",
                     "How many authors of the publication [TITLE] have [AFFILIATION] as their primary affiliation?"
-                ]
+                ],
+                "entities": ["?p1", "[AFFILIATION]"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#primaryAffiliation>"]
             }]
         },{
             "id": "TP72",
@@ -567,7 +633,9 @@ templates = {
                     "How many publications did the authors of [TITLE] publish?",
                     "How many publications did the authors of the paper [TITLE] publish?",
                     "How many publications did the authors of the publication [TITLE] publish?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TP73",
@@ -580,7 +648,9 @@ templates = {
                     "How many different affiliations do the authors of [TITLE] have?",
                     "How many different affiliations do the authors of the paper [TITLE] have?",
                     "How many different affiliations do the authors of the publication [TITLE] have?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#primaryAffiliation>"]
             }]
         },{
             "id": "TP74",
@@ -596,7 +666,9 @@ templates = {
                     "How many papers did the authors of the paper [TITLE] publish in the year [YEAR]?",
                     "How many papers did the authors of the publication [TITLE] publish in the year [YEAR]?",
                     "How many papers did the authors of the paper [TITLE] publish in the year [YEAR]?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TP75",
@@ -610,7 +682,9 @@ templates = {
                     "In [VENUE], how many papers did the authors of [TITLE] publish?",
                     "How many publications did the authors of the paper [TITLE] publish in [VENUE]?",
                     "In [VENUE], how many publications did the authors of the paper [TITLE] publish?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         }],
         "SUPERLATIVE": [{
@@ -627,7 +701,9 @@ templates = {
                     "To which institution are the majority of the authors of the paper [TITLE] affiliated to?",
                     "What is the primary affiliation of most of the authors of [TITLE]?",
                     "What is the primary affiliation of most of the authors of the paper [TITLE]?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#primaryAffiliation>"]
             }]
         },{
             "id": "TP82",
@@ -641,7 +717,9 @@ templates = {
                     "Who has published the most papers among the authors of the paper [TITLE]?",
                     "Among the authors of [TITLE], who has published the most papers?",
                     "Among the authors of the paper [TITLE], who has published the most papers?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TP83",
@@ -655,7 +733,9 @@ templates = {
                     "When were the first papers of the authors of the paper [TITLE] published?",
                     "When were the first publications of the authors of [TITLE] published?",
                     "When were the first publications of the authors of the paper [TITLE] published?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TP84",
@@ -669,7 +749,9 @@ templates = {
                     "Who published the first paper among the authors of the paper [TITLE]?",
                     "Among the authors of [TITLE], who published the first paper?",
                     "Among the authors of the paper [TITLE], who published the first paper?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TP85",
@@ -679,9 +761,13 @@ templates = {
             "questions": [{
                 "language": "en",
                 "strings": [
-                    "Between [TITLE] and [OTHER_TITLE], which one was published earlier?",
-                    "Between [TITLE] and [OTHER_TITLE], which one was published first?"
-                ]
+                    "Between [TITLE] and [OTHER_TITLE], which paper was published earlier?",
+                    "Between [TITLE] and [OTHER_TITLE], which one was published first?",
+                    "Which one was published first, [TITLE] or [OTHER_TITLE]?",
+                    "Which paper was published earlier, [TITLE] or [OTHER_TITLE]?"
+                ],
+                "entities": ["?p1", "?p2"],
+                "relations": ["<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TP86",
@@ -691,16 +777,20 @@ templates = {
             "questions": [{
                 "language": "en",
                 "strings": [
-                    "Between [TITLE] and [OTHER_TITLE], which one has more authors?",
+                    "Between [TITLE] and [OTHER_TITLE], which paper has more authors?",
                     "Between [TITLE] and [OTHER_TITLE], which one has more number of authors?",
-                    "Between [TITLE] and [OTHER_TITLE], which one has more number of co-authors?"
-                ]
+                    "Between [TITLE] and [OTHER_TITLE], which paper has more number of co-authors?",
+                    "Which one has more number of co-authors, [TITLE] or [OTHER_TITLE]?",
+                    "Which one has more number of authors, [TITLE] or [OTHER_TITLE]?"
+                ],
+                "entities": ["?p1", "?p2"],
+                "relations": ["<https://dblp.org/rdf/schema#numberOfCreators>"]
             }]
         }],
         "DISAMBIGUATION": [{
             "id": "TP91",
             "query":  [{
-                "sparql": "SELECT DISTINCT ?answer WHERE { ?x <https://dblp.org/rdf/schema#publishedIn> [VENUE] . ?x <https://dblp.org/rdf/schema#yearOfPublication> [YEAR] . ?x <https://dblp.org/rdf/schema#title> ?t . FILTER CONTAINS (LCASE(?t), [KEYWORD]) . ?x <https://dblp.org/rdf/schema#authoredBy> ?answer }"
+                "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer . ?p1 <https://dblp.org/rdf/schema#publishedIn> [VENUE] . ?p1 <https://dblp.org/rdf/schema#yearOfPublication> [YEAR] }"
             }],
             "questions": [{
                 "language": "en",
@@ -711,12 +801,14 @@ templates = {
                     "In [VENUE] in the year [YEAR], who are the authors that published research papers about [KEYWORD]?",
                     "In [YEAR] in [VENUE], who are the authors that published papers about [KEYWORD]?",
                     "In the year [YEAR] in [VENUE], who are the authors that published research papers about [KEYWORD]?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#publishedIn>", "<https://dblp.org/rdf/schema#yearOfPublication>", "<https://dblp.org/rdf/schema#authoredBy>"] 
             }]
         },{
             "id": "TP92",
             "query":  [{
-                "sparql": "SELECT DISTINCT ?answer WHERE { ?x <https://dblp.org/rdf/schema#publishedIn> [VENUE] . ?x <https://dblp.org/rdf/schema#yearOfPublication> [YEAR] . ?x <https://dblp.org/rdf/schema#title> ?answer . FILTER CONTAINS (LCASE(?answer), [KEYWORD]) }"
+                "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#publishedIn> [VENUE] . ?p1 <https://dblp.org/rdf/schema#yearOfPublication> [YEAR] . ?p1 <https://dblp.org/rdf/schema#title> ?answer }"
             }],
             "questions": [{
                 "language": "en",
@@ -727,7 +819,9 @@ templates = {
                     "In [VENUE] in the year [YEAR], what are the titles of the research papers on [KEYWORD]?",
                     "In [YEAR] in [VENUE], what are the titles of the papers on [KEYWORD]?",
                     "In the year [YEAR] in [VENUE], what are the titles of the research papers on [KEYWORD]?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#publishedIn>", "<https://dblp.org/rdf/schema#yearOfPublication>", "<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#title>"]
             }]
         },{
             "id": "TP93",
@@ -741,7 +835,9 @@ templates = {
                     "In what year was the paper [KEYWORD] by [AFFILIATION] published?",
                     "When was the research paper [KEYWORD] by [AFFILIATION] published?",
                     "Mention the year in which the paper [KEYWORD] by [AFFILIATION] was published?"
-                ]
+                ],
+                "entities": ["?p1","[AFFILIATION]"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#primaryAffiliation>", "<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         }],
     },
@@ -762,7 +858,9 @@ templates = {
                     "Which publications did [CREATOR_NAME] write?",
                     "Which papers did the author [CREATOR_NAME] write?",
                     "Which publications did [CREATOR_NAME] author?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC02",
@@ -776,7 +874,9 @@ templates = {
                     "What is the primary affiliation of the author [CREATOR_NAME]?",
                     "[CREATOR_NAME] is primarily affiliated to which institution?",
                     "The author [CREATOR_NAME] is primarily affiliated to which institution?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#primaryAffiliation>"]
             }]
         },{
             "id": "TC03",
@@ -790,7 +890,9 @@ templates = {
                     "What is the ORCID of the author [CREATOR_NAME]?",
                     "What is the ORCID of the person [CREATOR_NAME]?",
                     "What is the ORCID of the researcher [CREATOR_NAME]?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#orcid>"]
             }]
         },{
             "id": "TC04",
@@ -805,7 +907,9 @@ templates = {
                     "What are the institutions that [CREATOR_NAME] has been affiliated to?",
                     "To which institutions has [CREATOR_NAME] been affiliated?",
                     "To which institutions has the author [CREATOR_NAME] been affiliated?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#affiliation>"]
             }]
         },{
             "id": "TC05",
@@ -819,7 +923,9 @@ templates = {
                     "What is the homepage of the author [CREATOR_NAME]?",
                     "What is the homepage of the person [CREATOR_NAME]?",
                     "What is the homepage of the researcher [CREATOR_NAME]?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#homepage>"]
             }]
         }],
         "MULTI_FACT": [{
@@ -836,7 +942,9 @@ templates = {
                     "Which venues has [CREATOR_NAME] published in?",
                     "In which conferences or journals has [CREATOR_NAME] published papers?",
                     "In which conferences or journals has the author [CREATOR_NAME] published papers?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         },{
             "id": "TC12",
@@ -851,7 +959,9 @@ templates = {
                     "Which papers did [CREATOR_NAME] and [OTHER_CREATOR_NAME] write together?",
                     "What publications did [CREATOR_NAME] and [OTHER_CREATOR_NAME] author together?",
                     "Which papers did the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] co-write?"
-                ]
+                ],
+                "entities": ["?c1", "?c2"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC13",
@@ -866,7 +976,9 @@ templates = {
                     "What publications did [CREATOR_NAME] publish in [VENUE]?",
                     "In [VENUE], which papers did [CREATOR_NAME] publish?",
                     "In [VENUE], which papers did the author [CREATOR_NAME] publish?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         },{
             "id": "TC14",
@@ -880,7 +992,9 @@ templates = {
                     "Who are the co-authors of the author [CREATOR_NAME]?",
                     "With which other authors has [CREATOR_NAME] co-authored papers?",
                     "With which other authors has the author [CREATOR_NAME] co-authored papers?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC15",
@@ -894,7 +1008,9 @@ templates = {
                     "Which papers did the author [CREATOR_NAME] publish in the last [DURATION] years?",
                     "Which papers did [CREATOR_NAME] publish in the last [DURATION] years?",
                     "Which papers did the author [CREATOR_NAME] publish in the last [DURATION] years?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TC16",
@@ -909,7 +1025,9 @@ templates = {
                     "Which papers did [CREATOR_NAME] publish with the author affiliated to [AFFILIATION]?",
                     "Which papers did the author [CREATOR_NAME] write with the author from [AFFILIATION]?",
                     "Which publications did [CREATOR_NAME] write with the author from [AFFILIATION]?"
-                ]
+                ],
+                "entities": ["?c1", "[AFFILIATION]"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#primaryAffiliation>"]
             }]
         }],
         "DOUBLE_INTENT": [{
@@ -923,7 +1041,9 @@ templates = {
                     "Which papers did author [CREATOR_NAME] publish and in which year?",
                     "What are the papers published by [CREATOR_NAME] and in which year?",
                     "Which publications did [CREATOR_NAME] author and in which year?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TC22",
@@ -937,7 +1057,9 @@ templates = {
                     "Who are the co-authors of the author [CREATOR_NAME] and where are they affiliated?",
                     "With which other authors has [CREATOR_NAME] co-authored papers and where are they affiliated?",
                     "With which other authors has the author [CREATOR_NAME] co-authored papers and where are they affiliated?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#primaryAffiliation>"]
             }]
         },{
             "id": "TC23",
@@ -951,7 +1073,9 @@ templates = {
                     "Who are the co-authors of the author [CREATOR_NAME] in the last [DURATION] years and where are they affiliated?",
                     "With which other authors has [CREATOR_NAME] co-authored papers in the last [DURATION] years and where are they affiliated?",
                     "With which other authors has the author [CREATOR_NAME] co-authored papers in the last [DURATION] years and where are they affiliated?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TC24",
@@ -965,7 +1089,9 @@ templates = {
                     "In which venues did the author [CREATOR_NAME] publish papers and what are the titles of these papers?",
                     "What are the titles of the papers that [CREATOR_NAME] published and in which venues?",
                     "What are the titles of the papers that the author [CREATOR_NAME] published and in which venues?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>", "<https://dblp.org/rdf/schema#title>"]
             }]
         },{
             "id": "TC25",
@@ -979,7 +1105,9 @@ templates = {
                     "In which venues did the author [CREATOR_NAME] publish papers in the last [DURATION] years and what are the titles of these papers?",
                     "What are the titles of the papers that [CREATOR_NAME] published in the last [DURATION] years and in which venues?",
                     "What are the titles of the papers that the author [CREATOR_NAME] published in the last [DURATION] years and in which venues?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#yearOfPublication>", "<https://dblp.org/rdf/schema#publishedIn>", "<https://dblp.org/rdf/schema#title>"]
             }]
         }],
         "BOOLEAN": [{
@@ -997,7 +1125,9 @@ templates = {
                     "Was the paper [TITLE] published by the author [CREATOR_NAME]?",
                     "Was the paper [TITLE] published by the person [CREATOR_NAME]?",
                     "Was the paper [TITLE] published by the person named [CREATOR_NAME]?"
-                ]
+                ],
+                "entities": ["?c1", "?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC32",
@@ -1012,7 +1142,9 @@ templates = {
                     "Was the paper [TITLE] co-authored by [CREATOR_NAME] and [OTHER_CREATOR_NAME]?",
                     "Was the paper [TITLE] co-authored by the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME]?",
                     "Have [CREATOR_NAME] and [OTHER_CREATOR_NAME] co-authored the paper [TITLE]?"
-                ]
+                ],
+                "entities": ["?c1", "?c2", "?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC33",
@@ -1026,7 +1158,9 @@ templates = {
                     "Did the author [CREATOR_NAME] publish the paper [TITLE] in [VENUE]?",
                     "Was the paper [TITLE] published by [CREATOR_NAME] in [VENUE]?",
                     "Has [CREATOR_NAME] published the paper [TITLE] in [VENUE]?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         },{
             "id": "TC34",
@@ -1040,7 +1174,9 @@ templates = {
                     "Did the author [CREATOR_NAME] publish the paper [TITLE] in the last [DURATION] years?",
                     "Did [CREATOR_NAME] publish the paper [TITLE] in the last [DURATION] years?",
                     "Did the author [CREATOR_NAME] publish the paper [TITLE] in the last [DURATION] years?"
-                ]
+                ],
+                "entities": ["?c1", "?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TC35",
@@ -1054,7 +1190,9 @@ templates = {
                     "Did the author [CREATOR_NAME] publish in [VENUE] in the last [DURATION] years?",
                     "Has [CREATOR_NAME] published in [VENUE] in the last [DURATION] years?",
                     "Has the author [CREATOR_NAME] published in [VENUE] in the last [DURATION] years?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#yearOfPublication>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         },{
             "id": "TC36",
@@ -1068,7 +1206,9 @@ templates = {
                     "Does the author [CREATOR_NAME] have an ORCID?",
                     "Does the person [CREATOR_NAME] have an ORCID?",
                     "Does the person named [CREATOR_NAME] have an ORCID?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#orcid>"]
             }]
         }],
         "NEGATION": [{
@@ -1088,7 +1228,9 @@ templates = {
                     "Wasn't the paper [TITLE] not published by the author [CREATOR_NAME]?",
                     "Was the paper [TITLE] not published by the person [CREATOR_NAME]?",
                     "Wasn't the paper [TITLE] not published by the person named [CREATOR_NAME]?"
-                ]
+                ],
+                "entities": ["?c1", "?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC42",
@@ -1102,7 +1244,9 @@ templates = {
                     "Did the author [CREATOR_NAME] not publish in [VENUE]?",
                     "Has [CREATOR_NAME] not published in [VENUE]?",
                     "Has the author [CREATOR_NAME] not published in [VENUE]?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         },{
             "id": "TC43",
@@ -1117,7 +1261,9 @@ templates = {
                     "Was the paper [TITLE] not co-authored by [CREATOR_NAME] and [OTHER_CREATOR_NAME]?",
                     "Was the paper [TITLE] not co-authored by the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME]?",
                     "Have [CREATOR_NAME] and [OTHER_CREATOR_NAME] not co-authored the paper [TITLE]?"
-                ]
+                ],
+                "entities": ["?c1", "?c2", "?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC44",
@@ -1131,7 +1277,9 @@ templates = {
                     "Did the author [CREATOR_NAME] not publish in [VENUE] in the last [DURATION] years?",
                     "Has [CREATOR_NAME] not published in [VENUE] in the last [DURATION] years?",
                     "Has the author [CREATOR_NAME] not published in [VENUE] in the last [DURATION] years?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         }],
         "DOUBLE_NEGATION": [{
@@ -1149,7 +1297,9 @@ templates = {
                     "Wasn't the paper [TITLE] not not published by the author [CREATOR_NAME]?",
                     "Was the paper [TITLE] not not published by the person [CREATOR_NAME]?",
                     "Wasn't the paper [TITLE] not not published by the person named [CREATOR_NAME]?"
-                ]
+                ],
+                "entities": ["?c1", "?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC52",
@@ -1165,7 +1315,9 @@ templates = {
                     "Has the author [CREATOR_NAME] not not published in [YEAR]?",
                     "Didn't [CREATOR_NAME] not publish in [YEAR]?",
                     "Hasn't [CREATOR_NAME] not published in [YEAR]?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#yearOfPublication>"]
             }]
         },{
             "id": "TC53",
@@ -1179,7 +1331,9 @@ templates = {
                     "Did the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] not not co-author a paper?",
                     "Was a paper not not co-authored by [CREATOR_NAME] and [OTHER_CREATOR_NAME]?",
                     "Have [CREATOR_NAME] and [OTHER_CREATOR_NAME] not not co-authored a paper?"
-                ]
+                ],
+                "entities": ["?c1", "?c2"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC54",
@@ -1193,7 +1347,9 @@ templates = {
                     "Is [CREATOR_NAME] not not affiliated with [AFFILIATION]?",
                     "Doesn't [CREATOR_NAME] not work at [AFFILIATION]?",
                     "Does [CREATOR_NAME] not not have [AFFILIATION] as the primary affiliation?"
-                ]
+                ],
+                "entities": ["?c1", "[AFFILIATION]"],
+                "relations": ["<https://dblp.org/rdf/schema#primaryAffiliation>"]
             }]
         }],
         "UNION": [{
@@ -1209,7 +1365,9 @@ templates = {
                     "What are all the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published?",
                     "What are the papers that the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] published?",
                     "What are all the papers that the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] published?"
-                ]
+                ],
+                "entities": ["?c1", "?c2"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC62",
@@ -1224,7 +1382,9 @@ templates = {
                     "What are all the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE]?",
                     "What are the papers that the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE]?",
                     "What are all the papers that the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE]?"
-                ]
+                ],
+                "entities": ["?c1", "?c2"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         },{
             "id": "TC63",
@@ -1238,7 +1398,9 @@ templates = {
                     "What papers did the author [CREATOR_NAME] publish in [VENUE] and [OTHER_VENUE]?",
                     "What publications did [CREATOR_NAME] publish in [VENUE] and [OTHER_VENUE]?",
                     "What publications did the author [CREATOR_NAME] publish in [VENUE] and [OTHER_VENUE]?"
-                ] 
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         }],
         "COUNT": [{
@@ -1255,7 +1417,9 @@ templates = {
                     "How many publications has the author [CREATOR_NAME] published?",
                     "How many research papers has [CREATOR_NAME] published?",
                     "How many research papers has the author [CREATOR_NAME] published?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC72",
@@ -1271,7 +1435,9 @@ templates = {
                     "In [VENUE], how many papers has [CREATOR_NAME] published?",
                     "In [VENUE], how many papers has the author [CREATOR_NAME] published?",
                     "In [VENUE], how many publications has [CREATOR_NAME] published?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         },{
             "id": "TC73",
@@ -1285,7 +1451,9 @@ templates = {
                     "How many co-authors does the author [CREATOR_NAME] have?",
                     "With how many other authors has [CREATOR_NAME] co-authored papers?",
                     "With how many other authors has the author [CREATOR_NAME] co-authored papers?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC74",
@@ -1300,7 +1468,9 @@ templates = {
                     "How many papers did the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] co-write?",
                     "How many research papers did [CREATOR_NAME] and [OTHER_CREATOR_NAME] write together?",
                     "How many research papers did the authors [CREATOR_NAME] and [OTHER_CREATOR_NAME] co-write?"
-                ]
+                ],
+                "entities": ["?c1", "?c2"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC75",
@@ -1316,7 +1486,9 @@ templates = {
                     "What is the average number of publications published by the author [CREATOR_NAME] per year?",
                     "What is the average number of research papers published by [CREATOR_NAME] per year?",
                     "What is the average number of research papers published by the author [CREATOR_NAME] per year?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC76",
@@ -1332,7 +1504,9 @@ templates = {
                     "What is the average number of co-authors for publications published by the author [CREATOR_NAME]?",
                     "What is the average number of co-authors for research papers published by [CREATOR_NAME]?",
                     "What is the average number of co-authors for research papers published by the author [CREATOR_NAME]?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         }],
         "SUPERLATIVE": [{
@@ -1349,7 +1523,9 @@ templates = {
                     "In which year did the author [CREATOR_NAME] publish the most publications?",
                     "In which year did [CREATOR_NAME] publish the most research papers?",
                     "In which year did the author [CREATOR_NAME] publish the most research papers?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC82",
@@ -1365,7 +1541,9 @@ templates = {
                     "In which year did the author [CREATOR_NAME] publish the least publications?",
                     "In which year did [CREATOR_NAME] publish the least research papers?",
                     "In which year did the author [CREATOR_NAME] publish the least research papers?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC83",
@@ -1380,7 +1558,9 @@ templates = {
                     "In which venue did [CREATOR_NAME] publish the most publications and how many?",
                     "[CREATOR_NAME] published the most papers in which venue and how many?",
                     "[CREATOR_NAME] published the most publications in which venue?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC84",
@@ -1395,7 +1575,9 @@ templates = {
                     "With which author does [CREATOR_NAME] has the most research papers?",
                     "Who is the most common co-author of [CREATOR_NAME] and how many papers do they have together?",
                     "Who is the most frequent co-author of [CREATOR_NAME] and how many publications do they have together?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC85",
@@ -1410,7 +1592,9 @@ templates = {
                     "When was the first research paper by [CREATOR_NAME] published?",
                     "In which year was the first paper by [CREATOR_NAME] published?",
                     "In which year did [CREATOR_NAME] publish their first paper?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC86",
@@ -1425,13 +1609,15 @@ templates = {
                     "When was the last research paper by [CREATOR_NAME] published?",
                     "In which year was the last paper by [CREATOR_NAME] published?",
                     "In which year did [CREATOR_NAME] publish their last paper?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         }],
         "DISAMBIGUATION": [{
             "id": "TC91",
             "query":  [{
-                "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer . ?answer <https://dblp.org/rdf/schema#primaryFullCreatorName> ?x . FILTER CONTAINS(LCASE(?x), [PARTIAL_CREATOR_NAME]) }"
+                "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer }"
             }],
             "questions": [{
                 "language": "en",
@@ -1440,12 +1626,14 @@ templates = {
                     "Who is the author named [PARTIAL_CREATOR_NAME] who published the paper about [KEYWORD]?",
                     "Which author published the paper on [KEYWORD] and has the name [PARTIAL_CREATOR_NAME]?",
                     "Which author with the name [PARTIAL_CREATOR_NAME] published the paper about [KEYWORD]?"
-                ]
+                ],
+                "entities": ["?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             }]
         },{
             "id": "TC92",
             "query":  [{
-                "sparql": "SELECT DISTINCT ?answer WHERE { ?x <https://dblp.org/rdf/schema#publishedIn> [VENUE] . ?x <https://dblp.org/rdf/schema#authoredBy> ?y . ?y <https://dblp.org/rdf/schema#primaryFullCreatorName> ?z . FILTER REGEX (?z, [PARTIAL_CREATOR_NAME], 'i') .  ?x <https://dblp.org/rdf/schema#title> ?answer . FILTER REGEX (?answer, [KEYWORD], 'i') }"
+                "sparql": "SELECT DISTINCT ?answer WHERE { ?answer <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?answer <https://dblp.org/rdf/schema#publishedIn> [VENUE] }"
             }],
             "questions": [{
                 "language": "en",
@@ -1456,12 +1644,14 @@ templates = {
                     "Which publication on [KEYWORD] was published by the author [PARTIAL_CREATOR_NAME] in [VENUE]?",
                     "Which research paper on [KEYWORD] was published by [PARTIAL_CREATOR_NAME] in [VENUE]?",
                     "Which research paper on [KEYWORD] was published by the author [PARTIAL_CREATOR_NAME] in [VENUE]?"
-                ]
+                ],
+                "entities": ["?c1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         },{
             "id": "TC93",
             "query":  [{
-                "sparql": "SELECT DISTINCT ?answer WHERE { ?x <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?x <https://dblp.org/rdf/schema#title> ?y . FILTER CONTAINS(LCASE(?y), [KEYWORD]) . ?x <https://dblp.org/rdf/schema#publishedIn> ?answer }"
+                "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?c1 . ?p1 <https://dblp.org/rdf/schema#publishedIn> ?answer }"
             }],
             "questions": [{
                 "language": "en",
@@ -1472,7 +1662,9 @@ templates = {
                     "[PARTIAL_CREATOR_NAME] published the paper on [KEYWORD] in which venue?",
                     "[PARTIAL_CREATOR_NAME] published the publication on [KEYWORD] in which venue?",
                     "[PARTIAL_CREATOR_NAME] published the research paper on [KEYWORD] in which venue?"
-                ]
+                ],
+                "entities": ["?c1", "?p1"],
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             }]
         }]
     }

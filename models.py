@@ -127,12 +127,12 @@ class DataGenerator:
     """
     def __init__(self, graph, seed):
         random.seed(seed)
-        self.entities = ["CREATOR", "PUBLICATION"]
+        self.entity_types = ["CREATOR", "PUBLICATION"]
         self.query_types = [
             "SINGLE_FACT","MULTI_FACT","DOUBLE_INTENT",
             "BOOLEAN","NEGATION","DOUBLE_NEGATION",
             "UNION","DISAMBIGUATION",
-            "COUNT","RANK"
+            "COUNT","SUPERLATIVE"
         ]
         self.sample_generator = SampleGenerator(graph)
         self.server = DBLPServer("config.json")
@@ -227,8 +227,14 @@ class DataGenerator:
                     placeholder, str(random.choice(value))
                     if placeholder not in ["[DURATION]","[VENUE]","[OTHER_VENUE]"] else value[0]
                 )
+        
+        entities = []
+        
+        # Save the entities
+        for entity in template["query"]["entities"]:
+            entities.append(slots[entity])
 
-        return question, paraphrase, query
+        return question, paraphrase, query, entities
 
     def generate(self, num_samples):
         """
@@ -236,13 +242,13 @@ class DataGenerator:
         """
 
         valid_query_count_dict = {
-            "Publication": {{query_type: 0} for query_type in self.query_types},
-            "Creator": {{query_type: 0} for query_type in self.query_types}
+            "Publication": {query_type: 0 for query_type in self.query_types},
+            "Creator": {query_type: 0 for query_type in self.query_types}
         }
 
         invalid_query_count_dict = {
-            "Publication": {{query_type: 0} for query_type in self.query_types},
-            "Creator": {{query_type: 0} for query_type in self.query_types}
+            "Publication": {query_type: 0 for query_type in self.query_types},
+            "Creator": {query_type: 0 for query_type in self.query_types}
         }
         
         required_samle_size = (num_samples / len(self.entities)) / len(self.query_types)
@@ -250,33 +256,34 @@ class DataGenerator:
         valid_query_index = 0
         invalid_query_index = 0
 
-        for entity in self.entities:
+        for entity_type in self.entity_types:
             for query_type in self.query_types:
                 
-                while valid_query_count_dict[entity][query_type] < required_samle_size:
+                while valid_query_count_dict[entity_type][query_type] < required_samle_size:
                     
                     # Get two random samples
                     first_sample = self.sample_generator.get("Publication")
                     second_sample = self.sample_generator.get("Publication")
 
-                    # Get a random template for entity and query type
-                    template = random.choice(templates[entity][query_type])
+                    # Get a random template for entity type and query type
+                    template = random.choice(templates[entity_type][query_type])
 
                     # Fill in the template with the sample
-                    question, paraphrased_question, query = self.fill_slots(template, first_sample, second_sample)
+                    question, paraphrased_question, query, entities = self.fill_slots(template, first_sample, second_sample)
                     answers = self.server.query(query)
 
                     if answers:
                         valid_query_index += 1
-                        valid_query_count_dict[entity][query_type] += 1
+                        valid_query_count_dict[entity_type][query_type] += 1
                         id = "Q"+str(valid_query_index).zfill(4) # Q0001, Q0002, ...
                     else:
                         invalid_query_index += 1
-                        invalid_query_count_dict[entity][query_type] += 1
+                        invalid_query_count_dict[entity_type][query_type] += 1
                         id = "Q"+str(invalid_query_index).zfill(4)
 
                     yield id, {
-                        "entity": entity,
+                        "entities": entities,
+                        "relations": template["relations"],
                         "query_type": query_type,
                         "template_id": template["id"],
                         "question": [{
