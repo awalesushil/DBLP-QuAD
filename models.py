@@ -195,23 +195,23 @@ class DataGenerator:
         other_venue = second_sample.venue
 
         slots = {
-            "?p1": first_sample.uri,
-            "?p2": second_sample.uri,
-            "?c1": creator.get("uri"),
-            "?c2": other_creator.get("uri"),
-            "?b": first_sample.bibtextype,
-            "[TITLE]": first_sample.title,
-            "[OTHER_TITLE]": second_sample.title,
+            "?p1": [first_sample.uri],
+            "?p2": [second_sample.uri],
+            "?c1": [creator.get("uri")],
+            "?c2": [other_creator.get("uri")],
+            "?b": [first_sample.bibtextype],
+            "[TITLE]": [first_sample.title],
+            "[OTHER_TITLE]": [second_sample.title],
             "[CREATOR_NAME]": [name, self.alt_name(name)],
             "[OTHER_CREATOR_NAME]": [other_name, self.alt_name(other_name)],
-            "[TYPE]": get_bibtextype(first_sample.bibtextype),
+            "[TYPE]": [get_bibtextype(first_sample.bibtextype)],
             "[PARTIAL_CREATOR_NAME]": name.split(" "),
-            "[AFFILIATION]": creator.get("affiliation"),
-            "[YEAR]": first_sample.year,
+            "[AFFILIATION]": [creator.get("affiliation")],
+            "[YEAR]": [first_sample.year],
             "[DURATION]": [duration, self.alt_duration(duration)],
             "[VENUE]": [venue, self.alt_venue(venue)],
             "[OTHER_VENUE]": [other_venue, self.alt_venue(other_venue)],
-            "[KEYWORD]": self.keyword_generator.get(first_sample.title)
+            "[KEYWORD]": [self.keyword_generator.get(first_sample.title)]
         }
 
         # Randomly select two questions
@@ -224,13 +224,8 @@ class DataGenerator:
                     each.replace(placeholder, str(random.choice(value)))
                         for each in [question, paraphrase]
                 ]
-            
-            if placeholder in ["[DURATION]","[VENUE]","[OTHER_VENUE]"]:
-                query = query.replace(placeholder, "'" + str(value[0] + "'"))
-            elif placeholder in ["[YEAR]","[AFFILIATION]"]:
-                query = query.replace(placeholder, '"' + str(value) + '"')
-            else:
-                query = query.replace(placeholder, str(value))
+            query = query.replace(placeholder, 
+                "'" + str(value[0]) + "'" if placeholder != "[DUARTION]" else int(value[0]))
         
         entities = []
         
