@@ -54,8 +54,8 @@ def save_to_json(data_file, answers_file, failed_queries_file, dataGenerator):
                 for id, data, answer in tqdm(dataGenerator, desc="Generating data: "):
                     if (
                         answer["answer"] and 
-                        not re.search("NONE", data["string"]["question"]) and 
-                        not re.search("NONE", data["string"]["paraphrase"])
+                        not re.search("NONE", data["question"]["string"]) and 
+                        not re.search("NONE", data["paraphrased_question"]["string"])
                     ):
                         add_to_json(data_file, id, data)
                         add_to_json(answers_file, id, answer)

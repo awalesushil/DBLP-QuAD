@@ -312,7 +312,9 @@ class DataGenerator:
                             },
                             "template_id": template["id"],
                             "entities": entities,
-                            "relations": template["question"]["relations"]
+                            "relations": template["question"]["relations"],
+                            "temporal": template["query"]["temporal"],
+                            "held_out": template["test_only"],
                         }, {
                             "answer": answers
                         }
