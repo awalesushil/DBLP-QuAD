@@ -179,7 +179,7 @@ class DataGenerator:
         venue = re.sub(r"\(.*\)", "", venue).strip()
         return CORE.get(venue.upper().replace(".",""), venue)
 
-    def fill_slots(self, template, first_sample, second_sample):
+    def fill_slots(self, template, first_sample, second_sample, group):
         """
             Fill the slots in the template with the values from the samples
         """
@@ -221,8 +221,15 @@ class DataGenerator:
             "[KEYWORD]": [self.keyword_generator.get(first_sample.title)]
         }
 
+        question_strings = template["question"]["strings"]
+
+        # Withold two questions for the train set but not test set
+        if group == "train":
+            question_strings.pop(1)
+            question_strings.pop(3)
+
         # Randomly select two questions
-        question, paraphrase = random.sample(template["question"]["strings"], 2)
+        question, paraphrase = random.sample(question_strings, 2)
         query = template["query"]["sparql"]
 
         # Fill in the template with the sample
@@ -242,7 +249,7 @@ class DataGenerator:
 
         return question, paraphrase, query, entities
 
-    def generate(self, num_samples):
+    def generate(self, group, num_samples):
         """
             Generate question-query pairs
         """
@@ -271,11 +278,16 @@ class DataGenerator:
                     first_sample = self.sample_generator.get("Publication")
                     second_sample = self.sample_generator.get("Publication")
 
+                    # Withold test_only templates for the train set
+                    selected_templates = templates[entity_type][query_type]
+                    if group == "train":
+                        selected_templates = [template for template in selected_templates if not template["test_only"]]
+
                     # Get a random template for entity type and query type
-                    template = random.choice(templates[entity_type][query_type])
+                    template = random.choice(selected_templates)
 
                     # Fill in the template with the sample
-                    question, paraphrase, query, entities = self.fill_slots(template, first_sample, second_sample)
+                    question, paraphrase, query, entities = self.fill_slots(template, first_sample, second_sample, group)
                     answers = self.server.query(query)
 
                     if answers and not re.search("NONE", question) and not re.search("NONE", paraphrase):
@@ -300,7 +312,9 @@ class DataGenerator:
                             },
                             "template_id": template["id"],
                             "entities": entities,
-                            "relations": template["question"]["relations"]
+                            "relations": template["question"]["relations"],
+                            "temporal": template["query"]["temporal"],
+                            "held_out": template["test_only"],
                         }, {
                             "answer": answers
                         }
