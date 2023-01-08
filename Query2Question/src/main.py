@@ -240,7 +240,7 @@ def T5Trainer(dataframe, source_text, target_text, model_params, output_dir="./o
     dataframe = dataframe[[source_text, target_text]]
     display_df(dataframe.head(2))
 
-    train_size = 0.8
+    train_size = 0.9
 
     train_dataset = dataframe.sample(frac=train_size, random_state=model_params["SEED"])
     val_dataset = dataframe.drop(train_dataset.index).reset_index(drop=True)
@@ -322,13 +322,13 @@ def T5Trainer(dataframe, source_text, target_text, model_params, output_dir="./o
 # let's define model parameters specific to T5
 model_params = {
     "MODEL": "t5-base",  # model_type: t5-base/t5-large
-    "TRAIN_BATCH_SIZE": 8,  # training batch size
-    "VALID_BATCH_SIZE": 8,  # validation batch size
-    "TRAIN_EPOCHS": 15,  # number of training epochs
+    "TRAIN_BATCH_SIZE": 4,  # training batch size
+    "VALID_BATCH_SIZE": 4,  # validation batch size
+    "TRAIN_EPOCHS": 5,  # number of training epochs
     "VAL_EPOCHS": 1,  # number of validation epochs
     "LEARNING_RATE": 1e-4,  # learning rate
-    "MAX_SOURCE_TEXT_LENGTH": 512,  # max length of source text
-    "MAX_TARGET_TEXT_LENGTH": 512,  # max length of target text
+    "MAX_SOURCE_TEXT_LENGTH": 256,  # max length of source text
+    "MAX_TARGET_TEXT_LENGTH": 256,  # max length of target text
     "SEED": 42,  # set seed for reproducibility
 }
 
