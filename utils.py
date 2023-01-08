@@ -48,9 +48,9 @@ def save_to_json(data_file, answers_file, failed_queries_file, dataGenerator):
     with open(os.path.join("data", data_file), "w", encoding="utf-8") as data_file:
         with open(os.path.join("data", failed_queries_file), "w", encoding="utf-8") as failed_queries_file:
             with open(os.path.join("data", answers_file), "w", encoding="utf-8") as answers_file:
-                data_file.write('{"questions": [')
-                answers_file.write('{"answers": [')
-                failed_queries_file.write('{"failed_queries": [')
+                data_file.write('{\n"questions": [')
+                answers_file.write('{\n"answers": [')
+                failed_queries_file.write('{\n"failed_queries": [')
                 for id, data, answer in tqdm(dataGenerator, desc="Generating data: "):
                     if (
                         answer["answer"] and 
@@ -61,8 +61,16 @@ def save_to_json(data_file, answers_file, failed_queries_file, dataGenerator):
                         add_to_json(answers_file, id, answer)
                     else:
                         add_to_json(failed_queries_file, id, data)
+                data_file.seek(data_file.tell() - 2, 0)
+                data_file.truncate()
                 data_file.write("\n]}")
+
+                answers_file.seek(answers_file.tell() - 2, 0)
+                answers_file.truncate()
                 answers_file.write("\n]}")
+
+                failed_queries_file.seek(failed_queries_file.tell() - 2, 0)
+                failed_queries_file.truncate()
                 failed_queries_file.write("\n]}")
 
 
@@ -75,7 +83,6 @@ def plot_template_distribution():
         
         query_types = templates[entity].keys()
         total_templates = [len(templates[entity][each]) for each in query_types]
-        weights = [len(templates[entity][each])/sum(total_templates) for each in query_types]
 
         print("Total number of templates:", sum(total_templates))
         
