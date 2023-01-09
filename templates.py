@@ -834,7 +834,7 @@ templates = {
         },{
             "id": "TP83",
             "query":  {
-                "sparql": "SELECT DISTINCT ?answer (MIN(xsd:integer(?y) AS ?y) WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer . ?x <https://dblp.org/rdf/schema#authoredBy> ?answer . ?x <https://dblp.org/rdf/schema#yearOfPublication> ?y }",
+                "sparql": "SELECT DISTINCT ?answer MIN(xsd:integer(?y)) AS ?y WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer . ?x <https://dblp.org/rdf/schema#authoredBy> ?answer . ?x <https://dblp.org/rdf/schema#yearOfPublication> ?y }",
                 "temporal": True
             },
             "question": {
