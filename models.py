@@ -138,7 +138,7 @@ class DataGenerator:
             "SINGLE_FACT","MULTI_FACT","DOUBLE_INTENT",
             "BOOLEAN","NEGATION","DOUBLE_NEGATION",
             "UNION","DISAMBIGUATION",
-            "COUNT","SUPERLATIVE"
+            "COUNT","SUPERLATIVE+COMPARATIVE"
         ]
         self.sample_generator = SampleGenerator(graph)
         self.server = DBLPServer("config.json")
@@ -221,12 +221,12 @@ class DataGenerator:
             "[KEYWORD]": [self.keyword_generator.get(first_sample.title)]
         }
 
-        question_strings = template["question"]["strings"]
+        question_strings = template["question"]["strings"].copy()
 
         # Withold two questions for the train set but not test set
         if group == "train":
             question_strings.pop(1)
-            question_strings.pop(3)
+            question_strings.pop(2)
 
         # Randomly select two questions
         question, paraphrase = random.sample(question_strings, 2)
@@ -293,11 +293,11 @@ class DataGenerator:
                     if answers and not re.search("NONE", question) and not re.search("NONE", paraphrase):
                         valid_query_index += 1
                         valid_query_count_dict[entity_type][query_type] += 1
-                        id = "Q"+str(valid_query_index).zfill(4) # Q0001, Q0002, ...
+                        id = "Q"+str(valid_query_index).zfill(5) # Q00001, Q00002, ...
                     else:
                         invalid_query_index += 1
                         invalid_query_count_dict[entity_type][query_type] += 1
-                        id = "Q"+str(invalid_query_index).zfill(4)
+                        id = "Q"+str(invalid_query_index).zfill(5)
 
                     yield id, {
                             "query_type": query_type,
