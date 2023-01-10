@@ -1039,18 +1039,18 @@ templates = {
         },{
             "id": "TC05",
             "query":  {
-                "sparql": "SELECT DISTINCT ?answer WHERE { ?c1 <https://dblp.org/rdf/schema#homepage> ?answer }",
+                "sparql": "SELECT DISTINCT ?answer WHERE { ?c1 <https://dblp.org/rdf/schema#webpage> ?answer }",
                 "temporal": False
             },
             "question": {
                 "strings": [
-                    "What is the homepage of [CREATOR_NAME]?",
-                    "What is the homepage of the author [CREATOR_NAME]?",
-                    "What is the homepage of the person [CREATOR_NAME]?",
-                    "Mention the homepage of the researcher [CREATOR_NAME].",
+                    "What is the webpage of [CREATOR_NAME]?",
+                    "What is the webpage of the author [CREATOR_NAME]?",
+                    "What is the webpage of the person [CREATOR_NAME]?",
+                    "Mention the webpage of the researcher [CREATOR_NAME].",
                 ],
                 "entities": ["?c1"],
-                "relations": ["<https://dblp.org/rdf/schema#homepage>"]
+                "relations": ["<https://dblp.org/rdf/schema#webpage>"]
             },
             "test_only": False
         }],
