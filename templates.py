@@ -1025,11 +1025,11 @@ templates = {
             },
             "question": {
                 "strings": [
-                    "What is the Wikidata of [CREATOR_NAME]?",
-                    "What is the Wikidata of the author [CREATOR_NAME]?",
-                    "Show the Wikidata of the person [CREATOR_NAME].",
-                    "Mention the Wikidata of the researcher [CREATOR_NAME].",
-                    "The author [CREATOR_NAME] is associated with which Wikidata?"
+                    "What is the Wikidata ID of [CREATOR_NAME]?",
+                    "What is the Wikidata identifier of the author [CREATOR_NAME]?",
+                    "Show the Wikidata ID of the person [CREATOR_NAME].",
+                    "Mention the Wikidata identifier of the researcher [CREATOR_NAME].",
+                    "The author [CREATOR_NAME] is associated with which Wikidata identifier?"
                 ],
                 "entities": ["?c1"],
                 "relations": ["<https://dblp.org/rdf/schema#wikidata>"]
@@ -1116,8 +1116,8 @@ templates = {
             "question": {
                 "strings": [
                     "Who are the co-authors of [CREATOR_NAME]?",
-                    "With which other authors has [CREATOR_NAME] co-authored papers?",
-                    "With which other authors has the author [CREATOR_NAME] co-authored papers?",
+                    "With which other authors has [CREATOR_NAME] written papers?",
+                    "With which other authors has the author [CREATOR_NAME] written papers?",
                     "List the co-authors of [CREATOR_NAME].",
                     "Mention the co-authors of [CREATOR_NAME]."
                 ],
