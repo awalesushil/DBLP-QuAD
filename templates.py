@@ -211,20 +211,19 @@ templates = {
         },{
             "id": "TP14",
             "query":  {
-                "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?x <https://dblp.org/rdf/schema#affiliation> ?answer }",
+                "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?x . ?x <https://dblp.org/rdf/schema#webpage> ?answer }",
                 "temporal": False
             },
             "question": {
                 "strings": [
-                    "To which institutions have the authors of [TITLE] been affiliated?",
-                    "To which institutions have the authors of the paper [TITLE] been affiliated?",
-                    "Which institutions have the authors of [TITLE] been affiliated to?",
-                    "Which institutions have the authors of the paper [TITLE] been affiliated to?",
-                    "List the institutions to which the authors of [TITLE] have been affiliated.",
-                    "Name the institutions to which the authors of [TITLE] have been affiliated."
+                    "What are the webpages of authors of [TITLE]?",
+                    "What webpages do the authors of [TITLE] have?",
+                    "The authors of [TITLE] have which webpages?",
+                    "List the webpages of authors of [TITLE].",
+                    "Show the webpages of authors of [TITLE]."
                 ],
                 "entities": ["?p1"],
-                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#affiliation>"]
+                "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#webpage>"]
             },
             "test_only": False
         },{
@@ -1021,19 +1020,19 @@ templates = {
         },{
             "id": "TC04",
             "query":  {
-                "sparql": "SELECT DISTINCT ?answer WHERE { ?c1 <https://dblp.org/rdf/schema#affiliation> ?answer }",
+                "sparql": "SELECT DISTINCT ?answer WHERE { ?c1 <https://dblp.org/rdf/schema#wikidata> ?answer }",
                 "temporal": False
             },
             "question": {
                 "strings": [
-                    "Which institutions has [CREATOR_NAME] been affiliated to?",
-                    "What are the institutions that [CREATOR_NAME] has been affiliated to?",
-                    "To which institutions has [CREATOR_NAME] been affiliated?",
-                    "List the institutions that [CREATOR_NAME] has been affiliated to.",
-                    "Mention the institutions that [CREATOR_NAME] has been affiliated to."
+                    "What is the Wikidata of [CREATOR_NAME]?",
+                    "What is the Wikidata of the author [CREATOR_NAME]?",
+                    "Show the Wikidata of the person [CREATOR_NAME].",
+                    "Mention the Wikidata of the researcher [CREATOR_NAME].",
+                    "The author [CREATOR_NAME] is associated with which Wikidata?"
                 ],
                 "entities": ["?c1"],
-                "relations": ["<https://dblp.org/rdf/schema#affiliation>"]
+                "relations": ["<https://dblp.org/rdf/schema#wikidata>"]
             },
             "test_only": False
         },{
