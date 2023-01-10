@@ -179,6 +179,13 @@ class DataGenerator:
         venue = re.sub(r"\(.*\)", "", venue).strip()
         return CORE.get(venue.upper().replace(".",""), venue)
 
+    def alt_affiliation(self, affiliation):
+        """
+            Generate alternative affiliation name
+        """
+        affiliation = affiliation.split(",")[0]
+        return affiliation
+
     def fill_slots(self, template, first_sample, second_sample, group):
         """
             Fill the slots in the template with the values from the samples
@@ -213,7 +220,7 @@ class DataGenerator:
             "[OTHER_CREATOR_NAME]": [other_name, self.alt_name(other_name)],
             "[TYPE]": [get_bibtextype(first_sample.bibtextype)],
             "[PARTIAL_CREATOR_NAME]": name.split(" "),
-            "[AFFILIATION]": [affiliation],
+            "[AFFILIATION]": [affiliation, self.alt_affiliation(affiliation)],
             "[YEAR]": [first_sample.year],
             "[DURATION]": [duration, self.alt_duration(duration)],
             "[VENUE]": [venue, self.alt_venue(venue)],
