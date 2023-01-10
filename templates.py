@@ -496,7 +496,7 @@ templates = {
                 "entities": ["?p1"],
                 "relations": ["<https://dblp.org/rdf/schema#title>"]
             },
-            "test_only": False
+            "test_only": True
         },{
             "id": "TP42",
             "query":  {
@@ -626,7 +626,7 @@ templates = {
                 "entities": ["?p1", "?p2"],
                 "relations": ["<https://dblp.org/rdf/schema#authoredBy>"]
             },
-            "test_only": False
+            "test_only": True
         }],
         "UNION": [{
             "id": "TP61",
@@ -1325,7 +1325,7 @@ templates = {
                 "entities": ["?c1","?p1"],
                 "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
             },
-            "test_only": True
+            "test_only": False
         },{
             "id": "TC34",
             "query":  {
