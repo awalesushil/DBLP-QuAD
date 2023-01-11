@@ -274,8 +274,8 @@ class DataGenerator:
                 if placeholder.startswith("?") or placeholder == "[DURATION]" else "'" + str(value[0]) + "'")
 
             paraphrase_pairs = [
-                     (each[0].replace(placeholder, "["+str(random.choice(value)))+"]",
-                        each[1].replace(placeholder, "["+str(random.choice(value)))+"]",
+                     (each[0].replace(placeholder, "["+str(random.choice(value))+"]"),
+                        each[1].replace(placeholder, "["+str(random.choice(value))+"]"),
                            template["id"])
                      for each in paraphrase_pairs
             ]
