@@ -132,17 +132,17 @@ class ParaphrasePairGenerator:
     """
         Generate paraphrase pairs
     """
-    def __init__(self):
-        self.datagenerator = DataGenerator()
+    def __init__(self, graph, seed):
+        self.datagenerator = DataGenerator(graph, seed)
     
     def generate(self):
         for entity_type in self.datagenerator.entity_types:
             for query_type in self.datagenerator.query_types:
                 for each in templates[entity_type][query_type]:
-                    first_sample = self.sample_generator.get("Publication")
-                    second_sample = self.sample_generator.get("Publication")
+                    first_sample = self.datagenerator.sample_generator.get("Publication")
+                    second_sample = self.datagenerator.sample_generator.get("Publication")
                     _, _, _, _, paraphrase_pairs = self.datagenerator.fill_slots(each, first_sample, second_sample, group="test")
-        return paraphrase_pairs
+                    yield paraphrase_pairs
 
 class DataGenerator:
     """
@@ -268,12 +268,11 @@ class DataGenerator:
                 if placeholder.startswith("?") or placeholder == "[DURATION]" else "'" + str(value[0]) + "'")
 
             paraphrase_pairs = [
-                (template["id"],
-                    each[0].replace(placeholder, str(random.choice(value))),
-                        each[1].replace(placeholder, str(random.choice(value))))
-                    for each in paraphrase_pairs
+                     (each[0].replace(placeholder, str(random.choice(value))),
+                        each[1].replace(placeholder, str(random.choice(value))),
+                           template["id"])
+                     for each in paraphrase_pairs
             ]
-        
         entities = []
         
         # Save the entities

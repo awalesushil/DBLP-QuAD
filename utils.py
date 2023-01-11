@@ -75,13 +75,12 @@ def save_to_json(data_file, answers_file, failed_queries_file, dataGenerator):
 
 def save_paraphrases_json(filename, generator):
     """
-        Save paraphrases to a json file
+        Save paraphrases to a file
     """
     with open(os.path.join("data", filename), "w", encoding="utf-8") as file:
         file.write('{\n"paraphrases": [')
-        for data in tqdm(generator, desc="Generating data: "):
-            id, paraphrases = data[0], data[1:]
-            add_to_json(file, id, data)
+        for data in tqdm(generator, desc="Generating paraphrases: "):
+            json.dump(data, file, indent=4, ensure_ascii=False)
         file.seek(file.tell() - 2, 0)
         file.truncate()
         file.write("\n]}")

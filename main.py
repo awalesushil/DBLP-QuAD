@@ -48,7 +48,8 @@ if __name__ == "__main__":
     
     if args.generate_paraphrases:
         logging.info("Generating paraphrases")
-        paraphraseGenerator = ParaphrasePairGenerator()
+        graph = load_graph()
+        paraphraseGenerator = ParaphrasePairGenerator(graph, args.seed)
         generator = paraphraseGenerator.generate()
         save_paraphrases_json("paraphrase_pairs.json", generator=generator)
 
