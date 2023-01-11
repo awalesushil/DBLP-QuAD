@@ -135,14 +135,20 @@ class ParaphrasePairGenerator:
     def __init__(self, graph, seed):
         self.datagenerator = DataGenerator(graph, seed)
     
+    def instantiate(self, template):
+        first_sample = self.datagenerator.sample_generator.get("Publication")
+        second_sample = self.datagenerator.sample_generator.get("Publication")
+        _, _, _, _, paraphrase_pairs = self.datagenerator.fill_slots(template, first_sample, second_sample, group="test")
+        paraphrase_pair = random.choice(paraphrase_pairs)
+        if "NONE" in paraphrase_pair[0] or "NONE" in paraphrase_pair[1]:
+            return self.instantiate(template)
+        return paraphrase_pairs
+
     def generate(self):
         for entity_type in self.datagenerator.entity_types:
             for query_type in self.datagenerator.query_types:
                 for each in templates[entity_type][query_type]:
-                    first_sample = self.datagenerator.sample_generator.get("Publication")
-                    second_sample = self.datagenerator.sample_generator.get("Publication")
-                    _, _, _, _, paraphrase_pairs = self.datagenerator.fill_slots(each, first_sample, second_sample, group="test")
-                    yield paraphrase_pairs
+                    yield self.instantiate(each)
 
 class DataGenerator:
     """
@@ -231,8 +237,8 @@ class DataGenerator:
             "?c1": [creator.get("uri")],
             "?c2": [other_creator.get("uri")],
             "?b": [first_sample.bibtextype],
-            "[TITLE]": [first_sample.title],
-            "[OTHER_TITLE]": [second_sample.title],
+            "[TITLE]": ["'"+first_sample.title+"'"],
+            "[OTHER_TITLE]": ["'"+second_sample.title+"'"],
             "[CREATOR_NAME]": [name, self.alt_name(name)],
             "[OTHER_CREATOR_NAME]": [other_name, self.alt_name(other_name)],
             "[TYPE]": [get_bibtextype(first_sample.bibtextype)],
@@ -268,8 +274,8 @@ class DataGenerator:
                 if placeholder.startswith("?") or placeholder == "[DURATION]" else "'" + str(value[0]) + "'")
 
             paraphrase_pairs = [
-                     (each[0].replace(placeholder, str(random.choice(value))),
-                        each[1].replace(placeholder, str(random.choice(value))),
+                     (each[0].replace(placeholder, "["+str(random.choice(value)))+"]",
+                        each[1].replace(placeholder, "["+str(random.choice(value)))+"]",
                            template["id"])
                      for each in paraphrase_pairs
             ]

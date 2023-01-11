@@ -83,10 +83,12 @@ def save_paraphrases_json(filename, generator):
         for paraphrases in tqdm(generator, desc="Generating paraphrases "):
             for each in paraphrases:
                 count += 1
-                json.dump(
-                    {"id": "P"+str(count).zfill(2), "template_id": each[2], "paraphrases": each[:2]},
+                json.dump({
+                        "id": "P"+str(count).zfill(4),
+                        "template_id": each[2],
+                        "paraphrases": each[:2]},
                     file, indent=4, ensure_ascii=False)
-
+                file.write(",\n")
         file.seek(file.tell() - 2, 0)
         file.truncate()
         file.write("\n]")
