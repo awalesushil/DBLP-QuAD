@@ -73,6 +73,18 @@ def save_to_json(data_file, answers_file, failed_queries_file, dataGenerator):
                 failed_queries_file.truncate()
                 failed_queries_file.write("\n]}")
 
+def save_paraphrases_json(filename, generator):
+    """
+        Save paraphrases to a json file
+    """
+    with open(os.path.join("data", filename), "w", encoding="utf-8") as file:
+        file.write('{\n"paraphrases": [')
+        for data in tqdm(generator, desc="Generating data: "):
+            id, paraphrases = data[0], data[1:]
+            add_to_json(file, id, data)
+        file.seek(file.tell() - 2, 0)
+        file.truncate()
+        file.write("\n]}")
 
 def plot_template_distribution():
     """

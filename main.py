@@ -1,8 +1,8 @@
 import argparse
 import logging
 
-from models import DataGenerator
-from utils import save_to_json
+from models import DataGenerator, ParaphrasePairGenerator
+from utils import save_to_json, save_paraphrases_json
 from utils import plot_question_distributions, plot_template_distribution
 from utils import index_graph, load_graph
 
@@ -20,6 +20,8 @@ if __name__ == "__main__":
     parser.add_argument("--generate", action="store_true", help="Generate data")
     parser.add_argument("--size", type=int, default=10000, help="Number of questions to generate")
     parser.add_argument("--seed", type=int, default=2358, help="Random seed")
+
+    parser.add_argument("--generate_paraphrases", action="store_true", help="Generate paraphrases")
 
     parser.add_argument("--stats", action="store_true", help="Show stats")
     
@@ -44,6 +46,12 @@ if __name__ == "__main__":
             generator = dataGenerator.generate(group, size)
             save_to_json(group+"_questions.json", group+"_answers.json", "failed_queries.json", generator)
     
+    if args.generate_paraphrases:
+        logging.info("Generating paraphrases")
+        paraphraseGenerator = ParaphrasePairGenerator()
+        generator = paraphraseGenerator.generate()
+        save_paraphrases_json("paraphrase_pairs.json", generator=generator)
+
     if args.stats:
         plot_template_distribution()
         plot_question_distributions()

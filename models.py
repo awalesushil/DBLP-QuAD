@@ -8,6 +8,7 @@ import logging
 
 import requests
 import urllib.parse
+from itertools import combinations
 
 import spacy
 from spacy.matcher import Matcher
@@ -127,6 +128,22 @@ class KeywordGenerator:
         keywords = [keyword for keyword in keywords if not nlp.vocab[keyword].is_stop]
         return random.choice(keywords).capitalize() if keywords else "NONE"
 
+class ParaphrasePairGenerator:
+    """
+        Generate paraphrase pairs
+    """
+    def __init__(self):
+        self.datagenerator = DataGenerator()
+    
+    def generate(self):
+        for entity_type in self.datagenerator.entity_types:
+            for query_type in self.datagenerator.query_types:
+                for each in templates[entity_type][query_type]:
+                    first_sample = self.sample_generator.get("Publication")
+                    second_sample = self.sample_generator.get("Publication")
+                    _, _, _, _, paraphrase_pairs = self.datagenerator.fill_slots(each, first_sample, second_sample, group="test")
+        return paraphrase_pairs
+
 class DataGenerator:
     """
         Generate question-query pairs
@@ -229,6 +246,7 @@ class DataGenerator:
         }
 
         question_strings = template["question"]["strings"].copy()
+        paraphrase_pairs = list(combinations(question_strings, 2))
 
         # Withold two questions for the train set but not test set
         if group == "train":
@@ -245,8 +263,16 @@ class DataGenerator:
                     each.replace(placeholder, str(random.choice(value)))
                         for each in [question, paraphrase]
                 ]
+
             query = query.replace(placeholder, value[0]
                 if placeholder.startswith("?") or placeholder == "[DURATION]" else "'" + str(value[0]) + "'")
+
+            paraphrase_pairs = [
+                (template["id"],
+                    each[0].replace(placeholder, str(random.choice(value))),
+                        each[1].replace(placeholder, str(random.choice(value))))
+                    for each in paraphrase_pairs
+            ]
         
         entities = []
         
@@ -254,7 +280,7 @@ class DataGenerator:
         for entity in template["question"]["entities"]:
             entities.append(slots[entity][0])
 
-        return question, paraphrase, query, entities
+        return question, paraphrase, query, entities, paraphrase_pairs
 
     def generate(self, group, num_samples):
         """
@@ -294,7 +320,7 @@ class DataGenerator:
                     template = random.choice(selected_templates)
 
                     # Fill in the template with the sample
-                    question, paraphrase, query, entities = self.fill_slots(template, first_sample, second_sample, group)
+                    question, paraphrase, query, entities, _ = self.fill_slots(template, first_sample, second_sample, group)
                     answers = self.server.query(query)
 
                     if answers and not re.search("NONE", question) and not re.search("NONE", paraphrase):

@@ -35,18 +35,18 @@
         - ?count: the count of the final result
 
     The templates and questions contain the following placeholders/slots for literals:
-        - [TITLE]: the title> of the publication
+        - [TITLE]: the title of the publication
         - [CREATOR_NAME]: the name of the creator
         - [AFFILIATION]: the affiliation of the creator
         - [VENUE]: the venue of the publication
         - [YEAR]: the year of the publication
         - [TYPE]: the bibtextype of the publication
         - [DURATION]: duration in years
-        - [OTHER_TITLE]: the title> of another publication
+        - [OTHER_TITLE]: the title of another publication
         - [OTHER_CREATOR]: the name of another creator
         - [OTHER_VENUE]: the venue of another publication
         - [PARTIAL_CREATOR_NAME]: a partial name of the creator
-        - [KEYWORD]: a keyword generated from the title> of the publication
+        - [KEYWORD]: a keyword generated from the title of the publication
 """
 
 templates = {
