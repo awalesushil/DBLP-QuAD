@@ -326,11 +326,11 @@ class DataGenerator:
                     if answers and not re.search("NONE", question) and not re.search("NONE", paraphrase):
                         valid_query_index += 1
                         valid_query_count_dict[entity_type][query_type] += 1
-                        id = "Q"+str(valid_query_index).zfill(5) # Q00001, Q00002, ...
+                        id = "Q"+str(valid_query_index).zfill(4) # Q0001, Q0002, ...
                     else:
                         invalid_query_index += 1
                         invalid_query_count_dict[entity_type][query_type] += 1
-                        id = "Q"+str(invalid_query_index).zfill(5)
+                        id = "Q"+str(invalid_query_index).zfill(4)
 
                     yield id, {
                             "query_type": query_type,
