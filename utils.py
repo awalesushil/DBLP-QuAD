@@ -78,12 +78,18 @@ def save_paraphrases_json(filename, generator):
         Save paraphrases to a file
     """
     with open(os.path.join("data", filename), "w", encoding="utf-8") as file:
-        file.write('{\n"paraphrases": [')
-        for data in tqdm(generator, desc="Generating paraphrases: "):
-            json.dump(data, file, indent=4, ensure_ascii=False)
+        file.write('[\n')
+        count = 0
+        for paraphrases in tqdm(generator, desc="Generating paraphrases "):
+            for each in paraphrases:
+                count += 1
+                json.dump(
+                    {"id": "P"+str(count).zfill(2), "template_id": each[2], "paraphrases": each[:2]},
+                    file, indent=4, ensure_ascii=False)
+
         file.seek(file.tell() - 2, 0)
         file.truncate()
-        file.write("\n]}")
+        file.write("\n]")
 
 def plot_template_distribution():
     """
