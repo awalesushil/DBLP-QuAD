@@ -1,8 +1,8 @@
 import argparse
 import logging
 
-from models import DataGenerator
-from utils import save_to_json
+from models import DataGenerator, ParaphrasePairGenerator
+from utils import save_to_json, save_paraphrases_json
 from utils import plot_question_distributions, plot_template_distribution
 from utils import index_graph, load_graph
 
@@ -18,11 +18,10 @@ if __name__ == "__main__":
     parser.add_argument("--graph_path", type=str, default="data/dblp.nt", help="Path to the graph")
 
     parser.add_argument("--generate", action="store_true", help="Generate data")
-    parser.add_argument("--data_file", type=str, default="data.json", help="Data file name")
-    parser.add_argument("--failed_queries_file", type=str, default="failed_queries.json", help="Failed queries file name")
-    parser.add_argument("--answers_file", type=str, default="answers.json", help="Answers file name")
-    parser.add_argument("--size", type=int, default=5000, help="Number of questions to generate")
+    parser.add_argument("--size", type=int, default=10000, help="Number of questions to generate")
     parser.add_argument("--seed", type=int, default=2358, help="Random seed")
+
+    parser.add_argument("--generate_paraphrases", action="store_true", help="Generate paraphrases")
 
     parser.add_argument("--stats", action="store_true", help="Show stats")
     
@@ -32,11 +31,28 @@ if __name__ == "__main__":
         index_graph(args.graph_path)
     
     if args.generate:
+
         graph = load_graph()
         dataGenerator = DataGenerator(graph, args.seed)
-        generator = dataGenerator.generate(args.size)
-        save_to_json(args.data_file, args.answers_file, args.failed_queries_file, generator)
+        
+        data_size = {
+            "train": int(args.size * 0.7),
+            "valid": int(args.size * 0.1),
+            "test": int(args.size * 0.2)
+        }
+        
+        for group, size in data_size.items():
+            logging.info(f"Generating {size} {group} questions")
+            generator = dataGenerator.generate(group, size)
+            save_to_json(group+"_questions.json", group+"_answers.json", "failed_queries.json", generator)
     
+    if args.generate_paraphrases:
+        logging.info("Generating paraphrases")
+        graph = load_graph()
+        paraphraseGenerator = ParaphrasePairGenerator(graph, args.seed)
+        generator = paraphraseGenerator.generate()
+        save_paraphrases_json("paraphrase_pairs.json", generator=generator)
+
     if args.stats:
         plot_template_distribution()
         plot_question_distributions()
