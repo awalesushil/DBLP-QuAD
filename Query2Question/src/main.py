@@ -314,7 +314,7 @@ def T5Trainer(train_df, valid_df, source_text, target_text, model_params, output
 
 # let's define model parameters specific to T5
 model_params = {
-    "MODEL": "t5-base",  # model_type: t5-base/t5-large
+    "MODEL": "t5-small",  # model_type: t5-base/t5-large
     "TRAIN_BATCH_SIZE": 4,  # training batch size
     "VALID_BATCH_SIZE": 4,  # validation batch size
     "TRAIN_EPOCHS": 5,  # number of training epochs
@@ -329,13 +329,13 @@ import re
 import json
 import pandas as pd
 
-data = {
+data_df = {
     "train": [],
     "valid": []
 }
 
 for each in ["train", "valid"]:
-    with open("../data/"+each+"_questions.json","r") as f:
+    with open("../../data/"+each+"_questions.json","r") as f:
         raw = json.load(f)
 
     entity_group = re.compile(r"<(\S+)>")
@@ -354,14 +354,14 @@ for each in ["train", "valid"]:
     df["question"] = prefix + df["question"] + " [SEP] " + df["entities"] + " [SEP] " + df["relations"]
     df["sparql"] = "<s> " + df["sparql"] + " </s>"
 
-    data[each] = df
+    data_df[each] = df
 
-train_df = data["train"]
-valid_df = data["valid"]
+train_df = data_df["train"]
+valid_df = data_df["valid"]
 
 T5Trainer(
-    train_dataframe=train_df,
-    valid_dataframe=valid_df,
+    train_df=train_df,
+    valid_df=valid_df,
     source_text="question",
     target_text="sparql",
     model_params=model_params,
