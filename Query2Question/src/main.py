@@ -221,7 +221,7 @@ def validate(epoch, tokenizer, model, device, loader):
             actuals.extend(target)
     return predictions, actuals
 
-def T5Trainer(dataframe, source_text, target_text, model_params, output_dir="./outputs/"):
+def T5Trainer(train_df, valid_df, source_text, target_text, model_params, output_dir="./outputs/"):
 
     torch.manual_seed(model_params["SEED"])
     np.random.seed(model_params["SEED"])
@@ -237,16 +237,9 @@ def T5Trainer(dataframe, source_text, target_text, model_params, output_dir="./o
 
     console.log(f"[Data]: Reading data...\n")
 
-    dataframe = dataframe[[source_text, target_text]]
-    display_df(dataframe.head(2))
-
-    train_size = 0.9
-
-    train_dataset = dataframe.sample(frac=train_size, random_state=model_params["SEED"])
-    val_dataset = dataframe.drop(train_dataset.index).reset_index(drop=True)
-    train_dataset = train_dataset.reset_index(drop=True)
-
-    console.print(f"FULL Dataset: {dataframe.shape}")
+    train_dataset = train_df[[source_text, target_text]]
+    val_dataset = valid_df[[source_text, target_text]]
+    
     console.print(f"TRAIN Dataset: {train_dataset.shape}")
     console.print(f"TEST Dataset: {val_dataset.shape}\n")
 
@@ -327,8 +320,8 @@ model_params = {
     "TRAIN_EPOCHS": 5,  # number of training epochs
     "VAL_EPOCHS": 1,  # number of validation epochs
     "LEARNING_RATE": 1e-4,  # learning rate
-    "MAX_SOURCE_TEXT_LENGTH": 256,  # max length of source text
-    "MAX_TARGET_TEXT_LENGTH": 256,  # max length of target text
+    "MAX_SOURCE_TEXT_LENGTH": 512,  # max length of source text
+    "MAX_TARGET_TEXT_LENGTH": 512,  # max length of target text
     "SEED": 42,  # set seed for reproducibility
 }
 
@@ -336,27 +329,39 @@ import re
 import json
 import pandas as pd
 
-with open("data/data.json","r") as f:
-    dblp_raw = json.load(f)
+data = {
+    "train": [],
+    "valid": []
+}
 
-entity_group = re.compile(r"<(\S+)>")
+for each in ["train", "valid"]:
+    with open("../data/"+each+"_questions.json","r") as f:
+        raw = json.load(f)
 
-data = [{
-    "id": d["id"],
-    "question": d["question"]["string"],
-    "entities": entity_group.sub(r"\1", " ".join(d["entities"])),
-    "relations": entity_group.sub(r"\1", " ".join(d["relations"])),
-    "sparql": entity_group.sub(r"\1", d["query"]["sparql"])
-    } for d in dblp_raw["questions"]]
+    entity_group = re.compile(r"<(\S+)>")
 
-df = pd.DataFrame(data)
+    data = [{
+        "id": d["id"],
+        "question": d["question"]["string"],
+        "entities": entity_group.sub(r"\1", " ".join(d["entities"])),
+        "relations": entity_group.sub(r"\1", " ".join(d["relations"])),
+        "sparql": entity_group.sub(r"\1", d["query"]["sparql"])
+        } for d in raw["questions"]]
 
-prefix = "parse text to SPARQL query: " 
-df["question"] = prefix + df["question"] + " [SEP] " + df["entities"] + " [SEP] " + df["relations"]
-df["sparql"] = "<s> " + df["sparql"] + " </s>"
+    df = pd.DataFrame(data)
+
+    prefix = "parse text to SPARQL query: " 
+    df["question"] = prefix + df["question"] + " [SEP] " + df["entities"] + " [SEP] " + df["relations"]
+    df["sparql"] = "<s> " + df["sparql"] + " </s>"
+
+    data[each] = df
+
+train_df = data["train"]
+valid_df = data["valid"]
 
 T5Trainer(
-    dataframe=df,
+    train_dataframe=train_df,
+    valid_dataframe=valid_df,
     source_text="question",
     target_text="sparql",
     model_params=model_params,
