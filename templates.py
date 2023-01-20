@@ -1539,7 +1539,7 @@ templates = {
                 "strings": [
                     "What are the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published?",
                     "What are all the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published?",
-                    "List all the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published?",
+                    "List all the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published.",
                     "[CREATOR_NAME] and [OTHER_CREATOR_NAME] published which papers?"
                 ],
                 "entities": ["?c1", "?c2"],
@@ -1556,7 +1556,7 @@ templates = {
                 "strings": [
                     "What are the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE]?",
                     "What are all the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE]?",
-                    "List all the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE]?",
+                    "List all the papers that [CREATOR_NAME] and [OTHER_CREATOR_NAME] published in [VENUE].",
                     "[CREATOR_NAME] and [OTHER_CREATOR_NAME] published which papers in [VENUE]?"
                 ],
                 "entities": ["?c1", "?c2"],
@@ -1574,7 +1574,7 @@ templates = {
                     "What papers did [CREATOR_NAME] publish in [VENUE] and [OTHER_VENUE]?",
                     "What publications did the author [CREATOR_NAME] publish in [VENUE] and [OTHER_VENUE]?",
                     "In [VENUE] and [OTHER_VENUE], what papers did [CREATOR_NAME] publish?",
-                    "List all the papers that [CREATOR_NAME] published in [VENUE] and [OTHER_VENUE]?"
+                    "List all the papers that [CREATOR_NAME] published in [VENUE] and [OTHER_VENUE]."
                 ],
                 "entities": ["?c1"],
                 "relations": ["<https://dblp.org/rdf/schema#authoredBy>", "<https://dblp.org/rdf/schema#publishedIn>"]
