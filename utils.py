@@ -162,3 +162,180 @@ def plot_question_distributions():
         plt.legend()
         plt.show()
 
+def compute_data_distribution():
+    """
+        Compute the distribution of data
+    """
+
+    def edit_distance(s1, s2):
+        """
+            Compute the edit distance between two strings
+        """
+        if len(s1) < len(s2):
+            return edit_distance(s2, s1)
+
+        # len(s1) >= len(s2)
+        if len(s2) == 0:
+            return len(s1)
+
+        previous_row = range(len(s2) + 1)
+        for i, c1 in enumerate(s1):
+            current_row = [i + 1]
+            for j, c2 in enumerate(s2):
+                insertions = previous_row[j + 1] + 1
+                deletions = current_row[j] + 1
+                substitutions = previous_row[j] + (c1 != c2)
+                current_row.append(min(insertions, deletions, substitutions))
+            previous_row = current_row
+
+        return previous_row[-1]
+
+    def jaccard_similarity_ngrams(s1, s2, n=1):
+        """
+            Compute the ngram jaccard similarity between two strings
+        """
+        s1 = s1.lower().split()
+        s2 = s2.lower().split()
+        a = set(zip(*[s1[i:] for i in range(n)]))
+        b = set(zip(*[s2[i:] for i in range(n)]))
+        c = a.intersection(b)
+        return float(len(c)) / (len(a) + len(b) - len(c))
+
+    data = {}
+    all_data = {}
+
+    for each in ["train", "valid", "test"]:
+        with open(os.path.join("data",each+"_questions.json"), "r") as f:
+            data[each] = json.load(f)
+            all_data["questions"] = all_data.get("questions", []) + data[each]["questions"]
+    
+
+    WORD_COUNT = 0
+    QUERY_VOCAB_COUNT = 0
+    MAX_WORD_COUNT = 0
+    MAX_QUERY_VOCAB_COUNT = 0
+    CHAR_COUNT = 0
+    QUERY_CHAR_COUNT = 0
+    MAX_CHAR_COUNT = 0
+    query_type_count = {}
+    query_types = set()
+    temporal_count = 0
+    entities = []
+    relations = []
+    held_out = {
+        "train": 0,
+        "valid": 0,
+        "test": 0
+    }
+    zero_shot = ['TP32', 'TC03', 'TC36', 'TP04', 'TP15']
+    zero_shot_count = {
+        "valid": 0,
+        "test": 0
+    }
+    compositonal_count = {
+        "valid": 0,
+        "test": 0
+    }
+    iid_count = {
+        "valid": 0,
+        "test": 0
+    }
+    edit_distances = []
+    jaccard_similarities_unigram = []
+    jaccard_similarities_bigram = []
+
+    for each in all_data["questions"]:
+        WORD_COUNT += len(each['question']['string'].split(" "))
+        WORD_COUNT += len(each['paraphrased_question']['string'].split(" "))
+        QUERY_VOCAB_COUNT += len(each['query']['sparql'].split(" "))
+        
+        CHAR_COUNT += len(each['question']['string'])
+        CHAR_COUNT += len(each['paraphrased_question']['string'])
+        QUERY_CHAR_COUNT += len(each['query']['sparql'])
+
+        MAX_CHAR_COUNT = max(MAX_CHAR_COUNT, len(each['question']['string']))
+        MAX_WORD_COUNT = max(MAX_WORD_COUNT, len(each['question']['string'].split(" ")))
+        MAX_WORD_COUNT = max(MAX_WORD_COUNT, len(each['paraphrased_question']['string'].split(" ")))
+        MAX_QUERY_VOCAB_COUNT = max(MAX_QUERY_VOCAB_COUNT, len(each['query']['sparql'].split(" ")))
+
+        entities.extend(each["entities"])
+        relations.extend(each["relations"])
+        query_type = each["query_type"]
+        query_types.add(query_type)
+        query_type_count.setdefault(query_type, 0)
+        query_type_count[query_type] += 1
+        edit_distances.append(
+            edit_distance(
+                each["question"]['string'],
+                each["paraphrased_question"]['string']))
+        jaccard_similarities_unigram.append(
+            jaccard_similarity_ngrams(
+                each["question"]['string'],
+                each["paraphrased_question"]['string']))
+        jaccard_similarities_bigram.append(
+            jaccard_similarity_ngrams(
+                each["question"]['string'],
+                each["paraphrased_question"]['string'],
+                n=2))
+        if each['temporal']:
+            temporal_count += 1
+        
+    
+    for group in ["valid", "test"]:
+        for each in data[group]["questions"]:
+            if each['held_out']:
+                held_out[group] += 1
+                if each['template_id'] in zero_shot:
+                    zero_shot_count[group] += 1
+                else:
+                    compositonal_count[group] += 1
+            else:
+                iid_count[group] += 1
+
+
+    # Average
+    print("Average word count: ", WORD_COUNT / (2 * N))
+    print("Average query vocab count: ", QUERY_VOCAB_COUNT / N)
+
+    # Max
+    print("Max word count: ", MAX_WORD_COUNT)
+    print("Max query vocab count: ", MAX_QUERY_VOCAB_COUNT)
+    print("Max char count: ", MAX_CHAR_COUNT)
+
+    # Average
+    print("Average char count: ", CHAR_COUNT / (2 * N))
+    print("Average query char count: ", QUERY_CHAR_COUNT / N)
+    
+    print("Total number of questions:", len(all_data["questions"]))
+    print("Total number of temporal questions:", temporal_count)
+    print("Total number of entities:", len(set(entities)))
+    print("Total number of relations:", len(set(relations)))
+    print("Total number of query types:", len(query_types))
+    print("Distribution of query types:")
+    for each in query_types:
+        print(each, query_type_count[each])
+    
+    print("Percent of held out questions:")
+    for each in held_out:
+        print(each, held_out[each]/len(data[each]["questions"]))
+    
+    print("Percent of zero-shot questions:")
+    for each in zero_shot_count:
+        print(each, zero_shot_count[each]/len(data[each]["questions"]))
+    
+    print("Percent of compositional questions:")
+    for each in compositonal_count:
+        print(each, compositonal_count[each]/len(data[each]["questions"]))
+    
+    print("Percent of iid questions:")
+    for each in iid_count:
+        print(each, iid_count[each]/len(data[each]["questions"]))
+    
+    print("Average edit distance:", np.mean(edit_distances))
+    print("Standard deviation of edit distance:", np.std(edit_distances))
+
+    print("Average Jaccard similarity unigram:", np.mean(jaccard_similarities_unigram))
+    print("Standard deviation of Jaccard similarity unigram:", np.std(jaccard_similarities_unigram))
+
+    print("Average Jaccard similarity bigram:", np.mean(jaccard_similarities_bigram))
+    print("Standard deviation of Jaccard similarity bigram:", np.std(jaccard_similarities_bigram))
