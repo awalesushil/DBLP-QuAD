@@ -56,7 +56,7 @@ def run_queries():
         with open("../data/actual_answers.json", "w+", encoding="utf-8") as act_file:
             pred_file.write('{\n"answers":[')
             act_file.write('{\n"answers":[')
-            with open("../data/predictions.csv", "r", encoding="utf-8") as f:
+            with open("outputs/predictions.csv", "r", encoding="utf-8") as f:
                 reader = csv.reader(f)
                 next(reader)
                 for row in reader:
@@ -71,8 +71,8 @@ def run_queries():
                     act_answer['id'] = row[0]
                     json.dump(act_answer, act_file, indent=4, ensure_ascii=False)
                     act_file.write(",\n")
-                    if TOTAL_QUERIES == 250:
-                        break
+                    # if TOTAL_QUERIES == 250:
+                    #     break
             pred_file.seek(pred_file.tell() - 2, 0)
             pred_file.truncate()
             pred_file.write("]}")
@@ -90,7 +90,7 @@ def get_answer(answer):
         if "boolean" in answer.keys():
             return [answer["boolean"]]
         elif "results" in answer.keys():
-            if answer["results"]["bindings"]:
+            if answer["results"]["bindings"] and answer["results"]["bindings"] != [{}]:
                 if "answer" in answer["head"]["vars"]:
                     return [binding["answer"]["value"] for binding in answer["results"]["bindings"]]
                 elif ["firstanswer", "secondanswer"] in answer["head"]["vars"]:
@@ -105,7 +105,7 @@ def get_answer(answer):
 def calculate_accuracy(total_queries):
 
     accuracy = 0
-    with open("../data/predictions.csv", "r", encoding="utf-8") as f:
+    with open("outputs/predictions.csv", "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         next(reader)
         for row in reader:
