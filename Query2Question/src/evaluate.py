@@ -43,7 +43,7 @@ def clean_query(query):
     query = query.replace("  ", " ")
     return query 
 
-def run_queries():
+def run_queries(model):
     """
         Run generated queries
     """
@@ -52,11 +52,11 @@ def run_queries():
 
     dblp_server = DBLPServer("../../config.json")
 
-    with open("../data/predicted_answers.json", "w+", encoding="utf-8") as pred_file:
-        with open("../data/actual_answers.json", "w+", encoding="utf-8") as act_file:
+    with open("../"+model+"-data/predicted_answers.json", "w+", encoding="utf-8") as pred_file:
+        with open("../"+model+"-data/actual_answers.json", "w+", encoding="utf-8") as act_file:
             pred_file.write('{\n"answers":[')
             act_file.write('{\n"answers":[')
-            with open("outputs/predictions.csv", "r", encoding="utf-8") as f:
+            with open(model+"-outputs/predictions.csv", "r", encoding="utf-8") as f:
                 reader = csv.reader(f)
                 next(reader)
                 for row in reader:
@@ -71,8 +71,6 @@ def run_queries():
                     act_answer['id'] = row[0]
                     json.dump(act_answer, act_file, indent=4, ensure_ascii=False)
                     act_file.write(",\n")
-                    # if TOTAL_QUERIES == 250:
-                    #     break
             pred_file.seek(pred_file.tell() - 2, 0)
             pred_file.truncate()
             pred_file.write("]}")
@@ -102,10 +100,10 @@ def get_answer(answer):
                     return [binding["count"]["value"] for binding in answer["results"]["bindings"]]
     return None
 
-def calculate_accuracy(total_queries):
+def calculate_accuracy(model, total_queries):
 
     accuracy = 0
-    with open("outputs/predictions.csv", "r", encoding="utf-8") as f:
+    with open(model+"-outputs/predictions.csv", "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         next(reader)
         for row in reader:
@@ -117,7 +115,7 @@ def calculate_accuracy(total_queries):
                 accuracy += 1
     print("Accuracy: ", accuracy / total_queries)
 
-def calculate_f1(total_queries):
+def calculate_f1(model, total_queries):
     """
         Calculate precision and recall at rank 1
     """
@@ -126,8 +124,8 @@ def calculate_f1(total_queries):
     precision = {"1": 0, "5": 0, "10": 0}
     recall = {"1": 0, "5": 0, "10": 0}
     
-    with open("../data/predicted_answers.json", "r", encoding="utf-8") as pred_file:
-        with open("../data/actual_answers.json", "r", encoding="utf-8") as act_file:
+    with open("../"+model+"-data/predicted_answers.json", "r", encoding="utf-8") as pred_file:
+        with open("../"+model+"-data/actual_answers.json", "r", encoding="utf-8") as act_file:
             pred_answers = json.load(pred_file)["answers"]
             act_answers = json.load(act_file)["answers"]
             
@@ -184,9 +182,12 @@ def calculate_f1(total_queries):
 
 
 if __name__ == "__main__":
-    TOTAL_QUERIES = run_queries()
-    calculate_accuracy(TOTAL_QUERIES)
-    calculate_f1(TOTAL_QUERIES)
+
+    for model in ["t5-small", "t5-base"]:
+        print("Model: ", model)
+        TOTAL_QUERIES = run_queries(model)
+        calculate_accuracy(model, TOTAL_QUERIES)
+        calculate_f1(model, TOTAL_QUERIES)
                 
 
 
