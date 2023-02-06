@@ -9,6 +9,9 @@ from tqdm import tqdm
 import numpy as np
 import matplotlib.pyplot as plt
 
+import seaborn as sns
+import pandas as pd
+
 from templates import templates
 from dblp import Graph
 
@@ -93,79 +96,12 @@ def save_paraphrases_json(filename, generator):
         file.truncate()
         file.write("\n]")
 
-def plot_template_distribution():
-    """
-        Plot template distribution
-    """
-    for entity in ["CREATOR", "PUBLICATION"]:
-        print(f"Stats for Entity: {entity}")
-        
-        query_types = templates[entity].keys()
-        total_templates = [len(templates[entity][each]) for each in query_types]
-
-        print("Total number of templates:", sum(total_templates))
-        
-        X_axis = np.arange(len(query_types))
-        width = 0.4
-        if entity == "CREATOR":
-            creator = plt.bar(X_axis - 0.2, total_templates, width, label=entity)
-        else:
-            publication = plt.bar(X_axis + 0.2, total_templates, width, label=entity)
-
-    plt.bar_label(creator, padding=3)
-    plt.bar_label(publication, padding=3)
-    plt.xticks(X_axis, query_types)
-    plt.xlabel("Query Type")
-    plt.ylabel("Number of templates")
-    plt.title(f"Number of templates per query type")
-    plt.legend()
-    plt.show()
-
-
-def plot_question_distributions():
-    """
-        Plot the distribution of questions generated and queries failed
-    """
-    data_file = ["data.json", "failed_queries.json"]
-
-    for file in data_file:
-        
-        with open(os.path.join("data",file), "r") as f:
-            data = json.load(f)
-
-        query_type_count = {}
-        query_types = set()
-
-        for each in data:
-            entity = each["entity"]
-            query_type = each["query_type"]
-            query_types.add(query_type)
-            query_type_count.setdefault(entity, {})
-            query_type_count[entity].setdefault(query_type, 0)
-            query_type_count[entity][query_type] += 1
-
-
-        X_axis = np.arange(len(query_types))
-        width = 0.4
-        total_templates = [query_type_count['CREATOR'].get(each, 0) for each in query_types]
-        creator = plt.bar(X_axis - 0.2, total_templates, width, label="CREATOR")
-
-        total_templates = [query_type_count['PUBLICATION'].get(each, 0) for each in query_types]
-        publication = plt.bar(X_axis + 0.2, total_templates, width, label="PUBLICATION")
-
-        plt.bar_label(creator, padding=3)
-        plt.bar_label(publication, padding=3)
-        plt.xticks(X_axis, query_types)
-        plt.xlabel("Query Type")
-        plt.ylabel("Number of question-query")
-        plt.title(f"Number of question-query pairs per query type for {file}")
-        plt.legend()
-        plt.show()
-
 def compute_data_distribution():
     """
         Compute the distribution of data
     """
+
+    pd.set_option('display.max_columns', None)
 
     def edit_distance(s1, s2):
         """
@@ -201,27 +137,76 @@ def compute_data_distribution():
         c = a.intersection(b)
         return float(len(c)) / (len(a) + len(b) - len(c))
 
-    data = {}
-    all_data = {}
+    data, all_data = {}, {}
 
     for each in ["train", "valid", "test"]:
-        with open(os.path.join("data",each+"_questions.json"), "r") as f:
+        with open(os.path.join("data","DBLP-QuAD",each,"questions.json"), "r") as f:
             data[each] = json.load(f)
+            for x in data[each]["questions"]:
+                x["question"] = x["question"]["string"]
+                x["paraphrased_question"] = x["paraphrased_question"]["string"]
+                x["query"] = x["query"]["sparql"]
             all_data["questions"] = all_data.get("questions", []) + data[each]["questions"]
     
+    df = pd.DataFrame(all_data["questions"])
 
-    WORD_COUNT = 0
-    QUERY_VOCAB_COUNT = 0
-    MAX_WORD_COUNT = 0
-    MAX_QUERY_VOCAB_COUNT = 0
-    CHAR_COUNT = 0
-    QUERY_CHAR_COUNT = 0
-    MAX_CHAR_COUNT = 0
-    query_type_count = {}
-    query_types = set()
-    temporal_count = 0
-    entities = []
-    relations = []
+    print(df.head())
+
+    df["question_word_count"] = df["question"].apply(lambda x: len(x.split()))
+    df["paraphrased_question_word_count"] = df["paraphrased_question"].apply(lambda x: len(x.split()))
+    df["query_vocab_count"] = df["query"].apply(lambda x: len(set(x.split())))
+
+    df["question_char_count"] = df["question"].apply(lambda x: len(x))
+    df["paraphrased_question_char_count"] = df["paraphrased_question"].apply(lambda x: len(x))
+    df["query_char_count"] = df["query"].apply(lambda x: len(x))
+
+    df["edit_distance"] = df.apply(lambda x: edit_distance(x["question"], x["paraphrased_question"]), axis=1)
+    df["jaccard_similarity_unigram"] = df.apply(lambda x: jaccard_similarity_ngrams(x["question"], x["paraphrased_question"]), axis=1)
+    df["jaccard_similarity_bigram"] = df.apply(lambda x: jaccard_similarity_ngrams(x["question"], x["paraphrased_question"], n=2), axis=1)
+
+    print("-"*100)
+    print("\033[1m" + "General statistics of the dataset" + "\033[0m")
+    print("-"*100)
+    print(df.describe())
+    print("-"*100)
+    print("\n"*2)
+
+
+    print("-"*100)
+    print("\033[1m" + "Distribution of query types" + "\033[0m")
+    print("-"*100)
+    print(df["query_type"].value_counts())
+    print("-"*100)
+    print("\n"*2)
+
+    print("-"*100)
+    print("\033[1m" + "Distribution of temporal queries" + "\033[0m")
+    print("-"*100)
+    print(df["temporal"].value_counts(normalize=True))
+    print("-"*100)
+    print("\n"*2)
+
+    print("-"*100)
+    print("\033[1m" + "Distribution of entities" + "\033[0m")
+    print("-"*100)
+    _df = df.explode("entities")
+    print(_df["entities"].value_counts())
+    print("-"*100)
+    print("\n"*2)
+
+    print("-"*100)
+    print("\033[1m" + "Distribution of relations" + "\033[0m")
+    print("-"*100)
+    _df = df.explode("relations")
+    print(_df["relations"].value_counts())
+    print("-"*100)
+    print("\n"*2)
+
+    print("-"*100)
+    print("\033[1m" + "GENERALIZATION STATS" + "\033[0m")
+    print("-"*100)
+    print("\n"*2)
+
     held_out = {
         "train": 0,
         "valid": 0,
@@ -239,47 +224,7 @@ def compute_data_distribution():
     iid_count = {
         "valid": 0,
         "test": 0
-    }
-    edit_distances = []
-    jaccard_similarities_unigram = []
-    jaccard_similarities_bigram = []
-
-    for each in all_data["questions"]:
-        WORD_COUNT += len(each['question']['string'].split(" "))
-        WORD_COUNT += len(each['paraphrased_question']['string'].split(" "))
-        QUERY_VOCAB_COUNT += len(each['query']['sparql'].split(" "))
-        
-        CHAR_COUNT += len(each['question']['string'])
-        CHAR_COUNT += len(each['paraphrased_question']['string'])
-        QUERY_CHAR_COUNT += len(each['query']['sparql'])
-
-        MAX_CHAR_COUNT = max(MAX_CHAR_COUNT, len(each['question']['string']))
-        MAX_WORD_COUNT = max(MAX_WORD_COUNT, len(each['question']['string'].split(" ")))
-        MAX_WORD_COUNT = max(MAX_WORD_COUNT, len(each['paraphrased_question']['string'].split(" ")))
-        MAX_QUERY_VOCAB_COUNT = max(MAX_QUERY_VOCAB_COUNT, len(each['query']['sparql'].split(" ")))
-
-        entities.extend(each["entities"])
-        relations.extend(each["relations"])
-        query_type = each["query_type"]
-        query_types.add(query_type)
-        query_type_count.setdefault(query_type, 0)
-        query_type_count[query_type] += 1
-        edit_distances.append(
-            edit_distance(
-                each["question"]['string'],
-                each["paraphrased_question"]['string']))
-        jaccard_similarities_unigram.append(
-            jaccard_similarity_ngrams(
-                each["question"]['string'],
-                each["paraphrased_question"]['string']))
-        jaccard_similarities_bigram.append(
-            jaccard_similarity_ngrams(
-                each["question"]['string'],
-                each["paraphrased_question"]['string'],
-                n=2))
-        if each['temporal']:
-            temporal_count += 1
-        
+    }    
     
     for group in ["valid", "test"]:
         for each in data[group]["questions"]:
@@ -292,29 +237,6 @@ def compute_data_distribution():
             else:
                 iid_count[group] += 1
 
-
-    # Average
-    print("Average word count: ", WORD_COUNT / (2 * N))
-    print("Average query vocab count: ", QUERY_VOCAB_COUNT / N)
-
-    # Max
-    print("Max word count: ", MAX_WORD_COUNT)
-    print("Max query vocab count: ", MAX_QUERY_VOCAB_COUNT)
-    print("Max char count: ", MAX_CHAR_COUNT)
-
-    # Average
-    print("Average char count: ", CHAR_COUNT / (2 * N))
-    print("Average query char count: ", QUERY_CHAR_COUNT / N)
-    
-    print("Total number of questions:", len(all_data["questions"]))
-    print("Total number of temporal questions:", temporal_count)
-    print("Total number of entities:", len(set(entities)))
-    print("Total number of relations:", len(set(relations)))
-    print("Total number of query types:", len(query_types))
-    print("Distribution of query types:")
-    for each in query_types:
-        print(each, query_type_count[each])
-    
     print("Percent of held out questions:")
     for each in held_out:
         print(each, held_out[each]/len(data[each]["questions"]))
@@ -331,11 +253,14 @@ def compute_data_distribution():
     for each in iid_count:
         print(each, iid_count[each]/len(data[each]["questions"]))
     
-    print("Average edit distance:", np.mean(edit_distances))
-    print("Standard deviation of edit distance:", np.std(edit_distances))
+    ax = sns.displot(df, x="edit_distance", kde=True, bins=20)
+    ax.set(xlabel="Edit distance", ylabel="Number of question pairs")
+    ax.savefig("edit_distance_distribution.png", dpi=300)
 
-    print("Average Jaccard similarity unigram:", np.mean(jaccard_similarities_unigram))
-    print("Standard deviation of Jaccard similarity unigram:", np.std(jaccard_similarities_unigram))
+    ax = sns.displot(df, x="jaccard_similarity_unigram", kde=True)
+    ax.set(xlabel="Jaccard similarity", ylabel="Number of question pairs")
+    ax.savefig("jaccard_similarity_unigram_distribution.png", dpi=300)
 
-    print("Average Jaccard similarity bigram:", np.mean(jaccard_similarities_bigram))
-    print("Standard deviation of Jaccard similarity bigram:", np.std(jaccard_similarities_bigram))
+    ax = sns.displot(df, x="jaccard_similarity_bigram", kde=True)
+    ax.set(xlabel="Jaccard similarity", ylabel="Number of question pairs")
+    ax.savefig("jaccard_similarity_bigram_distribution.png", dpi=300)

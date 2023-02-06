@@ -3,7 +3,7 @@ import logging
 
 from models import DataGenerator, ParaphrasePairGenerator
 from utils import save_to_json, save_paraphrases_json
-from utils import plot_question_distributions, plot_template_distribution
+from utils import plot_question_distributions, plot_template_distribution, compute_data_distribution
 from utils import index_graph, load_graph
 
 
@@ -54,6 +54,5 @@ if __name__ == "__main__":
         save_paraphrases_json("paraphrase_pairs.json", generator=generator)
 
     if args.stats:
-        plot_template_distribution()
-        plot_question_distributions()
+        compute_data_distribution()
 
