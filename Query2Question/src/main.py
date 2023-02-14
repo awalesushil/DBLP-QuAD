@@ -52,6 +52,7 @@ device = 'cuda' if cuda.is_available() else 'cpu'
 
 sparql_vocab = [
     "<s>", "</s>","https://dblp.org/pid/", "https://dblp.org/rec/journals/", "https://dblp.org/rec/conf/",
+    "http://purl.org/net/nknouf/ns/bibtex#",
     "SELECT", "DISTINCT", "WHERE", "ASK", "FILTER", "YEAR", "NOW", "NOT", "EXISTS", "GROUP BY", "ORDER BY", 
     "ASC", "DESC", "LIMIT", "BIND", "AS", "IF", "GROUP_CONCAT", "COUNT", "separator=', '",
     "MAX", "MIN", "xsd:integer",
@@ -63,7 +64,8 @@ sparql_vocab = [
     "https://dblp.org/rdf/schema#authoredBy",
     "https://dblp.org/rdf/schema#numberOfCreators",
     "https://dblp.org/rdf/schema#primaryAffiliation",
-    "https://dblp.org/rdf/schema#bibtexType"
+    "https://dblp.org/rdf/schema#bibtexType",
+    "http://purl.org/dc/terms/bibtexType"
 ]
 
 labels = " ".join([f"<extra_id_{idx}> {vocab}" for idx, vocab in enumerate(sparql_vocab)])

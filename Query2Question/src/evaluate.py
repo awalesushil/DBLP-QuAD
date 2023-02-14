@@ -4,6 +4,12 @@ import requests
 import urllib.parse
 import csv
 
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from numpy import NaN
+
 class DBLPServer:
     """
         DBLP Server class
@@ -36,6 +42,9 @@ def clean_query(query):
     """
     group = re.compile(r"(https:\S+)")
     query = group.sub(r"<\1>", query)
+    group = re.compile(r"(http:\S+)")
+    query = group.sub(r"<\1>", query)
+    query = query.replace(",>", ">,")
     query = query.replace(" < s> ", "")
     query = query.replace('"', "")
     query = query.replace("( ", "(")
@@ -91,9 +100,10 @@ def get_answer(answer):
             if answer["results"]["bindings"] and answer["results"]["bindings"] != [{}]:
                 if "answer" in answer["head"]["vars"]:
                     return [binding["answer"]["value"] for binding in answer["results"]["bindings"]]
-                elif ["firstanswer", "secondanswer"] in answer["head"]["vars"]:
+                elif "firstanswer" in answer["head"]["vars"] and "secondanswer" in answer["head"]["vars"]:
                     return [
-                            (binding["firstanswer"]["value"], binding["secondanswer"]["value"])
+                            (binding.get("firstanswer", {}).get("value", None),
+                            binding.get("secondanswer", {}).get("value", None))
                             for binding in answer["results"]["bindings"]
                         ]
                 elif "count" in answer["head"]["vars"]:
@@ -113,81 +123,190 @@ def calculate_accuracy(model, total_queries):
             actual_query = actual_query.replace(" ", "")
             if generated_query == actual_query:
                 accuracy += 1
-    print("Accuracy: ", accuracy / total_queries)
+    print("Exact-match Accuracy: ", accuracy / total_queries)
 
-def calculate_f1(model, total_queries):
+def calculate_f1(model):
     """
-        Calculate precision and recall at rank 1
+        Calculate F1 score
     """
 
-    accuracy = 0
-    precision = {"1": 0, "5": 0, "10": 0}
-    recall = {"1": 0, "5": 0, "10": 0}
+    categories = [
+            "SINGLE_FACT","MULTI_FACT","DOUBLE_INTENT",
+            "BOOLEAN","NEGATION","DOUBLE_NEGATION",
+            "UNION","DISAMBIGUATION",
+            "COUNT","SUPERLATIVE+COMPARATIVE",
+            "TEMPORAL", "NON_TEMPORAL",
+            "IID", "ZERO-SHOT", "COMPOSITIONAL",
+            "ALL"
+        ]
+
+    zero_shot_ids = ['TP32', 'TC03', 'TC36', 'TP04', 'TP15']
+    precision = {category: 0 for category in categories}
+    recall = {category: 0 for category in categories}
+    count = {category: 0 for category in categories}
+
+    precision_category_generalization = {
+        category: {level: 0 for level in ["IID", "ZERO-SHOT", "COMPOSITIONAL"]}
+            for category in categories}
+    recall_category_generalization = {category: 
+        {level: 0 for level in ["IID", "ZERO-SHOT", "COMPOSITIONAL"]}
+            for category in categories}
+    count_category_generalization = {category:
+        {level: 0 for level in ["IID", "ZERO-SHOT", "COMPOSITIONAL"]}
+            for category in categories}
+    f1_category_generalization = {category:
+        {level: 0 for level in ["IID", "ZERO-SHOT", "COMPOSITIONAL"]}
+            for category in categories}
+
+    with open("../../data/test_questions.json", "r", encoding="utf-8") as f:
+        test_questions = json.load(f)["questions"]
+
     
-    with open("../"+model+"-data/predicted_answers.json", "r", encoding="utf-8") as pred_file:
-        with open("../"+model+"-data/actual_answers.json", "r", encoding="utf-8") as act_file:
-            pred_answers = json.load(pred_file)["answers"]
-            act_answers = json.load(act_file)["answers"]
+    with open(model+"-outputs/correct.csv", "a+", encoding="utf-8") as cf:
+        with open(model+"-outputs/errors.csv", "a+", encoding="utf-8") as ef:
+            with open("../"+model+"-data/predicted_answers.json", "r", encoding="utf-8") as pred_file:
+                with open("../"+model+"-data/actual_answers.json", "r", encoding="utf-8") as act_file:
+                    pred_answers = json.load(pred_file)["answers"]
+                    act_answers = json.load(act_file)["answers"]
+                    
+                    for pred_answer, act_answer in zip(pred_answers, act_answers):
+                        
+                        id = int(pred_answer["id"])
+                        metadata = test_questions[id]
+                        template_id = metadata["template_id"]
+                        category = metadata["query_type"]
+                        temporal = metadata["temporal"]
+                        held_out = metadata["held_out"]
+
+                        pred_answer = get_answer(pred_answer)
+                        act_answer = get_answer(act_answer)
+
+                        count[category] += 1
+                        count["ALL"] += 1
+                        if temporal:
+                            count["TEMPORAL"] += 1
+                        else:
+                            count["NON_TEMPORAL"] += 1
+                        
+                        if held_out:
+                            if template_id in zero_shot_ids:
+                                count["ZERO-SHOT"] += 1
+                                count_category_generalization[category]["ZERO-SHOT"] += 1
+                            else:
+                                count["COMPOSITIONAL"] += 1
+                                count_category_generalization[category]["COMPOSITIONAL"] += 1
+                        else:
+                            count["IID"] += 1
+                            count_category_generalization[category]["IID"] += 1
+
+                        if not pred_answer or not act_answer:
+                            ef.write(str(id)+"\n")
+                            continue
+
+                        if pred_answer != act_answer:
+                            ef.write(str(id)+"\n")
+                        else:
+                            cf.write(str(id)+"\n")
+                    
+                        relevant_and_retrieved = set(pred_answer).intersection(set(act_answer))
+                        precision[category] += len(relevant_and_retrieved) / len(pred_answer)
+                        recall[category] += len(relevant_and_retrieved) / len(act_answer)
+
+                        if temporal:
+                            precision["TEMPORAL"] += len(relevant_and_retrieved) / len(pred_answer)
+                            recall["TEMPORAL"] += len(relevant_and_retrieved) / len(act_answer)
+                        else:
+                            precision["NON_TEMPORAL"] += len(relevant_and_retrieved) / len(pred_answer)
+                            recall["NON_TEMPORAL"] += len(relevant_and_retrieved) / len(act_answer)
+                        
+                        if held_out:
+                            if template_id in zero_shot_ids:
+                                precision["ZERO-SHOT"] += len(relevant_and_retrieved) / len(pred_answer)
+                                recall["ZERO-SHOT"] += len(relevant_and_retrieved) / len(act_answer)
+                                precision_category_generalization[category]["ZERO-SHOT"] += len(relevant_and_retrieved) / len(pred_answer)
+                                recall_category_generalization[category]["ZERO-SHOT"] += len(relevant_and_retrieved) / len(act_answer)
+                            else:
+                                precision["COMPOSITIONAL"] += len(relevant_and_retrieved) / len(pred_answer)
+                                recall["COMPOSITIONAL"] += len(relevant_and_retrieved) / len(act_answer)
+                                precision_category_generalization[category]["COMPOSITIONAL"] += len(relevant_and_retrieved) / len(pred_answer)
+                                recall_category_generalization[category]["COMPOSITIONAL"] += len(relevant_and_retrieved) / len(act_answer)
+                        else:
+                            precision["IID"] += len(relevant_and_retrieved) / len(pred_answer)
+                            recall["IID"] += len(relevant_and_retrieved) / len(act_answer)
+                            precision_category_generalization[category]["IID"] += len(relevant_and_retrieved) / len(pred_answer)
+                            recall_category_generalization[category]["IID"] += len(relevant_and_retrieved) / len(act_answer)
+
+                        precision["ALL"] += len(relevant_and_retrieved) / len(pred_answer)
+                        recall["ALL"] += len(relevant_and_retrieved) / len(act_answer)
+
+    print("Category", " " * 17, "F1 IID", " " * 4, "Count", " " * 3, "F1 Zero-Shot", " " * 2, "Count", " " * 2, "F1 Compositional", " " * 2, "Count", " " * 2, "F1", " " * 8, "Count")
+    print("-" * 50)
+    for category in categories:
+        
+        if count_category_generalization[category]["IID"] == 0:
+            f1_IID = NaN
+        else:
+            precision_category_generalization[category]["IID"] = precision_category_generalization[category]["IID"] / count_category_generalization[category]["IID"]
+            recall_category_generalization[category]["IID"] = recall_category_generalization[category]["IID"] / count_category_generalization[category]["IID"]
+            if precision_category_generalization[category]["IID"] == 0 or recall_category_generalization[category]["IID"] == 0:
+                f1_IID = 0
+            else:
+                f1_IID = round(2 * ((precision_category_generalization[category]["IID"] * recall_category_generalization[category]["IID"]) / (precision_category_generalization[category]["IID"] + recall_category_generalization[category]["IID"])), 3)
             
-            for pred_answer, act_answer in zip(pred_answers, act_answers):
-                
-                pred_answer = get_answer(pred_answer)
-                act_answer = get_answer(act_answer)
-                
-                if not pred_answer or not act_answer:
-                    continue
-                
-                # Calculate accuracy
-                if pred_answer == act_answer:
-                    accuracy += 1
+        if count_category_generalization[category]["ZERO-SHOT"] == 0:
+            f1_zero_shot = NaN
+        else:
+            precision_category_generalization[category]["ZERO-SHOT"] = precision_category_generalization[category]["ZERO-SHOT"] / count_category_generalization[category]["ZERO-SHOT"]
+            recall_category_generalization[category]["ZERO-SHOT"] = recall_category_generalization[category]["ZERO-SHOT"] / count_category_generalization[category]["ZERO-SHOT"]
+            if precision_category_generalization[category]["ZERO-SHOT"] == 0 or recall_category_generalization[category]["ZERO-SHOT"] == 0:
+                f1_zero_shot = 0
+            else:
+                f1_zero_shot = round(2 * ((precision_category_generalization[category]["ZERO-SHOT"] * recall_category_generalization[category]["ZERO-SHOT"]) / (precision_category_generalization[category]["ZERO-SHOT"] + recall_category_generalization[category]["ZERO-SHOT"])), 3)
+            
+        if count_category_generalization[category]["COMPOSITIONAL"] == 0:
+            f1_COMPOSITIONAL = NaN
+        else:
+            precision_category_generalization[category]["COMPOSITIONAL"] = precision_category_generalization[category]["COMPOSITIONAL"] / count_category_generalization[category]["COMPOSITIONAL"]
+            recall_category_generalization[category]["COMPOSITIONAL"] = recall_category_generalization[category]["COMPOSITIONAL"] / count_category_generalization[category]["COMPOSITIONAL"]
+            if precision_category_generalization[category]["COMPOSITIONAL"] == 0 or recall_category_generalization[category]["COMPOSITIONAL"] == 0:
+                f1_COMPOSITIONAL = 0
+            else:
+                f1_COMPOSITIONAL = round(2 * ((precision_category_generalization[category]["COMPOSITIONAL"] * recall_category_generalization[category]["COMPOSITIONAL"]) / (precision_category_generalization[category]["COMPOSITIONAL"] + recall_category_generalization[category]["COMPOSITIONAL"])), 3)
+        
+        f1_category_generalization[category]["IID"] = f1_IID
+        f1_category_generalization[category]["ZERO-SHOT"] = f1_zero_shot
+        f1_category_generalization[category]["COMPOSITIONAL"] = f1_COMPOSITIONAL
 
-                relevant_and_retrieved_1 = set(pred_answer[:1]).intersection(set(act_answer[:1]))
-                relevant_and_retrieved_5 = set(pred_answer[:6]).intersection(set(act_answer[:6]))
-                relevant_and_retrieved_10 = set(pred_answer[:11]).intersection(set(act_answer[:11]))
-                
-                # Calculate precision at rank 1, 5 and 10
-                precision["1"] += len(relevant_and_retrieved_1) / len(pred_answer[:1])
-                precision["5"] += len(relevant_and_retrieved_5) / len(pred_answer[:6])
-                precision["10"] += len(relevant_and_retrieved_10) / len(pred_answer[:11])
-    
-                # Calculate recall at rank 1, 5 and 10
-                recall["1"] += len(relevant_and_retrieved_1) / len(act_answer[:1])
-                recall["5"] += len(relevant_and_retrieved_5) / len(act_answer[:6])
-                recall["10"] += len(relevant_and_retrieved_10) / len(act_answer[:11])
+        precision[category] = precision[category] / count[category]
+        recall[category] = recall[category] / count[category]
+        f1 = round(2 * ((precision[category] * recall[category]) / (precision[category] + recall[category])), 3)
 
-    print("Total queries: ", total_queries)
-    print("Accuracy: ", accuracy / total_queries)
-    
-    precision["1"] = precision["1"] / total_queries
-    print("Precision at rank 1: ", precision["1"])
-    
-    precision["5"] = precision["5"] / total_queries
-    print("Precision at rank 5: ", precision["5"])
-    
-    precision["10"] = precision["10"] / total_queries
-    print("Precision at rank 10: ", precision["10"])
-    
-    recall["1"] = recall["1"] / total_queries
-    print("Recall at rank 1: ", recall["1"])
+        print(category, " " * (25 - len(category)), f1_IID, " " * (10 - len(str(f1_IID))), count["IID"], " " * 4, f1_zero_shot, " " * (14 - len(str(f1_zero_shot))), count["ZERO-SHOT"], " " * 5, f1_COMPOSITIONAL, " " * (18 - len(str(f1_COMPOSITIONAL))), count["COMPOSITIONAL"], " " * 4, f1, " " * (10 - len(str(f1))), count[category])
 
-    recall["5"] = recall["5"] / total_queries
-    print("Recall at rank 5: ", recall["5"])
+    # Plot heatmap
+    f1_category_generalization.pop("ALL")
+    f1_category_generalization.pop("IID")
+    f1_category_generalization.pop("ZERO-SHOT")
+    f1_category_generalization.pop("COMPOSITIONAL")
+    f1_category_generalization.pop("NON_TEMPORAL")
+    f1_category_generalization.pop("TEMPORAL")
 
-    recall["10"] = recall["10"] / total_queries
-    print("Recall at rank 10: ", recall["10"])
-
-    # Calculate F1 score
-    for k in precision.keys():
-        print("F1 score at {}:".format(k), round(2 * ((precision[k] * recall[k]) / (precision[k] + recall[k])), 3))
-
+    df = pd.DataFrame.from_dict(f1_category_generalization, orient='index')
+    ax = sns.heatmap(df, annot=True, cmap="YlGnBu", linewidths=.1)
+    ax.set(xlabel="Level of Generalization", ylabel="Query Type")
+    ax = ax.get_figure()
+    ax.savefig("f1_scores_category_generalization_" + model + ".png", dpi=300, bbox_inches='tight', pad_inches=0.1)
+    ax = ax.clf()
+    # plt.show()
 
 if __name__ == "__main__":
 
     for model in ["t5-small", "t5-base"]:
-        print("Model: ", model)
-        TOTAL_QUERIES = run_queries(model)
+        print("\n Model: ", model)
+        # TOTAL_QUERIES = run_queries(model)
+        TOTAL_QUERIES = 2000
         calculate_accuracy(model, TOTAL_QUERIES)
-        calculate_f1(model, TOTAL_QUERIES)
+        calculate_f1(model)
                 
 
 
