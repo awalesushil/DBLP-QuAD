@@ -851,7 +851,7 @@ templates = {
         },{
             "id": "TP84",
             "query":  {
-                "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1",
+                "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?z WHERE { ?p1 <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1",
                 "temporal": True
             },
             "question": {
@@ -886,7 +886,7 @@ templates = {
         },{
             "id": "TP86",
             "query":  {
-                "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#numberOfCreators> ?x . ?p2 <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, ?p1, ?p1) AS ?answer) }",
+                "sparql": "SELECT DISTINCT ?answer WHERE { ?p1 <https://dblp.org/rdf/schema#numberOfCreators> ?x . ?p2 <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, ?p1, ?p2) AS ?answer) }",
                 "temporal": False
             },
             "question": {
