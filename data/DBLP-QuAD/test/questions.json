@@ -43781,7 +43781,7 @@
         "string": "Name the author who published their first paper among the authors of 'Preface'."
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/journals/oms/LiuLT16> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/journals/oms/LiuLT16> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -43804,7 +43804,7 @@
         "string": "Between 'Non-Intrusive Estimation of Web Server Delays' and 'Stand and Move at Work', which paper has more authors?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/lcn/HallPL01> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/amia/ChoonooB17> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/lcn/HallPL01>, <https://dblp.org/rec/conf/lcn/HallPL01>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/lcn/HallPL01> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/amia/ChoonooB17> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/lcn/HallPL01>, <https://dblp.org/rec/conf/amia/ChoonooB17>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -44010,7 +44010,7 @@
         "string": "Between 'Air supply system of a PEM fuel cell model: Passivity and robust PI control' and 'Application of the Six Sigma Method for Improving Maintenance Processes - Case Study', which paper has more authors?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/cdc/TaljOA11> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/icores/Zasadzien17> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/cdc/TaljOA11>, <https://dblp.org/rec/conf/cdc/TaljOA11>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/cdc/TaljOA11> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/icores/Zasadzien17> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/cdc/TaljOA11>, <https://dblp.org/rec/conf/icores/Zasadzien17>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -44033,7 +44033,7 @@
         "string": "Among the authors of 'The next-best-view for workpiece localization in robot workspace', who published their first paper?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/conf/aimech/HuPD21> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/conf/aimech/HuPD21> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -44102,7 +44102,7 @@
         "string": "Who published their first paper among the authors of 'DNA genetic algorithm for design of the generalized membership-type Takagi-Sugeno fuzzy control system'?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/conf/smc/DingR00> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/conf/smc/DingR00> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -44125,7 +44125,7 @@
         "string": "Who published their first paper among the authors of 'Cooperative Diversity with Blind Relays in Nakagami-m Fading Channels: MRC Analysis'?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/conf/vtc/SongSS08> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/conf/vtc/SongSS08> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -44170,7 +44170,7 @@
         "string": "Name the author who published their first paper among the authors of 'On the Asymptotic Enumeration of LEGO Structures'."
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/journals/em/AbrahamsenE11> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/journals/em/AbrahamsenE11> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -44216,7 +44216,7 @@
         "string": "Which one has more number of co-authors, 'An optical and potential dual-image CMOS sensor for on-chip neural and DNA imaging applications' or 'Model-driven Development and Validation of Multi-agent Systems in JIAC V with the Agent World Editor'?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/iscas/TokudaNYKNO06> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/ant/KusterKLA14> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/iscas/TokudaNYKNO06>, <https://dblp.org/rec/conf/iscas/TokudaNYKNO06>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/iscas/TokudaNYKNO06> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/ant/KusterKLA14> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/iscas/TokudaNYKNO06>, <https://dblp.org/rec/conf/ant/KusterKLA14>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -44239,7 +44239,7 @@
         "string": "Between 'E-research: a new genre of digital library services' and 'Design and Comparative Study of Voltage Regulation-Based 2-Tap Flexible Feed-Forward Equalizer for Voltage-Mode Transmitters', which one has more number of authors?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/wdl/Taha08> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/access/ChaeJC22> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/wdl/Taha08>, <https://dblp.org/rec/journals/wdl/Taha08>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/wdl/Taha08> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/access/ChaeJC22> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/wdl/Taha08>, <https://dblp.org/rec/journals/access/ChaeJC22>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -44308,7 +44308,7 @@
         "string": "Which one has more number of authors, 'A note about connection of the first-order functional calculus with many-valued propositional calculi' or 'Toward nonlinear dynamic control over encrypted data for infinite time horizon'?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/ndjfl/Reichbach64> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/corr/abs-2110-06270> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/ndjfl/Reichbach64>, <https://dblp.org/rec/journals/ndjfl/Reichbach64>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/ndjfl/Reichbach64> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/corr/abs-2110-06270> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/ndjfl/Reichbach64>, <https://dblp.org/rec/journals/corr/abs-2110-06270>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -44489,7 +44489,7 @@
         "string": "Among the authors of the paper 'The Ring Buffer Network Bus (RBNB) DataTurbine Streaming Data Middleware for Environmental Observing Systems', who published their first paper?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/conf/eScience/TilakHMF07> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/conf/eScience/TilakHMF07> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -44512,7 +44512,7 @@
         "string": "Between 'Atomistic Simulations of Electrolyte Solutions and Hydrogels with Explicit Solvent Models' and 'Collaboration Between People for Sustainability in the ICT Society', which paper has more authors?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/books/daglib/p/WalterDRHVH11> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/hci/Bradley07> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/books/daglib/p/WalterDRHVH11>, <https://dblp.org/rec/books/daglib/p/WalterDRHVH11>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/books/daglib/p/WalterDRHVH11> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/hci/Bradley07> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/books/daglib/p/WalterDRHVH11>, <https://dblp.org/rec/conf/hci/Bradley07>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -44603,7 +44603,7 @@
         "string": "Name the author who published their first paper among the authors of 'Networking for big data [Guest Editorial]'."
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/journals/network/YuLM14> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/journals/network/YuLM14> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -44648,7 +44648,7 @@
         "string": "Which one has more number of authors, 'A Framework of an Extended Reading Passage Grading System for Personalised English Learning' or 'A Self-Supervised Learning Approach to Rapid Path Planning for Car-Like Vehicles Maneuvering in Urban Environment'?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/kicss/ChaiRS12> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/corr/abs-2003-00946> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/kicss/ChaiRS12>, <https://dblp.org/rec/conf/kicss/ChaiRS12>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/kicss/ChaiRS12> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/corr/abs-2003-00946> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/kicss/ChaiRS12>, <https://dblp.org/rec/journals/corr/abs-2003-00946>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -44694,7 +44694,7 @@
         "string": "Between 'Efficient compression of rhythmic motion using spatial segmentation and temporal blending' and 'Development of a validation algorithm for 'present on admission' flagging', which paper has more number of co-authors?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/icmcs/FirouzmaneshLDCB13> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/midm/JacksonMRSCRP09> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/icmcs/FirouzmaneshLDCB13>, <https://dblp.org/rec/conf/icmcs/FirouzmaneshLDCB13>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/icmcs/FirouzmaneshLDCB13> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/midm/JacksonMRSCRP09> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/icmcs/FirouzmaneshLDCB13>, <https://dblp.org/rec/journals/midm/JacksonMRSCRP09>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -44717,7 +44717,7 @@
         "string": "Which one has more number of authors, 'Multicommodity Network Flow Models and Algorithms in Telecommunications' or 'Robust Fault Detection using Set-based Approaches'?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/books/daglib/p/Minoux06> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/systol/ZhangP21> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/books/daglib/p/Minoux06>, <https://dblp.org/rec/books/daglib/p/Minoux06>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/books/daglib/p/Minoux06> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/systol/ZhangP21> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/books/daglib/p/Minoux06>, <https://dblp.org/rec/conf/systol/ZhangP21>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -44786,7 +44786,7 @@
         "string": "Name the author who published their first paper among the authors of 'First-order stability cells of active multi-rigid-body systems'."
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/journals/trob/TrinkleFS95> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/journals/trob/TrinkleFS95> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -44809,7 +44809,7 @@
         "string": "Among the authors of 'How to Define Searching Sessions on Web Search Engines', who published their first paper?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/conf/kdd/JansenSK06> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/conf/kdd/JansenSK06> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -44855,7 +44855,7 @@
         "string": "Who published their first paper among the authors of 'Resolving error propagation in distributed systems'?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/journals/ipl/LinK00> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/journals/ipl/LinK00> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -44901,7 +44901,7 @@
         "string": "Among the authors of the paper 'Encountering Mannahatta:  A Critical Review Forum', who published their first paper?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/journals/cartographica/Rose-Redwood10> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/journals/cartographica/Rose-Redwood10> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -44947,7 +44947,7 @@
         "string": "Which one has more number of co-authors, 'A fast direct solver for elliptic problems on general meshes in 2D' or 'Stationary Types in Moduless'?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/jcphy/SchmitzY12> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/mlq/Rothmaler83> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/jcphy/SchmitzY12>, <https://dblp.org/rec/journals/jcphy/SchmitzY12>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/jcphy/SchmitzY12> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/mlq/Rothmaler83> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/jcphy/SchmitzY12>, <https://dblp.org/rec/journals/mlq/Rothmaler83>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -44993,7 +44993,7 @@
         "string": "Which one has more number of authors, 'Vocal Emotion Recognition with Log-Gabor Filters' or 'Non Rigid Registration of 3D Images to Laparoscopic Video for Image Guided Surgery'?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/mm/GuPL15> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/miccai/AllanKMM15> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/mm/GuPL15>, <https://dblp.org/rec/conf/mm/GuPL15>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/mm/GuPL15> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/miccai/AllanKMM15> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/mm/GuPL15>, <https://dblp.org/rec/conf/miccai/AllanKMM15>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -45173,7 +45173,7 @@
         "string": "Which one has more number of authors, 'Efficiency-based evaluation of aligners for industrial applications' or 'Localization Services for Online Common Operational Picture and Situation Awareness'?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/eamt/ToralPPT12> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/access/BjorkbomTYKGMSKCJVVK13> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/eamt/ToralPPT12>, <https://dblp.org/rec/conf/eamt/ToralPPT12>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/eamt/ToralPPT12> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/access/BjorkbomTYKGMSKCJVVK13> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/eamt/ToralPPT12>, <https://dblp.org/rec/journals/access/BjorkbomTYKGMSKCJVVK13>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -45196,7 +45196,7 @@
         "string": "Between 'X-ray Digital Radiography and Computed Tomography' and 'Screening for novel lead compounds targeting benzodiazepine allosteric binding site of wild-type and H129Y variant of GABAA receptor: an in-silico molecular docking study', which paper has more authors?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/jimaging/MorigiA22> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/ijcbdd/ThotaN21> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/jimaging/MorigiA22>, <https://dblp.org/rec/journals/jimaging/MorigiA22>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/jimaging/MorigiA22> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/ijcbdd/ThotaN21> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/jimaging/MorigiA22>, <https://dblp.org/rec/journals/ijcbdd/ThotaN21>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -45219,7 +45219,7 @@
         "string": "Between 'Power Allocation Strategies in Energy Harvesting Wireless Cooperative Networks' and 'The Specialized High-Performance Network on Anton 3', which paper has more authors?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/twc/DingPEP14> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/corr/abs-2201-08357> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/twc/DingPEP14>, <https://dblp.org/rec/journals/twc/DingPEP14>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/twc/DingPEP14> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/corr/abs-2201-08357> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/twc/DingPEP14>, <https://dblp.org/rec/journals/corr/abs-2201-08357>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -45242,7 +45242,7 @@
         "string": "Who published their first paper among the authors of 'Effective Detection of Rare Anomalies from Massive Waveform Data Using Heterogeneous Clustering'?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/conf/bigdataconf/GotoCKRO20> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/conf/bigdataconf/GotoCKRO20> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -45288,7 +45288,7 @@
         "string": "Among the authors of the paper 'Priority-based Parameter Propagation for Distributed DNN Training', who published their first paper?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/journals/corr/abs-1905-03960> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/journals/corr/abs-1905-03960> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -45311,7 +45311,7 @@
         "string": "Which one has more number of authors, '3\\u00D73 Dipole lens antenna at 300 GHz with different permittivity lenses' or 'Planetary skin institute ALERTS: automated land change evaluation, reporting and tracking system'?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/6gsummit/KokkonenMJ20> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/comgeo/Stanley11> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/6gsummit/KokkonenMJ20>, <https://dblp.org/rec/conf/6gsummit/KokkonenMJ20>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/conf/6gsummit/KokkonenMJ20> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/comgeo/Stanley11> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/conf/6gsummit/KokkonenMJ20>, <https://dblp.org/rec/conf/comgeo/Stanley11>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -45334,7 +45334,7 @@
         "string": "Who published their first paper among the authors of 'Runtime Verification of Generalized Test Tables'?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/conf/nfm/WeiglUTK21> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/conf/nfm/WeiglUTK21> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -45357,7 +45357,7 @@
         "string": "Among the authors of the paper 'A DSP- and FPGA-Based Industrial Control With High-Speed Communication Interfaces for Grid Converters Applied to Distributed Power Generation Systems', who published their first paper?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/journals/tie/BuenoHRGMC09> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/journals/tie/BuenoHRGMC09> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -45449,7 +45449,7 @@
         "string": "Between 'A Novel Multiagent Neurodynamic Approach to Constrained Distributed Convex Optimization' and 'Hierarchical distributed controllers - design and verification', which one has more number of authors?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/tcyb/MaB21> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/etfa/Missal0H07> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/tcyb/MaB21>, <https://dblp.org/rec/journals/tcyb/MaB21>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/tcyb/MaB21> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/etfa/Missal0H07> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/tcyb/MaB21>, <https://dblp.org/rec/conf/etfa/Missal0H07>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -45494,7 +45494,7 @@
         "string": "Between the authors of 'Hole-filling based on content loss indexed 3D partial convolution network for freehand ultrasound reconstruction', who published their first paper?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/journals/cmpb/DongFLDFSCLWY21> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/journals/cmpb/DongFLDFSCLWY21> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -45517,7 +45517,7 @@
         "string": "Among the authors of the paper 'Characterizing the radar ambiguity functions', who published their first paper?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/journals/tit/AuslanderT84> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/journals/tit/AuslanderT84> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -45540,7 +45540,7 @@
         "string": "Who published their first paper among the authors of 'Edge-Aided Reliable Data Transmission for Heterogeneous Edge-IoT Sensor Networks'?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/journals/sensors/XuCLHS19> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/journals/sensors/XuCLHS19> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -45631,7 +45631,7 @@
         "string": "Among the authors of 'ECG Pattern Analysis for Emotion Detection', who published their first paper?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/journals/taffco/AgrafiotiHA12> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/journals/taffco/AgrafiotiHA12> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -45654,7 +45654,7 @@
         "string": "Which one has more number of authors, 'Second-Order Blind Signal Separation for Convolutive Mixtures Using Conjugate Gradient' or 'A Branch-and-Cut-and-Price Algorithm for the Two-Echelon Capacitated Vehicle Routing Problem'?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/spl/DamCNT08> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/transci/SantosMC15> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/spl/DamCNT08>, <https://dblp.org/rec/journals/spl/DamCNT08>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/spl/DamCNT08> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/transci/SantosMC15> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/spl/DamCNT08>, <https://dblp.org/rec/journals/transci/SantosMC15>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -45677,7 +45677,7 @@
         "string": "Which one has more number of authors, 'Innovative management strategies for building and sustaining a digital initiatives department with limited resources' or 'Planning a revenue stream system in an e-business environment'?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/oclc/Miller18> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/imds/WalkerJ01> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/oclc/Miller18>, <https://dblp.org/rec/journals/oclc/Miller18>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/oclc/Miller18> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/imds/WalkerJ01> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/oclc/Miller18>, <https://dblp.org/rec/journals/imds/WalkerJ01>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -45700,7 +45700,7 @@
         "string": "Which one has more number of authors, 'Proc\\u00E9dure d\\u00E9centralis\\u00E9e d'affectation d'individus \\u00E0 des activit\\u00E9s' or 'Extracting and Visualizing Implementation Structure of Features'?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/ria/MorgeN18> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/apsec/KazatoHOMHS13> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/ria/MorgeN18>, <https://dblp.org/rec/journals/ria/MorgeN18>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/ria/MorgeN18> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/apsec/KazatoHOMHS13> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/ria/MorgeN18>, <https://dblp.org/rec/conf/apsec/KazatoHOMHS13>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -45745,7 +45745,7 @@
         "string": "Between 'Internet of Things for Smart Spaces: A University Campus Case Study' and 'Statistical beam information for mmW positioning', which paper has more number of co-authors?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/sensors/GilmanTYRPHLRP20> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/vtc/DelgadoWLMS20> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/sensors/GilmanTYRPHLRP20>, <https://dblp.org/rec/journals/sensors/GilmanTYRPHLRP20>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/sensors/GilmanTYRPHLRP20> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/conf/vtc/DelgadoWLMS20> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/sensors/GilmanTYRPHLRP20>, <https://dblp.org/rec/conf/vtc/DelgadoWLMS20>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -45791,7 +45791,7 @@
         "string": "Between 'A Flexible and Generic Gaussian Sampler With Power Side-Channel Countermeasures for Quantum-Secure Internet of Things' and 'GEONGrid portal: design and implementations', which paper has more number of co-authors?"
     },
     "query": {
-        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/iotj/ZhangLCLL20> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/concurrency/YounBBCLMMS07> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/iotj/ZhangLCLL20>, <https://dblp.org/rec/journals/iotj/ZhangLCLL20>) AS ?answer) }"
+        "sparql": "SELECT DISTINCT ?answer WHERE { <https://dblp.org/rec/journals/iotj/ZhangLCLL20> <https://dblp.org/rdf/schema#numberOfCreators> ?x . <https://dblp.org/rec/journals/concurrency/YounBBCLMMS07> <https://dblp.org/rdf/schema#numberOfCreators> ?y . BIND(IF(?x > ?y, <https://dblp.org/rec/journals/iotj/ZhangLCLL20>, <https://dblp.org/rec/journals/concurrency/YounBBCLMMS07>) AS ?answer) }"
     },
     "template_id": "TP86",
     "entities": [
@@ -45903,7 +45903,7 @@
         "string": "Between the authors of 'Exploring source of the variety in organizational innovation adoption issues - An empirical study of managers' label on knowledge management project issues in Taiwan', who published their first paper?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/journals/eswa/ChenL09a> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/journals/eswa/ChenL09a> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
@@ -45949,7 +45949,7 @@
         "string": "Who published their first paper among the authors of 'M-government services for rural SMEs'?"
     },
     "query": {
-        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) ?z WHERE { SELECT DISTINCT ?answer ?y WHERE { <https://dblp.org/rec/journals/ijesdf/NtalianiCMK09> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
+        "sparql": "SELECT (GROUP_CONCAT(?answer; separator=', ') AS ?answer) WHERE { SELECT DISTINCT ?answer ?z WHERE { <https://dblp.org/rec/journals/ijesdf/NtalianiCMK09> <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#authoredBy> ?answer . ?y <https://dblp.org/rdf/schema#yearOfPublication> ?z } GROUP BY ?z } ORDER BY ASC(?z) LIMIT 1"
     },
     "template_id": "TP84",
     "entities": [
