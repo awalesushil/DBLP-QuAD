@@ -9,6 +9,9 @@ from tqdm import tqdm
 import numpy as np
 import matplotlib.pyplot as plt
 
+import seaborn as sns
+import pandas as pd
+
 from templates import templates
 from dblp import Graph
 
@@ -93,72 +96,171 @@ def save_paraphrases_json(filename, generator):
         file.truncate()
         file.write("\n]")
 
-def plot_template_distribution():
+def compute_data_distribution():
     """
-        Plot template distribution
+        Compute the distribution of data
     """
-    for entity in ["CREATOR", "PUBLICATION"]:
-        print(f"Stats for Entity: {entity}")
-        
-        query_types = templates[entity].keys()
-        total_templates = [len(templates[entity][each]) for each in query_types]
 
-        print("Total number of templates:", sum(total_templates))
-        
-        X_axis = np.arange(len(query_types))
-        width = 0.4
-        if entity == "CREATOR":
-            creator = plt.bar(X_axis - 0.2, total_templates, width, label=entity)
-        else:
-            publication = plt.bar(X_axis + 0.2, total_templates, width, label=entity)
+    pd.set_option('display.max_columns', None)
 
-    plt.bar_label(creator, padding=3)
-    plt.bar_label(publication, padding=3)
-    plt.xticks(X_axis, query_types)
-    plt.xlabel("Query Type")
-    plt.ylabel("Number of templates")
-    plt.title(f"Number of templates per query type")
-    plt.legend()
-    plt.show()
+    def edit_distance(s1, s2):
+        """
+            Compute the edit distance between two strings
+        """
+        if len(s1) < len(s2):
+            return edit_distance(s2, s1)
+
+        # len(s1) >= len(s2)
+        if len(s2) == 0:
+            return len(s1)
+
+        previous_row = range(len(s2) + 1)
+        for i, c1 in enumerate(s1):
+            current_row = [i + 1]
+            for j, c2 in enumerate(s2):
+                insertions = previous_row[j + 1] + 1
+                deletions = current_row[j] + 1
+                substitutions = previous_row[j] + (c1 != c2)
+                current_row.append(min(insertions, deletions, substitutions))
+            previous_row = current_row
+
+        return previous_row[-1]
+
+    def jaccard_similarity_ngrams(s1, s2, n=1):
+        """
+            Compute the ngram jaccard similarity between two strings
+        """
+        s1 = s1.lower().split()
+        s2 = s2.lower().split()
+        a = set(zip(*[s1[i:] for i in range(n)]))
+        b = set(zip(*[s2[i:] for i in range(n)]))
+        c = a.intersection(b)
+        return float(len(c)) / (len(a) + len(b) - len(c))
+
+    data, all_data = {}, {}
+
+    for each in ["train", "valid", "test"]:
+        with open(os.path.join("data","DBLP-QuAD",each,"questions.json"), "r") as f:
+            data[each] = json.load(f)
+            for x in data[each]["questions"]:
+                x["question"] = x["question"]["string"]
+                x["paraphrased_question"] = x["paraphrased_question"]["string"]
+                x["query"] = x["query"]["sparql"]
+            all_data["questions"] = all_data.get("questions", []) + data[each]["questions"]
+    
+    df = pd.DataFrame(all_data["questions"])
+
+    print(df.head())
+
+    df["question_word_count"] = df["question"].apply(lambda x: len(x.split()))
+    df["paraphrased_question_word_count"] = df["paraphrased_question"].apply(lambda x: len(x.split()))
+    df["query_vocab_count"] = df["query"].apply(lambda x: len(set(x.split())))
+
+    df["question_char_count"] = df["question"].apply(lambda x: len(x))
+    df["paraphrased_question_char_count"] = df["paraphrased_question"].apply(lambda x: len(x))
+    df["query_char_count"] = df["query"].apply(lambda x: len(x))
+
+    df["edit_distance"] = df.apply(lambda x: edit_distance(x["question"], x["paraphrased_question"]), axis=1)
+    df["jaccard_similarity_unigram"] = df.apply(lambda x: jaccard_similarity_ngrams(x["question"], x["paraphrased_question"]), axis=1)
+    df["jaccard_similarity_bigram"] = df.apply(lambda x: jaccard_similarity_ngrams(x["question"], x["paraphrased_question"], n=2), axis=1)
+
+    print("-"*100)
+    print("\033[1m" + "General statistics of the dataset" + "\033[0m")
+    print("-"*100)
+    print(df.describe())
+    print("-"*100)
+    print("\n"*2)
 
 
-def plot_question_distributions():
-    """
-        Plot the distribution of questions generated and queries failed
-    """
-    data_file = ["data.json", "failed_queries.json"]
+    print("-"*100)
+    print("\033[1m" + "Distribution of query types" + "\033[0m")
+    print("-"*100)
+    print(df["query_type"].value_counts())
+    print("-"*100)
+    print("\n"*2)
 
-    for file in data_file:
-        
-        with open(os.path.join("data",file), "r") as f:
-            data = json.load(f)
+    print("-"*100)
+    print("\033[1m" + "Distribution of temporal queries" + "\033[0m")
+    print("-"*100)
+    print(df["temporal"].value_counts(normalize=True))
+    print("-"*100)
+    print("\n"*2)
 
-        query_type_count = {}
-        query_types = set()
+    print("-"*100)
+    print("\033[1m" + "Distribution of entities" + "\033[0m")
+    print("-"*100)
+    _df = df.explode("entities")
+    print(_df["entities"].value_counts())
+    print("-"*100)
+    print("\n"*2)
 
-        for each in data:
-            entity = each["entity"]
-            query_type = each["query_type"]
-            query_types.add(query_type)
-            query_type_count.setdefault(entity, {})
-            query_type_count[entity].setdefault(query_type, 0)
-            query_type_count[entity][query_type] += 1
+    print("-"*100)
+    print("\033[1m" + "Distribution of relations" + "\033[0m")
+    print("-"*100)
+    _df = df.explode("relations")
+    print(_df["relations"].value_counts())
+    print("-"*100)
+    print("\n"*2)
 
+    print("-"*100)
+    print("\033[1m" + "GENERALIZATION STATS" + "\033[0m")
+    print("-"*100)
+    print("\n"*2)
 
-        X_axis = np.arange(len(query_types))
-        width = 0.4
-        total_templates = [query_type_count['CREATOR'].get(each, 0) for each in query_types]
-        creator = plt.bar(X_axis - 0.2, total_templates, width, label="CREATOR")
+    held_out = {
+        "train": 0,
+        "valid": 0,
+        "test": 0
+    }
+    zero_shot = ['TP32', 'TC03', 'TC36', 'TP04', 'TP15']
+    zero_shot_count = {
+        "valid": 0,
+        "test": 0
+    }
+    compositonal_count = {
+        "valid": 0,
+        "test": 0
+    }
+    iid_count = {
+        "valid": 0,
+        "test": 0
+    }    
+    
+    for group in ["valid", "test"]:
+        for each in data[group]["questions"]:
+            if each['held_out']:
+                held_out[group] += 1
+                if each['template_id'] in zero_shot:
+                    zero_shot_count[group] += 1
+                else:
+                    compositonal_count[group] += 1
+            else:
+                iid_count[group] += 1
 
-        total_templates = [query_type_count['PUBLICATION'].get(each, 0) for each in query_types]
-        publication = plt.bar(X_axis + 0.2, total_templates, width, label="PUBLICATION")
+    print("Percent of held out questions:")
+    for each in held_out:
+        print(each, held_out[each]/len(data[each]["questions"]))
+    
+    print("Percent of zero-shot questions:")
+    for each in zero_shot_count:
+        print(each, zero_shot_count[each]/len(data[each]["questions"]))
+    
+    print("Percent of compositional questions:")
+    for each in compositonal_count:
+        print(each, compositonal_count[each]/len(data[each]["questions"]))
+    
+    print("Percent of iid questions:")
+    for each in iid_count:
+        print(each, iid_count[each]/len(data[each]["questions"]))
+    
+    ax = sns.displot(df, x="edit_distance", kde=True, bins=20)
+    ax.set(xlabel="Edit distance", ylabel="Number of question pairs")
+    ax.savefig("edit_distance_distribution.png", dpi=300)
 
-        plt.bar_label(creator, padding=3)
-        plt.bar_label(publication, padding=3)
-        plt.xticks(X_axis, query_types)
-        plt.xlabel("Query Type")
-        plt.ylabel("Number of question-query")
-        plt.title(f"Number of question-query pairs per query type for {file}")
-        plt.legend()
-        plt.show()
+    ax = sns.displot(df, x="jaccard_similarity_unigram", kde=True)
+    ax.set(xlabel="Jaccard similarity", ylabel="Number of question pairs")
+    ax.savefig("jaccard_similarity_unigram_distribution.png", dpi=300)
 
+    ax = sns.displot(df, x="jaccard_similarity_bigram", kde=True)
+    ax.set(xlabel="Jaccard similarity", ylabel="Number of question pairs")
+    ax.savefig("jaccard_similarity_bigram_distribution.png", dpi=300)
